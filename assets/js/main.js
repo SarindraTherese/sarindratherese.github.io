@@ -81,24 +81,118 @@ function filterProj(cat, btn) {
   });
 }
 
-/* ── CONTACT FORM ── */
-function sendMessage() {
-  const name    = document.getElementById('name').value.trim();
-  const email   = document.getElementById('email').value.trim();
-  const subject = document.getElementById('subject').value.trim();
-  const message = document.getElementById('message').value.trim();
+/* ── CONTACT FORM — Formspree ── */
+function sendMessage(btnEl) {
+  const page      = btnEl.closest('#page-contact') || document.getElementById('page-contact');
+  const nameEl    = page.querySelector('#name');
+  const emailEl   = page.querySelector('#email');
+  const subjectEl = page.querySelector('#subject');
+  const messageEl = page.querySelector('#message');
+  const errName   = page.querySelector('#err-name');
+  const errEmail  = page.querySelector('#err-email');
+  const errMsgEl  = page.querySelector('#err-message');
+  const errBox    = page.querySelector('#form-error');
+  const errBoxMsg = page.querySelector('#form-error-msg');
+  const successEl = page.querySelector('#form-success');
+  const formBody  = page.querySelector('#contact-form-body');
 
-  if (!name || !email || !message) {
-    alert('Veuillez remplir tous les champs obligatoires.');
-    return;
+  // Reset erreurs
+  [errName, errEmail, errMsgEl].forEach(el => { if (el) el.textContent = ''; });
+  [nameEl, emailEl, messageEl].forEach(el => { if (el) el.classList.remove('input-error'); });
+  if (errBox) errBox.style.display = 'none';
+
+  const name    = nameEl    ? nameEl.value.trim()    : '';
+  const email   = emailEl   ? emailEl.value.trim()   : '';
+  const subject = subjectEl ? subjectEl.value.trim() : '';
+  const message = messageEl ? messageEl.value.trim() : '';
+
+  // Validation
+  let valid = true;
+  if (!name) {
+    if (errName) errName.textContent = 'Le nom est requis.';
+    if (nameEl)  nameEl.classList.add('input-error');
+    valid = false;
   }
+  if (!email) {
+    if (errEmail) errEmail.textContent = 'Email requis.';
+    if (emailEl)  emailEl.classList.add('input-error');
+    valid = false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (errEmail) errEmail.textContent = 'Email invalide.';
+    if (emailEl)  emailEl.classList.add('input-error');
+    valid = false;
+  }
+  if (!message) {
+    if (errMsgEl)  errMsgEl.textContent = 'Le message est requis.';
+    if (messageEl) messageEl.classList.add('input-error');
+    valid = false;
+  }
+  if (!valid) return;
 
-  // Build mailto link
-  const mailto = `mailto:randriambelosonsarindratherese@gmail.com`
-    + `?subject=${encodeURIComponent(subject || 'Contact depuis portfolio')}`
-    + `&body=${encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+  // Désactiver immédiatement le bouton — aucun double envoi possible
+  btnEl.disabled = true;
+  btnEl.textContent = '⏳ Envoi en cours...';
+  btnEl.style.background = 'linear-gradient(135deg, #7c3aed, #a855f7)';
+  btnEl.style.opacity = '0.85';
 
-  window.location.href = mailto;
+  fetch('https://formspree.io/f/mojkzoae', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ name, email, subject: subject || 'Contact depuis portfolio', message })
+  })
+  .then(res => res.json().then(data => ({ ok: res.ok, data })))
+  .then(({ ok, data }) => {
+    if (ok) {
+      // Succès — bouton vert, désactivé 5s
+      btnEl.textContent = '✅ Message envoyé !';
+      btnEl.style.background = 'linear-gradient(135deg, #16a34a, #22c55e)';
+      btnEl.style.opacity = '1';
+      btnEl.style.boxShadow = '0 0 30px rgba(34, 197, 94, 0.5)';
+      setTimeout(() => {
+        if (formBody)  formBody.style.display = 'none';
+        if (successEl) successEl.style.display = 'block';
+      }, 1200);
+    } else {
+      // Erreur serveur
+      const msg = (data && data.errors && data.errors[0]) ? data.errors[0].message : 'Erreur inconnue.';
+      if (errBoxMsg) errBoxMsg.textContent = '⚠️ ' + msg;
+      if (errBox)    errBox.style.display = 'block';
+      btnEl.textContent = '✈️ Send Message';
+      btnEl.style.background = '';
+      btnEl.style.opacity = '';
+      btnEl.style.boxShadow = '';
+      btnEl.disabled = false;
+    }
+  })
+  .catch(() => {
+    if (errBoxMsg) errBoxMsg.textContent = '⚠️ Connexion impossible. Verifiez votre reseau.';
+    if (errBox)    errBox.style.display = 'block';
+    btnEl.textContent = '✈️ Send Message';
+    btnEl.style.background = '';
+    btnEl.style.opacity = '';
+    btnEl.style.boxShadow = '';
+    btnEl.disabled = false;
+  });
+}
+
+
+function resetContactForm() {
+  const page = document.getElementById('page-contact');
+  if (!page) return;
+  const successEl = page.querySelector('#form-success');
+  const formBody  = page.querySelector('#contact-form-body');
+  if (successEl) successEl.style.display = 'none';
+  if (formBody)  formBody.style.display  = 'block';
+  ['name','email','subject','message'].forEach(id => {
+    const el = page.querySelector('#' + id);
+    if (el) el.value = '';
+  });
+  ['err-name','err-email','err-message'].forEach(id => {
+    const el = page.querySelector('#' + id);
+    if (el) el.textContent = '';
+  });
+  const errBox = page.querySelector('#form-error');
+  if (errBox) errBox.style.display = 'none';
 }
 
 /* ── CHARTS (Chart.js) ── */
