@@ -64,11 +64,19 @@ function filterProj(cat, btn) {
   document.querySelectorAll('.pfilt').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  document.querySelectorAll('.proj-card').forEach(card => {
-    if (cat === 'all' || card.dataset.cat === cat) {
+  document.querySelectorAll('.proj-card').forEach((card, i) => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    if (show) {
       card.style.display = 'flex';
+      // reset puis re-trigger l'animation
+      card.classList.remove('visible');
+      card.style.transitionDelay = (i * 0.07) + 's';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => card.classList.add('visible'));
+      });
     } else {
-      card.style.display = 'none';
+      card.classList.remove('visible');
+      setTimeout(() => { card.style.display = 'none'; }, 350);
     }
   });
 }
@@ -209,13 +217,7 @@ function initCharts() {
   }
 }
 
-/* ── INIT ON LOAD ── */
-document.addEventListener('DOMContentLoaded', () => {
-  // Make sure all project cards visible by default
-  document.querySelectorAll('.proj-card').forEach(c => {
-    c.style.display = 'flex';
-  });
-});
+/* ── INIT ON LOAD — see bottom of file ── */
 
 /* ── INTERSECTION OBSERVER — animations au scroll ── */
 function initScrollAnimations() {
@@ -266,10 +268,11 @@ function applyAnimClasses() {
     el.style.transitionDelay = (i * 0.1) + 's';
   });
 
-  // Project cards
+  // Project cards — use their own animation class to preserve display:flex
   document.querySelectorAll('.proj-card').forEach((el, i) => {
-    el.classList.add('anim-ready');
     el.style.transitionDelay = (i * 0.07) + 's';
+    // anim-ready is handled via CSS .proj-card.anim-ready
+    el.classList.add('anim-ready');
   });
 
   // Contact cards
@@ -301,6 +304,10 @@ window.showPage = function(id) {
     if (page) {
       page.querySelectorAll('.anim-ready').forEach(el => {
         el.classList.remove('visible');
+        // proj-cards: don't hide with display:none during reset
+        if (!el.classList.contains('proj-card')) {
+          // opacity handled by CSS
+        }
       });
       setTimeout(() => {
         page.querySelectorAll('.anim-ready').forEach(el => {
@@ -342,10 +349,6 @@ function animateCounters() {
 
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.proj-card').forEach(c => {
-    c.style.display = 'flex';
-  });
-
   applyAnimClasses();
   initScrollAnimations();
 
