@@ -1,649 +1,701 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sarindra Therese Randriambeloson — Data Analyst · Data Engineer · Generative AI</title>
-  <meta name="description" content="Portfolio de Sarindra Therese Randriambeloson — Data Analyst, Data Engineer et développeuse IA Générative basée à Antananarivo, Madagascar.">
-  <meta property="og:title" content="Sarindra Therese — Data & AI Portfolio">
-  <meta property="og:description" content="Data Analyst · Data Engineer · Generative AI — Antananarivo, Madagascar">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sarindratherese.github.io">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Chart.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sarindra Therese Randriambeloson — Data Analyst · Data Engineer · Generative AI</title>
+<meta content="Portfolio de Sarindra Therese Randriambeloson — Data Analyst, Data Engineer et développeuse IA Générative basée à Antananarivo, Madagascar." name="description"/>
+<meta content="Sarindra Therese — Data &amp; AI Portfolio" property="og:title"/>
+<meta content="Data Analyst · Data Engineer · Generative AI — Antananarivo, Madagascar" property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://sarindratherese.github.io" property="og:url"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Chart.js -->
+<script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- Styles -->
+<link href="assets/css/style.css" rel="stylesheet"/>
 </head>
 <body>
-
-  <!-- ── NAVIGATION ── -->
-  <nav id="navbar">
-    <a class="nav-logo" href="#" onclick="showPage('home')">STR. Portfolio</a>
-    <div class="nav-links">
-      <a class="active" onclick="showPage('home')">Home</a>
-      <a onclick="showPage('about')">About</a>
-      <a onclick="showPage('projects')">Projects</a>
-      <a onclick="showPage('skills')">Skills</a>
-      <a onclick="showPage('contact')">Contact</a>
-    </div>
-    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">☰</button>
-  </nav>
-
-  <!-- ── PAGE : HOME ── -->
-  <div id="page-home" class="page active">
-    <div class="home-inner">
-      <div class="home-text">
-        <div class="hero-badge">✦ Data Science &amp; AI Expert</div>
-        <h1 class="hero-title">
-          Transforming<br>
-          <span class="gradient-text">Data</span> into Insights
+<!-- ── NAVIGATION ── -->
+<nav id="navbar">
+<a class="nav-logo" href="#" onclick="showPage('home')">STR. Portfolio</a>
+<div class="nav-links">
+<a class="active" onclick="showPage('home')">Home</a>
+<a onclick="showPage('about')">About</a>
+<a onclick="showPage('projects')">Projects</a>
+<a onclick="showPage('skills')">Skills</a>
+<a onclick="showPage('contact')">Contact</a>
+</div>
+<button aria-label="Menu" class="nav-burger" onclick="toggleMenu()">☰</button>
+</nav>
+<!-- ── PAGE : HOME ── -->
+<div class="page active" id="page-home">
+<div class="home-inner">
+<div class="home-text">
+<div class="hero-badge">✦ Data Science &amp; AI Expert</div>
+<h1 class="hero-title">
+          Transforming<br/>
+<span class="gradient-text">Data</span> into Insights
         </h1>
-        <p class="hero-desc">
+<p class="hero-desc">
           Data Analyst, Data Engineer &amp; développeuse IA Générative.
           Je construis des pipelines robustes et des agents intelligents
           qui automatisent les workflows métiers.
         </p>
-        <div class="hero-btns">
-          <a class="btn-primary" href="#" onclick="showPage('projects')">
+<div class="hero-btns">
+<a class="btn-primary" href="#" onclick="showPage('projects')">
             View Projects →
           </a>
-          <a class="btn-ghost" href="#" onclick="showPage('contact')">
+<a class="btn-ghost" href="#" onclick="showPage('contact')">
             Get in Touch
           </a>
-        </div>
-        <div class="hero-stats">
-          <div class="hstat">
-            <div class="hstat-n">3+</div>
-            <div class="hstat-l">Years Experience</div>
-          </div>
-          <div class="hstat">
-            <div class="hstat-n">6+</div>
-            <div class="hstat-l">Projects Completed</div>
-          </div>
-          <div class="hstat">
-            <div class="hstat-n">5</div>
-            <div class="hstat-l">Companies</div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-img">👩‍💻</div>
-        <div class="float-card fc-1">
-          <div class="fc-icon">🗄️</div>
-          <div class="fc-label">Data Engineering</div>
-        </div>
-        <div class="float-card fc-2">
-          <div class="fc-icon">🧠</div>
-          <div class="fc-label">Generative AI</div>
-        </div>
-        <div class="float-card fc-3">
-          <div class="fc-icon">📊</div>
-          <div class="fc-label">Analytics</div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
+<div class="hero-stats">
+<div class="hstat">
+<div class="hstat-n">3+</div>
+<div class="hstat-l">Years Experience</div>
+</div>
+<div class="hstat">
+<div class="hstat-n">6+</div>
+<div class="hstat-l">Projects Completed</div>
+</div>
+<div class="hstat">
+<div class="hstat-n">5</div>
+<div class="hstat-l">Companies</div>
+</div>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-img">👩‍💻</div>
+<div class="float-card fc-1">
+<div class="fc-icon">🗄️</div>
+<div class="fc-label">Data Engineering</div>
+</div>
+<div class="float-card fc-2">
+<div class="fc-icon">🧠</div>
+<div class="fc-label">Generative AI</div>
+</div>
+<div class="float-card fc-3">
+<div class="fc-icon">📊</div>
+<div class="fc-label">Analytics</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ── PAGE : ABOUT ── -->
+<div class="page" id="page-about">
+<div class="page-inner">
+<div class="sec-hd">
+<h2 class="sec-title">About <span class="gradient-text">Me</span></h2>
+<p class="sec-sub">Passionnée par la donnée et l'IA pour résoudre des problèmes complexes et créer un impact significatif</p>
+</div>
+<div class="about-top">
+<div class="about-photo">👩‍💻</div>
+<div class="about-journey">
+<h3 class="journey-title">My Journey</h3>
+<p class="journey-txt">Avec plus de 3 ans d'expérience en Data Science et Engineering, j'ai eu le privilège de travailler sur des projets innovants qui relient les données brutes et les insights actionnables.</p>
+<p class="journey-txt">Mon expertise couvre l'ensemble du cycle de la donnée — de la conception de pipelines robustes (Kafka, PySpark) à la création de dashboards (Power BI, Grafana), jusqu'au déploiement d'agents IA génératifs intégrant OpenAI et Gemini.</p>
+<p class="journey-txt">Je suis particulièrement passionnée par l'IA générative et son potentiel à révolutionner les industries, notamment pour l'automatisation de workflows complexes.</p>
+<div class="skill-pills">
+<span class="spill">Python</span>
+<span class="spill">Flask</span>
+<span class="spill">Apache Kafka</span>
+<span class="spill">Power BI</span>
+<span class="spill">OpenAI</span>
+<span class="spill">Gemini AI</span>
+</div>
+</div>
+</div>
+<h3 class="about-sec-title">💼 Experience</h3>
+<div class="exp-list">
+<div class="exp-item">
+<div class="exp-left">
+<div class="exp-role">AI Developer</div>
+<div class="exp-co">Hairun Technology</div>
+<div class="exp-desc">Agent IA pour analyse de cahiers des charges (PDF/DOCX) + API Flask + workflow n8n</div>
+</div>
+<div class="exp-period">Jan — Fév 2026</div>
+</div>
+<div class="exp-item">
+<div class="exp-left">
+<div class="exp-role">Développeuse IA Générative</div>
+<div class="exp-co">Projet Generative AI</div>
+<div class="exp-desc">Traitement DICT/DT (OCR + Gemini AI) · Assistant médical intelligent (Streamlit)</div>
+</div>
+<div class="exp-period">Déc 2024 — Mars 2025</div>
+</div>
+<div class="exp-item">
+<div class="exp-left">
+<div class="exp-role">Data Analyst</div>
+<div class="exp-co">Entreprise de recyclage</div>
+<div class="exp-desc">Dashboards Power BI · suivi KPI machines de recyclage</div>
+</div>
+<div class="exp-period">Avr — Juin 2025</div>
+</div>
+<div class="exp-item">
+<div class="exp-left">
+<div class="exp-role">Data Engineer</div>
+<div class="exp-co">KAPSDATA</div>
+<div class="exp-desc">Monitoring temps réel Kafka · dashboards Grafana · InfluxDB</div>
+</div>
+<div class="exp-period">Jan — Juil 2024</div>
+</div>
+<div class="exp-item">
+<div class="exp-left">
+<div class="exp-role">Data Analyst</div>
+<div class="exp-co">Compagnie d'assurance</div>
+<div class="exp-desc">Dashboard financier Power BI · analyses YTD/MTD · TOP 50 débiteurs</div>
+</div>
+<div class="exp-period">Août — Oct 2023</div>
+</div>
+<div class="exp-item">
+<div class="exp-left">
+<div class="exp-role">Data Engineer</div>
+<div class="exp-co">KAPSDATA</div>
+<div class="exp-desc">Pipeline Elasticsearch → Kafka → InfluxDB</div>
+</div>
+<div class="exp-period">Sep 2022 — Jan 2023</div>
+</div>
+</div>
+<div class="about-bottom-grid">
+<div>
+<h3 class="about-sec-title">🎓 Education</h3>
+<div class="edu-card">
+<div class="edu-deg">Master en Informatique</div>
+<div class="edu-school">Génie logiciel &amp; Intelligence Artificielle</div>
+<div class="edu-year">ISPM Antsobolo · 2021</div>
+</div>
+<div class="edu-card">
+<div class="edu-deg">Licence en Informatique</div>
+<div class="edu-school">Génie logiciel &amp; Intelligence Artificielle</div>
+<div class="edu-year">ISPM Antsobolo · 2018</div>
+</div>
+</div>
+<div>
+<h3 class="about-sec-title">🌍 Langues &amp; Contact</h3>
+<div class="edu-card">
+<div class="edu-deg">🇫🇷 Français</div>
+<div class="edu-school">Langue natale</div>
+</div>
+<div class="edu-card">
+<div class="edu-deg">🇬🇧 Anglais</div>
+<div class="edu-school">Niveau intermédiaire</div>
+</div>
+<div class="edu-card">
+<div class="edu-deg">📍 Antananarivo, Madagascar</div>
+<div class="edu-school available">✓ Disponible pour missions</div>
+</div>
+</div>
+</div>
+<div class="cert-section">
+<h3 class="about-sec-title">🏆 Certifications</h3>
+<div class="cert-grid">
+<a class="cert-card" href="https://www.udemy.com/certificate/UC-9d3f8c12-90ed-4f55-87a8-6cf49240e790/" target="_blank">
+<div class="cert-badge cert-badge--udemy">Udemy</div>
+<div class="cert-name">Apache Kafka Series — Kafka Connect Hands-on Learning</div>
+<div class="cert-link">Voir le certificat →</div>
+</a>
+<a class="cert-card" href="https://www.udemy.com/certificate/UC-d6bfb498-c2f0-4892-a212-0f7541f1adb2/" target="_blank">
+<div class="cert-badge cert-badge--udemy">Udemy</div>
+<div class="cert-name">Apache Kafka Series — Learn Apache Kafka for Beginners v3</div>
+<div class="cert-link">Voir le certificat →</div>
+</a>
+<a class="cert-card" href="https://www.udemy.com/certificate/UC-e75a08e2-fb2d-4931-915f-f81103700b02/" target="_blank">
+<div class="cert-badge cert-badge--udemy">Udemy</div>
+<div class="cert-name">Apache Kafka Series — Kafka Streams for Data Processing</div>
+<div class="cert-link">Voir le certificat →</div>
+</a>
+<a class="cert-card" href="https://www.udemy.com/certificate/UC-cb04f58b-c443-4ce0-a3ec-bb5eac00833c/" target="_blank">
+<div class="cert-badge cert-badge--udemy">Udemy</div>
+<div class="cert-name">Microsoft Power BI Desktop for Business Intelligence</div>
+<div class="cert-link">Voir le certificat →</div>
+</a>
+<a class="cert-card" href="https://www.coursera.org/account/accomplishments/professional-cert/2EXCEXX5MFUS" target="_blank">
+<div class="cert-badge cert-badge--coursera">Coursera</div>
+<div class="cert-name">Microsoft Power BI Data Analyst</div>
+<div class="cert-link">Voir le certificat →</div>
+</a>
+</div>
+</div>
+<div class="drives-card">
+<div class="drives-icon">💜</div>
+<h3>Ce qui me motive</h3>
+<p>Je crois au pouvoir des données pour créer un impact positif. Mon objectif est de construire des solutions IA qui soient non seulement techniquement excellentes, mais également éthiques et bénéfiques. Chaque projet est une opportunité d'apprendre, d'innover et de faire la différence.</p>
+</div>
+</div>
+</div>
+<!-- ── PAGE : PROJECTS ── -->
+<div class="page" id="page-projects">
+<div class="page-inner">
+<div class="sec-hd">
+<h2 class="sec-title">Featured <span class="gradient-text">Projects</span></h2>
+<p class="sec-sub">Missions et projets en Data Engineering, IA Générative et Analytics</p>
+</div>
+<div class="proj-filters">
+<button class="pfilt active" onclick="filterProj('all', this)">All</button>
+<button class="pfilt" onclick="filterProj('ai', this)">Generative AI</button>
+<button class="pfilt" onclick="filterProj('de', this)">Data Engineering</button>
+<button class="pfilt" onclick="filterProj('an', this)">Analytics</button>
+</div>
+<div class="proj-grid-v2" id="proj-grid">
+<!-- 1 — Hairun Technology -->
 
-  <!-- ── PAGE : ABOUT ── -->
-  <div id="page-about" class="page">
-    <div class="page-inner">
-      <div class="sec-hd">
-        <h2 class="sec-title">About <span class="gradient-text">Me</span></h2>
-        <p class="sec-sub">Passionnée par la donnée et l'IA pour résoudre des problèmes complexes et créer un impact significatif</p>
-      </div>
+<!-- 2 — Document Processing System -->
 
-      <div class="about-top">
-        <div class="about-photo">👩‍💻</div>
-        <div class="about-journey">
-          <h3 class="journey-title">My Journey</h3>
-          <p class="journey-txt">Avec plus de 3 ans d'expérience en Data Science et Engineering, j'ai eu le privilège de travailler sur des projets innovants qui relient les données brutes et les insights actionnables.</p>
-          <p class="journey-txt">Mon expertise couvre l'ensemble du cycle de la donnée — de la conception de pipelines robustes (Kafka, PySpark) à la création de dashboards (Power BI, Grafana), jusqu'au déploiement d'agents IA génératifs intégrant OpenAI et Gemini.</p>
-          <p class="journey-txt">Je suis particulièrement passionnée par l'IA générative et son potentiel à révolutionner les industries, notamment pour l'automatisation de workflows complexes.</p>
-          <div class="skill-pills">
-            <span class="spill">Python</span>
-            <span class="spill">Flask</span>
-            <span class="spill">Apache Kafka</span>
-            <span class="spill">Power BI</span>
-            <span class="spill">OpenAI</span>
-            <span class="spill">Gemini AI</span>
-          </div>
-        </div>
-      </div>
+<!-- 3 — Medical AI Assistant -->
 
-      <h3 class="about-sec-title">💼 Experience</h3>
-      <div class="exp-list">
-        <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-role">AI Developer</div>
-            <div class="exp-co">Hairun Technology</div>
-            <div class="exp-desc">Agent IA pour analyse de cahiers des charges (PDF/DOCX) + API Flask + workflow n8n</div>
-          </div>
-          <div class="exp-period">Jan — Fév 2026</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-role">Développeuse IA Générative</div>
-            <div class="exp-co">Projet Generative AI</div>
-            <div class="exp-desc">Traitement DICT/DT (OCR + Gemini AI) · Assistant médical intelligent (Streamlit)</div>
-          </div>
-          <div class="exp-period">Déc 2024 — Mars 2025</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-role">Data Analyst</div>
-            <div class="exp-co">Entreprise de recyclage</div>
-            <div class="exp-desc">Dashboards Power BI · suivi KPI machines de recyclage</div>
-          </div>
-          <div class="exp-period">Avr — Juin 2025</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-role">Data Engineer</div>
-            <div class="exp-co">KAPSDATA</div>
-            <div class="exp-desc">Monitoring temps réel Kafka · dashboards Grafana · InfluxDB</div>
-          </div>
-          <div class="exp-period">Jan — Juil 2024</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-role">Data Analyst</div>
-            <div class="exp-co">Compagnie d'assurance</div>
-            <div class="exp-desc">Dashboard financier Power BI · analyses YTD/MTD · TOP 50 débiteurs</div>
-          </div>
-          <div class="exp-period">Août — Oct 2023</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-role">Data Engineer</div>
-            <div class="exp-co">KAPSDATA</div>
-            <div class="exp-desc">Pipeline Elasticsearch → Kafka → InfluxDB</div>
-          </div>
-          <div class="exp-period">Sep 2022 — Jan 2023</div>
-        </div>
-      </div>
+<!-- 4 — KAPSDATA Monitoring -->
 
-      <div class="about-bottom-grid">
-        <div>
-          <h3 class="about-sec-title">🎓 Education</h3>
-          <div class="edu-card">
-            <div class="edu-deg">Master en Informatique</div>
-            <div class="edu-school">Génie logiciel &amp; Intelligence Artificielle</div>
-            <div class="edu-year">ISPM Antsobolo · 2021</div>
-          </div>
-          <div class="edu-card">
-            <div class="edu-deg">Licence en Informatique</div>
-            <div class="edu-school">Génie logiciel &amp; Intelligence Artificielle</div>
-            <div class="edu-year">ISPM Antsobolo · 2018</div>
-          </div>
-        </div>
-        <div>
-          <h3 class="about-sec-title">🌍 Langues &amp; Contact</h3>
-          <div class="edu-card">
-            <div class="edu-deg">🇫🇷 Français</div>
-            <div class="edu-school">Langue natale</div>
-          </div>
-          <div class="edu-card">
-            <div class="edu-deg">🇬🇧 Anglais</div>
-            <div class="edu-school">Niveau intermédiaire</div>
-          </div>
-          <div class="edu-card">
-            <div class="edu-deg">📍 Antananarivo, Madagascar</div>
-            <div class="edu-school available">✓ Disponible pour missions</div>
-          </div>
-        </div>
-      </div>
+<!-- 5 — KAPSDATA Pipeline -->
 
-      <div class="cert-section">
-        <h3 class="about-sec-title">🏆 Certifications</h3>
-        <div class="cert-grid">
-          <a class="cert-card" href="https://www.coursera.org/account/accomplishments/professional-cert/2EXCEXX5MFUS" target="_blank">
-            <div class="cert-badge cert-badge--coursera">Coursera</div>
-            <div class="cert-name">Microsoft Power BI Data Analyst</div>
-            <div class="cert-link">Voir le certificat →</div>
-          </a>
-          <a class="cert-card" href="https://www.udemy.com/certificate/UC-cb04f58b-c443-4ce0-a3ec-bb5eac00833c/" target="_blank">
-            <div class="cert-badge cert-badge--udemy">Udemy</div>
-            <div class="cert-name">Microsoft Power BI Desktop for Business Intelligence</div>
-            <div class="cert-link">Voir le certificat →</div>
-          </a>
-          <a class="cert-card" href="https://www.udemy.com/certificate/UC-9d3f8c12-90ed-4f55-87a8-6cf49240e790/" target="_blank">
-            <div class="cert-badge cert-badge--udemy">Udemy</div>
-            <div class="cert-name">Apache Kafka Series — Kafka Connect Hands-on Learning</div>
-            <div class="cert-link">Voir le certificat →</div>
-          </a>
-          <a class="cert-card" href="https://www.udemy.com/certificate/UC-d6bfb498-c2f0-4892-a212-0f7541f1adb2/" target="_blank">
-            <div class="cert-badge cert-badge--udemy">Udemy</div>
-            <div class="cert-name">Apache Kafka Series — Learn Apache Kafka for Beginners v3</div>
-            <div class="cert-link">Voir le certificat →</div>
-          </a>
-          <a class="cert-card" href="https://www.udemy.com/certificate/UC-e75a08e2-fb2d-4931-915f-f81103700b02/" target="_blank">
-            <div class="cert-badge cert-badge--udemy">Udemy</div>
-            <div class="cert-name">Apache Kafka Series — Kafka Streams for Data Processing</div>
-            <div class="cert-link">Voir le certificat →</div>
-          </a>
-        </div>
-      </div>
+<!-- 6 — Recycling Industry -->
 
-      <div class="drives-card">
-        <div class="drives-icon">💜</div>
-        <h3>Ce qui me motive</h3>
-        <p>Je crois au pouvoir des données pour créer un impact positif. Mon objectif est de construire des solutions IA qui soient non seulement techniquement excellentes, mais également éthiques et bénéfiques. Chaque projet est une opportunité d'apprendre, d'innover et de faire la différence.</p>
-      </div>
-    </div>
-  </div>
+<!-- 7 — Insurance -->
 
-  <!-- ── PAGE : PROJECTS ── -->
-  <div id="page-projects" class="page">
-    <div class="page-inner">
-      <div class="sec-hd">
-        <h2 class="sec-title">Featured <span class="gradient-text">Projects</span></h2>
-        <p class="sec-sub">A showcase of my work in data science, AI, and analytics</p>
-      </div>
-
-      <div class="proj-filters">
-        <button class="pfilt active" onclick="filterProj('all', this)">All</button>
-        <button class="pfilt" onclick="filterProj('ai', this)">Generative AI</button>
-        <button class="pfilt" onclick="filterProj('de', this)">Data Engineering</button>
-        <button class="pfilt" onclick="filterProj('an', this)">Analytics</button>
-      </div>
-
-      <div class="proj-grid" id="proj-grid">
-
-        <div class="proj-card" data-cat="ai">
-          <div class="proj-img proj-img--ai">🤖
-            <span class="proj-badge badge--ai">Generative AI</span>
-          </div>
-          <div class="proj-body">
-            <h3 class="proj-title">Agent IA — Analyse de cahiers des charges</h3>
-            <p class="proj-desc">Agent Python analysant automatiquement des PDF/DOCX et générant des estimations de projet. Validation et envoi automatique via n8n.</p>
-            <div class="proj-stats">
-              <span class="pstat">PDF/DOCX</span>
-              <span class="pstat">Auto-estimation</span>
-              <span class="pstat">Workflow n8n</span>
+<div class="proj-card-v2" data-cat="ai">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--ai">Generative AI</span>
+<span class="pcv2-date">Jan 2026 – Fév 2026</span>
+</div>
+<div class="pcv2-icon">🤖</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Système de traitement automatisé de documents</h3>
+<p class="pcv2-context">AI / Data Engineer — <strong>Hairun Technology</strong></p>
+<ul class="pcv2-list">
+<li>Pipeline hybride OCR + LLM pour extraction et structuration de documents PDF/DOCX</li>
+<li>Normalisation et sortie standardisée JSON pour intégration dans des systèmes métiers</li>
+<li>API Flask exposant les résultats pour exploitation externe</li>
+<li>Automatisation complète du workflow via n8n (validation, génération et envoi de rapports)</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Réduction significative du temps de traitement manuel et amélioration de la fiabilité des données
             </div>
-            <div class="proj-tags">
-              <span class="ptag">Python</span>
-              <span class="ptag">Flask</span>
-              <span class="ptag">OpenAI API</span>
-              <span class="ptag">n8n</span>
+<div class="pcv2-stack">
+<span class="ptag">Python</span>
+<span class="ptag">Flask</span>
+<span class="ptag">OpenAI API</span>
+<span class="ptag">n8n</span>
+</div>
+</div>
+</div>
+        <div class="proj-card-v2" data-cat="an">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--an">Analytics</span>
+<span class="pcv2-date">Avr 2025 – Juin 2025</span>
+</div>
+<div class="pcv2-icon">♻️</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Dashboard de performance machines de recyclage</h3>
+<p class="pcv2-context">Data Analyst — <strong>Recycling Industry</strong></p>
+<ul class="pcv2-list">
+<li>Conception de dashboards de suivi des performances des machines</li>
+<li>Définition et optimisation des KPI pour améliorer la lecture des données opérationnelles</li>
+<li>Analyse des données pour identifier anomalies et axes d'amélioration</li>
+<li>Amélioration de la lisibilité et de l'ergonomie des visualisations</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Meilleure visibilité sur la performance des équipements et support à la prise de décision opérationnelle
             </div>
-            <a class="proj-btn" href="https://github.com/SarindraTherese" target="_blank">🔗 View on GitHub</a>
-          </div>
+<div class="pcv2-stack">
+<span class="ptag">Power BI</span>
+</div>
+</div>
+</div>
+        <div class="proj-card-v2" data-cat="ai">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--ai">Generative AI</span>
+<span class="pcv2-date">Déc 2024 – Mars 2025</span>
+</div>
+<div class="pcv2-icon">📄</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Document Processing System (AI-Enhanced)</h3>
+<p class="pcv2-context">Projet personnel — <strong>AI &amp; Data Projects</strong></p>
+<ul class="pcv2-list">
+<li>Pipeline multi-format (PDF/ZIP) avec extraction OCR et structuration via LLM</li>
+<li>Validation et normalisation des données avec Pydantic</li>
+<li>Production de données structurées (JSON) exploitables par des systèmes aval</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Automatisation du traitement de documents complexes et réduction des tâches manuelles
+            </div>
+<div class="pcv2-stack">
+<span class="ptag">Python</span>
+<span class="ptag">Flask</span>
+<span class="ptag">Gemini AI</span>
+<span class="ptag">Pydantic</span>
+</div>
+</div>
+</div>
+        <div class="proj-card-v2" data-cat="ai">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--ai">Generative AI</span>
+<span class="pcv2-date">Déc 2024 – Mars 2025</span>
+</div>
+<div class="pcv2-icon">💊</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Medical AI Assistant</h3>
+<p class="pcv2-context">Projet personnel — <strong>AI &amp; Data Projects</strong></p>
+<ul class="pcv2-list">
+<li>Système d'analyse de symptômes basé sur LLM avec pipeline de données intégré</li>
+<li>Génération de recommandations automatisées vers des spécialistes</li>
+<li>Interface utilisateur interactive Streamlit</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Amélioration de l'accessibilité à une première orientation médicale
+            </div>
+<div class="pcv2-stack">
+<span class="ptag">Python</span>
+<span class="ptag">Flask</span>
+<span class="ptag">Streamlit</span>
+<span class="ptag">Gemini AI</span>
+</div>
+</div>
+</div>
+        <div class="proj-card-v2" data-cat="de">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--de">Data Engineering</span>
+<span class="pcv2-date">Jan 2024 – Juil 2024</span>
+</div>
+<div class="pcv2-icon">⚡</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Pipeline de monitoring infrastructure temps réel</h3>
+<p class="pcv2-context">Data Engineer — <strong>KAPSDATA</strong></p>
+<ul class="pcv2-list">
+<li>Pipeline Kafka pour collecte et traitement de métriques systèmes (CPU, mémoire, ressources)</li>
+<li>Intégration dans InfluxDB pour stockage et analyse temporelle</li>
+<li>Dashboards Grafana pour le suivi des performances en temps réel</li>
+<li>Surveillance des flux et des infrastructures data</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Meilleure visibilité sur les performances systèmes et détection plus rapide des anomalies
+            </div>
+<div class="pcv2-stack">
+<span class="ptag">Kafka</span>
+<span class="ptag">Java</span>
+<span class="ptag">InfluxDB</span>
+<span class="ptag">Grafana</span>
+</div>
+</div>
+</div>
+        <div class="proj-card-v2" data-cat="an">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--an">Analytics</span>
+<span class="pcv2-date">Août 2023 – Oct 2023</span>
+</div>
+<div class="pcv2-icon">📊</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Dashboard financier — Secteur Assurance</h3>
+<p class="pcv2-context">Data Analyst — <strong>Insurance Industry</strong></p>
+<ul class="pcv2-list">
+<li>Dashboard consolidé (CA, primes, encaissements, impayés) avec analyses YTD/MTD</li>
+<li>Identification des comptes à risque via analyse des créances (top débiteurs)</li>
+<li>Déploiement sur Power BI Service avec Gateway pour automatisation des actualisations</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Meilleure visibilité financière, priorisation des actions de recouvrement et accès centralisé aux données
+            </div>
+<div class="pcv2-stack">
+<span class="ptag">Power BI</span>
+<span class="ptag">DAX</span>
+<span class="ptag">Power BI Service</span>
+</div>
+</div>
+</div>
+        <div class="proj-card-v2" data-cat="de">
+<div class="pcv2-header">
+<div class="pcv2-meta">
+<span class="pcv2-badge badge--de">Data Engineering</span>
+<span class="pcv2-date">Sep 2022 – Jan 2023</span>
+</div>
+<div class="pcv2-icon">🔗</div>
+</div>
+<div class="pcv2-body">
+<h3 class="pcv2-title">Pipeline Elasticsearch → Kafka → InfluxDB</h3>
+<p class="pcv2-context">Data Engineer — <strong>KAPSDATA</strong></p>
+<ul class="pcv2-list">
+<li>Mise en place de pipelines de données avec transformation, filtrage et routage des flux</li>
+<li>Participation à la structuration d'une architecture data temps réel</li>
+<li>Optimisation des flux pour améliorer la performance du pipeline</li>
+</ul>
+<div class="pcv2-impact">
+<span class="pcv2-impact-label">Impact</span>
+              Fiabilisation des flux de données et amélioration de la performance globale du système
+            </div>
+<div class="pcv2-stack">
+<span class="ptag">Kafka</span>
+<span class="ptag">Python</span>
+<span class="ptag">Elasticsearch</span>
+</div>
+</div>
+</div>
         </div>
-
-        <div class="proj-card" data-cat="ai">
-          <div class="proj-img proj-img--violet">💬
-            <span class="proj-badge badge--ai">Generative AI</span>
-          </div>
-          <div class="proj-body">
-            <h3 class="proj-title">Assistant médical intelligent</h3>
-            <p class="proj-desc">Chatbot Streamlit diagnostiquant des symptômes médicaux et recommandant des spécialistes grâce à Gemini AI.</p>
-            <div class="proj-stats">
-              <span class="pstat">Diagnostic IA</span>
-              <span class="pstat">Recommandation</span>
-            </div>
-            <div class="proj-tags">
-              <span class="ptag">Python</span>
-              <span class="ptag">Streamlit</span>
-              <span class="ptag">Gemini AI</span>
-            </div>
-            <a class="proj-btn" href="https://github.com/SarindraTherese" target="_blank">🔗 View on GitHub</a>
-          </div>
-        </div>
-
-        <div class="proj-card" data-cat="ai">
-          <div class="proj-img proj-img--blue">📄
-            <span class="proj-badge badge--ai">Generative AI</span>
-          </div>
-          <div class="proj-body">
-            <h3 class="proj-title">Traitement DICT/DT/DT-DICT</h3>
-            <p class="proj-desc">API Flask pour extraction OCR de fichiers PDF/ZIP, structuration via Gemini AI, retour JSON validé avec Pydantic.</p>
-            <div class="proj-stats">
-              <span class="pstat">OCR</span>
-              <span class="pstat">JSON structuré</span>
-            </div>
-            <div class="proj-tags">
-              <span class="ptag">Flask</span>
-              <span class="ptag">PyMuPDF</span>
-              <span class="ptag">Gemini AI</span>
-              <span class="ptag">Pydantic</span>
-            </div>
-            <a class="proj-btn" href="https://github.com/SarindraTherese" target="_blank">🔗 View on GitHub</a>
-          </div>
-        </div>
-
-        <div class="proj-card" data-cat="de">
-          <div class="proj-img proj-img--teal">⚡
-            <span class="proj-badge badge--de">Data Engineering</span>
-          </div>
-          <div class="proj-body">
-            <h3 class="proj-title">Pipeline monitoring infrastructure</h3>
-            <p class="proj-desc">Surveillance temps réel via Kafka : collecte CPU/mémoire, états services, dashboards Grafana personnalisés.</p>
-            <div class="proj-stats">
-              <span class="pstat">Temps réel</span>
-              <span class="pstat">Multi-sources</span>
-            </div>
-            <div class="proj-tags">
-              <span class="ptag">Kafka</span>
-              <span class="ptag">Java</span>
-              <span class="ptag">InfluxDB</span>
-              <span class="ptag">Grafana</span>
-            </div>
-            <a class="proj-btn" href="https://github.com/SarindraTherese" target="_blank">🔗 KAPSDATA</a>
-          </div>
-        </div>
-
-        <div class="proj-card" data-cat="de">
-          <div class="proj-img proj-img--teal2">🔗
-            <span class="proj-badge badge--de">Data Engineering</span>
-          </div>
-          <div class="proj-body">
-            <h3 class="proj-title">Pipeline Elasticsearch → Kafka → InfluxDB</h3>
-            <p class="proj-desc">Socle data pipeline de surveillance d'infrastructures avec filtrage et sélection des données envoyées entre systèmes.</p>
-            <div class="proj-stats">
-              <span class="pstat">ETL Pipeline</span>
-              <span class="pstat">Filtrage</span>
-            </div>
-            <div class="proj-tags">
-              <span class="ptag">Apache Kafka</span>
-              <span class="ptag">Python</span>
-              <span class="ptag">Elasticsearch</span>
-            </div>
-            <a class="proj-btn" href="https://github.com/SarindraTherese" target="_blank">🔗 KAPSDATA</a>
-          </div>
-        </div>
-
-        <div class="proj-card" data-cat="an">
-          <div class="proj-img proj-img--purple">📊
-            <span class="proj-badge badge--an">Analytics</span>
-          </div>
-          <div class="proj-body">
-            <h3 class="proj-title">Dashboard financier assurance</h3>
-            <p class="proj-desc">Dashboard Power BI complet : arriérés, primes, encaissements, analyses YTD/MTD, TOP 50 clients débiteurs.</p>
-            <div class="proj-stats">
-              <span class="pstat">YTD/MTD</span>
-              <span class="pstat">TOP 50 KPI</span>
-            </div>
-            <div class="proj-tags">
-              <span class="ptag">Power BI</span>
-              <span class="ptag">KPI</span>
-              <span class="ptag">DAX</span>
-            </div>
-            <a class="proj-btn" href="https://github.com/SarindraTherese" target="_blank">🔗 View Project</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="collab-banner">
-        <h3>Interested in collaborating?</h3>
-        <p>I'm always open to discussing new projects and opportunities</p>
-        <a class="collab-btn" href="#" onclick="showPage('contact')">Let's Connect</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PAGE : SKILLS ── -->
-  <div id="page-skills" class="page">
-    <div class="page-inner">
-      <div class="sec-hd">
-        <h2 class="sec-title">Skills &amp; <span class="gradient-text">Expertise</span></h2>
-        <p class="sec-sub">A comprehensive overview of my technical capabilities and professional expertise</p>
-      </div>
-
-      <div class="skills-tabs">
-        <button class="stab active" onclick="switchSkillTab('tech', this)">Technical Skills</button>
-        <button class="stab" onclick="switchSkillTab('viz', this)">Skill Visualization</button>
-      </div>
-
-      <!-- Technical Skills panel -->
-      <div id="sp-tech" class="skill-panel active">
-        <div class="skill-cat-grid">
-          <div class="skill-cat-card">
-            <div class="scat-header">
-              <div class="scat-icon">🐍</div>
-              <div class="scat-title">Langages &amp; Frameworks</div>
-            </div>
-            <ul class="scat-list">
-              <li>Python (NumPy, Pandas)</li>
-              <li>Flask · Django · Streamlit</li>
-              <li>Java</li>
-              <li>Pydantic · REST API</li>
-            </ul>
-          </div>
-          <div class="skill-cat-card">
-            <div class="scat-header">
-              <div class="scat-icon">🧠</div>
-              <div class="scat-title">IA Générative &amp; LLMs</div>
-            </div>
-            <ul class="scat-list">
-              <li>OpenAI API (GPT-4)</li>
-              <li>Gemini AI</li>
-              <li>OCR : PyMuPDF, Pytesseract</li>
-              <li>Automatisation n8n</li>
-            </ul>
-          </div>
-          <div class="skill-cat-card">
-            <div class="scat-header">
-              <div class="scat-icon">⚡</div>
-              <div class="scat-title">Big Data &amp; Pipelines</div>
-            </div>
-            <ul class="scat-list">
-              <li>Apache Kafka</li>
-              <li>PySpark</li>
-              <li>Apache Airflow</li>
-              <li>Elasticsearch · InfluxDB</li>
-            </ul>
-          </div>
-          <div class="skill-cat-card">
-            <div class="scat-header">
-              <div class="scat-icon">📊</div>
-              <div class="scat-title">Visualisation &amp; BI</div>
-            </div>
-            <ul class="scat-list">
-              <li>Power BI (DAX, KPI)</li>
-              <li>Grafana</li>
-              <li>Analyses YTD / MTD</li>
-              <li>Dashboard Design</li>
-            </ul>
-          </div>
-          <div class="skill-cat-card">
-            <div class="scat-header">
-              <div class="scat-icon">🗄️</div>
-              <div class="scat-title">Bases de données</div>
-            </div>
-            <ul class="scat-list">
-              <li>PostgreSQL · MySQL</li>
-              <li>SQL Server</li>
-              <li>Elasticsearch · InfluxDB</li>
-              <li>NoSQL</li>
-            </ul>
-          </div>
-          <div class="skill-cat-card">
-            <div class="scat-header">
-              <div class="scat-icon">🔧</div>
-              <div class="scat-title">Outils &amp; Workflow</div>
-            </div>
-            <ul class="scat-list">
-              <li>n8n (automatisation)</li>
-              <li>Git &amp; versioning</li>
-              <li>PDF / ZIP processing</li>
-              <li>JSON / Pydantic</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="skill-bars-grid">
-          <div class="skill-bars-card">
-            <h4>Programming Languages</h4>
-            <div class="bar-row"><div class="bar-top"><span>Python</span><span class="bar-pct">95%</span></div><div class="bar-track"><div class="bar-fill" data-w="95"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>SQL</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Java</span><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-w="75"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Flask / Streamlit</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Django</span><span class="bar-pct">70%</span></div><div class="bar-track"><div class="bar-fill" data-w="70"></div></div></div>
-          </div>
-          <div class="skill-bars-card">
-            <h4>IA &amp; Data Tools</h4>
-            <div class="bar-row"><div class="bar-top"><span>OpenAI API</span><span class="bar-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-w="90"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Gemini AI</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Apache Kafka</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>PySpark</span><span class="bar-pct">80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>n8n</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-          </div>
-          <div class="skill-bars-card">
-            <h4>Visualisation &amp; BDD</h4>
-            <div class="bar-row"><div class="bar-top"><span>Power BI</span><span class="bar-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-w="92"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Grafana</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-w="82"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>PostgreSQL</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>Elasticsearch</span><span class="bar-pct">78%</span></div><div class="bar-track"><div class="bar-fill" data-w="78"></div></div></div>
-            <div class="bar-row"><div class="bar-top"><span>InfluxDB</span><span class="bar-pct">80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Visualization panel -->
-      <div id="sp-viz" class="skill-panel">
-        <div class="radar-card">
-          <h4>Core Competencies Overview</h4>
-          <canvas id="radarChart" height="340"></canvas>
-        </div>
-        <div class="charts-grid">
-          <div class="chart-card">
-            <h4>Programming Languages</h4>
-            <canvas id="barChart1" height="260"></canvas>
-          </div>
-          <div class="chart-card">
-            <h4>IA &amp; Data Tools</h4>
-            <canvas id="barChart2" height="260"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PAGE : CONTACT ── -->
-  <div id="page-contact" class="page">
-    <div class="page-inner">
-      <div class="sec-hd">
-        <h2 class="sec-title">Get In <span class="gradient-text">Touch</span></h2>
-        <p class="sec-sub">Let's discuss how we can work together on your next data science project</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-form-card">
-          <h3>Send a Message</h3>
-
-          <div id="form-success" class="form-success" style="display:none;">
-            <div class="form-success-icon">✅</div>
-            <h4>Message envoyé !</h4>
-            <p>Merci pour votre message. Je vous répondrai dans les plus brefs délais.</p>
-            <button class="send-btn" onclick="resetContactForm()" style="margin-top:16px;">✉️ Nouveau message</button>
-          </div>
-
-          <div id="form-error" class="form-error" style="display:none;">
-            <p id="form-error-msg">⚠️ Une erreur est survenue. Réessayez ou contactez-moi par email.</p>
-          </div>
-
-          <div id="contact-form-body">
-            <div class="form-group">
-              <label for="name">Name <span class="req">*</span></label>
-              <input type="text" id="name" placeholder="Your name">
-              <div class="field-error" id="err-name"></div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email <span class="req">*</span></label>
-              <input type="email" id="email" placeholder="your.email@example.com">
-              <div class="field-error" id="err-email"></div>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" placeholder="Project inquiry, collaboration, etc.">
-            </div>
-            <div class="form-group">
-              <label for="message">Message <span class="req">*</span></label>
-              <textarea id="message" placeholder="Tell me about your project..."></textarea>
-              <div class="field-error" id="err-message"></div>
-            </div>
-            <button class="send-btn" id="send-btn" onclick="sendMessage(this)">
-              <span id="send-btn-text">✈️ Send Message</span>
-              <span id="send-btn-loader" style="display:none;">⏳ Sending...</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="contact-info-col">
-          <div class="contact-info-card">
-            <h3>Contact Information</h3>
-            <div class="cinfo-row">
-              <div class="cinfo-icon">📧</div>
-              <div>
-                <div class="cinfo-lbl">Email</div>
-                <div class="cinfo-val">randriambelosonsarindratherese@gmail.com</div>
-              </div>
-            </div>
-            <div class="cinfo-row">
-              <div class="cinfo-icon">📱</div>
-              <div>
-                <div class="cinfo-lbl">Phone</div>
-                <div class="cinfo-val">+261 34 302 9400</div>
-              </div>
-            </div>
-            <div class="cinfo-row">
-              <div class="cinfo-icon">📍</div>
-              <div>
-                <div class="cinfo-lbl">Location</div>
-                <div class="cinfo-val">Antananarivo, Madagascar</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-info-card">
-            <h3>Connect on Social</h3>
-            <a class="social-row" href="https://linkedin.com/in/sarindra-therese" target="_blank" rel="noopener">
-              <div class="cinfo-icon">💼</div>
-              <div class="cinfo-val">LinkedIn — /in/sarindra-therese</div>
-            </a>
-            <a class="social-row" href="https://github.com/SarindraTherese" target="_blank" rel="noopener">
-              <div class="cinfo-icon">🐙</div>
-              <div class="cinfo-val">GitHub — SarindraTherese</div>
-            </a>
-          </div>
-
-          <div class="avail-card">
-            <h3>Availability</h3>
-            <p>Disponible pour des missions freelance, consulting et postes en Data Analytics, Data Engineering ou IA Générative.</p>
-            <div class="avail-dot">Available for new opportunities</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="loc-card">
-        <h3>Based in Antananarivo</h3>
-        <p>Working with clients globally, specializing in remote collaboration</p>
-        <div class="loc-map">
-          <div class="loc-pin">📍</div>
-          <h4>Antananarivo, Madagascar</h4>
-          <p>Open to remote opportunities worldwide</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <span>© 2025 Sarindra Therese Randriambeloson</span>
-    <span>Data Analyst · Data Engineer · Generative AI</span>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="assets/js/main.js"></script>
-
+<div class="collab-banner">
+<h3>Interested in collaborating?</h3>
+<p>I'm always open to discussing new projects and opportunities</p>
+<a class="collab-btn" href="#" onclick="showPage('contact')">Let's Connect</a>
+</div>
+</div>
+</div>
+<!-- ── PAGE : SKILLS ── -->
+<div class="page" id="page-skills">
+<div class="page-inner">
+<div class="sec-hd">
+<h2 class="sec-title">Skills &amp; <span class="gradient-text">Expertise</span></h2>
+<p class="sec-sub">A comprehensive overview of my technical capabilities and professional expertise</p>
+</div>
+<div class="skills-tabs">
+<button class="stab active" onclick="switchSkillTab('tech', this)">Technical Skills</button>
+<button class="stab" onclick="switchSkillTab('viz', this)">Skill Visualization</button>
+</div>
+<!-- Technical Skills panel -->
+<div class="skill-panel active" id="sp-tech">
+<div class="skill-cat-grid">
+<div class="skill-cat-card">
+<div class="scat-header">
+<div class="scat-icon">🐍</div>
+<div class="scat-title">Langages &amp; Frameworks</div>
+</div>
+<ul class="scat-list">
+<li>Python (NumPy, Pandas)</li>
+<li>Flask · Django · Streamlit</li>
+<li>Java</li>
+<li>Pydantic · REST API</li>
+</ul>
+</div>
+<div class="skill-cat-card">
+<div class="scat-header">
+<div class="scat-icon">🧠</div>
+<div class="scat-title">IA Générative &amp; LLMs</div>
+</div>
+<ul class="scat-list">
+<li>OpenAI API (GPT-4)</li>
+<li>Gemini AI</li>
+<li>OCR : PyMuPDF, Pytesseract</li>
+<li>Automatisation n8n</li>
+</ul>
+</div>
+<div class="skill-cat-card">
+<div class="scat-header">
+<div class="scat-icon">⚡</div>
+<div class="scat-title">Big Data &amp; Pipelines</div>
+</div>
+<ul class="scat-list">
+<li>Apache Kafka</li>
+<li>PySpark</li>
+<li>Apache Airflow</li>
+<li>Elasticsearch · InfluxDB</li>
+</ul>
+</div>
+<div class="skill-cat-card">
+<div class="scat-header">
+<div class="scat-icon">📊</div>
+<div class="scat-title">Visualisation &amp; BI</div>
+</div>
+<ul class="scat-list">
+<li>Power BI (DAX, KPI)</li>
+<li>Grafana</li>
+<li>Analyses YTD / MTD</li>
+<li>Dashboard Design</li>
+</ul>
+</div>
+<div class="skill-cat-card">
+<div class="scat-header">
+<div class="scat-icon">🗄️</div>
+<div class="scat-title">Bases de données</div>
+</div>
+<ul class="scat-list">
+<li>PostgreSQL · MySQL</li>
+<li>SQL Server</li>
+<li>Elasticsearch · InfluxDB</li>
+<li>NoSQL</li>
+</ul>
+</div>
+<div class="skill-cat-card">
+<div class="scat-header">
+<div class="scat-icon">🔧</div>
+<div class="scat-title">Outils &amp; Workflow</div>
+</div>
+<ul class="scat-list">
+<li>n8n (automatisation)</li>
+<li>Git &amp; versioning</li>
+<li>PDF / ZIP processing</li>
+<li>JSON / Pydantic</li>
+</ul>
+</div>
+</div>
+<div class="skill-bars-grid">
+<div class="skill-bars-card">
+<h4>Programming Languages</h4>
+<div class="bar-row"><div class="bar-top"><span>Python</span><span class="bar-pct">95%</span></div><div class="bar-track"><div class="bar-fill" data-w="95"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>SQL</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Java</span><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-w="75"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Flask / Streamlit</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Django</span><span class="bar-pct">70%</span></div><div class="bar-track"><div class="bar-fill" data-w="70"></div></div></div>
+</div>
+<div class="skill-bars-card">
+<h4>IA &amp; Data Tools</h4>
+<div class="bar-row"><div class="bar-top"><span>OpenAI API</span><span class="bar-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-w="90"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Gemini AI</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Apache Kafka</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>PySpark</span><span class="bar-pct">80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>n8n</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+</div>
+<div class="skill-bars-card">
+<h4>Visualisation &amp; BDD</h4>
+<div class="bar-row"><div class="bar-top"><span>Power BI</span><span class="bar-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-w="92"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Grafana</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-w="82"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>PostgreSQL</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>Elasticsearch</span><span class="bar-pct">78%</span></div><div class="bar-track"><div class="bar-fill" data-w="78"></div></div></div>
+<div class="bar-row"><div class="bar-top"><span>InfluxDB</span><span class="bar-pct">80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+</div>
+</div>
+</div>
+<!-- Visualization panel -->
+<div class="skill-panel" id="sp-viz">
+<div class="radar-card">
+<h4>Core Competencies Overview</h4>
+<canvas height="340" id="radarChart"></canvas>
+</div>
+<div class="charts-grid">
+<div class="chart-card">
+<h4>Programming Languages</h4>
+<canvas height="260" id="barChart1"></canvas>
+</div>
+<div class="chart-card">
+<h4>IA &amp; Data Tools</h4>
+<canvas height="260" id="barChart2"></canvas>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ── PAGE : CONTACT ── -->
+<div class="page" id="page-contact">
+<div class="page-inner">
+<div class="sec-hd">
+<h2 class="sec-title">Get In <span class="gradient-text">Touch</span></h2>
+<p class="sec-sub">Let's discuss how we can work together on your next data science project</p>
+</div>
+<div class="contact-grid">
+<div class="contact-form-card">
+<h3>Send a Message</h3>
+<div class="form-success" id="form-success" style="display:none;">
+<div class="form-success-icon">✅</div>
+<h4>Message envoyé !</h4>
+<p>Merci pour votre message. Je vous répondrai dans les plus brefs délais.</p>
+<button class="send-btn" onclick="resetContactForm()" style="margin-top:16px;">✉️ Nouveau message</button>
+</div>
+<div class="form-error" id="form-error" style="display:none;">
+<p id="form-error-msg">⚠️ Une erreur est survenue. Réessayez ou contactez-moi par email.</p>
+</div>
+<div id="contact-form-body">
+<div class="form-group">
+<label for="name">Name <span class="req">*</span></label>
+<input id="name" placeholder="Your name" type="text"/>
+<div class="field-error" id="err-name"></div>
+</div>
+<div class="form-group">
+<label for="email">Email <span class="req">*</span></label>
+<input id="email" placeholder="your.email@example.com" type="email"/>
+<div class="field-error" id="err-email"></div>
+</div>
+<div class="form-group">
+<label for="subject">Subject</label>
+<input id="subject" placeholder="Project inquiry, collaboration, etc." type="text"/>
+</div>
+<div class="form-group">
+<label for="message">Message <span class="req">*</span></label>
+<textarea id="message" placeholder="Tell me about your project..."></textarea>
+<div class="field-error" id="err-message"></div>
+</div>
+<button class="send-btn" id="send-btn" onclick="sendMessage(this)">
+<span id="send-btn-text">✈️ Send Message</span>
+<span id="send-btn-loader" style="display:none;">⏳ Sending...</span>
+</button>
+</div>
+</div>
+<div class="contact-info-col">
+<div class="contact-info-card">
+<h3>Contact Information</h3>
+<div class="cinfo-row">
+<div class="cinfo-icon">📧</div>
+<div>
+<div class="cinfo-lbl">Email</div>
+<div class="cinfo-val">randriambelosonsarindratherese@gmail.com</div>
+</div>
+</div>
+<div class="cinfo-row">
+<div class="cinfo-icon">📱</div>
+<div>
+<div class="cinfo-lbl">Phone</div>
+<div class="cinfo-val">+261 34 302 9400</div>
+</div>
+</div>
+<div class="cinfo-row">
+<div class="cinfo-icon">📍</div>
+<div>
+<div class="cinfo-lbl">Location</div>
+<div class="cinfo-val">Antananarivo, Madagascar</div>
+</div>
+</div>
+</div>
+<div class="contact-info-card">
+<h3>Connect on Social</h3>
+<a class="social-row" href="https://linkedin.com/in/sarindra-therese" rel="noopener" target="_blank">
+<div class="cinfo-icon">💼</div>
+<div class="cinfo-val">LinkedIn — /in/sarindra-therese</div>
+</a>
+<a class="social-row" href="https://github.com/SarindraTherese" rel="noopener" target="_blank">
+<div class="cinfo-icon">🐙</div>
+<div class="cinfo-val">GitHub — SarindraTherese</div>
+</a>
+</div>
+<div class="avail-card">
+<h3>Availability</h3>
+<p>Disponible pour des missions freelance, consulting et postes en Data Analytics, Data Engineering ou IA Générative.</p>
+<div class="avail-dot">Available for new opportunities</div>
+</div>
+</div>
+</div>
+<div class="loc-card">
+<h3>Based in Antananarivo</h3>
+<p>Working with clients globally, specializing in remote collaboration</p>
+<div class="loc-map">
+<div class="loc-pin">📍</div>
+<h4>Antananarivo, Madagascar</h4>
+<p>Open to remote opportunities worldwide</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ── FOOTER ── -->
+<footer>
+<span>© 2025 Sarindra Therese Randriambeloson</span>
+<span>Data Analyst · Data Engineer · Generative AI</span>
+</footer>
+<!-- Scripts -->
+<script src="assets/js/main.js"></script>
 </body>
 </html>

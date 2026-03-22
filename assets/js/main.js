@@ -64,19 +64,22 @@ function filterProj(cat, btn) {
   document.querySelectorAll('.pfilt').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  document.querySelectorAll('.proj-card').forEach((card, i) => {
+  // Supporte les deux formats de cards (.proj-card et .proj-card-v2)
+  const cards = document.querySelectorAll('.proj-card, .proj-card-v2');
+  let visibleIdx = 0;
+  cards.forEach((card) => {
     const show = cat === 'all' || card.dataset.cat === cat;
     if (show) {
       card.style.display = 'flex';
-      // reset puis re-trigger l'animation
       card.classList.remove('visible');
-      card.style.transitionDelay = (i * 0.07) + 's';
+      card.style.transitionDelay = (visibleIdx * 0.08) + 's';
+      visibleIdx++;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => card.classList.add('visible'));
       });
     } else {
       card.classList.remove('visible');
-      setTimeout(() => { card.style.display = 'none'; }, 350);
+      setTimeout(() => { card.style.display = 'none'; }, 300);
     }
   });
 }
@@ -362,10 +365,9 @@ function applyAnimClasses() {
     el.style.transitionDelay = (i * 0.1) + 's';
   });
 
-  // Project cards — use their own animation class to preserve display:flex
-  document.querySelectorAll('.proj-card').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.07) + 's';
-    // anim-ready is handled via CSS .proj-card.anim-ready
+  // Project cards (v1 + v2)
+  document.querySelectorAll('.proj-card, .proj-card-v2').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.08) + 's';
     el.classList.add('anim-ready');
   });
 
