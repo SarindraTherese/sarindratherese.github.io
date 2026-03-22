@@ -200,6 +200,37 @@
         </div>
       </div>
 
+      <div class="cert-section">
+        <h3 class="about-sec-title">🏆 Certifications</h3>
+        <div class="cert-grid">
+          <a class="cert-card" href="https://www.coursera.org/account/accomplishments/professional-cert/2EXCEXX5MFUS" target="_blank">
+            <div class="cert-badge cert-badge--coursera">Coursera</div>
+            <div class="cert-name">Microsoft Power BI Data Analyst</div>
+            <div class="cert-link">Voir le certificat →</div>
+          </a>
+          <a class="cert-card" href="https://www.udemy.com/certificate/UC-cb04f58b-c443-4ce0-a3ec-bb5eac00833c/" target="_blank">
+            <div class="cert-badge cert-badge--udemy">Udemy</div>
+            <div class="cert-name">Microsoft Power BI Desktop for Business Intelligence</div>
+            <div class="cert-link">Voir le certificat →</div>
+          </a>
+          <a class="cert-card" href="https://www.udemy.com/certificate/UC-9d3f8c12-90ed-4f55-87a8-6cf49240e790/" target="_blank">
+            <div class="cert-badge cert-badge--udemy">Udemy</div>
+            <div class="cert-name">Apache Kafka Series — Kafka Connect Hands-on Learning</div>
+            <div class="cert-link">Voir le certificat →</div>
+          </a>
+          <a class="cert-card" href="https://www.udemy.com/certificate/UC-d6bfb498-c2f0-4892-a212-0f7541f1adb2/" target="_blank">
+            <div class="cert-badge cert-badge--udemy">Udemy</div>
+            <div class="cert-name">Apache Kafka Series — Learn Apache Kafka for Beginners v3</div>
+            <div class="cert-link">Voir le certificat →</div>
+          </a>
+          <a class="cert-card" href="https://www.udemy.com/certificate/UC-e75a08e2-fb2d-4931-915f-f81103700b02/" target="_blank">
+            <div class="cert-badge cert-badge--udemy">Udemy</div>
+            <div class="cert-name">Apache Kafka Series — Kafka Streams for Data Processing</div>
+            <div class="cert-link">Voir le certificat →</div>
+          </a>
+        </div>
+      </div>
+
       <div class="drives-card">
         <div class="drives-icon">💜</div>
         <h3>Ce qui me motive</h3>
@@ -508,23 +539,43 @@
       <div class="contact-grid">
         <div class="contact-form-card">
           <h3>Send a Message</h3>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Your name">
+
+          <div id="form-success" class="form-success" style="display:none;">
+            <div class="form-success-icon">✅</div>
+            <h4>Message envoyé !</h4>
+            <p>Merci pour votre message. Je vous répondrai dans les plus brefs délais.</p>
+            <button class="send-btn" onclick="resetContactForm()" style="margin-top:16px;">✉️ Nouveau message</button>
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="your.email@example.com">
+
+          <div id="form-error" class="form-error" style="display:none;">
+            <p id="form-error-msg">⚠️ Une erreur est survenue. Réessayez ou contactez-moi par email.</p>
           </div>
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" placeholder="Project inquiry, collaboration, etc.">
+
+          <div id="contact-form-body">
+            <div class="form-group">
+              <label for="name">Name <span class="req">*</span></label>
+              <input type="text" id="name" placeholder="Your name">
+              <div class="field-error" id="err-name"></div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" placeholder="your.email@example.com">
+              <div class="field-error" id="err-email"></div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="Project inquiry, collaboration, etc.">
+            </div>
+            <div class="form-group">
+              <label for="message">Message <span class="req">*</span></label>
+              <textarea id="message" placeholder="Tell me about your project..."></textarea>
+              <div class="field-error" id="err-message"></div>
+            </div>
+            <button class="send-btn" id="send-btn" onclick="sendMessage(this)">
+              <span id="send-btn-text">✈️ Send Message</span>
+              <span id="send-btn-loader" style="display:none;">⏳ Sending...</span>
+            </button>
           </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="Tell me about your project..."></textarea>
-          </div>
-          <button class="send-btn" onclick="sendMessage(this)">✈️ Send Message</button>
         </div>
 
         <div class="contact-info-col">
