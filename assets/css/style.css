@@ -307,8 +307,22 @@ body {
   animation: bob ease-in-out infinite;
 }
 
-.float-card .fc-icon { font-size: 18px; margin-bottom: 4px; }
-.float-card .fc-label { font-size: 13px; font-weight: 600; color: var(--txt); }
+.float-card {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+.float-card .fc-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.float-card .fc-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt);
+  white-space: nowrap;
+}
 
 .fc-1 { left: -18px; top: 60px;   animation-duration: 3s; }
 .fc-2 { right: -14px; top: 130px; animation-duration: 4s; }
