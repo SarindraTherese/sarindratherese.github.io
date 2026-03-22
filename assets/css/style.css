@@ -998,3 +998,263 @@ footer {
   .hero-stats     { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .hstat-n        { font-size: 24px; }
 }
+
+/* ============================================================
+   ANIMATIONS — inspirées du template Figma
+   ============================================================ */
+
+/* ── Keyframes ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
+  50%       { box-shadow: 0 0 44px rgba(236, 72, 153, 0.65), 0 0 80px rgba(139, 92, 246, 0.35); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes navUnderline {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── Intersection Observer classes ── */
+.anim-ready {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.anim-ready.from-left {
+  transform: translateX(-36px);
+}
+
+.anim-ready.from-right {
+  transform: translateX(36px);
+}
+
+.anim-ready.scale {
+  transform: scale(0.88);
+}
+
+.anim-ready.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delays for grid children */
+.anim-stagger > *:nth-child(1) { transition-delay: 0.05s; }
+.anim-stagger > *:nth-child(2) { transition-delay: 0.12s; }
+.anim-stagger > *:nth-child(3) { transition-delay: 0.19s; }
+.anim-stagger > *:nth-child(4) { transition-delay: 0.26s; }
+.anim-stagger > *:nth-child(5) { transition-delay: 0.33s; }
+.anim-stagger > *:nth-child(6) { transition-delay: 0.40s; }
+
+/* ── Hero entrance ── */
+.hero-badge {
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.1s;
+}
+
+.hero-title {
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.25s;
+}
+
+.hero-desc {
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.4s;
+}
+
+.hero-btns {
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.55s;
+}
+
+.hero-stats {
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.7s;
+}
+
+.hero-visual {
+  animation: fadeSlideRight 0.9s ease both;
+  animation-delay: 0.3s;
+}
+
+/* ── Float cards levitation (déjà présent, on améliore) ── */
+.float-card {
+  transition: box-shadow 0.3s;
+}
+
+.float-card:hover {
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.4);
+}
+
+/* ── Nav active underline animation ── */
+.nav-links a.active {
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 2px;
+  background: var(--grad);
+  border-radius: 2px;
+  animation: navUnderline 0.3s ease both;
+  transform-origin: left;
+}
+
+/* ── Buttons pulse on hero ── */
+.btn-primary {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.btn-primary:hover {
+  animation: none;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.6);
+}
+
+/* ── Project cards hover lift (plus prononcé) ── */
+.proj-card {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.proj-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 60px rgba(139, 92, 246, 0.3);
+  border-color: rgba(236, 72, 153, 0.45);
+}
+
+/* ── Skill category cards hover ── */
+.skill-cat-card {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s ease,
+              background 0.3s ease;
+}
+
+.skill-cat-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(236, 72, 153, 0.45);
+  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2);
+}
+
+/* ── Experience items hover ── */
+.exp-item {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.exp-item:hover {
+  transform: translateX(6px);
+  border-color: rgba(236, 72, 153, 0.4);
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.15);
+}
+
+/* ── Contact info rows hover ── */
+.cinfo-row,
+.social-row {
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.cinfo-row:hover {
+  transform: translateX(4px);
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+/* ── Shimmer on gradient text on hover ── */
+.hero-title .gradient-text {
+  background-size: 200% auto;
+  background-image: linear-gradient(90deg, #ec4899, #8b5cf6, #c084fc, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Page transition ── */
+.page.active .page-inner,
+.page.active .home-inner {
+  animation: fadeSlideUp 0.5s ease both;
+}
+
+/* ── Skill bars — trigger via JS (déjà fonctionnel, on améliore l'easing) ── */
+.bar-fill {
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Badge pulse on hero ── */
+.hero-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: translateX(-100%);
+  animation: badgeShine 3s ease-in-out infinite;
+}
+
+@keyframes badgeShine {
+  0%, 100% { transform: translateX(-100%); }
+  50%       { transform: translateX(100%); }
+}
+
+/* ── Stats counter animation hook ── */
+.hstat-n {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.hstat:hover .hstat-n {
+  transform: scale(1.15);
+  color: var(--pink);
+}
+
+/* ── Filter buttons animation ── */
+.pfilt, .stab {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pfilt:not(.active):hover,
+.stab:not(.active):hover {
+  transform: translateY(-2px);
+}
+
+.pfilt.active, .stab.active {
+  transform: scale(1.05);
+}
+

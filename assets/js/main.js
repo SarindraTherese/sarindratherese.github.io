@@ -216,3 +216,139 @@ document.addEventListener('DOMContentLoaded', () => {
     c.style.display = 'flex';
   });
 });
+
+/* ── INTERSECTION OBSERVER — animations au scroll ── */
+function initScrollAnimations() {
+  // Observer pour les éléments .anim-ready
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.anim-ready').forEach(el => io.observe(el));
+}
+
+/* ── APPLIQUER les classes anim sur les éléments ── */
+function applyAnimClasses() {
+  // Section headers
+  document.querySelectorAll('.sec-hd').forEach(el => {
+    el.classList.add('anim-ready');
+  });
+
+  // Experience items
+  document.querySelectorAll('.exp-item').forEach((el, i) => {
+    el.classList.add('anim-ready', 'from-left');
+    el.style.transitionDelay = (i * 0.08) + 's';
+  });
+
+  // Edu/cert cards
+  document.querySelectorAll('.edu-card').forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.style.transitionDelay = (i * 0.1) + 's';
+  });
+
+  // Skill cat cards
+  document.querySelectorAll('.skill-cat-card').forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.style.transitionDelay = (i * 0.07) + 's';
+  });
+
+  // Skill bars cards
+  document.querySelectorAll('.skill-bars-card').forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.style.transitionDelay = (i * 0.1) + 's';
+  });
+
+  // Project cards
+  document.querySelectorAll('.proj-card').forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.style.transitionDelay = (i * 0.07) + 's';
+  });
+
+  // Contact cards
+  document.querySelectorAll('.contact-form-card, .contact-info-card, .avail-card, .loc-card').forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.style.transitionDelay = (i * 0.1) + 's';
+  });
+
+  // About sections
+  document.querySelectorAll('.about-top, .drives-card, .about-bottom-grid').forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.style.transitionDelay = (i * 0.15) + 's';
+  });
+
+  // Collab banner
+  document.querySelectorAll('.collab-banner').forEach(el => {
+    el.classList.add('anim-ready', 'scale');
+  });
+}
+
+/* ── RE-INIT observer quand on change de page ── */
+const _origShowPage = showPage;
+window.showPage = function(id) {
+  _origShowPage(id);
+  // Légère pause pour que le DOM soit visible, puis observer
+  setTimeout(() => {
+    // Reset les classes anim sur la page qui s'affiche
+    const page = document.getElementById('page-' + id);
+    if (page) {
+      page.querySelectorAll('.anim-ready').forEach(el => {
+        el.classList.remove('visible');
+      });
+      setTimeout(() => {
+        page.querySelectorAll('.anim-ready').forEach(el => {
+          const io2 = new IntersectionObserver(
+            (entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  io2.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+          );
+          io2.observe(el);
+        });
+      }, 80);
+    }
+  }, 50);
+};
+
+/* ── COUNTER ANIMATION sur les stats home ── */
+function animateCounters() {
+  document.querySelectorAll('.hstat-n').forEach(el => {
+    const text = el.textContent.trim();
+    const match = text.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    const target = parseInt(match[1]);
+    const suffix = match[2];
+    let current = 0;
+    const step = Math.ceil(target / 30);
+    const interval = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current + suffix;
+      if (current >= target) clearInterval(interval);
+    }, 40);
+  });
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.proj-card').forEach(c => {
+    c.style.display = 'flex';
+  });
+
+  applyAnimClasses();
+  initScrollAnimations();
+
+  // Counter animation sur la home (avec délai pour laisser entrer la page)
+  setTimeout(animateCounters, 900);
+});
