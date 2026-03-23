@@ -338,10 +338,11 @@ body {
    ============================================================ */
 .about-top {
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: minmax(0, 320px) 1fr;
   gap: 48px;
   margin-bottom: 52px;
-  align-items: start;
+  align-items: center;
+  overflow: visible;
 }
 
 .about-photo {
@@ -355,11 +356,18 @@ body {
   font-size: 80px;
 }
 
+.about-journey {
+  text-align: left;
+  min-width: 0;
+  overflow: visible;
+}
+
 .journey-title {
   font-size: 20px;
   font-weight: 700;
   color: var(--txt);
   margin-bottom: 16px;
+  text-align: left;
 }
 
 .journey-txt {
@@ -367,7 +375,10 @@ body {
   font-size: 14px;
   line-height: 1.8;
   margin-bottom: 14px;
+  text-align: left;
 }
+
+
 
 .skill-pills {
   display: flex;

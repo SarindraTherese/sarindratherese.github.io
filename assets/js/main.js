@@ -337,7 +337,7 @@ function applyAnimClasses() {
     el.style.transitionDelay = (i * 0.1) + 's';
   });
 
-  document.querySelectorAll('.about-top, .drives-card, .about-bottom-grid').forEach((el, i) => {
+  document.querySelectorAll('.drives-card, .about-bottom-grid, .cert-section, .about-top').forEach((el, i) => {
     el.classList.add('anim-ready');
     el.style.transitionDelay = (i * 0.15) + 's';
   });
