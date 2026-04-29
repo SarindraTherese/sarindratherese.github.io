@@ -5,6 +5,18 @@
 
 'use strict';
 
+const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
+
+function trackVirtualPageView(id) {
+  if (typeof window.gtag !== 'function') return;
+
+  const sectionPath = id === 'home' ? '/' : '/' + id;
+  window.gtag('config', GA_MEASUREMENT_ID, {
+    page_path: sectionPath,
+    page_title: 'Sarindra Therese - ' + id.charAt(0).toUpperCase() + id.slice(1)
+  });
+}
+
 /* ── PAGE NAVIGATION ── */
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -24,6 +36,8 @@ function showPage(id) {
   if (id === 'skills') setTimeout(animateBars, 300);
 
   document.querySelector('.nav-links').classList.remove('open');
+
+  trackVirtualPageView(id);
 
   // Re-trigger animations on page change
   setTimeout(() => {
