@@ -1212,12 +1212,12 @@ body > footer {
 /* ============================================================
    NOTES & LECTURES
    ============================================================ */
-.note-list, .read-list { display: flex; flex-direction: column; }
+.offer-list, .read-list { display: flex; flex-direction: column; }
 
-/* — Écrits — */
-.note-item {
+/* — Séances proposées — */
+.offer-item {
   display: grid;
-  grid-template-columns: 132px 1fr;
+  grid-template-columns: 148px 1fr;
   gap: var(--s5);
   padding: var(--s5) 0;
   border-bottom: 1px solid var(--line-soft);
@@ -1225,29 +1225,29 @@ body > footer {
   color: inherit;
   transition: background 0.18s ease;
 }
-.note-item:first-child { border-top: 1px solid var(--line); }
-a.note-item:hover { background: var(--paper-2); }
-.note-date {
+.offer-item:first-child { border-top: 1px solid var(--line); }
+a.offer-item:hover { background: var(--paper-2); }
+.offer-meta {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
   padding-top: 5px;
 }
-.note-main { display: flex; flex-direction: column; gap: 10px; }
-.note-title {
+.offer-main { display: flex; flex-direction: column; gap: 10px; }
+.offer-title {
   font-family: var(--display);
   font-weight: 700;
   text-transform: uppercase;
   font-size: 18px;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
-a.note-item:hover .note-title { color: var(--cyan); }
-.note-summary { font-size: 16.5px; line-height: 1.7; color: var(--body); max-width: 64ch; }
-.note-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: var(--s1); }
-.note-more {
+a.offer-item:hover .offer-title { color: var(--cyan); }
+.offer-summary { font-size: 16.5px; line-height: 1.7; color: var(--body); max-width: 64ch; }
+.offer-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: var(--s1); }
+.offer-more {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1259,7 +1259,33 @@ a.note-item:hover .note-title { color: var(--cyan); }
   color: var(--cyan);
 }
 
-/* — Lectures — */
+/* — Lectures, regroupées par année — */
+.read-group + .read-group { margin-top: var(--s7); }
+.read-year {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--cyan-fill);
+}
+.read-year h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.read-year span {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.read-group .read-item:first-child { border-top: 0; }
+
 .read-item {
   display: grid;
   grid-template-columns: 132px 1fr;
@@ -1335,9 +1361,10 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .avail-card[data-tone="muted"] .avail-dot::before { background: var(--muted);     box-shadow: 0 0 0 3px rgba(94,118,129,0.16); }
 
 @media (max-width: 860px) {
-  .note-item, .read-item { grid-template-columns: 1fr; gap: var(--s2); }
-  .note-date { padding-top: 0; }
+  .offer-item, .read-item { grid-template-columns: 1fr; gap: var(--s2); }
+  .offer-meta { padding-top: 0; }
   .read-kind { margin-top: 0; }
-  .note-title { font-size: 23px; }
+  .offer-title { font-size: 16px; }
+  .read-year h3 { font-size: 21px; }
   .empty-state { padding: var(--s5) var(--s4); }
 }

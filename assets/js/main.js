@@ -38,45 +38,53 @@ const AVAILABILITY_COPY = {
 };
 
 /* ════════════════════════════════════════════════════════════
-   2. NOTES & LECTURES
+   2. OFF SCREEN — lectures et séances proposées
    ────────────────────────────────────────────────────────────
    Ajouter une entrée = ajouter un objet dans le tableau.
    Aucun HTML à toucher. Les entrées s'affichent dans l'ordre
    du tableau — mets la plus récente en premier.
 
-   NOTES — un écrit à toi :
-     { date: '2026-09', title: '...', summary: '...',
-       tags: ['LLM', 'OCR'],
-       url: 'https://...' }        // url facultative
+   READINGS — un livre, et ce que tu en retiens.
+   Les livres se regroupent tout seuls par année, la plus récente
+   en haut. Une entrée sans `year` part dans « Currently reading ».
+     { year: 2023,
+       title: '...', author: '...', kind: 'Book',   // Book | Essay | Article
+       note: 'Ce que j\'en retiens, en une phrase ou deux.',
+       url: 'https://...' }        // facultatif
 
-   READINGS — ce que tu lis :
-     { title: '...', author: '...', kind: 'Book',   // Book | Paper | Article
-       note: 'Ce que j\'en retiens, en une phrase.',
-       url: 'https://...' }        // url facultative
+   OFFERINGS — une séance ou un accompagnement que tu proposes :
+     { name: 'Lecture numérologique',
+       format: 'Visio',            // Visio | Sur place | Écrit
+       length: '60 min',
+       summary: 'Ce que la personne en retire.',
+       tags: ['Numérologie'],
+       url: 'https://...' }        // lien de réservation, facultatif
 
    ⚠ Tant que ces tableaux sont vides, la page affiche un état
    d'attente. Ajoute au moins une entrée dans chacun avant de
    publier.
    ════════════════════════════════════════════════════════════ */
-const NOTES = [
-  // { date: '2026-09', title: 'Why I split OCR from the LLM', summary: '…', tags: ['OCR','LLM'] },
+const READINGS = [
+  // { year: 2023, title: '…', author: '…', kind: 'Book', note: '…' },
 ];
 
-const READINGS = [
-  // { title: '…', author: '…', kind: 'Book', note: '…' },
+const OFFERINGS = [
+  // { name: '…', format: 'Visio', length: '60 min', summary: '…', tags: ['Numérologie'] },
 ];
 
 /* ════════════════════════════════════════════════════════════
    3. NAVIGATION — routage par ancre, liens partageables
    ════════════════════════════════════════════════════════════ */
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
-const PAGES = ['home', 'about', 'projects', 'skills', 'notes', 'contact'];
+const PAGES = ['home', 'about', 'projects', 'skills', 'offscreen', 'contact'];
+const PAGE_TITLES = { home: 'Home', about: 'About', projects: 'Projects',
+  skills: 'Skills', offscreen: 'Off Screen', contact: 'Contact' };
 
 function trackVirtualPageView(id) {
   if (typeof window.gtag !== 'function') return;
   window.gtag('config', GA_MEASUREMENT_ID, {
     page_path: id === 'home' ? '/' : '/' + id,
-    page_title: 'Sarindra Therese — ' + id.charAt(0).toUpperCase() + id.slice(1)
+    page_title: 'Sarindra Therese — ' + (PAGE_TITLES[id] || id)
   });
 }
 
@@ -96,7 +104,7 @@ function showPage(id, opts) {
   });
 
   closeMenu();
-  document.title = (id === 'home' ? '' : id.charAt(0).toUpperCase() + id.slice(1) + ' — ')
+  document.title = (id === 'home' ? '' : (PAGE_TITLES[id] || id) + ' — ')
     + 'Sarindra Thérèse Randriambeloson — Data & AI Engineer';
 
   if (!options.silent) {
@@ -182,7 +190,7 @@ function initProjectFilter() {
 }
 
 /* ════════════════════════════════════════════════════════════
-   6. NOTES & LECTURES — rendu
+   6. OFF SCREEN — rendu
    ════════════════════════════════════════════════════════════ */
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c =>
@@ -202,32 +210,55 @@ function emptyState(icon, title, text) {
     + '<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p></div>';
 }
 
-function renderNotes() {
-  const host = document.getElementById('note-list');
+function renderOfferings() {
+  const host = document.getElementById('offer-list');
   if (!host) return;
 
-  if (!NOTES.length) {
-    host.innerHTML = emptyState('i-pen', 'Nothing published yet',
-      'I’m starting to write about the systems I build — document pipelines, streaming architectures and BI modelling. First notes coming soon.');
+  if (!OFFERINGS.length) {
+    host.innerHTML = emptyState('i-compass', 'Sessions coming soon',
+      'I\'m putting together the sessions I want to offer alongside my data work. Details and booking will land here.');
     return;
   }
 
-  host.innerHTML = NOTES.map(n => {
-    const tags = (n.tags || []).map(t => '<span class="ptag">' + esc(t) + '</span>').join('');
-    const link = n.url
-      ? '<span class="note-more">Read it <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>'
+  host.innerHTML = OFFERINGS.map(o => {
+    const meta = [o.format, o.length].filter(Boolean).join(' · ');
+    const tags = (o.tags || []).map(t => '<span class="ptag">' + esc(t) + '</span>').join('');
+    const link = o.url
+      ? '<span class="offer-more">Book <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>'
       : '';
     const inner =
-        '<div class="note-date">' + esc(formatMonth(n.date)) + '</div>'
-      + '<div class="note-main">'
-      +   '<h3 class="note-title">' + esc(n.title) + '</h3>'
-      +   '<p class="note-summary">' + esc(n.summary || '') + '</p>'
-      +   (tags || link ? '<div class="note-foot">' + tags + link + '</div>' : '')
+        '<div class="offer-meta">' + esc(meta) + '</div>'
+      + '<div class="offer-main">'
+      +   '<h3 class="offer-title">' + esc(o.name) + '</h3>'
+      +   '<p class="offer-summary">' + esc(o.summary || '') + '</p>'
+      +   (tags || link ? '<div class="offer-foot">' + tags + link + '</div>' : '')
       + '</div>';
-    return n.url
-      ? '<a class="note-item" href="' + esc(n.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
-      : '<article class="note-item">' + inner + '</article>';
+    return o.url
+      ? '<a class="offer-item" href="' + esc(o.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+      : '<article class="offer-item">' + inner + '</article>';
   }).join('');
+}
+
+function readingItem(r) {
+  const inner =
+      '<div class="read-kind">' + esc(r.kind || 'Book') + '</div>'
+    + '<div class="read-main">'
+    +   '<h3 class="read-title">' + esc(r.title) + '</h3>'
+    +   (r.author ? '<p class="read-author">' + esc(r.author) + '</p>' : '')
+    +   (r.note ? '<p class="read-note">' + esc(r.note) + '</p>' : '')
+    + '</div>';
+  return r.url
+    ? '<a class="read-item" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+    : '<article class="read-item">' + inner + '</article>';
+}
+
+function readingGroup(label, books) {
+  const n = books.length;
+  return '<section class="read-group">'
+    + '<header class="read-year"><h3>' + esc(label) + '</h3>'
+    + '<span>' + n + (n > 1 ? ' books' : ' book') + '</span></header>'
+    + books.map(readingItem).join('')
+    + '</section>';
 }
 
 function renderReadings() {
@@ -235,23 +266,17 @@ function renderReadings() {
   if (!host) return;
 
   if (!READINGS.length) {
-    host.innerHTML = emptyState('i-book', 'Reading list in progress',
-      'I read a lot — on data systems, AI and how teams make decisions. I’m putting the list together, with one line on what I took from each.');
+    host.innerHTML = emptyState('i-book', 'Reading log in progress',
+      'I read a lot — on data systems, on people, on how decisions get made. I\'m putting the log together, year by year, with a line on what I took from each book.');
     return;
   }
 
-  host.innerHTML = READINGS.map(r => {
-    const inner =
-        '<div class="read-kind">' + esc(r.kind || 'Book') + '</div>'
-      + '<div class="read-main">'
-      +   '<h3 class="read-title">' + esc(r.title) + '</h3>'
-      +   (r.author ? '<p class="read-author">' + esc(r.author) + '</p>' : '')
-      +   (r.note ? '<p class="read-note">' + esc(r.note) + '</p>' : '')
-      + '</div>';
-    return r.url
-      ? '<a class="read-item" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
-      : '<article class="read-item">' + inner + '</article>';
-  }).join('');
+  const undated = READINGS.filter(r => !r.year);
+  const years = [...new Set(READINGS.map(r => r.year).filter(Boolean))].sort((a, b) => b - a);
+
+  host.innerHTML =
+      (undated.length ? readingGroup('Currently reading', undated) : '')
+    + years.map(y => readingGroup(String(y), READINGS.filter(r => r.year === y))).join('');
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -464,7 +489,7 @@ const ANIM_SELECTOR = [
   '.sec-hd', '.ab-state', '.ab-band', '.ab-quote', '.exp-item', '.edu-card', '.cert-card',
   '.drives-card', '.skill-cat-card', '.skill-bars-card',
   '.proj-card-v2', '.collab-banner', '.contact-form-card', '.contact-info-card',
-  '.avail-card', '.loc-card', '.note-item', '.read-item'
+  '.avail-card', '.loc-card', '.offer-item', '.read-item'
 ].join(',');
 
 let revealObserver = null;
@@ -517,8 +542,8 @@ function animateCounters() {
    ════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
-  renderNotes();
   renderReadings();
+  renderOfferings();
   initTabs();
   initProjectFilter();
   initReveal();
