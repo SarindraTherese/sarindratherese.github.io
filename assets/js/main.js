@@ -76,9 +76,9 @@ const OFFERINGS = [
    3. NAVIGATION — routage par ancre, liens partageables
    ════════════════════════════════════════════════════════════ */
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
-const PAGES = ['home', 'about', 'projects', 'skills', 'offscreen', 'contact'];
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'contact'];
 const PAGE_TITLES = { home: 'Home', about: 'About', projects: 'Projects',
-  skills: 'Skills', offscreen: 'Off Screen', contact: 'Contact' };
+  skills: 'Skills', refuge: "Sarindra's Refuge", contact: 'Contact' };
 
 function trackVirtualPageView(id) {
   if (typeof window.gtag !== 'function') return;
@@ -158,6 +158,21 @@ function initTabs() {
         if (id === 'viz') initCharts();
         if (id === 'tech') animateBars();
       });
+    });
+  });
+}
+
+/* Ouvre un onglet par son identifiant — utilisé par les liens [data-goto-tab]. */
+function activateTab(tabId) {
+  const btn = document.querySelector('.stab[data-tab="' + tabId + '"]');
+  if (btn) btn.click();
+}
+
+function initTabLinks() {
+  document.querySelectorAll('[data-goto-tab]').forEach(link => {
+    link.addEventListener('click', () => {
+      // le changement de hash déclenche showPage ; on bascule l'onglet juste après
+      setTimeout(() => activateTab(link.dataset.gotoTab), 0);
     });
   });
 }
@@ -545,6 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderReadings();
   renderOfferings();
   initTabs();
+  initTabLinks();
   initProjectFilter();
   initReveal();
 

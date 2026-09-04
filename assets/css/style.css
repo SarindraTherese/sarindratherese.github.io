@@ -202,7 +202,7 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
   gap: var(--s2);
 }
 .sec-title { font-size: clamp(21px, 2.9vw, 31px); }
-.sec-title em { color: var(--slate); }
+.sec-title em { color: var(--cyan); }
 .sec-sub { color: var(--muted); font-size: 17px; }
 
 /* Titre de sous-section */
@@ -1368,3 +1368,23 @@ a.read-item:hover .read-title { color: var(--cyan); }
   .read-year h3 { font-size: 21px; }
   .empty-state { padding: var(--s5) var(--s4); }
 }
+
+/* Fiche About cliquable — mène à l'onglet Books du Refuge */
+.fact-link {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.fact-link .icon {
+  align-self: center;
+  color: var(--cyan);
+  transition: transform 0.18s ease;
+}
+.fact-link small { flex-basis: 100%; }
+.fact-link:hover { color: var(--cyan); }
+.fact-link:hover .icon { transform: translateX(3px); }
+.fact-link:hover small { color: var(--cyan); }
