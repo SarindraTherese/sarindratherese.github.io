@@ -1,122 +1,53 @@
-# 👩‍💻 Sarindra Therese Randriambeloson — Portfolio
+# sarindratherese.github.io
 
-> **Data Analyst · Data Engineer · Generative AI**  
-> 🌍 Antananarivo, Madagascar · 🟢 Disponible pour missions
+Mon portfolio. Site statique, une seule page, aucun build : le dépôt est
+exactement ce qui est servi.
 
-🔗 **Live portfolio** → [sarindratherese.github.io](https://sarindratherese.github.io)
+En ligne : <https://sarindratherese.github.io>
 
----
-
-## ✨ Aperçu
-
-Portfolio personnel interactif présentant mon parcours en Data Analytics, Data Engineering et IA Générative. Design inspiré du style **Interactive Data Science Portfolio** avec un thème sombre violet/magenta.
-
-### Pages
-| Page | Description |
-|------|-------------|
-| 🏠 **Home** | Hero, stats clés, floating cards |
-| 👤 **About** | Bio, expérience, formation |
-| 🚀 **Projects** | 6 projets filtrables par catégorie |
-| 🛠️ **Skills** | Compétences + charts interactifs (radar, barres) |
-| 📬 **Contact** | Formulaire, réseaux sociaux, disponibilité |
-
----
-
-## 🛠️ Stack technique du portfolio
+## Lancer en local
 
 ```
-HTML5 · CSS3 · JavaScript (Vanilla)
-Chart.js 4.4 (radar + bar charts)
-Google Fonts (Inter)
-GitHub Pages (hébergement)
+python3 -m http.server 8000
 ```
 
----
+Puis <http://localhost:8000>. Passer par un serveur plutôt que d'ouvrir
+`index.html` en `file://` — sinon les polices Google et le formulaire de
+contact ne se comportent pas comme en production.
 
-## 📁 Structure du projet
+## Ce qu'il y a dedans
 
 ```
-portfolio/
-├── index.html              ← Point d'entrée (toutes les pages)
-├── assets/
-│   ├── css/
-│   │   └── style.css       ← Tous les styles (thème violet/magenta)
-│   ├── js/
-│   │   └── main.js         ← Navigation, charts, filtres, animations
-│   └── img/
-│       └── (photo, favicon à ajouter)
-└── README.md
+index.html        tout le contenu ; six écrans basculés en JS, routés par ancre
+assets/css/       un seul fichier, les couleurs sont en variables tout en haut
+assets/js/        navigation, onglets, filtres, formulaire, graphiques
+assets/img/       photo, favicon, image de partage (og-image)
+assets/docs/      le CV en PDF
+_design/          documents de travail, jamais publiés (voir son README)
 ```
 
----
+## Ce que je modifie souvent
 
-## 🚀 Déploiement local
+Trois constantes en tête de `assets/js/main.js`. Aucune ligne de HTML à toucher :
 
-```bash
-# Cloner le repo
-git clone https://github.com/SarindraTherese/sarindratherese.github.io.git
+- **`AVAILABILITY`** — `open`, `selective` ou `closed`. Une seule valeur qui
+  pilote la pastille, son libellé, le texte de la carte Contact et la ligne
+  « Status » de la fiche About. Mettre `AVAILABILITY_UPDATED` à jour en même
+  temps : une disponibilité périmée est pire que pas de disponibilité du tout.
+- **`READINGS`** — les livres, pour la page Refuge. Ajouter `year: 2024` et ils
+  se regroupent par année tout seuls, la plus récente en haut. Sans année,
+  l'entrée part dans « Currently reading ».
+- **`OFFERINGS`** — les séances proposées, même page, onglet Sessions.
 
-# Ouvrir directement dans le navigateur
-open index.html
-# ou
-cd sarindratherese.github.io && python -m http.server 8080
-```
+## Comment c'est fait
 
----
+HTML, CSS et JavaScript écrits à la main. Rien à installer, aucun framework.
+Chart.js pour les graphiques de compétences, Formspree pour le formulaire,
+Google Fonts (Instrument Sans en lecture, JetBrains Mono en titrage),
+GitHub Pages pour l'hébergement.
 
-## 🌐 Déploiement GitHub Pages
-
-```bash
-# 1. Initialiser (première fois)
-git init
-git add .
-git commit -m "🚀 Initial portfolio deploy"
-git remote add origin https://github.com/SarindraTherese/sarindratherese.github.io.git
-git branch -M main
-git push -u origin main
-
-# 2. Activer GitHub Pages
-# → Settings → Pages → Branch: main / folder: / (root) → Save
-
-# 3. Mettre à jour
-git add .
-git commit -m "✏️ Update portfolio"
-git push
-```
-
-**URL live :** `https://sarindratherese.github.io`
-
----
-
-## 💼 Expérience professionnelle
-
-| Période | Rôle | Entreprise |
-|---------|------|-----------|
-| Jan–Fév 2026 | AI Developer | Hairun Technology |
-| Déc 2024–Mars 2025 | Développeuse IA Générative | Projet indépendant |
-| Avr–Juin 2025 | Data Analyst | Entreprise de recyclage |
-| Jan–Juil 2024 | Data Engineer | KAPSDATA |
-| Août–Oct 2023 | Data Analyst | Compagnie d'assurance |
-| Sep 2022–Jan 2023 | Data Engineer | KAPSDATA |
-
----
-
-## 🧰 Stack technique principal
-
-**IA & LLMs** · Python · Flask · OpenAI API · Gemini AI · n8n  
-**Big Data** · Apache Kafka · PySpark · Apache Airflow · Elasticsearch  
-**Visualisation** · Power BI · Grafana · Streamlit  
-**Bases de données** · PostgreSQL · MySQL · InfluxDB · NoSQL  
-
----
-
-## 📬 Contact
-
-- 📧 [randriambelosonsarindratherese@gmail.com](mailto:randriambelosonsarindratherese@gmail.com)
-- 📱 +261 34 302 9400
-- 💼 [linkedin.com/in/sarindra-therese](https://linkedin.com/in/sarindra-therese)
-- 🐙 [github.com/SarindraTherese](https://github.com/SarindraTherese)
-
----
-
-*© 2025 Sarindra Therese Randriambeloson*
+La direction visuelle s'appelle **Blueprint** : fond quadrillé, titres en
+monospace capitales, angles vifs, cadres pointillés. La palette est dérivée des
+couleurs de ma photo de profil. Tout tient dans les variables CSS en tête de
+`assets/css/style.css` — les changer là recolore le site entier. Le raisonnement,
+les mesures de contraste et les directions écartées sont dans `_design/`.
