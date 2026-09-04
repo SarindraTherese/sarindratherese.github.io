@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0A2634"/>
+  <rect x="6.5" y="6.5" width="51" height="51" fill="none"
+        stroke="#0B7699" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="32" y="43" font-family="ui-monospace,'DejaVu Sans Mono',monospace"
+        font-size="30" font-weight="700" fill="#E4EDF1" text-anchor="middle">S</text>
+</svg>

@@ -1,385 +1,536 @@
 /* ============================================================
-   SARINDRA THERESE RANDRIAMBELOSON — Portfolio JS
+   SARINDRA THERESE RANDRIAMBELOSON — Portfolio
    assets/js/main.js
    ============================================================ */
 
 'use strict';
 
+/* ════════════════════════════════════════════════════════════
+   1. DISPONIBILITÉ — source unique de vérité
+   ────────────────────────────────────────────────────────────
+   Change UNIQUEMENT la valeur ci-dessous. Tout le site suit :
+   la pastille, le libellé, le texte de la carte, la bannière
+   « Interested in working together? », et la date de mise à jour.
+
+     'open'      → ouverte aux opportunités
+     'selective' → pas en recherche active, mais joignable
+     'closed'    → indisponible pour le moment
+   ════════════════════════════════════════════════════════════ */
+const AVAILABILITY = 'selective';
+const AVAILABILITY_UPDATED = '2026-09';   // AAAA-MM — à mettre à jour avec le statut
+
+const AVAILABILITY_COPY = {
+  open: {
+    label: 'Available for new opportunities',
+    text:  'I’m open to freelance missions, consulting and roles in Data Analytics, Data Engineering or Generative AI.',
+    tone:  'ok'
+  },
+  selective: {
+    label: 'Not actively looking',
+    text:  'I’m currently engaged on a project and not actively looking. I’m still glad to talk about interesting data and AI work — just get in touch.',
+    tone:  'sand'
+  },
+  closed: {
+    label: 'Currently unavailable',
+    text:  'My schedule is full at the moment and I’m not taking on new work. Feel free to write anyway — I’ll reply when things open up.',
+    tone:  'muted'
+  }
+};
+
+/* ════════════════════════════════════════════════════════════
+   2. NOTES & LECTURES
+   ────────────────────────────────────────────────────────────
+   Ajouter une entrée = ajouter un objet dans le tableau.
+   Aucun HTML à toucher. Les entrées s'affichent dans l'ordre
+   du tableau — mets la plus récente en premier.
+
+   NOTES — un écrit à toi :
+     { date: '2026-09', title: '...', summary: '...',
+       tags: ['LLM', 'OCR'],
+       url: 'https://...' }        // url facultative
+
+   READINGS — ce que tu lis :
+     { title: '...', author: '...', kind: 'Book',   // Book | Paper | Article
+       note: 'Ce que j\'en retiens, en une phrase.',
+       url: 'https://...' }        // url facultative
+
+   ⚠ Tant que ces tableaux sont vides, la page affiche un état
+   d'attente. Ajoute au moins une entrée dans chacun avant de
+   publier.
+   ════════════════════════════════════════════════════════════ */
+const NOTES = [
+  // { date: '2026-09', title: 'Why I split OCR from the LLM', summary: '…', tags: ['OCR','LLM'] },
+];
+
+const READINGS = [
+  // { title: '…', author: '…', kind: 'Book', note: '…' },
+];
+
+/* ════════════════════════════════════════════════════════════
+   3. NAVIGATION — routage par ancre, liens partageables
+   ════════════════════════════════════════════════════════════ */
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
+const PAGES = ['home', 'about', 'projects', 'skills', 'notes', 'contact'];
 
 function trackVirtualPageView(id) {
   if (typeof window.gtag !== 'function') return;
-
-  const sectionPath = id === 'home' ? '/' : '/' + id;
   window.gtag('config', GA_MEASUREMENT_ID, {
-    page_path: sectionPath,
-    page_title: 'Sarindra Therese - ' + id.charAt(0).toUpperCase() + id.slice(1)
+    page_path: id === 'home' ? '/' : '/' + id,
+    page_title: 'Sarindra Therese — ' + id.charAt(0).toUpperCase() + id.slice(1)
   });
 }
 
-/* ── PAGE NAVIGATION ── */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+function showPage(id, opts) {
+  if (!PAGES.includes(id)) id = 'home';
+  const options = opts || {};
 
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + id);
-  if (target) {
-    target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (!target) return;
+  target.classList.add('active');
+
+  document.querySelectorAll('#nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    a.removeAttribute('aria-current');
+    if (a.classList.contains('active')) a.setAttribute('aria-current', 'page');
+  });
+
+  closeMenu();
+  document.title = (id === 'home' ? '' : id.charAt(0).toUpperCase() + id.slice(1) + ' — ')
+    + 'Sarindra Thérèse Randriambeloson — Data & AI Engineer';
+
+  if (!options.silent) {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }
 
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    const onclick = a.getAttribute('onclick') || '';
-    if (onclick.includes("'" + id + "'")) a.classList.add('active');
-  });
-
-  if (id === 'skills') setTimeout(animateBars, 300);
-
-  document.querySelector('.nav-links').classList.remove('open');
-
+  if (id === 'skills') setTimeout(animateBars, 200);
+  revealIn(target);
   trackVirtualPageView(id);
-
-  // Re-trigger animations on page change
-  setTimeout(() => {
-    if (target) {
-      target.querySelectorAll('.anim-ready').forEach(el => el.classList.remove('visible'));
-      setTimeout(() => {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-        target.querySelectorAll('.anim-ready').forEach(el => io.observe(el));
-      }, 80);
-    }
-  }, 50);
 }
 
-/* ── MOBILE MENU ── */
+function currentHashPage() {
+  return (location.hash || '#home').replace('#', '').split('?')[0];
+}
+
+/* ── Menu mobile ── */
 function toggleMenu() {
-  document.querySelector('.nav-links').classList.toggle('open');
+  const links = document.getElementById('nav-links');
+  const btn = document.getElementById('nav-burger');
+  const open = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(open));
+  btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  btn.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
 }
 
-/* ── SKILLS TABS ── */
-function switchSkillTab(id, btn) {
-  document.querySelectorAll('.skill-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
-  document.getElementById('sp-' + id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'viz') initCharts();
-  if (id === 'tech') animateBars();
+function closeMenu() {
+  const links = document.getElementById('nav-links');
+  const btn = document.getElementById('nav-burger');
+  if (!links || !links.classList.contains('open')) return;
+  links.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-label', 'Open menu');
+  btn.querySelector('use').setAttribute('href', '#i-menu');
 }
 
-/* ── ANIMATE PROGRESS BARS ── */
+/* ════════════════════════════════════════════════════════════
+   4. ONGLETS — Skills et Notes partagent le même composant
+   ════════════════════════════════════════════════════════════ */
+function initTabs() {
+  document.querySelectorAll('.skills-tabs').forEach(group => {
+    const tabs = Array.from(group.querySelectorAll('.stab'));
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.tab;
+        tabs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        tabs.forEach(b => {
+          const panel = document.getElementById('sp-' + b.dataset.tab);
+          if (panel) panel.classList.toggle('active', b.dataset.tab === id);
+        });
+        if (id === 'viz') initCharts();
+        if (id === 'tech') animateBars();
+      });
+    });
+  });
+}
+
 function animateBars() {
   document.querySelectorAll('.bar-fill').forEach(bar => {
     bar.style.width = (bar.dataset.w || 0) + '%';
   });
 }
 
-/* ── PROJECT FILTER ── */
-function filterProj(cat, btn) {
-  document.querySelectorAll('.pfilt').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+/* ════════════════════════════════════════════════════════════
+   5. FILTRE PROJETS
+   ════════════════════════════════════════════════════════════ */
+function initProjectFilter() {
+  const btns = document.querySelectorAll('.pfilt');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-  const cards = document.querySelectorAll('.proj-card, .proj-card-v2');
-  let visibleIdx = 0;
-  cards.forEach((card) => {
-    const show = cat === 'all' || card.dataset.cat === cat;
-    if (show) {
-      card.style.display = 'flex';
-      card.classList.remove('visible');
-      card.style.transitionDelay = (visibleIdx * 0.08) + 's';
-      visibleIdx++;
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => card.classList.add('visible'));
+      document.querySelectorAll('.proj-card-v2').forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = show ? 'flex' : 'none';
+        const featured = card.closest('.proj-featured');
+        if (featured) featured.style.display = show ? 'block' : 'none';
       });
-    } else {
-      card.classList.remove('visible');
-      setTimeout(() => { card.style.display = 'none'; }, 300);
-    }
+    });
   });
 }
 
-/* ── CONTACT FORM — Formspree ── */
+/* ════════════════════════════════════════════════════════════
+   6. NOTES & LECTURES — rendu
+   ════════════════════════════════════════════════════════════ */
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function formatMonth(ym) {
+  if (!ym) return '';
+  const [y, m] = ym.split('-');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return (months[parseInt(m, 10) - 1] || '') + ' ' + y;
+}
+
+function emptyState(icon, title, text) {
+  return '<div class="empty-state">'
+    + '<svg class="icon" aria-hidden="true"><use href="#' + icon + '"/></svg>'
+    + '<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p></div>';
+}
+
+function renderNotes() {
+  const host = document.getElementById('note-list');
+  if (!host) return;
+
+  if (!NOTES.length) {
+    host.innerHTML = emptyState('i-pen', 'Nothing published yet',
+      'I’m starting to write about the systems I build — document pipelines, streaming architectures and BI modelling. First notes coming soon.');
+    return;
+  }
+
+  host.innerHTML = NOTES.map(n => {
+    const tags = (n.tags || []).map(t => '<span class="ptag">' + esc(t) + '</span>').join('');
+    const link = n.url
+      ? '<span class="note-more">Read it <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>'
+      : '';
+    const inner =
+        '<div class="note-date">' + esc(formatMonth(n.date)) + '</div>'
+      + '<div class="note-main">'
+      +   '<h3 class="note-title">' + esc(n.title) + '</h3>'
+      +   '<p class="note-summary">' + esc(n.summary || '') + '</p>'
+      +   (tags || link ? '<div class="note-foot">' + tags + link + '</div>' : '')
+      + '</div>';
+    return n.url
+      ? '<a class="note-item" href="' + esc(n.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+      : '<article class="note-item">' + inner + '</article>';
+  }).join('');
+}
+
+function renderReadings() {
+  const host = document.getElementById('read-list');
+  if (!host) return;
+
+  if (!READINGS.length) {
+    host.innerHTML = emptyState('i-book', 'Reading list in progress',
+      'I read a lot — on data systems, AI and how teams make decisions. I’m putting the list together, with one line on what I took from each.');
+    return;
+  }
+
+  host.innerHTML = READINGS.map(r => {
+    const inner =
+        '<div class="read-kind">' + esc(r.kind || 'Book') + '</div>'
+      + '<div class="read-main">'
+      +   '<h3 class="read-title">' + esc(r.title) + '</h3>'
+      +   (r.author ? '<p class="read-author">' + esc(r.author) + '</p>' : '')
+      +   (r.note ? '<p class="read-note">' + esc(r.note) + '</p>' : '')
+      + '</div>';
+    return r.url
+      ? '<a class="read-item" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+      : '<article class="read-item">' + inner + '</article>';
+  }).join('');
+}
+
+/* ════════════════════════════════════════════════════════════
+   7. DISPONIBILITÉ — application
+   ════════════════════════════════════════════════════════════ */
+function applyAvailability() {
+  const conf = AVAILABILITY_COPY[AVAILABILITY] || AVAILABILITY_COPY.selective;
+
+  const card = document.getElementById('avail-card');
+  const dot  = document.getElementById('avail-dot');
+  const text = document.getElementById('avail-text');
+
+  if (card) card.dataset.tone = conf.tone;
+  if (text) text.textContent = conf.text;
+  if (dot) {
+    dot.textContent = conf.label;
+    dot.setAttribute('title', 'Updated ' + formatMonth(AVAILABILITY_UPDATED));
+  }
+
+  const stamp = document.getElementById('avail-updated');
+  if (stamp) stamp.textContent = 'Status updated ' + formatMonth(AVAILABILITY_UPDATED);
+
+  // même source de vérité pour la fiche « At a glance » de la page About
+  const fact = document.getElementById('fact-status');
+  const factSub = document.getElementById('fact-status-sub');
+  if (fact) fact.childNodes[0].nodeValue = conf.label;
+  if (factSub) factSub.textContent = 'Updated ' + formatMonth(AVAILABILITY_UPDATED);
+}
+
+/* ════════════════════════════════════════════════════════════
+   8. FORMULAIRE DE CONTACT — Formspree
+   ════════════════════════════════════════════════════════════ */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojkzoae';
+
 function sendMessage(btnEl) {
-  const page      = btnEl.closest('#page-contact') || document.getElementById('page-contact');
-  const nameEl    = page.querySelector('#name');
-  const emailEl   = page.querySelector('#email');
-  const subjectEl = page.querySelector('#subject');
-  const messageEl = page.querySelector('#message');
-  const errName   = page.querySelector('#err-name');
-  const errEmail  = page.querySelector('#err-email');
-  const errMsgEl  = page.querySelector('#err-message');
-  const errBox    = page.querySelector('#form-error');
-  const errBoxMsg = page.querySelector('#form-error-msg');
-  const successEl = page.querySelector('#form-success');
-  const formBody  = page.querySelector('#contact-form-body');
+  const page = document.getElementById('page-contact');
+  const q = sel => page.querySelector(sel);
 
-  [errName, errEmail, errMsgEl].forEach(el => { if (el) el.textContent = ''; });
-  [nameEl, emailEl, messageEl].forEach(el => { if (el) el.classList.remove('input-error'); });
-  if (errBox) errBox.style.display = 'none';
+  const nameEl = q('#name'), emailEl = q('#email');
+  const subjectEl = q('#subject'), messageEl = q('#message');
+  const errBox = q('#form-error'), errBoxMsg = q('#form-error-msg');
+  const successEl = q('#form-success'), formBody = q('#contact-form-body');
+  const btnText = q('#send-btn-text');
 
-  const name    = nameEl    ? nameEl.value.trim()    : '';
-  const email   = emailEl   ? emailEl.value.trim()   : '';
-  const subject = subjectEl ? subjectEl.value.trim() : '';
-  const message = messageEl ? messageEl.value.trim() : '';
+  ['#err-name', '#err-email', '#err-message'].forEach(s => { q(s).textContent = ''; });
+  [nameEl, emailEl, messageEl].forEach(el => el.classList.remove('input-error'));
+  errBox.hidden = true;
+
+  const name = nameEl.value.trim();
+  const email = emailEl.value.trim();
+  const subject = subjectEl.value.trim();
+  const message = messageEl.value.trim();
 
   let valid = true;
-  if (!name) {
-    if (errName) errName.textContent = 'Name is required.';
-    if (nameEl)  nameEl.classList.add('input-error');
+  const fail = (el, errSel, msg) => {
+    q(errSel).textContent = msg;
+    el.classList.add('input-error');
     valid = false;
+  };
+
+  if (!name) fail(nameEl, '#err-name', 'Please enter your name.');
+  if (!email) fail(emailEl, '#err-email', 'Please enter your email.');
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    fail(emailEl, '#err-email', 'This email address doesn’t look valid.');
+  if (!message) fail(messageEl, '#err-message', 'Please write a message.');
+
+  if (!valid) {
+    page.querySelector('.input-error').focus();
+    return;
   }
-  if (!email) {
-    if (errEmail) errEmail.textContent = 'Email is required.';
-    if (emailEl)  emailEl.classList.add('input-error');
-    valid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    if (errEmail) errEmail.textContent = 'Invalid email.';
-    if (emailEl)  emailEl.classList.add('input-error');
-    valid = false;
-  }
-  if (!message) {
-    if (errMsgEl)  errMsgEl.textContent = 'Message is required.';
-    if (messageEl) messageEl.classList.add('input-error');
-    valid = false;
-  }
-  if (!valid) return;
 
   btnEl.disabled = true;
-  btnEl.textContent = '⏳ Sending...';
-  btnEl.style.background = 'linear-gradient(135deg, #7c3aed, #a855f7)';
-  btnEl.style.opacity = '0.85';
+  btnText.textContent = 'Sending…';
 
-  fetch('https://formspree.io/f/mojkzoae', {
+  const restore = msg => {
+    errBoxMsg.textContent = msg;
+    errBox.hidden = false;
+    btnText.textContent = 'Send message';
+    btnEl.disabled = false;
+  };
+
+  fetch(FORMSPREE_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({ name, email, subject: subject || 'Contact from portfolio', message })
   })
-  .then(res => res.json().then(data => ({ ok: res.ok, data })))
-  .then(({ ok, data }) => {
-    if (ok) {
-      btnEl.textContent = '✅ Message sent!';
-      btnEl.style.background = 'linear-gradient(135deg, #16a34a, #22c55e)';
-      btnEl.style.opacity = '1';
-      btnEl.style.boxShadow = '0 0 30px rgba(34, 197, 94, 0.5)';
+    .then(res => res.json().then(data => ({ ok: res.ok, data })))
+    .then(({ ok, data }) => {
+      if (!ok) {
+        const msg = (data && data.errors && data.errors[0])
+          ? data.errors[0].message
+          : 'The message could not be sent. Please try again.';
+        restore(msg);
+        return;
+      }
+      btnEl.classList.add('is-sent');
+      btnText.textContent = 'Message sent';
       setTimeout(() => {
-        if (formBody)  formBody.style.display = 'none';
-        if (successEl) successEl.style.display = 'block';
-      }, 1200);
-    } else {
-      const msg = (data && data.errors && data.errors[0]) ? data.errors[0].message : 'Unknown error.';
-      if (errBoxMsg) errBoxMsg.textContent = '⚠️ ' + msg;
-      if (errBox)    errBox.style.display = 'block';
-      btnEl.textContent = '✈️ Send Message';
-      btnEl.style.background = '';
-      btnEl.style.opacity = '';
-      btnEl.style.boxShadow = '';
-      btnEl.disabled = false;
-    }
-  })
-  .catch(() => {
-    if (errBoxMsg) errBoxMsg.textContent = '⚠️ Connection error. Please try again.';
-    if (errBox)    errBox.style.display = 'block';
-    btnEl.textContent = '✈️ Send Message';
-    btnEl.style.background = '';
-    btnEl.style.opacity = '';
-    btnEl.style.boxShadow = '';
-    btnEl.disabled = false;
-  });
+        formBody.hidden = true;
+        successEl.hidden = false;
+        successEl.querySelector('h4').focus();
+      }, 700);
+    })
+    .catch(() => restore('Connection error. Please try again, or email me directly.'));
 }
 
 function resetContactForm() {
   const page = document.getElementById('page-contact');
-  if (!page) return;
-  const successEl = page.querySelector('#form-success');
-  const formBody  = page.querySelector('#contact-form-body');
-  if (successEl) successEl.style.display = 'none';
-  if (formBody)  formBody.style.display  = 'block';
-  ['name','email','subject','message'].forEach(id => {
-    const el = page.querySelector('#' + id);
-    if (el) el.value = '';
-  });
-  ['err-name','err-email','err-message'].forEach(id => {
-    const el = page.querySelector('#' + id);
-    if (el) el.textContent = '';
-  });
-  const errBox = page.querySelector('#form-error');
-  if (errBox) errBox.style.display = 'none';
+  page.querySelector('#form-success').hidden = true;
+  page.querySelector('#contact-form-body').hidden = false;
+  page.querySelector('#form-error').hidden = true;
+
+  ['#name', '#email', '#subject', '#message'].forEach(s => { page.querySelector(s).value = ''; });
+  ['#err-name', '#err-email', '#err-message'].forEach(s => { page.querySelector(s).textContent = ''; });
+
+  const btn = page.querySelector('#send-btn');
+  btn.disabled = false;
+  btn.classList.remove('is-sent');
+  page.querySelector('#send-btn-text').textContent = 'Send message';
+  page.querySelector('#name').focus();
 }
 
-/* ── CHARTS (Chart.js) ── */
+/* ════════════════════════════════════════════════════════════
+   9. GRAPHIQUES — palette Petrol & Sand
+   ════════════════════════════════════════════════════════════ */
 let chartsInitialized = false;
 
 function initCharts() {
-  if (chartsInitialized) return;
+  if (chartsInitialized || typeof Chart === 'undefined') return;
   chartsInitialized = true;
 
-  const gridColor = 'rgba(255, 255, 255, 0.08)';
-  const tickColor = '#a78bca';
+  const CYAN = '#0B7699', SLATE = '#173B4D', SAND = '#B5601F';
+  const GRID = '#A9C4D1', TICK = '#4E6D7C', INK = '#0A2634';
 
-  const radarCtx = document.getElementById('radarChart');
-  if (radarCtx) {
-    new Chart(radarCtx, {
+  Chart.defaults.font.family = "'Instrument Sans', system-ui, sans-serif";
+  Chart.defaults.color = TICK;
+
+  const axis = max => ({
+    x: { grid: { color: GRID, drawTicks: false }, border: { color: GRID }, ticks: { color: TICK, font: { size: 12 } } },
+    y: { grid: { color: GRID, drawTicks: false }, border: { display: false },
+         ticks: { color: TICK, font: { size: 11 }, stepSize: 25 }, min: 0, max: max }
+  });
+
+  const bar = (el, labels, data, color) => {
+    if (!el) return;
+    new Chart(el, {
+      type: 'bar',
+      data: { labels, datasets: [{ label: 'Proficiency (%)', data, backgroundColor: color, borderRadius: 0, borderSkipped: false, maxBarThickness: 46 }] },
+      options: {
+        responsive: true,
+        scales: axis(100),
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: INK, padding: 10, cornerRadius: 0, displayColors: false }
+        }
+      }
+    });
+  };
+
+  const radarEl = document.getElementById('radarChart');
+  if (radarEl) {
+    new Chart(radarEl, {
       type: 'radar',
       data: {
-        labels: ['Data Engineering','Generative AI','Analytics / BI','Python / Dev','Big Data','Databases'],
+        labels: ['Data Engineering', 'Generative AI', 'Analytics / BI', 'Python / Dev', 'Big Data', 'Databases'],
         datasets: [{
-          label: 'Level (%)',
+          label: 'Proficiency (%)',
           data: [88, 87, 92, 95, 83, 85],
-          backgroundColor: 'rgba(192, 132, 252, 0.2)',
-          borderColor: '#c084fc',
-          pointBackgroundColor: '#ec4899',
-          pointBorderColor: '#fff',
-          borderWidth: 2
+          backgroundColor: 'rgba(11, 118, 153, 0.16)',
+          borderColor: '#0A6A8A',
+          borderWidth: 2,
+          pointBackgroundColor: SAND,
+          pointBorderColor: '#F4F9FB',
+          pointBorderWidth: 2,
+          pointRadius: 4
         }]
       },
       options: {
         responsive: true,
         scales: {
           r: {
-            angleLines: { color: gridColor },
-            grid:        { color: gridColor },
-            pointLabels: { color: tickColor, font: { size: 12 } },
-            ticks:       { color: tickColor, backdropColor: 'transparent', stepSize: 25 },
-            suggestedMin: 0,
-            suggestedMax: 100
+            angleLines: { color: GRID },
+            grid: { color: GRID },
+            pointLabels: { color: SLATE, font: { size: 12, weight: '500' } },
+            ticks: { color: TICK, backdropColor: 'transparent', stepSize: 25, font: { size: 10 } },
+            suggestedMin: 0, suggestedMax: 100
           }
         },
-        plugins: { legend: { labels: { color: tickColor } } }
-      }
-    });
-  }
-
-  const bc1 = document.getElementById('barChart1');
-  if (bc1) {
-    const ctx1 = bc1.getContext('2d');
-    const grad1 = ctx1.createLinearGradient(0, 0, 0, 260);
-    grad1.addColorStop(0, '#ec4899');
-    grad1.addColorStop(1, '#8b5cf6');
-    new Chart(bc1, {
-      type: 'bar',
-      data: {
-        labels: ['Python', 'SQL', 'Flask', 'Java', 'Django'],
-        datasets: [{ label: 'Level (%)', data: [95, 88, 85, 75, 70], backgroundColor: grad1, borderRadius: 8, borderSkipped: false }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { color: tickColor } },
-          y: { grid: { color: gridColor }, ticks: { color: tickColor }, min: 0, max: 100 }
-        },
-        plugins: { legend: { labels: { color: tickColor } } }
-      }
-    });
-  }
-
-  const bc2 = document.getElementById('barChart2');
-  if (bc2) {
-    const ctx2 = bc2.getContext('2d');
-    const grad2 = ctx2.createLinearGradient(0, 0, 0, 260);
-    grad2.addColorStop(0, '#d946ef');
-    grad2.addColorStop(1, '#7c3aed');
-    new Chart(bc2, {
-      type: 'bar',
-      data: {
-        labels: ['Power BI', 'OpenAI', 'Kafka', 'Gemini AI', 'PySpark'],
-        datasets: [{ label: 'Level (%)', data: [92, 90, 88, 85, 80], backgroundColor: grad2, borderRadius: 8, borderSkipped: false }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { color: tickColor } },
-          y: { grid: { color: gridColor }, ticks: { color: tickColor }, min: 0, max: 100 }
-        },
-        plugins: { legend: { labels: { color: tickColor } } }
-      }
-    });
-  }
-}
-
-/* ── SCROLL ANIMATIONS ── */
-function initScrollAnimations() {
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: INK, padding: 10, cornerRadius: 0, displayColors: false }
         }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.anim-ready').forEach(el => io.observe(el));
+      }
+    });
+  }
+
+  bar(document.getElementById('barChart1'),
+      ['Python', 'SQL', 'Flask', 'Java', 'Django'], [95, 88, 85, 75, 70], CYAN);
+  bar(document.getElementById('barChart2'),
+      ['Power BI', 'OpenAI', 'Kafka', 'Claude Code', 'PySpark'], [92, 90, 88, 85, 80], SLATE);
 }
 
-function applyAnimClasses() {
-  document.querySelectorAll('.sec-hd').forEach(el => el.classList.add('anim-ready'));
+/* ════════════════════════════════════════════════════════════
+   10. RÉVÉLATION AU DÉFILEMENT
+   Le contenu est visible par défaut ; l'animation n'est ajoutée
+   que si le navigateur la supporte et que l'utilisateur ne l'a
+   pas désactivée.
+   ════════════════════════════════════════════════════════════ */
+const ANIM_SELECTOR = [
+  '.sec-hd', '.ab-state', '.ab-band', '.ab-quote', '.exp-item', '.edu-card', '.cert-card',
+  '.drives-card', '.skill-cat-card', '.skill-bars-card',
+  '.proj-card-v2', '.collab-banner', '.contact-form-card', '.contact-info-card',
+  '.avail-card', '.loc-card', '.note-item', '.read-item'
+].join(',');
 
-  document.querySelectorAll('.exp-item').forEach((el, i) => {
-    el.classList.add('anim-ready', 'from-left');
-    el.style.transitionDelay = (i * 0.08) + 's';
-  });
+let revealObserver = null;
 
-  document.querySelectorAll('.edu-card').forEach((el, i) => {
-    el.classList.add('anim-ready');
-    el.style.transitionDelay = (i * 0.1) + 's';
-  });
-
-  document.querySelectorAll('.skill-cat-card').forEach((el, i) => {
-    el.classList.add('anim-ready');
-    el.style.transitionDelay = (i * 0.07) + 's';
-  });
-
-  document.querySelectorAll('.skill-bars-card').forEach((el, i) => {
-    el.classList.add('anim-ready');
-    el.style.transitionDelay = (i * 0.1) + 's';
-  });
-
-  document.querySelectorAll('.proj-card, .proj-card-v2').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.08) + 's';
-    el.classList.add('anim-ready');
-  });
-
-  document.querySelectorAll('.contact-form-card, .contact-info-card, .avail-card, .loc-card').forEach((el, i) => {
-    el.classList.add('anim-ready');
-    el.style.transitionDelay = (i * 0.1) + 's';
-  });
-
-  document.querySelectorAll('.drives-card, .about-bottom-grid, .cert-section, .about-top').forEach((el, i) => {
-    el.classList.add('anim-ready');
-    el.style.transitionDelay = (i * 0.15) + 's';
-  });
-
-  document.querySelectorAll('.collab-banner').forEach(el => el.classList.add('anim-ready', 'scale'));
+function prefersReducedMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/* ── COUNTER ANIMATION ── */
+function initReveal() {
+  if (prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+  revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+}
+
+function revealIn(root) {
+  if (!revealObserver) return;
+  root.querySelectorAll(ANIM_SELECTOR).forEach((el, i) => {
+    el.classList.add('anim-ready');
+    el.classList.remove('visible');
+    el.style.transitionDelay = Math.min(i, 8) * 0.05 + 's';
+    revealObserver.observe(el);
+  });
+}
+
+/* ── Compteurs du hero ── */
 function animateCounters() {
+  if (prefersReducedMotion()) return;
   document.querySelectorAll('.hstat-n').forEach(el => {
-    const text = el.textContent.trim();
-    const match = text.match(/^(\d+)(.*)$/);
-    if (!match) return;
-    const target = parseInt(match[1]);
-    const suffix = match[2];
+    const m = el.textContent.trim().match(/^(\d+)(.*)$/);
+    if (!m) return;
+    const target = parseInt(m[1], 10), suffix = m[2];
     let current = 0;
-    const step = Math.ceil(target / 30);
-    const interval = setInterval(() => {
+    const step = Math.max(1, Math.ceil(target / 24));
+    const id = setInterval(() => {
       current = Math.min(current + step, target);
       el.textContent = current + suffix;
-      if (current >= target) clearInterval(interval);
+      if (current >= target) clearInterval(id);
     }, 40);
   });
 }
 
-/* ── INIT ── */
+/* ════════════════════════════════════════════════════════════
+   11. INIT
+   ════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  applyAnimClasses();
-  initScrollAnimations();
-  setTimeout(animateCounters, 900);
+  applyAvailability();
+  renderNotes();
+  renderReadings();
+  initTabs();
+  initProjectFilter();
+  initReveal();
+
+  document.getElementById('nav-burger').addEventListener('click', toggleMenu);
+  document.getElementById('send-btn').addEventListener('click', function () { sendMessage(this); });
+  document.getElementById('reset-form-btn').addEventListener('click', resetContactForm);
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  window.addEventListener('hashchange', () => showPage(currentHashPage()));
+  showPage(currentHashPage(), { silent: true });
+
+  setTimeout(animateCounters, 700);
 });
