@@ -92,7 +92,6 @@ function showPage(id, opts) {
   if (!PAGES.includes(id)) id = 'home';
   const options = opts || {};
 
-  document.body.dataset.page = id;   // permet un traitement propre à chaque page
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + id);
   if (!target) return;
