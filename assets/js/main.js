@@ -92,6 +92,7 @@ function showPage(id, opts) {
   if (!PAGES.includes(id)) id = 'home';
   const options = opts || {};
 
+  document.body.dataset.page = id;   // permet un traitement propre à chaque page
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + id);
   if (!target) return;
@@ -230,8 +231,8 @@ function renderOfferings() {
   if (!host) return;
 
   if (!OFFERINGS.length) {
-    host.innerHTML = emptyState('i-compass', 'Sessions coming soon',
-      'I\'m putting together the sessions I want to offer alongside my data work. Details and booking will land here.');
+    host.innerHTML = emptyState('i-compass', 'Sessions, soon',
+      'I\'m shaping what I want to offer here, alongside the data work. Details and how to book will land on this page.');
     return;
   }
 
@@ -281,8 +282,8 @@ function renderReadings() {
   if (!host) return;
 
   if (!READINGS.length) {
-    host.innerHTML = emptyState('i-book', 'Reading log in progress',
-      'I read a lot — on data systems, on people, on how decisions get made. I\'m putting the log together, year by year, with a line on what I took from each book.');
+    host.innerHTML = emptyState('i-book', 'The shelf is still filling up',
+      'I read far more than I write about it. I\'m putting the log together year by year — what I read, and the one thing I took away from each.');
     return;
   }
 
