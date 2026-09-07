@@ -129,7 +129,8 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
   top: 0; left: 0; right: 0;
   z-index: 200;
   height: var(--nav-h);
-  background: rgba(245, 248, 249, 0.88);
+  background: var(--paper);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
@@ -168,6 +169,33 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a.active { color: var(--ink); border-bottom-color: var(--cyan-fill); }
+
+/* Le Refuge n'est pas une page de portfolio : le lien le dit.
+   Un filet le détache du bloc professionnel, et il porte le sable
+   au repos — la seule tache chaude de la barre. */
+.nav-links a.nav-refuge {
+  position: relative;
+  margin-left: 15px;
+  color: var(--sand-text);
+}
+.nav-links a.nav-refuge::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 15px;
+  background: var(--line);
+}
+.nav-links a.nav-refuge:hover {
+  color: var(--sand-text);
+  background: var(--sand-soft);
+}
+.nav-links a.nav-refuge.active {
+  color: var(--sand-text);
+  border-bottom-color: var(--sand);
+}
 
 .nav-burger {
   display: none;
