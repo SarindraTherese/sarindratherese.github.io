@@ -71,7 +71,7 @@ const READINGS = [
 /* ════════════════════════════════════════════════════════════
    3. LECTURE INTÉGRALE DE LA BIBLE — 31 jan → 7 juin 2025
    ────────────────────────────────────────────────────────────
-   Relevé tel qu'il a été tenu. `date: null` = entrée non datée.
+   Carnet tel qu'il a été tenu. `date: null` = entrée non datée.
    Tout le reste (durée, trame des 127 jours, journées actives,
    pauses, densités) est calculé à partir de ce tableau : rien
    n'est écrit en dur dans la page.
@@ -80,6 +80,14 @@ const BIBLE = {
   edition: 'Bible de Jérusalem',
   start:   '2025-01-31',
   end:     '2025-06-07',
+  /* Neuf lignes du carnet couvrent plusieurs livres : 63 lignes = 73 livres,
+     soit 46 pour l'Ancien Testament et 27 pour le Nouveau — le canon complet.
+     Le total affiché est calculé d'ici, jamais écrit en dur. */
+  grouped: {
+    'Jean 1, 2 et 3': 3, 'Samuel': 2, 'Rois 1, 2': 2, 'Les chroniques': 2,
+    'Maccabées': 2, 'Corinthiens': 2, 'Thessaloniciens': 2, 'Timothée': 2,
+    'Pierre': 2
+  },
   entries: [
     ['Jean 1, 2 et 3', null],       ['Saint Mathieu', '2025-02-09'],
     ['Saint Marc', '2025-02-10'],   ['Saint Luc', '2025-02-18'],
@@ -339,8 +347,8 @@ const TOPICS = [
     kicker: 'Lecture',
     date:   'Juin 2025',
     title:  'J’ai lu la Bible en 127 jours',
-    dek:    'Soixante-trois entrées, trente-neuf journées où un livre s’achève, et un silence de dix-neuf jours. Ce que le relevé montre vraiment derrière le chiffre.',
-    stats:  ['127 jours', '63 entrées', '39 journées de lecture'],
+    dek:    'Cinq mois, soixante-treize livres, et dix-neuf jours d’arrêt en plein milieu. Ce qu’il y a derrière le chiffre.',
+    stats:  ['127 jours', '73 livres', '39 jours de lecture'],
     page:   'bible'
   }
 ];
@@ -369,7 +377,7 @@ function renderTopics() {
   }).join('');
 }
 
-/* ── Lecture intégrale : trame des 127 jours + relevé ── */
+/* ── Lecture intégrale : trame des 127 jours + carnet ── */
 const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
   'juillet','août','septembre','octobre','novembre','décembre'];
 
@@ -391,10 +399,12 @@ function bibleStats() {
     if (gap > longest.gap) longest = { gap, from: days[i - 1], to: days[i] };
   }
   const gridStart = new Date(start.getTime() + 864e5);   // jour 1 = lendemain du départ
+  const books = BIBLE.entries.reduce((n, [name]) => n + (BIBLE.grouped[name] || 1), 0);
   return {
     start, end, gridStart, byDay,
     total: Math.round((end - start) / 864e5),
     entries: BIBLE.entries.length,
+    books,
     activeDays: byDay.size,
     longest
   };
@@ -408,10 +418,16 @@ function renderBible() {
   /* Les chiffres annoncés sont calculés, jamais écrits en dur. */
   const facts = document.getElementById('bible-facts');
   if (facts) facts.innerHTML = [
-    [st.entries, 'entrées au relevé'],
-    [st.activeDays, 'journées où un livre s’achève'],
-    [st.longest.gap, 'jours, la plus longue pause']
+    [st.books, 'livres, du premier au dernier'],
+    [st.longest.gap, 'jours sans en terminer un, ma plus longue pause']
   ].map(([n, label]) => '<li><b>' + n + '</b> ' + esc(label) + '</li>').join('');
+
+  /* Une phrase de lecture, pas une légende d'encodage. */
+  const cap = document.getElementById('bible-cap');
+  if (cap) cap.textContent = 'Chaque carré est un jour, de février à juin. Sur '
+    + st.total + ' jours, ' + st.activeDays + ' seulement portent un livre terminé. '
+    + 'On voit la longue traînée pâle de fin mars à mi-avril — presque trois '
+    + 'semaines sans rien finir — et les deux grappes sombres de mai et de juin.';
 
   /* Trame : une ligne par mois, une colonne par quantième. */
   const rows = [];
@@ -425,20 +441,22 @@ function renderBible() {
       const d = new Date(Date.UTC(y, m, day));
       if (d < st.gridStart || d > st.end) { cells += '<i class="bcell out"></i>'; continue; }
       const key = dayKey(d);
+      const inGap = st.longest.from && key > st.longest.from && key < st.longest.to;
       const books = st.byDay.get(key) || [];
       const lvl = books.length === 0 ? 0 : books.length === 1 ? 1 : books.length <= 3 ? 2 : 3;
       const label = day + ' ' + FR_MONTHS[m] + ' — ' + (books.length
         ? books.join(', ')
         : 'rien d’achevé');
-      cells += '<i class="bcell l' + lvl + '" title="' + esc(label) + '"></i>';
+      cells += '<i class="bcell l' + lvl + (inGap ? ' gap' : '')
+        + '" title="' + esc(label) + '"></i>';
     }
-    rows.push('<div class="brow"><span class="bmonth">' + FR_MONTHS[m].slice(0, 3)
+    rows.push('<div class="brow"><span class="bmonth">' + FR_MONTHS[m]
       + '</span><div class="bdays">' + cells + '</div></div>');
     cur.setUTCMonth(m + 1);
   }
   gridHost.innerHTML = rows.join('');
 
-  /* Relevé complet, par ordre chronologique. */
+  /* Carnet complet, par ordre chronologique. */
   const log = document.getElementById('bible-log');
   if (!log) return;
   const undated = BIBLE.entries.filter(e => !e[1]);
@@ -450,7 +468,7 @@ function renderBible() {
     groups.get(key).push([name, d]);
   });
   const row = ([name, d]) => '<div class="blogrow"><span>' + esc(name) + '</span><span>'
-    + (d ? Number(d.slice(8)) + ' ' + FR_MONTHS[Number(d.slice(5, 7)) - 1] : 'date non relevée')
+    + (d ? Number(d.slice(8)) + ' ' + FR_MONTHS[Number(d.slice(5, 7)) - 1] : 'date non carnete')
     + '</span></div>';
   log.innerHTML =
       (undated.length ? '<div class="blogmonth"><h4>Sans date <span>1</span></h4>'
@@ -466,7 +484,7 @@ function renderReadings() {
 
   if (!READINGS.length) {
     host.innerHTML = emptyState('i-book', 'L’étagère se remplit encore',
-      'Je lis bien plus que je n’en écris. Je reconstitue le relevé année par année — ce que j’ai lu, et la chose que j’en ai retenue.');
+      'Je lis bien plus que je n’en écris. Je reconstitue le carnet année par année — ce que j’ai lu, et la chose que j’en ai retenue.');
     return;
   }
 
