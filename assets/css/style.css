@@ -1470,25 +1470,32 @@ a.read-item:hover .read-title { color: var(--cyan); }
   border-bottom: 1px solid var(--line);
 }
 /* Seule exception aux capitales monospace du thème : une phrase de sept
-   mots en capitales se déchiffre au lieu de se lire. */
+   mots en capitales se déchiffre au lieu de se lire. La coupure est
+   explicite, pour éviter un « en » orphelin en début de ligne. */
 .bible-claim {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-top: 16px;
   font-family: var(--display);
   font-weight: 700;
   text-transform: none;
-  font-size: clamp(22px, 3vw, 32px);
-  line-height: 1.25;
   letter-spacing: -0.03em;
-  margin-top: 14px;
-  max-width: 22ch;
+  line-height: 1.1;
+}
+.bible-lead { font-size: clamp(20px, 2.6vw, 27px); }
+.bible-big {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(21px, 2.8vw, 29px);
 }
 .bible-num {
   color: var(--cyan);
-  font-size: clamp(46px, 7.4vw, 80px);
-  line-height: 0.9;
+  font-size: clamp(54px, 8.4vw, 92px);
+  line-height: 0.86;
   letter-spacing: -0.05em;
-  display: inline-block;
-  vertical-align: -0.08em;
-  margin: 0 4px;
 }
 .bible-sub {
   font-size: 17.5px;
@@ -1502,21 +1509,32 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .bible-facts {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s2) var(--s5);
-  margin-top: var(--s4);
-  padding-top: var(--s3);
-  border-top: 1px solid var(--line-soft);
+  gap: var(--s3) var(--s6);
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
 }
 .bible-facts li {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  color: var(--muted);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--body);
+  max-width: 34ch;
 }
-.bible-facts b { color: var(--ink); font-weight: 700; font-size: 17px; margin-right: 6px; }
+.bible-facts b {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  flex-shrink: 0;
+}
 
 /* La trame */
 .bible-fig { margin: var(--s6) 0 0; }
+.bible-grid { padding-bottom: var(--s2); }
 .bible-grid { display: flex; flex-direction: column; gap: 4px; max-width: 620px; }
 .brow { display: grid; grid-template-columns: 62px 1fr; gap: var(--s3); align-items: center; }
 .bmonth {
@@ -1536,27 +1554,28 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Hors période : rien du tout, pour que seuls les jours du parcours
    soient dessinés. */
 .bcell.void, .bcell.out { border-color: transparent; }
-/* La plus longue pause reçoit un fond sable très pâle, pour que l'œil
-   la trouve sans avoir à la chercher. */
-.bcell.gap { background: var(--sand-soft); border-color: var(--sand-line); }
+/* La plus longue pause est ombrée — assez pour se repérer, jamais assez
+   pour dominer les jours de lecture : l'absence ne doit pas parler plus
+   fort que la présence. */
+.bcell.gap { background: #EAE6E1; border-color: #DDD5CC; }
 .bcell.l1 { background: var(--cyan-soft); border-color: var(--cyan-line); }
 .bcell.l2 { background: var(--cyan-line); border-color: var(--cyan-fill); }
 .bcell.l3 { background: var(--cyan-fill); border-color: var(--cyan-fill); }
 .bcell.l1, .bcell.l2, .bcell.l3 { cursor: help; }
 
 .bible-cap {
-  font-size: 13.5px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.65;
   color: var(--muted);
-  margin-top: var(--s3);
-  max-width: 58ch;
+  margin-top: var(--s4);
+  max-width: 62ch;
 }
 
 /* Les trois temps */
 .bible-acts {
   display: grid;
-  grid-template-columns: 1.1fr 0.82fr 1.18fr;
-  gap: var(--s5);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s6);
   margin-top: var(--s7);
 }
 .bible-acts article { border-top: 2px solid var(--cyan-fill); padding-top: var(--s3); }
