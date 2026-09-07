@@ -68,6 +68,54 @@ const READINGS = [
   // { year: 2023, title: '…', author: '…', kind: 'Book', note: '…' },
 ];
 
+/* ════════════════════════════════════════════════════════════
+   3. LECTURE INTÉGRALE DE LA BIBLE — 31 jan → 7 juin 2025
+   ────────────────────────────────────────────────────────────
+   Relevé tel qu'il a été tenu. `date: null` = entrée non datée.
+   Tout le reste (durée, trame des 127 jours, journées actives,
+   pauses, densités) est calculé à partir de ce tableau : rien
+   n'est écrit en dur dans la page.
+   ════════════════════════════════════════════════════════════ */
+const BIBLE = {
+  edition: 'Bible de Jérusalem',
+  start:   '2025-01-31',
+  end:     '2025-06-07',
+  entries: [
+    ['Jean 1, 2 et 3', null],       ['Saint Mathieu', '2025-02-09'],
+    ['Saint Marc', '2025-02-10'],   ['Saint Luc', '2025-02-18'],
+    ['Saint Jean', '2025-02-25'],   ['Actes des apôtres', '2025-03-07'],
+    ['Genèse', '2025-03-15'],       ['Exode', '2025-03-20'],
+    ['Job', '2025-03-25'],          ['Lévitique', '2025-04-13'],
+    ['Nombres', '2025-04-16'],      ['Deutéronome', '2025-04-22'],
+    ['Josué', '2025-04-24'],        ['Juges', '2025-04-26'],
+    ['Ruth', '2025-04-27'],         ['Samuel', '2025-04-30'],
+    ['Rois 1, 2', '2025-05-06'],    ['Amos', '2025-05-07'],
+    ['Osée', '2025-05-07'],         ['Michée', '2025-05-07'],
+    ['Abdias', '2025-05-08'],       ['Jonas', '2025-05-08'],
+    ['Nahum', '2025-05-08'],        ['Joël', '2025-05-08'],
+    ['Habaquq', '2025-05-08'],      ['Sophonie', '2025-05-08'],
+    ['Aggée', '2025-05-09'],        ['Zacharie', '2025-05-09'],
+    ['Malachie', '2025-05-09'],     ['Les lamentations', '2025-05-09'],
+    ['Les chroniques', '2025-05-11'],['Daniel', '2025-05-13'],
+    ['Isaïe', '2025-05-16'],        ['Tobie', '2025-05-17'],
+    ['Judith', '2025-05-19'],       ['Jérémie', '2025-05-21'],
+    ['Baruch', '2025-05-23'],       ['Esther', '2025-05-24'],
+    ['Ézéchiel', '2025-05-27'],     ['Esdras', '2025-05-27'],
+    ['Néhémie', '2025-05-28'],      ['Ecclésiaste', '2025-05-29'],
+    ['Cantique des cantiques', '2025-05-29'], ['Sagesse', '2025-05-30'],
+    ['Maccabées', '2025-05-31'],    ['Romains', '2025-06-01'],
+    ['Proverbes', '2025-06-02'],    ['Corinthiens', '2025-06-02'],
+    ['Galates', '2025-06-03'],      ['Éphésiens', '2025-06-04'],
+    ['Philippiens', '2025-06-04'],  ['Colossiens', '2025-06-04'],
+    ['Thessaloniciens', '2025-06-04'], ['Psaumes', '2025-06-05'],
+    ['Timothée', '2025-06-05'],     ['Tite', '2025-06-05'],
+    ['Philémon', '2025-06-05'],     ['Hébreux', '2025-06-05'],
+    ['Jacques', '2025-06-05'],      ['Pierre', '2025-06-05'],
+    ['Jude', '2025-06-06'],         ['Apocalypse', '2025-06-06'],
+    ['Ecclésiastique', '2025-06-07']
+  ]
+};
+
 const OFFERINGS = [
   // { name: '…', format: 'Visio', length: '60 min', summary: '…', tags: ['Numérologie'] },
 ];
@@ -274,6 +322,96 @@ function readingGroup(label, books) {
     + '<span>' + n + (n > 1 ? ' books' : ' book') + '</span></header>'
     + books.map(readingItem).join('')
     + '</section>';
+}
+
+/* ── Lecture intégrale : trame des 127 jours + relevé ── */
+const EN_MONTHS = ['January','February','March','April','May','June',
+  'July','August','September','October','November','December'];
+
+function dayKey(d) { return d.toISOString().slice(0, 10); }
+function parseDay(s) { return new Date(s + 'T00:00:00Z'); }
+
+function bibleStats() {
+  const start = parseDay(BIBLE.start), end = parseDay(BIBLE.end);
+  const byDay = new Map();
+  BIBLE.entries.forEach(([name, d]) => {
+    if (!d) return;
+    if (!byDay.has(d)) byDay.set(d, []);
+    byDay.get(d).push(name);
+  });
+  const days = [...byDay.keys()].sort();
+  let longest = { gap: 0, from: null, to: null };
+  for (let i = 1; i < days.length; i++) {
+    const gap = Math.round((parseDay(days[i]) - parseDay(days[i - 1])) / 864e5);
+    if (gap > longest.gap) longest = { gap, from: days[i - 1], to: days[i] };
+  }
+  return {
+    start, end, byDay,
+    total: Math.round((end - start) / 864e5),
+    entries: BIBLE.entries.length,
+    activeDays: byDay.size,
+    longest
+  };
+}
+
+function renderBible() {
+  const gridHost = document.getElementById('bible-grid');
+  if (!gridHost) return;
+  const st = bibleStats();
+
+  /* Les chiffres annoncés sont calculés, jamais écrits en dur. */
+  const facts = document.getElementById('bible-facts');
+  if (facts) facts.innerHTML = [
+    [st.entries, 'entries in the log'],
+    [st.activeDays, 'days with a book finished'],
+    [st.longest.gap, 'days, the longest pause']
+  ].map(([n, label]) => '<li><b>' + n + '</b> ' + esc(label) + '</li>').join('');
+
+  /* Trame : une ligne par mois, une colonne par quantième. */
+  const rows = [];
+  const cur = new Date(Date.UTC(st.start.getUTCFullYear(), st.start.getUTCMonth(), 1));
+  while (cur <= st.end) {
+    const y = cur.getUTCFullYear(), m = cur.getUTCMonth();
+    const len = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    let cells = '';
+    for (let day = 1; day <= 31; day++) {
+      if (day > len) { cells += '<i class="bcell void"></i>'; continue; }
+      const d = new Date(Date.UTC(y, m, day));
+      if (d < st.start || d > st.end) { cells += '<i class="bcell out"></i>'; continue; }
+      const key = dayKey(d);
+      const books = st.byDay.get(key) || [];
+      const lvl = books.length === 0 ? 0 : books.length === 1 ? 1 : books.length <= 3 ? 2 : 3;
+      const label = day + ' ' + EN_MONTHS[m] + ' — ' + (books.length
+        ? books.join(', ')
+        : 'nothing finished');
+      cells += '<i class="bcell l' + lvl + '" title="' + esc(label) + '"></i>';
+    }
+    rows.push('<div class="brow"><span class="bmonth">' + EN_MONTHS[m].slice(0, 3)
+      + '</span><div class="bdays">' + cells + '</div></div>');
+    cur.setUTCMonth(m + 1);
+  }
+  gridHost.innerHTML = rows.join('');
+
+  /* Relevé complet, par ordre chronologique. */
+  const log = document.getElementById('bible-log');
+  if (!log) return;
+  const undated = BIBLE.entries.filter(e => !e[1]);
+  const dated = BIBLE.entries.filter(e => e[1]).sort((a, b) => a[1] < b[1] ? -1 : 1);
+  const groups = new Map();
+  dated.forEach(([name, d]) => {
+    const key = d.slice(0, 7);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push([name, d]);
+  });
+  const row = ([name, d]) => '<div class="blogrow"><span>' + esc(name) + '</span><span>'
+    + (d ? Number(d.slice(8)) + ' ' + EN_MONTHS[Number(d.slice(5, 7)) - 1] : 'not recorded')
+    + '</span></div>';
+  log.innerHTML =
+      (undated.length ? '<div class="blogmonth"><h4>Undated <span>1</span></h4>'
+        + undated.map(row).join('') + '</div>' : '')
+    + [...groups].map(([key, items]) => '<div class="blogmonth"><h4>'
+        + EN_MONTHS[Number(key.slice(5)) - 1] + ' <span>' + items.length + '</span></h4>'
+        + items.map(row).join('') + '</div>').join('');
 }
 
 function renderReadings() {
@@ -559,6 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
   renderReadings();
   renderOfferings();
+  renderBible();
   initTabs();
   initTabLinks();
   initProjectFilter();

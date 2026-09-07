@@ -1458,3 +1458,183 @@ a.read-item:hover .read-title { color: var(--cyan); }
   .refuge-lead { font-size: 18px; }
 }
 
+
+/* ============================================================
+   LECTURE INTÉGRALE — la trame des 127 jours
+   Le motif du site est déjà une grille : elle devient ici le
+   graphique. Pas d'axes, pas de légende, pas de tuiles.
+   ============================================================ */
+.bible {
+  padding-bottom: var(--s7);
+  margin-bottom: var(--s7);
+  border-bottom: 1px solid var(--line);
+}
+.bible-claim {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-top: 12px;
+  max-width: 20ch;
+}
+.bible-num {
+  color: var(--cyan);
+  font-size: clamp(52px, 9vw, 104px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  display: inline-block;
+  vertical-align: -0.08em;
+  margin: 0 4px;
+}
+.bible-span {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: var(--s3);
+}
+
+/* Annotations — pas des tuiles de KPI */
+.bible-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s5);
+  margin-top: var(--s4);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line-soft);
+}
+.bible-facts li {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.bible-facts b { color: var(--ink); font-weight: 700; font-size: 15px; margin-right: 5px; }
+
+/* La trame */
+.bible-fig { margin: var(--s6) 0 0; }
+.bible-grid { display: flex; flex-direction: column; gap: 4px; max-width: 620px; }
+.brow { display: grid; grid-template-columns: 34px 1fr; gap: var(--s3); align-items: center; }
+.bmonth {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
+.bdays { display: grid; grid-template-columns: repeat(31, 1fr); gap: 3px; }
+.bcell {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  background: transparent;
+  display: block;
+}
+/* Hors période : rien du tout, pour que seuls les jours du parcours
+   soient dessinés. */
+.bcell.void, .bcell.out { border-color: transparent; }
+.bcell.l1 { background: var(--cyan-soft); border-color: var(--cyan-line); }
+.bcell.l2 { background: var(--cyan-line); border-color: var(--cyan-fill); }
+.bcell.l3 { background: var(--cyan-fill); border-color: var(--cyan-fill); }
+.bcell.l1, .bcell.l2, .bcell.l3 { cursor: help; }
+
+.bible-cap {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: var(--s3);
+  max-width: 58ch;
+}
+
+/* Les trois temps */
+.bible-acts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s5);
+  margin-top: var(--s7);
+}
+.bible-acts article { border-top: 2px solid var(--cyan-fill); padding-top: var(--s3); }
+.bible-acts h4 { font-size: 16px; }
+.bible-when {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 3px 0 10px;
+}
+.bible-acts p:last-child { font-size: 15px; line-height: 1.65; color: var(--body); }
+
+.bible-note {
+  margin-top: var(--s5);
+  padding-left: var(--s4);
+  border-left: 2px solid var(--sand);
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--body);
+  max-width: 68ch;
+}
+
+/* Le relevé, en déroulante */
+.bible-details { margin-top: var(--s6); }
+.bible-details summary {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  cursor: pointer;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bible-details summary::-webkit-details-marker { display: none; }
+.bible-details summary::before { content: "+"; font-size: 15px; line-height: 1; }
+.bible-details[open] summary::before { content: "−"; }
+.bible-details summary:hover { color: var(--ink); }
+
+.bible-log {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--s4) var(--s5);
+  padding: var(--s4) 0 var(--s2);
+}
+.blogmonth h4 {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 7px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--line);
+}
+.blogrow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: 4px 0;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.blogrow span:last-child {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .bible-acts { grid-template-columns: 1fr; gap: var(--s4); }
+  .bdays { gap: 2px; }
+  .brow { grid-template-columns: 28px 1fr; gap: var(--s2); }
+}
