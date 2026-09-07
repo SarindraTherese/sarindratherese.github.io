@@ -1638,3 +1638,85 @@ a.read-item:hover .read-title { color: var(--cyan); }
   .bdays { gap: 2px; }
   .brow { grid-template-columns: 28px 1fr; gap: var(--s2); }
 }
+
+/* ============================================================
+   SUJETS DU REFUGE — index cliquable
+   Un sujet occupe toute la largeur : c'est un texte, pas une
+   tuile. Filet en tête, chiffres en monospace en pied.
+   ============================================================ */
+.topics { display: flex; flex-direction: column; margin-bottom: var(--s7); }
+.topic {
+  display: block;
+  padding: var(--s5) 0;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s ease, padding 0.18s ease;
+}
+.topic:last-child { border-bottom: 1px solid var(--line); }
+.topic:hover { background: var(--paper-2); padding-left: var(--s3); padding-right: var(--s3); }
+.topic-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.topic-title {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(19px, 2.4vw, 25px);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  margin: 10px 0 12px;
+  max-width: 22ch;
+}
+.topic:hover .topic-title { color: var(--cyan); }
+.topic-dek { font-size: 16.5px; line-height: 1.68; color: var(--body); max-width: 62ch; }
+.topic-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+  margin-top: var(--s4);
+}
+.topic-stats { display: flex; flex-wrap: wrap; gap: 6px; }
+.topic-stats span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 3px 9px;
+}
+.topic-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.topic:hover .topic-go .icon { transform: translateX(3px); }
+.topic-go .icon { transition: transform 0.18s ease; }
+
+/* Retour vers le Refuge, en tête d'un sujet */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: var(--s5);
+  transition: color 0.18s ease;
+}
+.back-link .icon { transform: rotate(180deg); }
+.back-link:hover { color: var(--cyan); }

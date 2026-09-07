@@ -124,9 +124,12 @@ const OFFERINGS = [
    3. NAVIGATION — routage par ancre, liens partageables
    ════════════════════════════════════════════════════════════ */
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'contact'];
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'contact'];
 const PAGE_TITLES = { home: 'Home', about: 'About', projects: 'Projects',
-  skills: 'Skills', refuge: "Sarindra's Refuge", contact: 'Contact' };
+  skills: 'Skills', refuge: "Sarindra's Refuge", bible: '127 Days', contact: 'Contact' };
+/* Les sujets du Refuge sont des pages à part ; la barre de navigation
+   doit rester allumée sur le Refuge quand on les lit. */
+const PAGE_PARENT = { bible: 'refuge' };
 
 function trackVirtualPageView(id) {
   if (typeof window.gtag !== 'function') return;
@@ -146,7 +149,7 @@ function showPage(id, opts) {
   target.classList.add('active');
 
   document.querySelectorAll('#nav-links a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    a.classList.toggle('active', a.getAttribute('href') === '#' + (PAGE_PARENT[id] || id));
     a.removeAttribute('aria-current');
     if (a.classList.contains('active')) a.setAttribute('aria-current', 'page');
   });
@@ -324,6 +327,48 @@ function readingGroup(label, books) {
     + '</section>';
 }
 
+/* ════════════════════════════════════════════════════════════
+   SUJETS DU REFUGE
+   ────────────────────────────────────────────────────────────
+   Un sujet = une entrée ici. Deux façons de le relier :
+     page: 'bible'          → une page interne (#bible)
+     url:  'https://…'      → un texte publié ailleurs
+   ════════════════════════════════════════════════════════════ */
+const TOPICS = [
+  {
+    kicker: 'Reading',
+    date:   'June 2025',
+    title:  'I read the Bible in 127 days',
+    dek:    'Sixty-three entries, thirty-nine days with a book finished, and one nineteen-day silence. What the log actually shows behind the number.',
+    stats:  ['127 days', '63 entries', '39 reading days'],
+    page:   'bible'
+  }
+];
+
+function renderTopics() {
+  const host = document.getElementById('topics');
+  if (!host) return;
+  if (!TOPICS.length) {
+    host.innerHTML = emptyState('i-pen', 'Nothing here yet',
+      'This is where the longer pieces will go.');
+    return;
+  }
+  host.innerHTML = TOPICS.map(t => {
+    const external = !t.page && t.url;
+    const href = t.page ? '#' + t.page : (t.url || '#');
+    const stats = (t.stats || []).map(x => '<span>' + esc(x) + '</span>').join('');
+    return '<a class="topic" href="' + esc(href) + '"'
+      + (external ? ' target="_blank" rel="noopener"' : '') + '>'
+      + '<p class="topic-meta">' + esc(t.kicker || '') + (t.date ? ' · ' + esc(t.date) : '') + '</p>'
+      + '<h3 class="topic-title">' + esc(t.title) + '</h3>'
+      + '<p class="topic-dek">' + esc(t.dek || '') + '</p>'
+      + '<div class="topic-foot"><div class="topic-stats">' + stats + '</div>'
+      + '<span class="topic-go">' + (external ? 'Read it' : 'Read')
+      + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-'
+      + (external ? 'ur' : 'right') + '"/></svg></span></div></a>';
+  }).join('');
+}
+
 /* ── Lecture intégrale : trame des 127 jours + relevé ── */
 const EN_MONTHS = ['January','February','March','April','May','June',
   'July','August','September','October','November','December'];
@@ -345,8 +390,9 @@ function bibleStats() {
     const gap = Math.round((parseDay(days[i]) - parseDay(days[i - 1])) / 864e5);
     if (gap > longest.gap) longest = { gap, from: days[i - 1], to: days[i] };
   }
+  const gridStart = new Date(start.getTime() + 864e5);   // jour 1 = lendemain du départ
   return {
-    start, end, byDay,
+    start, end, gridStart, byDay,
     total: Math.round((end - start) / 864e5),
     entries: BIBLE.entries.length,
     activeDays: byDay.size,
@@ -369,7 +415,7 @@ function renderBible() {
 
   /* Trame : une ligne par mois, une colonne par quantième. */
   const rows = [];
-  const cur = new Date(Date.UTC(st.start.getUTCFullYear(), st.start.getUTCMonth(), 1));
+  const cur = new Date(Date.UTC(st.gridStart.getUTCFullYear(), st.gridStart.getUTCMonth(), 1));
   while (cur <= st.end) {
     const y = cur.getUTCFullYear(), m = cur.getUTCMonth();
     const len = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
@@ -377,7 +423,7 @@ function renderBible() {
     for (let day = 1; day <= 31; day++) {
       if (day > len) { cells += '<i class="bcell void"></i>'; continue; }
       const d = new Date(Date.UTC(y, m, day));
-      if (d < st.start || d > st.end) { cells += '<i class="bcell out"></i>'; continue; }
+      if (d < st.gridStart || d > st.end) { cells += '<i class="bcell out"></i>'; continue; }
       const key = dayKey(d);
       const books = st.byDay.get(key) || [];
       const lvl = books.length === 0 ? 0 : books.length === 1 ? 1 : books.length <= 3 ? 2 : 3;
@@ -642,7 +688,7 @@ const ANIM_SELECTOR = [
   '.sec-hd', '.ab-state', '.ab-band', '.ab-quote', '.exp-item', '.edu-card', '.cert-card',
   '.drives-card', '.skill-cat-card', '.skill-bars-card',
   '.proj-card-v2', '.collab-banner', '.contact-form-card', '.contact-info-card',
-  '.avail-card', '.loc-card', '.offer-item', '.read-item'
+  '.avail-card', '.loc-card', '.offer-item', '.read-item', '.topic'
 ].join(',');
 
 let revealObserver = null;
@@ -697,6 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
   renderReadings();
   renderOfferings();
+  renderTopics();
   renderBible();
   initTabs();
   initTabLinks();
