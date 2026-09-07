@@ -46,9 +46,9 @@ const AVAILABILITY_COPY = {
 
    READINGS — un livre, et ce que tu en retiens.
    Les livres se regroupent tout seuls par année, la plus récente
-   en haut. Une entrée sans `year` part dans « Currently reading ».
+   en haut. Une entrée sans `year` part dans « En cours de lecture ».
      { year: 2023,
-       title: '...', author: '...', kind: 'Book',   // Book | Essay | Article
+       title: '...', author: '...', kind: 'Livre',   // Livre | Essai | Article
        note: 'Ce que j\'en retiens, en une phrase ou deux.',
        url: 'https://...' }        // facultatif
 
@@ -65,7 +65,7 @@ const AVAILABILITY_COPY = {
    publier.
    ════════════════════════════════════════════════════════════ */
 const READINGS = [
-  // { year: 2023, title: '…', author: '…', kind: 'Book', note: '…' },
+  // { year: 2023, title: '…', author: '…', kind: 'Livre', note: '…' },
 ];
 
 /* ════════════════════════════════════════════════════════════
@@ -126,7 +126,7 @@ const OFFERINGS = [
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'contact'];
 const PAGE_TITLES = { home: 'Home', about: 'About', projects: 'Projects',
-  skills: 'Skills', refuge: "Sarindra's Refuge", bible: '127 Days', contact: 'Contact' };
+  skills: 'Skills', refuge: "Sarindra's Refuge", bible: '127 jours', contact: 'Contact' };
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
 const PAGE_PARENT = { bible: 'refuge' };
@@ -281,8 +281,8 @@ function renderOfferings() {
   if (!host) return;
 
   if (!OFFERINGS.length) {
-    host.innerHTML = emptyState('i-compass', 'Sessions, soon',
-      'I\'m shaping what I want to offer here, alongside the data work. Details and how to book will land on this page.');
+    host.innerHTML = emptyState('i-compass', 'Les séances, bientôt',
+      'Je mets en forme ce que je veux proposer ici, à côté du travail data. Le détail et la façon de réserver arriveront sur cette page.');
     return;
   }
 
@@ -307,7 +307,7 @@ function renderOfferings() {
 
 function readingItem(r) {
   const inner =
-      '<div class="read-kind">' + esc(r.kind || 'Book') + '</div>'
+      '<div class="read-kind">' + esc(r.kind || 'Livre') + '</div>'
     + '<div class="read-main">'
     +   '<h3 class="read-title">' + esc(r.title) + '</h3>'
     +   (r.author ? '<p class="read-author">' + esc(r.author) + '</p>' : '')
@@ -322,7 +322,7 @@ function readingGroup(label, books) {
   const n = books.length;
   return '<section class="read-group">'
     + '<header class="read-year"><h3>' + esc(label) + '</h3>'
-    + '<span>' + n + (n > 1 ? ' books' : ' book') + '</span></header>'
+    + '<span>' + n + (n > 1 ? ' livres' : ' livre') + '</span></header>'
     + books.map(readingItem).join('')
     + '</section>';
 }
@@ -336,11 +336,11 @@ function readingGroup(label, books) {
    ════════════════════════════════════════════════════════════ */
 const TOPICS = [
   {
-    kicker: 'Reading',
-    date:   'June 2025',
-    title:  'I read the Bible in 127 days',
-    dek:    'Sixty-three entries, thirty-nine days with a book finished, and one nineteen-day silence. What the log actually shows behind the number.',
-    stats:  ['127 days', '63 entries', '39 reading days'],
+    kicker: 'Lecture',
+    date:   'Juin 2025',
+    title:  'J’ai lu la Bible en 127 jours',
+    dek:    'Soixante-trois entrées, trente-neuf journées où un livre s’achève, et un silence de dix-neuf jours. Ce que le relevé montre vraiment derrière le chiffre.',
+    stats:  ['127 jours', '63 entrées', '39 journées de lecture'],
     page:   'bible'
   }
 ];
@@ -349,8 +349,8 @@ function renderTopics() {
   const host = document.getElementById('topics');
   if (!host) return;
   if (!TOPICS.length) {
-    host.innerHTML = emptyState('i-pen', 'Nothing here yet',
-      'This is where the longer pieces will go.');
+    host.innerHTML = emptyState('i-pen', 'Rien pour l’instant',
+      'C’est ici que viendront les textes plus longs.');
     return;
   }
   host.innerHTML = TOPICS.map(t => {
@@ -363,15 +363,15 @@ function renderTopics() {
       + '<h3 class="topic-title">' + esc(t.title) + '</h3>'
       + '<p class="topic-dek">' + esc(t.dek || '') + '</p>'
       + '<div class="topic-foot"><div class="topic-stats">' + stats + '</div>'
-      + '<span class="topic-go">' + (external ? 'Read it' : 'Read')
+      + '<span class="topic-go">' + 'Lire'
       + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-'
       + (external ? 'ur' : 'right') + '"/></svg></span></div></a>';
   }).join('');
 }
 
 /* ── Lecture intégrale : trame des 127 jours + relevé ── */
-const EN_MONTHS = ['January','February','March','April','May','June',
-  'July','August','September','October','November','December'];
+const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
+  'juillet','août','septembre','octobre','novembre','décembre'];
 
 function dayKey(d) { return d.toISOString().slice(0, 10); }
 function parseDay(s) { return new Date(s + 'T00:00:00Z'); }
@@ -408,9 +408,9 @@ function renderBible() {
   /* Les chiffres annoncés sont calculés, jamais écrits en dur. */
   const facts = document.getElementById('bible-facts');
   if (facts) facts.innerHTML = [
-    [st.entries, 'entries in the log'],
-    [st.activeDays, 'days with a book finished'],
-    [st.longest.gap, 'days, the longest pause']
+    [st.entries, 'entrées au relevé'],
+    [st.activeDays, 'journées où un livre s’achève'],
+    [st.longest.gap, 'jours, la plus longue pause']
   ].map(([n, label]) => '<li><b>' + n + '</b> ' + esc(label) + '</li>').join('');
 
   /* Trame : une ligne par mois, une colonne par quantième. */
@@ -427,12 +427,12 @@ function renderBible() {
       const key = dayKey(d);
       const books = st.byDay.get(key) || [];
       const lvl = books.length === 0 ? 0 : books.length === 1 ? 1 : books.length <= 3 ? 2 : 3;
-      const label = day + ' ' + EN_MONTHS[m] + ' — ' + (books.length
+      const label = day + ' ' + FR_MONTHS[m] + ' — ' + (books.length
         ? books.join(', ')
-        : 'nothing finished');
+        : 'rien d’achevé');
       cells += '<i class="bcell l' + lvl + '" title="' + esc(label) + '"></i>';
     }
-    rows.push('<div class="brow"><span class="bmonth">' + EN_MONTHS[m].slice(0, 3)
+    rows.push('<div class="brow"><span class="bmonth">' + FR_MONTHS[m].slice(0, 3)
       + '</span><div class="bdays">' + cells + '</div></div>');
     cur.setUTCMonth(m + 1);
   }
@@ -450,13 +450,13 @@ function renderBible() {
     groups.get(key).push([name, d]);
   });
   const row = ([name, d]) => '<div class="blogrow"><span>' + esc(name) + '</span><span>'
-    + (d ? Number(d.slice(8)) + ' ' + EN_MONTHS[Number(d.slice(5, 7)) - 1] : 'not recorded')
+    + (d ? Number(d.slice(8)) + ' ' + FR_MONTHS[Number(d.slice(5, 7)) - 1] : 'date non relevée')
     + '</span></div>';
   log.innerHTML =
-      (undated.length ? '<div class="blogmonth"><h4>Undated <span>1</span></h4>'
+      (undated.length ? '<div class="blogmonth"><h4>Sans date <span>1</span></h4>'
         + undated.map(row).join('') + '</div>' : '')
     + [...groups].map(([key, items]) => '<div class="blogmonth"><h4>'
-        + EN_MONTHS[Number(key.slice(5)) - 1] + ' <span>' + items.length + '</span></h4>'
+        + FR_MONTHS[Number(key.slice(5)) - 1] + ' <span>' + items.length + '</span></h4>'
         + items.map(row).join('') + '</div>').join('');
 }
 
@@ -465,8 +465,8 @@ function renderReadings() {
   if (!host) return;
 
   if (!READINGS.length) {
-    host.innerHTML = emptyState('i-book', 'The shelf is still filling up',
-      'I read far more than I write about it. I\'m putting the log together year by year — what I read, and the one thing I took away from each.');
+    host.innerHTML = emptyState('i-book', 'L’étagère se remplit encore',
+      'Je lis bien plus que je n’en écris. Je reconstitue le relevé année par année — ce que j’ai lu, et la chose que j’en ai retenue.');
     return;
   }
 
@@ -474,7 +474,7 @@ function renderReadings() {
   const years = [...new Set(READINGS.map(r => r.year).filter(Boolean))].sort((a, b) => b - a);
 
   host.innerHTML =
-      (undated.length ? readingGroup('Currently reading', undated) : '')
+      (undated.length ? readingGroup('En cours de lecture', undated) : '')
     + years.map(y => readingGroup(String(y), READINGS.filter(r => r.year === y))).join('');
 }
 
