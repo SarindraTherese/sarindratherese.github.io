@@ -671,26 +671,69 @@ const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
 
 
 function renderBible() {
-  /* Carnet complet, par ordre chronologique. */
   const log = document.getElementById('bible-log');
   if (!log) return;
+
+  const day = t => new Date(t + 'T00:00:00Z');
   const undated = BIBLE.entries.filter(e => !e[1]);
-  const dated = BIBLE.entries.filter(e => e[1]).sort((a, b) => a[1] < b[1] ? -1 : 1);
-  const groups = new Map();
+  const dated = BIBLE.entries.filter(e => e[1])
+    .sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+
+  /* Un jour, et tout ce qui s'y est terminé. Les jours où sept livres
+     s'achèvent tiennent sept lignes : la grappe se voit sans qu'on ait
+     à la compter. */
+  const days = [];
   dated.forEach(([name, d]) => {
-    const key = d.slice(0, 7);
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push([name, d]);
+    const last = days[days.length - 1];
+    if (last && last.d === d) last.books.push(name);
+    else days.push({ d: d, books: [name] });
   });
-  const row = ([name, d]) => '<div class="blogrow"><span>' + esc(name) + '</span><span>'
-    + (d ? Number(d.slice(8)) + ' ' + FR_MONTHS[Number(d.slice(5, 7)) - 1] : '—')
-    + '</span></div>';
-  log.innerHTML =
-      (undated.length ? '<div class="blogmonth"><h4>Sans date <span>1</span></h4>'
-        + undated.map(row).join('') + '</div>' : '')
-    + [...groups].map(([key, items]) => '<div class="blogmonth"><h4>'
-        + FR_MONTHS[Number(key.slice(5)) - 1] + ' <span>' + items.length + '</span></h4>'
-        + items.map(row).join('') + '</div>').join('');
+
+  const nbLivres = n => n + (n > 1 ? ' livres' : ' livre');
+  const out = [];
+
+  /* La lecture commence le 31 janvier, mais le carnet ne dit pas quel
+     jour ce livre-là s'est terminé. Il garde donc son mois et un tiret
+     à la place du quantième : on n'invente pas une date. */
+  if (undated.length) {
+    out.push('<li class="carnet-month"><h4>Janvier'
+      + '<span>' + nbLivres(undated.length) + '</span></h4></li>');
+    out.push('<li class="carnet-day"><span class="carnet-num">—</span>'
+      + '<span class="carnet-books">'
+      + undated.map(e => '<b>' + esc(e[0]) + '</b>').join('')
+      + '</span></li>');
+  }
+
+  let mois = null;
+  days.forEach((jour, k) => {
+    const m = Number(jour.d.slice(5, 7)) - 1;
+
+    /* Le silence entre deux jours occupe la place qu'il a prise — y
+       compris quand il traverse un changement de mois, ce qui est le
+       cas du plus long : dix-neuf jours entre Job et le Lévitique. */
+    if (k > 0) {
+      const ecart = Math.round((day(jour.d) - day(days[k - 1].d)) / 864e5);
+      if (ecart >= 5) {
+        out.push('<li class="carnet-gap" style="--h:'
+          + Math.min(ecart * 4, 84) + 'px"><span>' + ecart + ' jours</span></li>');
+      }
+    }
+
+    if (m !== mois) {
+      mois = m;
+      const n = days.filter(x => Number(x.d.slice(5, 7)) - 1 === m)
+                    .reduce((t, x) => t + x.books.length, 0);
+      out.push('<li class="carnet-month"><h4>' + FR_MONTHS[m]
+        + '<span>' + nbLivres(n) + '</span></h4></li>');
+    }
+    out.push('<li class="carnet-day"><span class="carnet-num">'
+      + String(Number(jour.d.slice(8))).padStart(2, '0') + '</span>'
+      + '<span class="carnet-books">'
+      + jour.books.map(b => '<b>' + esc(b) + '</b>').join('')
+      + '</span></li>');
+  });
+
+  log.innerHTML = '<ol class="carnet">' + out.join('') + '</ol>';
 }
 
 

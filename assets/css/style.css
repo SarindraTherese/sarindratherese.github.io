@@ -1415,50 +1415,6 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Annotations — pas des tuiles de KPI */
 /* La trame */
 /* Le carnet, à plat : c'est lui la page, plus une annexe. */
-.bible-logtitle {
-  margin: var(--s6) 0 var(--s4);
-  padding-top: var(--s4);
-  border-top: 1px solid var(--line);
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.bible-log {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: var(--s4) var(--s5);
-  padding: var(--s4) 0 var(--s2);
-}
-.blogmonth h4 {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-  border-bottom: 1px solid var(--line);
-}
-.blogrow {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s3);
-  padding: 4px 0;
-  font-size: 13.5px;
-  color: var(--ink);
-}
-.blogrow span:last-child {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
 @media (max-width: 860px) {
   .bible-claim { max-width: none; }
 }
@@ -1805,4 +1761,103 @@ a.read-item:hover .read-title { color: var(--cyan); }
   font-size: 15px;
   line-height: 1.65;
   color: var(--body);
+}
+
+/* Le titre du carnet, effacé par erreur avec les styles de l'ancienne
+   mise en colonnes : « .bible-log » est un préfixe de son nom. */
+.bible-logtitle {
+  margin: var(--s6) 0 var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Le carnet des 127 jours ───────────────────────────────────
+   Une colonne, dans l'ordre du temps. Le rythme n'est pas dessiné :
+   il se lit dans la page. Un jour où sept livres s'achèvent tient
+   sept lignes, et un silence de dix-neuf jours occupe la place qu'il
+   a prise. */
+.carnet {
+  list-style: none;
+  padding: 0;
+  max-width: 46ch;
+  border-left: 1px solid var(--line-soft);
+}
+.carnet-month {
+  margin: var(--s6) 0 var(--s3);
+  padding-left: var(--s4);
+}
+.carnet-month:first-child { margin-top: 0; }
+.carnet-month h4 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--cyan-line);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.carnet-month h4 span {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--muted);
+}
+.carnet-day {
+  position: relative;
+  display: flex;
+  gap: var(--s3);
+  padding: 5px 0 5px var(--s4);
+}
+/* Le repère du jour, posé sur le filet de gauche. */
+.carnet-day::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 13px;
+  width: 5px;
+  height: 5px;
+  background: var(--cyan-fill);
+  border-radius: 50%;
+}
+.carnet-num {
+  flex: none;
+  width: 2.2em;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  padding-top: 2px;
+}
+.carnet-books b {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--ink);
+}
+/* Le silence : une hauteur proportionnelle à sa durée, et rien d'autre. */
+.carnet-gap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--h, 24px);
+  padding-left: var(--s4);
+}
+.carnet-gap span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  /* Le repère reste discret par sa taille, pas par un gris illisible :
+     #4E6D7C sur le papier, 4,65:1. */
+  color: var(--muted);
 }
