@@ -1426,90 +1426,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 
 /* Annotations — pas des tuiles de KPI */
-.bible-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s3) var(--s6);
-  margin-top: var(--s5);
-  padding-top: var(--s4);
-  border-top: 1px solid var(--line);
-}
-.bible-facts li {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 15.5px;
-  line-height: 1.45;
-  color: var(--body);
-  max-width: 34ch;
-}
-.bible-facts b {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 24px;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-  flex-shrink: 0;
-}
-
 /* La trame */
-.bible-fig { margin: var(--s6) 0 0; }
-.bible-grid { padding-bottom: var(--s2); }
-.bible-grid { display: flex; flex-direction: column; gap: 4px; max-width: 620px; }
-.brow { display: grid; grid-template-columns: 62px 1fr; gap: var(--s3); align-items: center; }
-.bmonth {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  text-align: right;
-}
-.bdays { display: grid; grid-template-columns: repeat(31, 1fr); gap: 3px; }
-.bcell {
-  aspect-ratio: 1;
-  border: 1px solid var(--line);
-  background: transparent;
-  display: block;
-}
-/* Hors période : rien du tout, pour que seuls les jours du parcours
-   soient dessinés. */
-.bcell.void, .bcell.out { border-color: transparent; }
-/* La plus longue pause est ombrée — assez pour se repérer, jamais assez
-   pour dominer les jours de lecture : l'absence ne doit pas parler plus
-   fort que la présence. */
-.bcell.gap { background: #EAE6E1; border-color: #DDD5CC; }
-.bcell.l1 { background: var(--cyan-soft); border-color: var(--cyan-line); }
-.bcell.l2 { background: var(--cyan-line); border-color: var(--cyan-fill); }
-.bcell.l3 { background: var(--cyan-fill); border-color: var(--cyan-fill); }
-.bcell.l1, .bcell.l2, .bcell.l3 { cursor: help; }
-
-.bible-cap {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--muted);
-  margin-top: var(--s4);
-  max-width: 62ch;
-}
-
-/* Les trois temps */
-.bible-acts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s6);
-  margin-top: var(--s7);
-}
-.bible-acts article { border-top: 2px solid var(--cyan-fill); padding-top: var(--s3); }
-.bible-acts h4 { font-size: 16px; }
-.bible-when {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin: 3px 0 10px;
-}
-.bible-acts p:last-child { font-size: 15px; line-height: 1.65; color: var(--body); }
-
 .bible-note {
   margin-top: var(--s5);
   padding-left: var(--s4);
@@ -1520,28 +1437,18 @@ a.read-item:hover .read-title { color: var(--cyan); }
   max-width: 68ch;
 }
 
-/* Le relevé, en déroulante */
-.bible-details { margin-top: var(--s6); }
-.bible-details summary {
+/* Le carnet, à plat : c'est lui la page, plus une annexe. */
+.bible-logtitle {
+  margin: var(--s6) 0 var(--s4);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cyan);
-  cursor: pointer;
-  padding: 12px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color: var(--muted);
 }
-.bible-details summary::-webkit-details-marker { display: none; }
-.bible-details summary::before { content: "+"; font-size: 15px; line-height: 1; }
-.bible-details[open] summary::before { content: "−"; }
-.bible-details summary:hover { color: var(--ink); }
-
 .bible-log {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -1576,10 +1483,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 
 @media (max-width: 860px) {
-  .bible-acts { grid-template-columns: 1fr; gap: var(--s4); }
   .bible-claim { max-width: none; }
-  .bdays { gap: 2px; }
-  .brow { grid-template-columns: 52px 1fr; gap: var(--s2); }
 }
 
 /* ============================================================

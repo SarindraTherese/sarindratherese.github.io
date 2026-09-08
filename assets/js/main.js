@@ -636,85 +636,12 @@ function topics() {
 }
 
 
-/* ── Lecture intégrale : trame des 127 jours + carnet ── */
+/* ── Les 127 jours : le carnet ── */
 const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
   'juillet','août','septembre','octobre','novembre','décembre'];
 
-function dayKey(d) { return d.toISOString().slice(0, 10); }
-function parseDay(s) { return new Date(s + 'T00:00:00Z'); }
-
-function bibleStats() {
-  const start = parseDay(BIBLE.start), end = parseDay(BIBLE.end);
-  const byDay = new Map();
-  BIBLE.entries.forEach(([name, d]) => {
-    if (!d) return;
-    if (!byDay.has(d)) byDay.set(d, []);
-    byDay.get(d).push(name);
-  });
-  const days = [...byDay.keys()].sort();
-  let longest = { gap: 0, from: null, to: null };
-  for (let i = 1; i < days.length; i++) {
-    const gap = Math.round((parseDay(days[i]) - parseDay(days[i - 1])) / 864e5);
-    if (gap > longest.gap) longest = { gap, from: days[i - 1], to: days[i] };
-  }
-  const gridStart = new Date(start.getTime() + 864e5);   // jour 1 = lendemain du départ
-  const books = BIBLE.entries.reduce((n, [name]) => n + (BIBLE.grouped[name] || 1), 0);
-  return {
-    start, end, gridStart, byDay,
-    total: Math.round((end - start) / 864e5),
-    entries: BIBLE.entries.length,
-    books,
-    activeDays: byDay.size,
-    longest
-  };
-}
 
 function renderBible() {
-  const gridHost = document.getElementById('bible-grid');
-  if (!gridHost) return;
-  const st = bibleStats();
-
-  /* Les chiffres annoncés sont calculés, jamais écrits en dur. */
-  const facts = document.getElementById('bible-facts');
-  if (facts) facts.innerHTML = [
-    [st.books, 'livres, du premier au dernier'],
-    [st.longest.gap, 'jours sans en terminer un, ma plus longue pause']
-  ].map(([n, label]) => '<li><b>' + n + '</b> ' + esc(label) + '</li>').join('');
-
-  /* Une phrase de lecture, pas une légende d'encodage. */
-  const cap = document.getElementById('bible-cap');
-  if (cap) cap.textContent = 'Chaque carré est un jour, de février à juin. Sur '
-    + st.total + ' jours, ' + st.activeDays + ' seulement portent un livre terminé. '
-    + 'On voit la longue traînée pâle de fin mars à mi-avril — presque trois '
-    + 'semaines sans rien finir — et les deux grappes sombres de mai et de juin.';
-
-  /* Trame : une ligne par mois, une colonne par quantième. */
-  const rows = [];
-  const cur = new Date(Date.UTC(st.gridStart.getUTCFullYear(), st.gridStart.getUTCMonth(), 1));
-  while (cur <= st.end) {
-    const y = cur.getUTCFullYear(), m = cur.getUTCMonth();
-    const len = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
-    let cells = '';
-    for (let day = 1; day <= 31; day++) {
-      if (day > len) { cells += '<i class="bcell void"></i>'; continue; }
-      const d = new Date(Date.UTC(y, m, day));
-      if (d < st.gridStart || d > st.end) { cells += '<i class="bcell out"></i>'; continue; }
-      const key = dayKey(d);
-      const inGap = st.longest.from && key > st.longest.from && key < st.longest.to;
-      const books = st.byDay.get(key) || [];
-      const lvl = books.length === 0 ? 0 : books.length === 1 ? 1 : books.length <= 3 ? 2 : 3;
-      const label = day + ' ' + FR_MONTHS[m] + ' — ' + (books.length
-        ? books.join(', ')
-        : 'rien d’achevé');
-      cells += '<i class="bcell l' + lvl + (inGap ? ' gap' : '')
-        + '" title="' + esc(label) + '"></i>';
-    }
-    rows.push('<div class="brow"><span class="bmonth">' + FR_MONTHS[m]
-      + '</span><div class="bdays">' + cells + '</div></div>');
-    cur.setUTCMonth(m + 1);
-  }
-  gridHost.innerHTML = rows.join('');
-
   /* Carnet complet, par ordre chronologique. */
   const log = document.getElementById('bible-log');
   if (!log) return;
@@ -727,7 +654,7 @@ function renderBible() {
     groups.get(key).push([name, d]);
   });
   const row = ([name, d]) => '<div class="blogrow"><span>' + esc(name) + '</span><span>'
-    + (d ? Number(d.slice(8)) + ' ' + FR_MONTHS[Number(d.slice(5, 7)) - 1] : 'date non carnete')
+    + (d ? Number(d.slice(8)) + ' ' + FR_MONTHS[Number(d.slice(5, 7)) - 1] : '—')
     + '</span></div>';
   log.innerHTML =
       (undated.length ? '<div class="blogmonth"><h4>Sans date <span>1</span></h4>'
