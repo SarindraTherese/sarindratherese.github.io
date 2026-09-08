@@ -68,9 +68,9 @@ const AVAILABILITY_COPY = {
    `note`, `image` et `url` peuvent manquer : la carte s'adapte.
    ════════════════════════════════════════════════════════════ */
 const DISCOVERIES = [
-  { name: 'Kindle', kind: 'Liseuse', note: '' },
-  { name: 'Vanow', kind: 'Mug', note: '' },
-  { name: 'Bablov', kind: 'Tumbler', note: '' },
+  { name: 'Kindle', kind: 'Liseuse', note: '', image: 'kindle.jpg' },
+  { name: 'Vanow', kind: 'Mug isotherme', note: '', image: 'vanow.jpg' },
+  { name: 'Bablov', kind: 'Tumbler', note: '', image: 'bablov.jpg' },
 ];
 
 
