@@ -1827,7 +1827,9 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Photos de produit, souvent carrées et détourées : on montre l'objet
    entier plutôt que de le recadrer. D'où `contain` et non `cover`. */
 .find-shot {
-  aspect-ratio: 4 / 3;
+  /* Cadre carré : il accueille aussi bien un objet haut et étroit
+     qu'un objet large, sans qu'aucun n'apparaisse minuscule. */
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
