@@ -44,55 +44,55 @@ const AVAILABILITY_COPY = {
    Aucun HTML à toucher. Les entrées s'affichent dans l'ordre
    du tableau — mets la plus récente en premier.
 
-   READINGS — un livre, et ce que tu en retiens.
-   Les livres se regroupent tout seuls par année, la plus récente
-   en haut. Une entrée sans `year` part dans « En cours de lecture ».
-     { year: 2023,
-       title: '...', author: '...', kind: 'Livre',   // Livre | Essai | Article
-       note: 'Ce que j\'en retiens, en une phrase ou deux.',
-       url: 'https://...' }        // facultatif
+   READINGS — un livre lu, une ligne.
+   L'année range le livre sur la bonne étagère (#lectures-2023).
+     { year: 2023, title: '…', author: '…', cover: 'le-petit-prince.jpg' }
 
-   ⚠ Tant que ce tableau est vide, chaque année affiche un état
-   d'attente. Ajoute au moins un livre avant de publier.
+   La couverture se cherche dans assets/img/livres/<année>/<cover>.
+   Le fichier peut ne pas exister : la carte affiche alors son titre
+   en tranche typographique. Poser l'image au bon nom suffit à la
+   faire apparaître — il n'y a rien à changer ici.
+
+   `author` est facultatif : mieux vaut pas d'auteur qu'un faux.
    ════════════════════════════════════════════════════════════ */
 const READINGS = [
   { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'le-guide-du-lightworker.jpg' },
-  { year: 2022, title: 'Penser comme un millionnaire' },
-  { year: 2022, title: 'Apprendre à gérer son argent' },
-  { year: 2022, title: 'L\'art de la confiance en soi' },
-  { year: 2022, title: 'La clé de votre énergie', author: 'Natacha Calestrémé' },
-  { year: 2022, title: 'Le guide détendu des émotions au travail' },
-  { year: 2022, title: 'L\'obstacle est le chemin', author: 'Ryan Holiday' },
-  { year: 2022, title: 'Père riche, père pauvre', author: 'Robert Kiyosaki' },
+  { year: 2022, title: 'Penser comme un millionnaire', cover: 'penser-comme-un-millionnaire.jpg' },
+  { year: 2022, title: 'Apprendre à gérer son argent', cover: 'apprendre-a-gerer-son-argent.jpg' },
+  { year: 2022, title: 'L\'art de la confiance en soi', cover: 'l-art-de-la-confiance-en-soi.jpg' },
+  { year: 2022, title: 'La clé de votre énergie', author: 'Natacha Calestrémé', cover: 'la-cle-de-votre-energie.jpg' },
+  { year: 2022, title: 'Le guide détendu des émotions au travail', cover: 'le-guide-detendu-des-emotions-au-travail.jpg' },
+  { year: 2022, title: 'L\'obstacle est le chemin', author: 'Ryan Holiday', cover: 'l-obstacle-est-le-chemin.jpg' },
+  { year: 2022, title: 'Père riche, père pauvre', author: 'Robert Kiyosaki', cover: 'pere-riche-pere-pauvre.jpg' },
   { year: 2022, title: 'La magie du rangement illustrée', author: 'Marie Kondo', cover: 'la-magie-du-rangement-illustree.jpg' },
   { year: 2022, title: 'The Personal MBA', author: 'Josh Kaufman', cover: 'the-personal-mba.jpg' },
-  { year: 2022, title: 'Trouver ma place' },
-  { year: 2022, title: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une', author: 'Raphaëlle Giordano' },
+  { year: 2022, title: 'Trouver ma place', cover: 'trouver-ma-place.jpg' },
+  { year: 2022, title: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une', author: 'Raphaëlle Giordano', cover: 'ta-deuxieme-vie-commence-quand-tu-comprends-que-.jpg' },
   { year: 2022, title: 'Le miracle de la pleine conscience', author: 'Thich Nhat Hanh', cover: 'le-miracle-de-la-pleine-conscience.jpg' },
   { year: 2022, title: 'L\'homme qui voulait être heureux', author: 'Laurent Gounelle', cover: 'l-homme-qui-voulait-etre-heureux.jpg' },
-  { year: 2022, title: 'Le pouvoir du moment présent', author: 'Eckhart Tolle' },
-  { year: 2022, title: 'La Puissance de l\'acceptation' },
+  { year: 2022, title: 'Le pouvoir du moment présent', author: 'Eckhart Tolle', cover: 'le-pouvoir-du-moment-present.jpg' },
+  { year: 2022, title: 'La Puissance de l\'acceptation', cover: 'la-puissance-de-l-acceptation.jpg' },
   { year: 2022, title: 'L\'Alchimiste', author: 'Paulo Coelho', cover: 'l-alchimiste.jpg' },
   { year: 2022, title: 'Les mots sont des fenêtres', author: 'Marshall Rosenberg', cover: 'les-mots-sont-des-fenetres.jpg' },
-  { year: 2022, title: 'Les 5 blessures', author: 'Lise Bourbeau' },
-  { year: 2022, title: 'Progressez à pas de géant', author: 'Anthony Robbins' },
-  { year: 2022, title: 'Miracle Morning', author: 'Hal Elrod' },
-  { year: 2022, title: 'Qui es-tu ?' },
+  { year: 2022, title: 'Les 5 blessures', author: 'Lise Bourbeau', cover: 'les-5-blessures.jpg' },
+  { year: 2022, title: 'Progressez à pas de géant', author: 'Anthony Robbins', cover: 'progressez-a-pas-de-geant.jpg' },
+  { year: 2022, title: 'Miracle Morning', author: 'Hal Elrod', cover: 'miracle-morning.jpg' },
+  { year: 2022, title: 'Qui es-tu ?', cover: 'qui-es-tu.jpg' },
   { year: 2022, title: 'Devenir super-conscient', author: 'Joe Dispenza', cover: 'devenir-super-conscient.jpg' },
   { year: 2022, title: 'Kilomètre zéro', author: 'Maud Ankaoua', cover: 'kilometre-zero.jpg' },
-  { year: 2022, title: 'Communiquer et guérir avec les anges' },
-  { year: 2022, title: 'Révélez la sorcière qui dort en vous' },
+  { year: 2022, title: 'Communiquer et guérir avec les anges', cover: 'communiquer-et-guerir-avec-les-anges.jpg' },
+  { year: 2022, title: 'Révélez la sorcière qui dort en vous', cover: 'revelez-la-sorciere-qui-dort-en-vous.jpg' },
   { year: 2022, title: 'Le livre des esprits', author: 'Allan Kardec', cover: 'le-livre-des-esprits.jpg' },
-  { year: 2022, title: 'La prophétie des Andes', author: 'James Redfield' },
-  { year: 2022, title: 'Écoute ton corps', author: 'Lise Bourbeau' },
-  { year: 2022, title: 'Réfléchissez et devenez riche', author: 'Napoleon Hill' },
-  { year: 2022, title: 'Les quatre accords toltèques', author: 'Don Miguel Ruiz' },
-  { year: 2022, title: 'Prendre soin de l\'enfant intérieur', author: 'Thich Nhat Hanh' },
+  { year: 2022, title: 'La prophétie des Andes', author: 'James Redfield', cover: 'la-prophetie-des-andes.jpg' },
+  { year: 2022, title: 'Écoute ton corps', author: 'Lise Bourbeau', cover: 'ecoute-ton-corps.jpg' },
+  { year: 2022, title: 'Réfléchissez et devenez riche', author: 'Napoleon Hill', cover: 'reflechissez-et-devenez-riche.jpg' },
+  { year: 2022, title: 'Les quatre accords toltèques', author: 'Don Miguel Ruiz', cover: 'les-quatre-accords-tolteques.jpg' },
+  { year: 2022, title: 'Prendre soin de l\'enfant intérieur', author: 'Thich Nhat Hanh', cover: 'prendre-soin-de-l-enfant-interieur.jpg' },
   { year: 2022, title: 'À la croisée des mondes', author: 'Philip Pullman', cover: 'a-la-croisee-des-mondes.jpg' },
-  { year: 2023, title: 'La Wicca', author: 'Scott Cunningham' },
-  { year: 2023, title: 'Trois minutes à méditer', author: 'Christophe André' },
+  { year: 2023, title: 'La Wicca', author: 'Scott Cunningham', cover: 'la-wicca.jpg' },
+  { year: 2023, title: 'Trois minutes à méditer', author: 'Christophe André', cover: 'trois-minutes-a-mediter.jpg' },
   { year: 2023, title: 'Le Petit Prince', author: 'Antoine de Saint-Exupéry', cover: 'le-petit-prince.jpg' },
-  { year: 2023, title: 'Devenir', author: 'Michelle Obama' },
+  { year: 2023, title: 'Devenir', author: 'Michelle Obama', cover: 'devenir.jpg' },
   { year: 2023, title: 'Le charme discret de l\'intestin', author: 'Giulia Enders', cover: 'le-charme-discret-de-l-intestin.jpg' },
   { year: 2023, title: 'Transformez votre vie', author: 'Louise Hay', cover: 'transformez-votre-vie.jpg' },
   { year: 2023, title: 'Deep Work', author: 'Cal Newport', cover: 'deep-work.jpg' },
@@ -100,36 +100,36 @@ const READINGS = [
   { year: 2023, title: 'Oser', author: 'Frédéric Fanget', cover: 'oser.jpg' },
   { year: 2023, title: 'S\'ouvrir à l\'amour et au bonheur', author: 'Don Miguel Ruiz', cover: 's-ouvrir-a-l-amour-et-au-bonheur.jpg' },
   { year: 2023, title: 'Orgueil et préjugés', author: 'Jane Austen', cover: 'orgueil-et-prejuges.jpg' },
-  { year: 2023, title: 'Et si c\'était vrai', author: 'Marc Levy' },
+  { year: 2023, title: 'Et si c\'était vrai', author: 'Marc Levy', cover: 'et-si-c-etait-vrai.jpg' },
   { year: 2023, title: 'Conversations avec Dieu tome 1', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-1.jpg' },
   { year: 2023, title: 'La confiance en soi une philosophie', author: 'Charles Pépin', cover: 'la-confiance-en-soi-une-philosophie.jpg' },
   { year: 2023, title: 'Le jour où j\'ai appris à vivre', author: 'Laurent Gounelle', cover: 'le-jour-ou-j-ai-appris-a-vivre.jpg' },
   { year: 2023, title: 'Techniques de visualisation créatrice', author: 'Shakti Gawain', cover: 'techniques-de-visualisation-creatrice.jpg' },
   { year: 2023, title: 'Da Vinci Code', author: 'Dan Brown', cover: 'da-vinci-code.jpg' },
   { year: 2023, title: 'L\'Étranger', author: 'Albert Camus', cover: 'l-etranger.jpg' },
-  { year: 2023, title: 'Plus jamais', author: 'Colleen Hoover' },
+  { year: 2023, title: 'Plus jamais', author: 'Colleen Hoover', cover: 'plus-jamais.jpg' },
   { year: 2023, title: 'Petit traité de vie intérieure', author: 'Frédéric Lenoir', cover: 'petit-traite-de-vie-interieure.jpg' },
-  { year: 2023, title: 'Testament des abeilles', author: 'Natacha Calestrémé' },
+  { year: 2023, title: 'Testament des abeilles', author: 'Natacha Calestrémé', cover: 'testament-des-abeilles.jpg' },
   { year: 2023, title: 'Le livre des coïncidences', author: 'Deepak Chopra', cover: 'le-livre-des-coincidences.jpg' },
   { year: 2023, title: 'Conversations avec Dieu tome 2', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-2.jpg' },
-  { year: 2023, title: 'Nos étoiles contraires', author: 'John Green' },
+  { year: 2023, title: 'Nos étoiles contraires', author: 'John Green', cover: 'nos-etoiles-contraires.jpg' },
   { year: 2023, title: 'Il est grand temps de rallumer les étoiles', author: 'Virginie Grimaldi', cover: 'il-est-grand-temps-de-rallumer-les-etoiles.jpg' },
   { year: 2023, title: 'Onze minutes', author: 'Paulo Coelho', cover: 'onze-minutes.jpg' },
   { year: 2023, title: 'Tremblez mais osez', author: 'Susan Jeffers', cover: 'tremblez-mais-osez.jpg' },
-  { year: 2023, title: 'La loi de l\'attraction' },
+  { year: 2023, title: 'La loi de l\'attraction', cover: 'la-loi-de-l-attraction.jpg' },
   { year: 2023, title: 'L\'estime de soi', author: 'Christophe André et François Lelord', cover: 'l-estime-de-soi.jpg' },
-  { year: 2023, title: 'N\'ayez pas peur de la vie' },
+  { year: 2023, title: 'N\'ayez pas peur de la vie', cover: 'n-ayez-pas-peur-de-la-vie.jpg' },
   { year: 2023, title: 'Steve Jobs', author: 'Walter Isaacson', cover: 'steve-jobs.jpg' },
   { year: 2023, title: 'Méditer jour après jour', author: 'Christophe André', cover: 'mediter-jour-apres-jour.jpg' },
-  { year: 2023, title: 'La femme parfaite est une connasse', author: 'Anne-Sophie et Marie-Aldine Girard' },
+  { year: 2023, title: 'La femme parfaite est une connasse', author: 'Anne-Sophie et Marie-Aldine Girard', cover: 'la-femme-parfaite-est-une-connasse.jpg' },
   { year: 2023, title: 'Comment se faire des amis', author: 'Dale Carnegie', cover: 'comment-se-faire-des-amis.jpg' },
   { year: 2023, title: 'La formule de Dieu', author: 'José Rodrigues dos Santos', cover: 'la-formule-de-dieu.jpg' },
-  { year: 2023, title: 'La magie de la foi', author: 'Claude Bristol' },
-  { year: 2023, title: 'Qui a piqué mon fromage ?', author: 'Spencer Johnson' },
+  { year: 2023, title: 'La magie de la foi', author: 'Claude Bristol', cover: 'la-magie-de-la-foi.jpg' },
+  { year: 2023, title: 'Qui a piqué mon fromage ?', author: 'Spencer Johnson', cover: 'qui-a-pique-mon-fromage.jpg' },
   { year: 2023, title: 'La ferme des animaux', author: 'George Orwell', cover: 'la-ferme-des-animaux.jpg' },
-  { year: 2023, title: 'Harry Potter', author: 'J. K. Rowling' },
+  { year: 2023, title: 'Harry Potter', author: 'J. K. Rowling', cover: 'harry-potter.jpg' },
   { year: 2023, title: 'Imparfaits, libres et heureux', author: 'Christophe André', cover: 'imparfaits-libres-et-heureux.jpg' },
-  { year: 2023, title: 'La Vie !', author: 'Louise Hay' },
+  { year: 2023, title: 'La Vie !', author: 'Louise Hay', cover: 'la-vie.jpg' },
   { year: 2023, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'la-magie-de-voir-grand.jpg' },
 ];
 
@@ -360,18 +360,29 @@ function emptyState(icon, title, text) {
 }
 
 
+/* Une couverture se dépose dans assets/img/livres/<année>/<cover>.
+   Rien d'autre à faire : si le fichier est là, il s'affiche ; s'il
+   n'est pas là, la carte retombe sur sa tranche typographique, où le
+   titre tient lieu de couverture et n'est donc plus répété dessous. */
 function bookCard(b) {
-  /* Sans couverture, le titre devient lui-même la couverture : une
-     tranche typographique. Il n'est alors pas répété en dessous. */
-  const blank = !b.cover;
-  const cover = blank
-    ? '<div class="book-cover is-blank"><span>' + esc(b.title) + '</span></div>'
-    : '<div class="book-cover"><img src="assets/img/livres/' + esc(b.cover)
-      + '" alt="Couverture de ' + esc(b.title) + '" loading="lazy"></div>';
-  return '<article class="book">' + cover
-    + (blank ? '' : '<p class="book-title">' + esc(b.title) + '</p>')
+  const src = 'assets/img/livres/' + b.year + '/' + esc(b.cover);
+  return '<article class="book">'
+    + '<div class="book-cover"><span>' + esc(b.title) + '</span>'
+    + '<img src="' + src + '" alt="Couverture de ' + esc(b.title)
+    + '" loading="lazy" onerror="bookNoCover(this)"></div>'
+    + '<p class="book-title">' + esc(b.title) + '</p>'
     + (b.author ? '<p class="book-author">' + esc(b.author) + '</p>' : '')
     + '</article>';
+}
+
+/* Image absente : on découvre la tranche et on retire le titre en
+   double. Appelé par l'attribut onerror, donc global. */
+function bookNoCover(img) {
+  const box = img.parentNode;
+  box.classList.add('is-blank');
+  img.remove();
+  const dup = box.parentNode.querySelector('.book-title');
+  if (dup) dup.remove();
 }
 
 

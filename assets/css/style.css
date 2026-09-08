@@ -1699,6 +1699,10 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 .book:hover .book-cover { transform: translateY(-3px); }
 .book-cover img { width: 100%; height: 100%; object-fit: cover; }
+/* La tranche attend derrière l'image : elle n'apparaît que si le
+   fichier manque (voir bookNoCover). */
+.book-cover > span { display: none; }
+.book-cover.is-blank > span { display: block; }
 
 /* Sans couverture : une tranche typographique, pas un trou */
 .book-cover.is-blank {
