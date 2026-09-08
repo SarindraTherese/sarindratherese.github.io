@@ -56,6 +56,7 @@ const AVAILABILITY_COPY = {
    `author` est facultatif : mieux vaut pas d'auteur qu'un faux.
    ════════════════════════════════════════════════════════════ */
 const READINGS = [
+  /* ── 2022 ── */
   { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'le-guide-du-lightworker.jpg' },
   { year: 2022, title: 'Penser comme un millionnaire', cover: 'penser-comme-un-millionnaire.jpg' },
   { year: 2022, title: 'Apprendre à gérer son argent', cover: 'apprendre-a-gerer-son-argent.jpg' },
@@ -67,11 +68,11 @@ const READINGS = [
   { year: 2022, title: 'La magie du rangement illustrée', author: 'Marie Kondo', cover: 'la-magie-du-rangement-illustree.jpg' },
   { year: 2022, title: 'The Personal MBA', author: 'Josh Kaufman', cover: 'the-personal-mba.jpg' },
   { year: 2022, title: 'Trouver ma place', cover: 'trouver-ma-place.jpg' },
-  { year: 2022, title: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une', author: 'Raphaëlle Giordano', cover: 'ta-deuxieme-vie-commence-quand-tu-comprends-que-.jpg' },
+  { year: 2022, title: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une', author: 'Raphaëlle Giordano', cover: 'ta-deuxieme-vie-commence-quand-tu-comprends-que-tu-n.jpg' },
   { year: 2022, title: 'Le miracle de la pleine conscience', author: 'Thich Nhat Hanh', cover: 'le-miracle-de-la-pleine-conscience.jpg' },
   { year: 2022, title: 'L\'homme qui voulait être heureux', author: 'Laurent Gounelle', cover: 'l-homme-qui-voulait-etre-heureux.jpg' },
   { year: 2022, title: 'Le pouvoir du moment présent', author: 'Eckhart Tolle', cover: 'le-pouvoir-du-moment-present.jpg' },
-  { year: 2022, title: 'La Puissance de l\'acceptation', cover: 'la-puissance-de-l-acceptation.jpg' },
+  { year: 2022, title: 'La puissance de l\'acceptation', cover: 'la-puissance-de-l-acceptation.jpg' },
   { year: 2022, title: 'L\'Alchimiste', author: 'Paulo Coelho', cover: 'l-alchimiste.jpg' },
   { year: 2022, title: 'Les mots sont des fenêtres', author: 'Marshall Rosenberg', cover: 'les-mots-sont-des-fenetres.jpg' },
   { year: 2022, title: 'Les 5 blessures', author: 'Lise Bourbeau', cover: 'les-5-blessures.jpg' },
@@ -89,6 +90,7 @@ const READINGS = [
   { year: 2022, title: 'Les quatre accords toltèques', author: 'Don Miguel Ruiz', cover: 'les-quatre-accords-tolteques.jpg' },
   { year: 2022, title: 'Prendre soin de l\'enfant intérieur', author: 'Thich Nhat Hanh', cover: 'prendre-soin-de-l-enfant-interieur.jpg' },
   { year: 2022, title: 'À la croisée des mondes', author: 'Philip Pullman', cover: 'a-la-croisee-des-mondes.jpg' },
+  /* ── 2023 ── */
   { year: 2023, title: 'La Wicca', author: 'Scott Cunningham', cover: 'la-wicca.jpg' },
   { year: 2023, title: 'Trois minutes à méditer', author: 'Christophe André', cover: 'trois-minutes-a-mediter.jpg' },
   { year: 2023, title: 'Le Petit Prince', author: 'Antoine de Saint-Exupéry', cover: 'le-petit-prince.jpg' },
@@ -101,8 +103,8 @@ const READINGS = [
   { year: 2023, title: 'S\'ouvrir à l\'amour et au bonheur', author: 'Don Miguel Ruiz', cover: 's-ouvrir-a-l-amour-et-au-bonheur.jpg' },
   { year: 2023, title: 'Orgueil et préjugés', author: 'Jane Austen', cover: 'orgueil-et-prejuges.jpg' },
   { year: 2023, title: 'Et si c\'était vrai', author: 'Marc Levy', cover: 'et-si-c-etait-vrai.jpg' },
-  { year: 2023, title: 'Conversations avec Dieu tome 1', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-1.jpg' },
-  { year: 2023, title: 'La confiance en soi une philosophie', author: 'Charles Pépin', cover: 'la-confiance-en-soi-une-philosophie.jpg' },
+  { year: 2023, title: 'Conversations avec Dieu, tome 1', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-1.jpg' },
+  { year: 2023, title: 'La confiance en soi, une philosophie', author: 'Charles Pépin', cover: 'la-confiance-en-soi-une-philosophie.jpg' },
   { year: 2023, title: 'Le jour où j\'ai appris à vivre', author: 'Laurent Gounelle', cover: 'le-jour-ou-j-ai-appris-a-vivre.jpg' },
   { year: 2023, title: 'Techniques de visualisation créatrice', author: 'Shakti Gawain', cover: 'techniques-de-visualisation-creatrice.jpg' },
   { year: 2023, title: 'Da Vinci Code', author: 'Dan Brown', cover: 'da-vinci-code.jpg' },
@@ -111,26 +113,173 @@ const READINGS = [
   { year: 2023, title: 'Petit traité de vie intérieure', author: 'Frédéric Lenoir', cover: 'petit-traite-de-vie-interieure.jpg' },
   { year: 2023, title: 'Testament des abeilles', author: 'Natacha Calestrémé', cover: 'testament-des-abeilles.jpg' },
   { year: 2023, title: 'Le livre des coïncidences', author: 'Deepak Chopra', cover: 'le-livre-des-coincidences.jpg' },
-  { year: 2023, title: 'Conversations avec Dieu tome 2', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-2.jpg' },
+  { year: 2023, title: 'Conversations avec Dieu, tome 2', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-2.jpg' },
   { year: 2023, title: 'Nos étoiles contraires', author: 'John Green', cover: 'nos-etoiles-contraires.jpg' },
   { year: 2023, title: 'Il est grand temps de rallumer les étoiles', author: 'Virginie Grimaldi', cover: 'il-est-grand-temps-de-rallumer-les-etoiles.jpg' },
   { year: 2023, title: 'Onze minutes', author: 'Paulo Coelho', cover: 'onze-minutes.jpg' },
   { year: 2023, title: 'Tremblez mais osez', author: 'Susan Jeffers', cover: 'tremblez-mais-osez.jpg' },
-  { year: 2023, title: 'La loi de l\'attraction', cover: 'la-loi-de-l-attraction.jpg' },
+  { year: 2023, title: 'La loi de l\'attraction', author: 'Michael Losier', cover: 'la-loi-de-l-attraction.jpg' },
   { year: 2023, title: 'L\'estime de soi', author: 'Christophe André et François Lelord', cover: 'l-estime-de-soi.jpg' },
   { year: 2023, title: 'N\'ayez pas peur de la vie', cover: 'n-ayez-pas-peur-de-la-vie.jpg' },
   { year: 2023, title: 'Steve Jobs', author: 'Walter Isaacson', cover: 'steve-jobs.jpg' },
-  { year: 2023, title: 'Méditer jour après jour', author: 'Christophe André', cover: 'mediter-jour-apres-jour.jpg' },
+  { year: 2023, title: 'Méditer, jour après jour', author: 'Christophe André', cover: 'mediter-jour-apres-jour.jpg' },
   { year: 2023, title: 'La femme parfaite est une connasse', author: 'Anne-Sophie et Marie-Aldine Girard', cover: 'la-femme-parfaite-est-une-connasse.jpg' },
   { year: 2023, title: 'Comment se faire des amis', author: 'Dale Carnegie', cover: 'comment-se-faire-des-amis.jpg' },
   { year: 2023, title: 'La formule de Dieu', author: 'José Rodrigues dos Santos', cover: 'la-formule-de-dieu.jpg' },
   { year: 2023, title: 'La magie de la foi', author: 'Claude Bristol', cover: 'la-magie-de-la-foi.jpg' },
   { year: 2023, title: 'Qui a piqué mon fromage ?', author: 'Spencer Johnson', cover: 'qui-a-pique-mon-fromage.jpg' },
   { year: 2023, title: 'La ferme des animaux', author: 'George Orwell', cover: 'la-ferme-des-animaux.jpg' },
-  { year: 2023, title: 'Harry Potter', author: 'J. K. Rowling', cover: 'harry-potter.jpg' },
+  { year: 2023, title: 'Harry Potter, tomes 1 et 2', author: 'J. K. Rowling', cover: 'harry-potter-tomes-1-et-2.jpg', count: 2 },
   { year: 2023, title: 'Imparfaits, libres et heureux', author: 'Christophe André', cover: 'imparfaits-libres-et-heureux.jpg' },
-  { year: 2023, title: 'La Vie !', author: 'Louise Hay', cover: 'la-vie.jpg' },
+  { year: 2023, title: 'La vie !', author: 'Louise Hay', cover: 'la-vie.jpg' },
   { year: 2023, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'la-magie-de-voir-grand.jpg' },
+  /* ── 2024 ── */
+  { year: 2024, title: 'Quand on veut, on peut !', cover: 'quand-on-veut-on-peut.jpg' },
+  { year: 2024, title: 'Je pense trop', author: 'Christel Petitcollin', cover: 'je-pense-trop.jpg' },
+  { year: 2024, title: 'Il y a quelqu\'un dans la maison', author: 'Stephanie Perkins', cover: 'il-y-a-quelqu-un-dans-la-maison.jpg' },
+  { year: 2024, title: 'La tresse', author: 'Laetitia Colombani', cover: 'la-tresse.jpg' },
+  { year: 2024, title: 'Les impatientes', author: 'Djaïli Amadou Amal', cover: 'les-impatientes.jpg' },
+  { year: 2024, title: 'Plus rien ne pourra me blesser', author: 'David Goggins', cover: 'plus-rien-ne-pourra-me-blesser.jpg' },
+  { year: 2024, title: 'Numéro deux', author: 'David Foenkinos', cover: 'numero-deux.jpg' },
+  { year: 2024, title: 'Harry Potter, tomes 3 et 4', author: 'J. K. Rowling', cover: 'harry-potter-tomes-3-et-4.jpg', count: 2 },
+  { year: 2024, title: 'Les hauts de Hurlevent', author: 'Emily Brontë', cover: 'les-hauts-de-hurlevent.jpg' },
+  { year: 2024, title: 'Psychologie de la peur', author: 'Christophe André', cover: 'psychologie-de-la-peur.jpg' },
+  { year: 2024, title: 'Je revenais des autres', author: 'Mélissa Da Costa', cover: 'je-revenais-des-autres.jpg' },
+  { year: 2024, title: 'Le cinquième accord toltèque', author: 'Don Miguel Ruiz', cover: 'le-cinquieme-accord-tolteque.jpg' },
+  { year: 2024, title: 'The Subtle Art of Not Giving a F*ck', author: 'Mark Manson', cover: 'the-subtle-art-of-not-giving-a-f-ck.jpg' },
+  { year: 2024, title: 'Antigone', cover: 'antigone.jpg' },
+  { year: 2024, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'la-magie-de-voir-grand.jpg' },
+  { year: 2024, title: 'Conversations avec Dieu, tome 1', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-1.jpg' },
+  { year: 2024, title: 'Juste avant le bonheur', author: 'Agnès Ledig', cover: 'juste-avant-le-bonheur.jpg' },
+  { year: 2024, title: 'Des fleurs pour Algernon', author: 'Daniel Keyes', cover: 'des-fleurs-pour-algernon.jpg' },
+  { year: 2024, title: 'L\'art d\'avoir toujours raison', author: 'Arthur Schopenhauer', cover: 'l-art-d-avoir-toujours-raison.jpg' },
+  { year: 2024, title: 'La délicatesse', author: 'David Foenkinos', cover: 'la-delicatesse.jpg' },
+  { year: 2024, title: 'The 5 Love Languages', author: 'Gary Chapman', cover: 'the-5-love-languages.jpg' },
+  { year: 2024, title: 'L\'art de la simplicité', author: 'Dominique Loreau', cover: 'l-art-de-la-simplicite.jpg' },
+  { year: 2024, title: 'Harry Potter, tomes 5 à 7', author: 'J. K. Rowling', cover: 'harry-potter-tomes-5-a-7.jpg', count: 3 },
+  { year: 2024, title: 'Toujours plus, + = +', author: 'Léna Situations', cover: 'toujours-plus.jpg' },
+  { year: 2024, title: 'Les douleurs fantômes', author: 'Mélissa Da Costa', cover: 'les-douleurs-fantomes.jpg' },
+  { year: 2024, title: 'Votre temps est infini', author: 'Fabien Olicard', cover: 'votre-temps-est-infini.jpg' },
+  { year: 2024, title: 'Tu comprendras quand tu seras plus grande', author: 'Virginie Grimaldi', cover: 'tu-comprendras-quand-tu-seras-plus-grande.jpg' },
+  { year: 2024, title: 'À tout jamais', author: 'Colleen Hoover', cover: 'a-tout-jamais.jpg' },
+  { year: 2024, title: 'Le premier jour du reste de ma vie', author: 'Virginie Grimaldi', cover: 'le-premier-jour-du-reste-de-ma-vie.jpg' },
+  { year: 2024, title: 'Origine', author: 'Dan Brown', cover: 'origine.jpg' },
+  { year: 2024, title: 'Les choses humaines', author: 'Karine Tuil', cover: 'les-choses-humaines.jpg' },
+  { year: 2024, title: 'L\'éveil de votre puissance intérieure', author: 'Anthony Robbins', cover: 'l-eveil-de-votre-puissance-interieure.jpg' },
+  { year: 2024, title: 'Bilbo le Hobbit', author: 'J. R. R. Tolkien', cover: 'bilbo-le-hobbit.jpg' },
+  { year: 2024, title: 'Demandez et vous recevrez', author: 'Pierre Morency', cover: 'demandez-et-vous-recevrez.jpg' },
+  { year: 2024, title: 'Les frères Karamazov', author: 'Fiodor Dostoïevski', cover: 'les-freres-karamazov.jpg' },
+  { year: 2024, title: 'Ne coupez jamais la poire en deux', author: 'Chris Voss', cover: 'ne-coupez-jamais-la-poire-en-deux.jpg' },
+  { year: 2024, title: 'Et n\'oublie pas d\'être heureux', author: 'Christophe André', cover: 'et-n-oublie-pas-d-etre-heureux.jpg' },
+  { year: 2024, title: 'Influence et manipulation', author: 'Robert Cialdini', cover: 'influence-et-manipulation.jpg' },
+  { year: 2024, title: 'Le prophète', author: 'Khalil Gibran', cover: 'le-prophete.jpg' },
+  { year: 2024, title: 'Harry Potter et l\'enfant maudit', author: 'J. K. Rowling', cover: 'harry-potter-et-l-enfant-maudit.jpg' },
+  { year: 2024, title: 'Lettres à un jeune poète', author: 'Rainer Maria Rilke', cover: 'lettres-a-un-jeune-poete.jpg' },
+  { year: 2024, title: 'Ainsi gèlent les bulles de savon', author: 'Mélissa Da Costa', cover: 'ainsi-gelent-les-bulles-de-savon.jpg' },
+  { year: 2024, title: 'La nuit des temps', author: 'René Barjavel', cover: 'la-nuit-des-temps.jpg' },
+  { year: 2024, title: 'Attendez-vous à un miracle', cover: 'attendez-vous-a-un-miracle.jpg' },
+  { year: 2024, title: 'Tout le bleu du ciel', author: 'Mélissa Da Costa', cover: 'tout-le-bleu-du-ciel.jpg' },
+  { year: 2024, title: 'Kama Sutra', cover: 'kama-sutra.jpg' },
+  { year: 2024, title: 'November 9', author: 'Colleen Hoover', cover: 'november-9.jpg' },
+  { year: 2024, title: 'Le seigneur des anneaux, tomes 1 à 3', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tomes-1-a-3.jpg', count: 3 },
+  { year: 2024, title: 'Écoute ton corps', author: 'Lise Bourbeau', cover: 'ecoute-ton-corps.jpg' },
+  { year: 2024, title: 'Cessez d\'être gentil, soyez vrai !', author: 'Thomas d\'Ansembourg', cover: 'cessez-d-etre-gentil-soyez-vrai.jpg' },
+  { year: 2024, title: 'Libérez votre cerveau', author: 'Idriss Aberkane', cover: 'liberez-votre-cerveau.jpg' },
+  { year: 2024, title: 'Le pouvoir insoupçonné de tes blessures et de tes blocages', cover: 'le-pouvoir-insoupconne-de-tes-blessures-et-de-tes-bl.jpg' },
+  { year: 2024, title: 'Plus malin que le diable', author: 'Napoleon Hill', cover: 'plus-malin-que-le-diable.jpg' },
+  { year: 2024, title: 'Désenchantées', author: 'Marie Vareille', cover: 'desenchantees.jpg' },
+  /* ── 2025 ── */
+  { year: 2025, title: 'Affirmez-vous', author: 'Frédéric Fanget', cover: 'affirmez-vous.jpg' },
+  { year: 2025, title: 'Le journal d\'Anne Frank', author: 'Anne Frank', cover: 'le-journal-d-anne-frank.jpg' },
+  { year: 2025, title: 'Respire', cover: 'respire.jpg' },
+  { year: 2025, title: 'Les délices de Tokyo', author: 'Durian Sukegawa', cover: 'les-delices-de-tokyo.jpg' },
+  { year: 2025, title: 'Ainsi parlait Zarathoustra', author: 'Friedrich Nietzsche', cover: 'ainsi-parlait-zarathoustra.jpg' },
+  { year: 2025, title: 'Les sept maris d\'Evelyn Hugo', author: 'Taylor Jenkins Reid', cover: 'les-sept-maris-d-evelyn-hugo.jpg' },
+  { year: 2025, title: 'Le(s) vrai(es) amour(s)', cover: 'le-s-vrai-es-amour-s.jpg' },
+  { year: 2025, title: 'Les sirènes de Malibu', author: 'Taylor Jenkins Reid', cover: 'les-sirenes-de-malibu.jpg' },
+  { year: 2025, title: 'Ce que j\'aimerais te dire', author: 'Emeric Lebreton', cover: 'ce-que-j-aimerais-te-dire.jpg' },
+  { year: 2025, title: 'L\'intelligence émotionnelle, tome 1', author: 'Daniel Goleman', cover: 'l-intelligence-emotionnelle-tome-1.jpg' },
+  { year: 2025, title: 'La mort d\'Ivan Ilitch', author: 'Léon Tolstoï', cover: 'la-mort-d-ivan-ilitch.jpg' },
+  { year: 2025, title: 'La métamorphose', author: 'Franz Kafka', cover: 'la-metamorphose.jpg' },
+  { year: 2025, title: 'Sois heureux', author: 'Pape François', cover: 'sois-heureux.jpg' },
+  { year: 2025, title: 'La miséricorde', author: 'Pape François', cover: 'la-misericorde.jpg' },
+  { year: 2025, title: 'La force de la prière', author: 'Pape François', cover: 'la-force-de-la-priere.jpg' },
+  { year: 2025, title: 'La Bible', cover: 'la-bible.jpg', page: 'bible' },
+  { year: 2025, title: 'La joie de l\'Évangile', author: 'Pape François', cover: 'la-joie-de-l-evangile.jpg' },
+  { year: 2025, title: 'La peau de chagrin', author: 'Honoré de Balzac', cover: 'la-peau-de-chagrin.jpg' },
+  { year: 2025, title: 'La chambre de Giovanni', author: 'James Baldwin', cover: 'la-chambre-de-giovanni.jpg' },
+  { year: 2025, title: 'Le dernier jour d\'un condamné', author: 'Victor Hugo', cover: 'le-dernier-jour-d-un-condamne.jpg' },
+  { year: 2025, title: 'L\'éducation sentimentale', author: 'Gustave Flaubert', cover: 'l-education-sentimentale.jpg' },
+  { year: 2025, title: 'Ho\'oponopono', author: 'Maria-Elisa Hurtado-Graciet', cover: 'ho-oponopono.jpg' },
+  { year: 2025, title: 'Fahrenheit 451', author: 'Ray Bradbury', cover: 'fahrenheit-451.jpg' },
+  { year: 2025, title: 'Les lois de la nature humaine', author: 'Robert Greene', cover: 'les-lois-de-la-nature-humaine.jpg' },
+  { year: 2025, title: 'Vous êtes notre espoir pour demain', author: 'Pape François', cover: 'vous-etes-notre-espoir-pour-demain.jpg' },
+  { year: 2025, title: 'Pierre et Jean', author: 'Guy de Maupassant', cover: 'pierre-et-jean.jpg' },
+  { year: 2025, title: 'Un temps pour changer', author: 'Pape François', cover: 'un-temps-pour-changer.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 1', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-1.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 2', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-2.jpg' },
+  { year: 2025, title: 'En as-tu vraiment besoin ?', author: 'Pierre-Yves McSween', cover: 'en-as-tu-vraiment-besoin.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 3', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-3.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 4', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-4.jpg' },
+  { year: 2025, title: 'La vie', author: 'Pape François', cover: 'la-vie.jpg' },
+  { year: 2025, title: 'Histoire d\'une âme', author: 'Thérèse de Lisieux', cover: 'histoire-d-une-ame.jpg' },
+  { year: 2025, title: 'L\'imitation de Jésus-Christ', author: 'Thomas a Kempis', cover: 'l-imitation-de-jesus-christ.jpg' },
+  { year: 2025, title: 'Martin Eden', author: 'Jack London', cover: 'martin-eden.jpg' },
+  { year: 2025, title: 'Dieu est jeune', author: 'Pape François', cover: 'dieu-est-jeune.jpg' },
+  { year: 2025, title: 'L\'appel de la forêt', author: 'Jack London', cover: 'l-appel-de-la-foret.jpg' },
+  { year: 2025, title: 'La dame aux camélias', author: 'Alexandre Dumas fils', cover: 'la-dame-aux-camelias.jpg' },
+  { year: 2025, title: 'Prier le chapelet et aimer ça', cover: 'prier-le-chapelet-et-aimer-ca.jpg' },
+  { year: 2025, title: 'Commentaire de la Genèse', author: 'Jean Chrysostome', cover: 'commentaire-de-la-genese.jpg' },
+  { year: 2025, title: 'Le livre de la vie', author: 'Thérèse d\'Avila', cover: 'le-livre-de-la-vie.jpg' },
+  { year: 2025, title: '1984', author: 'George Orwell', cover: '1984.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 5', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-5.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 6', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-6.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 7', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-7.jpg' },
+  { year: 2025, title: 'The Midnight Library', author: 'Matt Haig', cover: 'the-midnight-library.jpg' },
+  { year: 2025, title: 'Diary of a Wimpy Kid, tome 1', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-1.jpg' },
+  { year: 2025, title: 'Greenlights', author: 'Matthew McConaughey', cover: 'greenlights.jpg' },
+  { year: 2025, title: 'Le livre de ma mère', author: 'Albert Cohen', cover: 'le-livre-de-ma-mere.jpg' },
+  { year: 2025, title: 'Tuesdays with Morrie', author: 'Mitch Albom', cover: 'tuesdays-with-morrie.jpg' },
+  { year: 2025, title: 'Diary of a Wimpy Kid, tome 2 : Rodrick Rules', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-2-rodrick-rules.jpg' },
+  { year: 2025, title: 'Thérèse Raquin', author: 'Émile Zola', cover: 'therese-raquin.jpg' },
+  { year: 2025, title: 'L\'homme le plus riche de Babylone', author: 'George S. Clason', cover: 'l-homme-le-plus-riche-de-babylone.jpg' },
+  { year: 2025, title: 'La pitié dangereuse', author: 'Stefan Zweig', cover: 'la-pitie-dangereuse.jpg' },
+  /* ── 2026 ── */
+  { year: 2026, title: 'L\'imitation de Jésus-Christ', author: 'Thomas a Kempis', cover: 'l-imitation-de-jesus-christ.jpg' },
+  { year: 2026, title: 'The Happiness Project', author: 'Gretchen Rubin', cover: 'the-happiness-project.jpg' },
+  { year: 2026, title: 'Atomic Habits', author: 'James Clear', cover: 'atomic-habits.jpg' },
+  { year: 2026, title: 'Œuvres complètes', author: 'Jean Chrysostome', cover: 'uvres-completes.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 8', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-8.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 3 : The Last Straw', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-3-the-last-straw.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 9', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-9.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 10', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-10.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 11', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-11.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 12', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-12.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 13', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-13.jpg' },
+  { year: 2026, title: 'Kiki\'s Delivery Service', author: 'Eiko Kadono', cover: 'kiki-s-delivery-service.jpg' },
+  { year: 2026, title: 'How to Win at Chess', author: 'Levy Rozman', cover: 'how-to-win-at-chess.jpg' },
+  { year: 2026, title: 'The Five People You Meet in Heaven', author: 'Mitch Albom', cover: 'the-five-people-you-meet-in-heaven.jpg' },
+  { year: 2026, title: 'Nine Days with Saint Joseph', cover: 'nine-days-with-saint-joseph.jpg' },
+  { year: 2026, title: 'The Secret', author: 'Rhonda Byrne', cover: 'the-secret.jpg' },
+  { year: 2026, title: 'Le joueur d\'échecs', author: 'Stefan Zweig', cover: 'le-joueur-d-echecs.jpg' },
+  { year: 2026, title: 'I Will Teach You to Be Rich', author: 'Ramit Sethi', cover: 'i-will-teach-you-to-be-rich.jpg' },
+  { year: 2026, title: 'Petit journal : La Miséricorde divine dans mon âme', author: 'Sainte Faustine Kowalska', cover: 'petit-journal-la-misericorde-divine-dans-mon-ame.jpg' },
+  { year: 2026, title: 'The Good Life Handbook', author: 'Épictète', cover: 'the-good-life-handbook.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 4 : Dog Days', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-4-dog-days.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 5 : The Ugly Truth', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-5-the-ugly-truth.jpg' },
+  { year: 2026, title: 'Pisse-mémé', cover: 'pisse-meme.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 6 : Cabin Fever', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-6-cabin-fever.jpg' },
+  { year: 2026, title: 'À l\'est d\'Éden', author: 'John Steinbeck', cover: 'a-l-est-d-eden.jpg' },
+  { year: 2026, title: 'The Devil\'s Sons, tome 1', cover: 'the-devil-s-sons-tome-1.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 33', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-33.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 34', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-34.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 35', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-35.jpg' },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tomes 1 à 3', cover: 'though-i-am-an-inept-villainess-tomes-1-a-3.jpg', count: 3 },
+  { year: 2026, title: 'Hunter x Hunter, tome 36', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-36.jpg' },
+  { year: 2026, title: 'Des souris et des hommes', author: 'John Steinbeck', cover: 'des-souris-et-des-hommes.jpg' },
+  { year: 2026, title: 'Madame Bovary', author: 'Gustave Flaubert', cover: 'madame-bovary.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 7 : The Third Wheel', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-7-the-third-wheel.jpg' },
+  { year: 2026, title: 'Numérologie', cover: 'numerologie.jpg' },
 ];
 
 /* ════════════════════════════════════════════════════════════
@@ -195,7 +344,7 @@ const BIBLE = {
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 /* Les années suivies. En ajouter une ici crée sa carte dans le Refuge et
    sa page (#lectures-2021), sans toucher au HTML. */
-const YEARS = [2025, 2024, 2023, 2022];
+const YEARS = [2026, 2025, 2024, 2023, 2022];
 const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
 
 const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible']
@@ -366,13 +515,20 @@ function emptyState(icon, title, text) {
    titre tient lieu de couverture et n'est donc plus répété dessous. */
 function bookCard(b) {
   const src = 'assets/img/livres/' + b.year + '/' + esc(b.cover);
-  return '<article class="book">'
+  /* Un livre peut avoir sa propre page ici — la Bible en a une. */
+  const open  = b.page ? '<a class="book is-linked" href="#' + esc(b.page) + '">'
+                       : '<article class="book">';
+  const close = b.page ? '</a>' : '</article>';
+  return open
     + '<div class="book-cover"><span>' + esc(b.title) + '</span>'
     + '<img src="' + src + '" alt="Couverture de ' + esc(b.title)
     + '" loading="lazy" onerror="bookNoCover(this)"></div>'
     + '<p class="book-title">' + esc(b.title) + '</p>'
     + (b.author ? '<p class="book-author">' + esc(b.author) + '</p>' : '')
-    + '</article>';
+    + (b.page ? '<p class="book-go">Lire le récit'
+        + '<svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+        + '</p>' : '')
+    + close;
 }
 
 /* Image absente : on découvre la tranche et on retire le titre en
@@ -411,6 +567,13 @@ function renderTopics() {
 
 function booksOfYear(y) { return READINGS.filter(r => r.year === y); }
 
+/* Une ligne peut couvrir plusieurs tomes (un marathon Harry Potter,
+   une intégrale). On compte alors les livres, pas les lignes. */
+function countBooks(list) {
+  return list.reduce((n, b) => n + (b.count || 1), 0);
+}
+const THIS_YEAR = new Date().getFullYear();
+
 function topics() {
   const bible = {
     /* Ce n'est pas une lecture de plus : c'est un défi mené à son
@@ -428,7 +591,7 @@ function topics() {
     badge: 'Lecture', tone: 'cyan', icon: 'i-book',
     title: 'Mes lectures, année par année',
     meta:  READINGS.length
-      ? READINGS.length + ' livres · ' + span
+      ? countBooks(READINGS) + ' livres · ' + span
       : 'à venir',
     /* On entre par l'année la plus récente qui a des livres ;
        les pastilles font le reste. */
@@ -548,7 +711,7 @@ function renderYearPills(current) {
   const host = document.getElementById('year-pills');
   if (!host) return;
   host.innerHTML = YEARS.map(y => {
-    const n = booksOfYear(y).length;
+    const n = countBooks(booksOfYear(y));
     const cur = y === current;
     return '<a class="year-pill' + (cur ? ' is-current' : '')
       + (n ? '' : ' is-empty') + '" href="#lectures-' + y + '"'
@@ -566,11 +729,12 @@ function renderYear(year) {
   if (!list || !title) return;
 
   const books = booksOfYear(year);
+  const n = countBooks(books);
   renderYearPills(year);
   title.textContent = 'Mes lectures de ' + year;
-  lead.textContent = books.length
-    ? books.length + (books.length > 1 ? ' livres cette année-là' : ' livre cette année-là')
-      + '.'
+  lead.textContent = n
+    ? n + (n > 1 ? ' livres' : ' livre')
+      + (year === THIS_YEAR ? ' depuis janvier.' : ' cette année-là.')
     : 'Je n’ai pas encore reconstitué cette année.';
   list.innerHTML = books.length
     ? books.map(bookCard).join('')

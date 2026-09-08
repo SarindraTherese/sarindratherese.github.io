@@ -1782,3 +1782,19 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Une année pas encore reconstituée : pointillé, comme les tranches. */
 .year-pill.is-empty { border-style: dashed; }
 .year-pill.is-empty .year-pill-y { color: var(--muted); }
+
+/* Un livre qui mène quelque part : ici la Bible, vers les 127 jours. */
+.book.is-linked { text-decoration: none; }
+.book.is-linked .book-cover { border-color: var(--sand-line); }
+.book.is-linked:hover .book-cover { border-color: var(--sand); }
+.book-go {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sand-text);
+}
+.book.is-linked:hover .book-go { text-decoration: underline; }
