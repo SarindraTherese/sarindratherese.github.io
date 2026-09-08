@@ -55,6 +55,24 @@ const AVAILABILITY_COPY = {
 
    `author` est facultatif : mieux vaut pas d'auteur qu'un faux.
    ════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+   DISCOVERIES — les belles découvertes.
+   Un objet, un service, un achat qui a changé quelque chose.
+     { name:  'Kindle',
+       kind:  'Liseuse',              // la catégorie, en deux mots
+       note:  'Pourquoi c’en est une belle.',   // tes mots, 1 à 3 phrases
+       image: 'kindle.jpg',           // dans assets/img/decouvertes/
+       url:   'https://…' }           // facultatif
+
+   `note`, `image` et `url` peuvent manquer : la carte s'adapte.
+   ════════════════════════════════════════════════════════════ */
+const DISCOVERIES = [
+  { name: 'Kindle', kind: 'Liseuse', note: '' },
+  { name: 'Vanow', kind: '', note: '' },
+  { name: 'Bablov', kind: '', note: '' },
+];
+
+
 const READINGS = [
   /* ── 2022 ── */
   { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'le-guide-du-lightworker.jpg' },
@@ -129,7 +147,8 @@ const READINGS = [
   { year: 2023, title: 'La magie de la foi', author: 'Claude Bristol', cover: 'la-magie-de-la-foi.jpg' },
   { year: 2023, title: 'Qui a piqué mon fromage ?', author: 'Spencer Johnson', cover: 'qui-a-pique-mon-fromage.jpg' },
   { year: 2023, title: 'La ferme des animaux', author: 'George Orwell', cover: 'la-ferme-des-animaux.jpg' },
-  { year: 2023, title: 'Harry Potter, tomes 1 et 2', author: 'J. K. Rowling', cover: 'harry-potter-tomes-1-et-2.jpg', count: 2 },
+  { year: 2023, title: 'Harry Potter à l\'école des sorciers', author: 'J. K. Rowling', cover: 'harry-potter-a-l-ecole-des-sorciers.jpg' },
+  { year: 2023, title: 'Harry Potter et la chambre des secrets', author: 'J. K. Rowling', cover: 'harry-potter-et-la-chambre-des-secrets.jpg' },
   { year: 2023, title: 'Imparfaits, libres et heureux', author: 'Christophe André', cover: 'imparfaits-libres-et-heureux.jpg' },
   { year: 2023, title: 'La vie !', author: 'Louise Hay', cover: 'la-vie.jpg' },
   { year: 2023, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'la-magie-de-voir-grand.jpg' },
@@ -141,7 +160,8 @@ const READINGS = [
   { year: 2024, title: 'Les impatientes', author: 'Djaïli Amadou Amal', cover: 'les-impatientes.jpg' },
   { year: 2024, title: 'Plus rien ne pourra me blesser', author: 'David Goggins', cover: 'plus-rien-ne-pourra-me-blesser.jpg' },
   { year: 2024, title: 'Numéro deux', author: 'David Foenkinos', cover: 'numero-deux.jpg' },
-  { year: 2024, title: 'Harry Potter, tomes 3 et 4', author: 'J. K. Rowling', cover: 'harry-potter-tomes-3-et-4.jpg', count: 2 },
+  { year: 2024, title: 'Harry Potter et le prisonnier d\'Azkaban', author: 'J. K. Rowling', cover: 'harry-potter-et-le-prisonnier-d-azkaban.jpg' },
+  { year: 2024, title: 'Harry Potter et la coupe de feu', author: 'J. K. Rowling', cover: 'harry-potter-et-la-coupe-de-feu.jpg' },
   { year: 2024, title: 'Les hauts de Hurlevent', author: 'Emily Brontë', cover: 'les-hauts-de-hurlevent.jpg' },
   { year: 2024, title: 'Psychologie de la peur', author: 'Christophe André', cover: 'psychologie-de-la-peur.jpg' },
   { year: 2024, title: 'Je revenais des autres', author: 'Mélissa Da Costa', cover: 'je-revenais-des-autres.jpg' },
@@ -156,7 +176,9 @@ const READINGS = [
   { year: 2024, title: 'La délicatesse', author: 'David Foenkinos', cover: 'la-delicatesse.jpg' },
   { year: 2024, title: 'The 5 Love Languages', author: 'Gary Chapman', cover: 'the-5-love-languages.jpg' },
   { year: 2024, title: 'L\'art de la simplicité', author: 'Dominique Loreau', cover: 'l-art-de-la-simplicite.jpg' },
-  { year: 2024, title: 'Harry Potter, tomes 5 à 7', author: 'J. K. Rowling', cover: 'harry-potter-tomes-5-a-7.jpg', count: 3 },
+  { year: 2024, title: 'Harry Potter et l\'ordre du Phénix', author: 'J. K. Rowling', cover: 'harry-potter-et-l-ordre-du-phenix.jpg' },
+  { year: 2024, title: 'Harry Potter et le prince de sang-mêlé', author: 'J. K. Rowling', cover: 'harry-potter-et-le-prince-de-sang-mele.jpg' },
+  { year: 2024, title: 'Harry Potter et les reliques de la mort', author: 'J. K. Rowling', cover: 'harry-potter-et-les-reliques-de-la-mort.jpg' },
   { year: 2024, title: 'Toujours plus, + = +', author: 'Léna Situations', cover: 'toujours-plus.jpg' },
   { year: 2024, title: 'Les douleurs fantômes', author: 'Mélissa Da Costa', cover: 'les-douleurs-fantomes.jpg' },
   { year: 2024, title: 'Votre temps est infini', author: 'Fabien Olicard', cover: 'votre-temps-est-infini.jpg' },
@@ -181,7 +203,9 @@ const READINGS = [
   { year: 2024, title: 'Tout le bleu du ciel', author: 'Mélissa Da Costa', cover: 'tout-le-bleu-du-ciel.jpg' },
   { year: 2024, title: 'Kama Sutra', cover: 'kama-sutra.jpg' },
   { year: 2024, title: 'November 9', author: 'Colleen Hoover', cover: 'november-9.jpg' },
-  { year: 2024, title: 'Le seigneur des anneaux, tomes 1 à 3', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tomes-1-a-3.jpg', count: 3 },
+  { year: 2024, title: 'Le seigneur des anneaux, tome 1 : La communauté de l\'anneau', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-1-la-communaute-de-l-an.jpg' },
+  { year: 2024, title: 'Le seigneur des anneaux, tome 2 : Les deux tours', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-2-les-deux-tours.jpg' },
+  { year: 2024, title: 'Le seigneur des anneaux, tome 3 : Le retour du roi', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-3-le-retour-du-roi.jpg' },
   { year: 2024, title: 'Écoute ton corps', author: 'Lise Bourbeau', cover: 'ecoute-ton-corps.jpg' },
   { year: 2024, title: 'Cessez d\'être gentil, soyez vrai !', author: 'Thomas d\'Ansembourg', cover: 'cessez-d-etre-gentil-soyez-vrai.jpg' },
   { year: 2024, title: 'Libérez votre cerveau', author: 'Idriss Aberkane', cover: 'liberez-votre-cerveau.jpg' },
@@ -274,7 +298,9 @@ const READINGS = [
   { year: 2026, title: 'Hunter x Hunter, tome 33', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-33.jpg' },
   { year: 2026, title: 'Hunter x Hunter, tome 34', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-34.jpg' },
   { year: 2026, title: 'Hunter x Hunter, tome 35', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-35.jpg' },
-  { year: 2026, title: 'Though I Am an Inept Villainess, tomes 1 à 3', cover: 'though-i-am-an-inept-villainess-tomes-1-a-3.jpg', count: 3 },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tome 1', cover: 'though-i-am-an-inept-villainess-tome-1.jpg' },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tome 2', cover: 'though-i-am-an-inept-villainess-tome-2.jpg' },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tome 3', cover: 'though-i-am-an-inept-villainess-tome-3.jpg' },
   { year: 2026, title: 'Hunter x Hunter, tome 36', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-36.jpg' },
   { year: 2026, title: 'Des souris et des hommes', author: 'John Steinbeck', cover: 'des-souris-et-des-hommes.jpg' },
   { year: 2026, title: 'Madame Bovary', author: 'Gustave Flaubert', cover: 'madame-bovary.jpg' },
@@ -347,16 +373,17 @@ const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 const YEARS = [2026, 2025, 2024, 2023, 2022];
 const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
 
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible']
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds']
   .concat(YEAR_PAGES, ['contact']);
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
-    refuge: "Sarindra's Refuge", bible: '127 jours', contact: 'Contact' },
+    refuge: "Sarindra's Refuge", bible: '127 jours',
+    finds: 'Belles découvertes', contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
-const PAGE_PARENT = Object.assign({ bible: 'refuge' },
+const PAGE_PARENT = Object.assign({ bible: 'refuge', finds: 'refuge' },
   Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
 
 /* Toutes les années partagent un même bloc de page. */
@@ -567,11 +594,6 @@ function renderTopics() {
 
 function booksOfYear(y) { return READINGS.filter(r => r.year === y); }
 
-/* Une ligne peut couvrir plusieurs tomes (un marathon Harry Potter,
-   une intégrale). On compte alors les livres, pas les lignes. */
-function countBooks(list) {
-  return list.reduce((n, b) => n + (b.count || 1), 0);
-}
 const THIS_YEAR = new Date().getFullYear();
 
 function topics() {
@@ -591,14 +613,23 @@ function topics() {
     badge: 'Lecture', tone: 'cyan', icon: 'i-book',
     title: 'Mes lectures, année par année',
     meta:  READINGS.length
-      ? countBooks(READINGS) + ' livres · ' + span
+      ? READINGS.length + ' livres · ' + span
       : 'à venir',
     /* On entre par l'année la plus récente qui a des livres ;
        les pastilles font le reste. */
     page:  'lectures-' + (filled.length ? filled[filled.length - 1] : YEARS[0]),
     empty: READINGS.length === 0
   };
-  return [bible, lectures];
+  const finds = {
+    badge: 'Découverte', tone: 'ink', icon: 'i-spark',
+    title: 'Belles découvertes',
+    meta:  DISCOVERIES.length
+      ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' trouvailles' : ' trouvaille')
+      : 'à venir',
+    page:  'finds',
+    empty: DISCOVERIES.length === 0
+  };
+  return [bible, lectures, finds];
 }
 
 
@@ -711,7 +742,7 @@ function renderYearPills(current) {
   const host = document.getElementById('year-pills');
   if (!host) return;
   host.innerHTML = YEARS.map(y => {
-    const n = countBooks(booksOfYear(y));
+    const n = booksOfYear(y).length;
     const cur = y === current;
     return '<a class="year-pill' + (cur ? ' is-current' : '')
       + (n ? '' : ' is-empty') + '" href="#lectures-' + y + '"'
@@ -721,6 +752,48 @@ function renderYearPills(current) {
   }).join('');
 }
 
+/* ── Belles découvertes ─────────────────────────────────────
+   Un objet par carte. Tout est facultatif sauf le nom : une
+   trouvaille peut n'être qu'un nom en attendant qu'elle soit
+   racontée, et la carte ne montre pas de trou pour autant. */
+function findCard(d) {
+  const img = d.image
+    ? '<div class="find-shot"><img src="assets/img/decouvertes/' + esc(d.image)
+      + '" alt="' + esc(d.name) + '" loading="lazy"'
+      + ' onerror="this.parentNode.remove()"></div>'
+    : '';
+  const link = d.url
+    ? '<span class="find-go">Voir'
+      + '<svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-ur"/></svg>'
+      + '</span>'
+    : '';
+  const body = img
+    + (d.kind ? '<p class="find-kind">' + esc(d.kind) + '</p>' : '')
+    + '<p class="find-name">' + esc(d.name) + '</p>'
+    + (d.note ? '<p class="find-note">' + esc(d.note) + '</p>' : '')
+    + link;
+  return d.url
+    ? '<a class="find is-linked" href="' + esc(d.url)
+      + '" target="_blank" rel="noopener">' + body + '</a>'
+    : '<article class="find">' + body + '</article>';
+}
+
+function renderFinds() {
+  const host = document.getElementById('finds');
+  const lead = document.getElementById('finds-lead');
+  if (!host) return;
+  if (lead) {
+    lead.textContent = DISCOVERIES.length
+      ? 'Des objets et des achats qui valaient le coup.'
+      : '';
+  }
+  host.innerHTML = DISCOVERIES.length
+    ? DISCOVERIES.map(findCard).join('')
+    : emptyState('i-spark', 'Bientôt',
+        'Cette étagère-là n’est pas encore garnie.');
+}
+
+
 /* Page d'une année : même bloc pour toutes, rempli à la volée. */
 function renderYear(year) {
   const list = document.getElementById('read-list');
@@ -729,7 +802,7 @@ function renderYear(year) {
   if (!list || !title) return;
 
   const books = booksOfYear(year);
-  const n = countBooks(books);
+  const n = books.length;
   renderYearPills(year);
   title.textContent = 'Mes lectures de ' + year;
   lead.textContent = n
@@ -1006,6 +1079,7 @@ function animateCounters() {
 document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
   renderTopics();
+  renderFinds();
   renderBible();
   initTabs();
   initTabLinks();

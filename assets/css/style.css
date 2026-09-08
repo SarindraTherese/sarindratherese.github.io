@@ -1798,3 +1798,61 @@ a.read-item:hover .read-title { color: var(--cyan); }
   color: var(--sand-text);
 }
 .book.is-linked:hover .book-go { text-decoration: underline; }
+
+/* ── Belles découvertes ────────────────────────────────────────
+   Ni une fiche produit, ni une étagère de couvertures : un objet,
+   ce qu'il est, et pourquoi il compte. Ton neutre (#0A2634 sur
+   #DBE7ED : 12,44:1) — le cyan reste à la lecture, le sable à ce
+   qui est accompli. */
+.tone-ink { background: var(--paper-2); color: var(--ink); }
+.finds {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: var(--s4);
+}
+.find {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  text-decoration: none;
+}
+.find.is-linked { transition: border-color 0.18s ease; }
+.find.is-linked:hover { border-color: var(--cyan-line); }
+.find-shot {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: 4px;
+  background: var(--paper-2);
+  border: 1px solid var(--line-soft);
+}
+.find-shot img { width: 100%; height: 100%; object-fit: cover; }
+.find-kind {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.find-name {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.find-note { font-size: 14.5px; line-height: 1.6; color: var(--body); }
+.find-go {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.find.is-linked:hover .find-go { text-decoration: underline; }
