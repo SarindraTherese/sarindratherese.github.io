@@ -1763,6 +1763,16 @@ a.read-item:hover .read-title { color: var(--cyan); }
   color: var(--body);
 }
 
+/* La plage de dates : c'est elle qui rend les 127 jours vérifiables. */
+.bible-range {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* Le titre du carnet, effacé par erreur avec les styles de l'ancienne
    mise en colonnes : « .bible-log » est un préfixe de son nom. */
 .bible-logtitle {

@@ -675,6 +675,16 @@ function renderBible() {
   if (!log) return;
 
   const day = t => new Date(t + 'T00:00:00Z');
+  const enToutesLettres = t =>
+    Number(t.slice(8)) + ' ' + FR_MONTHS[Number(t.slice(5, 7)) - 1];
+
+  /* Les 127 jours doivent être vérifiables : sans ces deux dates, le
+     carnet commence au 9 février et le compte ne tombe pas juste. */
+  const range = document.getElementById('bible-range');
+  if (range) {
+    range.textContent = enToutesLettres(BIBLE.start) + ' — '
+      + enToutesLettres(BIBLE.end) + ' ' + BIBLE.end.slice(0, 4);
+  }
   const undated = BIBLE.entries.filter(e => !e[1]);
   const dated = BIBLE.entries.filter(e => e[1])
     .sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
@@ -704,7 +714,7 @@ function renderBible() {
       + '</span></li>');
   }
 
-  let mois = null;
+  let mois = null, premierEcart = true;
   days.forEach((jour, k) => {
     const m = Number(jour.d.slice(5, 7)) - 1;
 
@@ -713,9 +723,14 @@ function renderBible() {
        cas du plus long : dix-neuf jours entre Job et le Lévitique. */
     if (k > 0) {
       const ecart = Math.round((day(jour.d) - day(days[k - 1].d)) / 864e5);
-      if (ecart >= 5) {
+      /* Au-dessous de huit jours, le repère apparaîtrait une fois sur
+         trois et ne voudrait plus rien dire. Le premier dit de quoi il
+         s'agit ; les suivants se contentent du nombre. */
+      if (ecart >= 8) {
         out.push('<li class="carnet-gap" style="--h:'
-          + Math.min(ecart * 4, 84) + 'px"><span>' + ecart + ' jours</span></li>');
+          + Math.min(ecart * 4, 84) + 'px"><span>' + ecart + ' jours'
+          + (premierEcart ? ' sans rien finir' : '') + '</span></li>');
+        premierEcart = false;
       }
     }
 
