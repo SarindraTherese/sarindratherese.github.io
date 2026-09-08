@@ -1789,9 +1789,8 @@ a.read-item:hover .read-title { color: var(--cyan); }
 
 /* ── Le carnet des 127 jours ───────────────────────────────────
    Une colonne, dans l'ordre du temps. Le rythme n'est pas dessiné :
-   il se lit dans la page. Un jour où sept livres s'achèvent tient
-   sept lignes, et un silence de dix-neuf jours occupe la place qu'il
-   a prise. */
+   il se lit dans la page, un jour où sept livres s'achèvent tenant
+   sept lignes. */
 .carnet {
   list-style: none;
   padding: 0;
@@ -1856,18 +1855,3 @@ a.read-item:hover .read-title { color: var(--cyan); }
   color: var(--ink);
 }
 /* Le silence : une hauteur proportionnelle à sa durée, et rien d'autre. */
-.carnet-gap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: var(--h, 24px);
-  padding-left: var(--s4);
-}
-.carnet-gap span {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  /* Le repère reste discret par sa taille, pas par un gris illisible :
-     #4E6D7C sur le papier, 4,65:1. */
-  color: var(--muted);
-}

@@ -674,7 +674,6 @@ function renderBible() {
   const log = document.getElementById('bible-log');
   if (!log) return;
 
-  const day = t => new Date(t + 'T00:00:00Z');
   const enToutesLettres = t =>
     Number(t.slice(8)) + ' ' + FR_MONTHS[Number(t.slice(5, 7)) - 1];
 
@@ -714,25 +713,9 @@ function renderBible() {
       + '</span></li>');
   }
 
-  let mois = null, premierEcart = true;
-  days.forEach((jour, k) => {
+  let mois = null;
+  days.forEach(jour => {
     const m = Number(jour.d.slice(5, 7)) - 1;
-
-    /* Le silence entre deux jours occupe la place qu'il a prise — y
-       compris quand il traverse un changement de mois, ce qui est le
-       cas du plus long : dix-neuf jours entre Job et le Lévitique. */
-    if (k > 0) {
-      const ecart = Math.round((day(jour.d) - day(days[k - 1].d)) / 864e5);
-      /* Au-dessous de huit jours, le repère apparaîtrait une fois sur
-         trois et ne voudrait plus rien dire. Le premier dit de quoi il
-         s'agit ; les suivants se contentent du nombre. */
-      if (ecart >= 8) {
-        out.push('<li class="carnet-gap" style="--h:'
-          + Math.min(ecart * 4, 84) + 'px"><span>' + ecart + ' jours'
-          + (premierEcart ? ' sans rien finir' : '') + '</span></li>');
-        premierEcart = false;
-      }
-    }
 
     if (m !== mois) {
       mois = m;
