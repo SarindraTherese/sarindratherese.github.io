@@ -1619,6 +1619,12 @@ a.read-item:hover .read-title { color: var(--cyan); }
   border-radius: var(--r1);
 }
 .tone-cyan  { background: var(--cyan-soft); color: var(--cyan); }
+/* Le sable est réservé à ce qui est accompli, pas à ce qui se poursuit
+   (#9A5019 sur #F0E1D2 : 4,64:1, AA). */
+.tone-sand  { background: var(--sand-soft); color: var(--sand-text); }
+/* L'icône du badge se cale sur la casse du texte, pas sur la ligne. */
+.topic-badge { display: inline-flex; align-items: center; gap: 6px; }
+.icon-xs { width: 12px; height: 12px; }
 .topic-name {
   font-size: 16px;
   font-weight: 600;
@@ -1670,3 +1676,105 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 .back-link .icon { transform: rotate(180deg); }
 .back-link:hover { color: var(--cyan); }
+
+/* ============================================================
+   L'ÉTAGÈRE — les livres d'une année
+   Les couvertures sont la seule couleur libre du site : le
+   Blueprint tient le cadre, les livres font le mur.
+   ============================================================ */
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+  gap: var(--s5) var(--s4);
+}
+.book { display: flex; flex-direction: column; gap: 10px; }
+.book-cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease;
+}
+.book:hover .book-cover { transform: translateY(-3px); }
+.book-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Sans couverture : une tranche typographique, pas un trou */
+.book-cover.is-blank {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 13px;
+  background: var(--surface);
+  border-style: dashed;
+  box-shadow: none;
+}
+.book-cover.is-blank span {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow: hidden;
+}
+.book-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.book-author {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .shelf { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--s4) var(--s3); }
+  .book-title { font-size: 12.5px; }
+}
+
+/* ── Les années, en pastilles ──────────────────────────────────
+   On passe d'une année à l'autre sans repasser par le Refuge.
+   L'année lue est en aplat cyan (blanc sur #0B7699 : 5,17:1, AA). */
+.years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--s6);
+}
+.year-pill {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-family: var(--mono);
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.year-pill:hover { border-color: var(--cyan-line); background: var(--cyan-soft); }
+.year-pill-y {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.year-pill-n {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.year-pill.is-current {
+  background: var(--cyan-fill);
+  border-color: var(--cyan-fill);
+}
+.year-pill.is-current .year-pill-y,
+.year-pill.is-current .year-pill-n { color: #fff; }
+/* Une année pas encore reconstituée : pointillé, comme les tranches. */
+.year-pill.is-empty { border-style: dashed; }
+.year-pill.is-empty .year-pill-y { color: var(--muted); }

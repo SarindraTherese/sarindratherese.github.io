@@ -56,7 +56,81 @@ const AVAILABILITY_COPY = {
    d'attente. Ajoute au moins un livre avant de publier.
    ════════════════════════════════════════════════════════════ */
 const READINGS = [
-  // { year: 2023, title: '…', author: '…', kind: 'Livre', note: '…' },
+  { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'le-guide-du-lightworker.jpg' },
+  { year: 2022, title: 'Penser comme un millionnaire' },
+  { year: 2022, title: 'Apprendre à gérer son argent' },
+  { year: 2022, title: 'L\'art de la confiance en soi' },
+  { year: 2022, title: 'La clé de votre énergie', author: 'Natacha Calestrémé' },
+  { year: 2022, title: 'Le guide détendu des émotions au travail' },
+  { year: 2022, title: 'L\'obstacle est le chemin', author: 'Ryan Holiday' },
+  { year: 2022, title: 'Père riche, père pauvre', author: 'Robert Kiyosaki' },
+  { year: 2022, title: 'La magie du rangement illustrée', author: 'Marie Kondo', cover: 'la-magie-du-rangement-illustree.jpg' },
+  { year: 2022, title: 'The Personal MBA', author: 'Josh Kaufman', cover: 'the-personal-mba.jpg' },
+  { year: 2022, title: 'Trouver ma place' },
+  { year: 2022, title: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une', author: 'Raphaëlle Giordano' },
+  { year: 2022, title: 'Le miracle de la pleine conscience', author: 'Thich Nhat Hanh', cover: 'le-miracle-de-la-pleine-conscience.jpg' },
+  { year: 2022, title: 'L\'homme qui voulait être heureux', author: 'Laurent Gounelle', cover: 'l-homme-qui-voulait-etre-heureux.jpg' },
+  { year: 2022, title: 'Le pouvoir du moment présent', author: 'Eckhart Tolle' },
+  { year: 2022, title: 'La Puissance de l\'acceptation' },
+  { year: 2022, title: 'L\'Alchimiste', author: 'Paulo Coelho', cover: 'l-alchimiste.jpg' },
+  { year: 2022, title: 'Les mots sont des fenêtres', author: 'Marshall Rosenberg', cover: 'les-mots-sont-des-fenetres.jpg' },
+  { year: 2022, title: 'Les 5 blessures', author: 'Lise Bourbeau' },
+  { year: 2022, title: 'Progressez à pas de géant', author: 'Anthony Robbins' },
+  { year: 2022, title: 'Miracle Morning', author: 'Hal Elrod' },
+  { year: 2022, title: 'Qui es-tu ?' },
+  { year: 2022, title: 'Devenir super-conscient', author: 'Joe Dispenza', cover: 'devenir-super-conscient.jpg' },
+  { year: 2022, title: 'Kilomètre zéro', author: 'Maud Ankaoua', cover: 'kilometre-zero.jpg' },
+  { year: 2022, title: 'Communiquer et guérir avec les anges' },
+  { year: 2022, title: 'Révélez la sorcière qui dort en vous' },
+  { year: 2022, title: 'Le livre des esprits', author: 'Allan Kardec', cover: 'le-livre-des-esprits.jpg' },
+  { year: 2022, title: 'La prophétie des Andes', author: 'James Redfield' },
+  { year: 2022, title: 'Écoute ton corps', author: 'Lise Bourbeau' },
+  { year: 2022, title: 'Réfléchissez et devenez riche', author: 'Napoleon Hill' },
+  { year: 2022, title: 'Les quatre accords toltèques', author: 'Don Miguel Ruiz' },
+  { year: 2022, title: 'Prendre soin de l\'enfant intérieur', author: 'Thich Nhat Hanh' },
+  { year: 2022, title: 'À la croisée des mondes', author: 'Philip Pullman', cover: 'a-la-croisee-des-mondes.jpg' },
+  { year: 2023, title: 'La Wicca', author: 'Scott Cunningham' },
+  { year: 2023, title: 'Trois minutes à méditer', author: 'Christophe André' },
+  { year: 2023, title: 'Le Petit Prince', author: 'Antoine de Saint-Exupéry', cover: 'le-petit-prince.jpg' },
+  { year: 2023, title: 'Devenir', author: 'Michelle Obama' },
+  { year: 2023, title: 'Le charme discret de l\'intestin', author: 'Giulia Enders', cover: 'le-charme-discret-de-l-intestin.jpg' },
+  { year: 2023, title: 'Transformez votre vie', author: 'Louise Hay', cover: 'transformez-votre-vie.jpg' },
+  { year: 2023, title: 'Deep Work', author: 'Cal Newport', cover: 'deep-work.jpg' },
+  { year: 2023, title: 'Le livre des médiums', author: 'Allan Kardec', cover: 'le-livre-des-mediums.jpg' },
+  { year: 2023, title: 'Oser', author: 'Frédéric Fanget', cover: 'oser.jpg' },
+  { year: 2023, title: 'S\'ouvrir à l\'amour et au bonheur', author: 'Don Miguel Ruiz', cover: 's-ouvrir-a-l-amour-et-au-bonheur.jpg' },
+  { year: 2023, title: 'Orgueil et préjugés', author: 'Jane Austen', cover: 'orgueil-et-prejuges.jpg' },
+  { year: 2023, title: 'Et si c\'était vrai', author: 'Marc Levy' },
+  { year: 2023, title: 'Conversations avec Dieu tome 1', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-1.jpg' },
+  { year: 2023, title: 'La confiance en soi une philosophie', author: 'Charles Pépin', cover: 'la-confiance-en-soi-une-philosophie.jpg' },
+  { year: 2023, title: 'Le jour où j\'ai appris à vivre', author: 'Laurent Gounelle', cover: 'le-jour-ou-j-ai-appris-a-vivre.jpg' },
+  { year: 2023, title: 'Techniques de visualisation créatrice', author: 'Shakti Gawain', cover: 'techniques-de-visualisation-creatrice.jpg' },
+  { year: 2023, title: 'Da Vinci Code', author: 'Dan Brown', cover: 'da-vinci-code.jpg' },
+  { year: 2023, title: 'L\'Étranger', author: 'Albert Camus', cover: 'l-etranger.jpg' },
+  { year: 2023, title: 'Plus jamais', author: 'Colleen Hoover' },
+  { year: 2023, title: 'Petit traité de vie intérieure', author: 'Frédéric Lenoir', cover: 'petit-traite-de-vie-interieure.jpg' },
+  { year: 2023, title: 'Testament des abeilles', author: 'Natacha Calestrémé' },
+  { year: 2023, title: 'Le livre des coïncidences', author: 'Deepak Chopra', cover: 'le-livre-des-coincidences.jpg' },
+  { year: 2023, title: 'Conversations avec Dieu tome 2', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-2.jpg' },
+  { year: 2023, title: 'Nos étoiles contraires', author: 'John Green' },
+  { year: 2023, title: 'Il est grand temps de rallumer les étoiles', author: 'Virginie Grimaldi', cover: 'il-est-grand-temps-de-rallumer-les-etoiles.jpg' },
+  { year: 2023, title: 'Onze minutes', author: 'Paulo Coelho', cover: 'onze-minutes.jpg' },
+  { year: 2023, title: 'Tremblez mais osez', author: 'Susan Jeffers', cover: 'tremblez-mais-osez.jpg' },
+  { year: 2023, title: 'La loi de l\'attraction' },
+  { year: 2023, title: 'L\'estime de soi', author: 'Christophe André et François Lelord', cover: 'l-estime-de-soi.jpg' },
+  { year: 2023, title: 'N\'ayez pas peur de la vie' },
+  { year: 2023, title: 'Steve Jobs', author: 'Walter Isaacson', cover: 'steve-jobs.jpg' },
+  { year: 2023, title: 'Méditer jour après jour', author: 'Christophe André', cover: 'mediter-jour-apres-jour.jpg' },
+  { year: 2023, title: 'La femme parfaite est une connasse', author: 'Anne-Sophie et Marie-Aldine Girard' },
+  { year: 2023, title: 'Comment se faire des amis', author: 'Dale Carnegie', cover: 'comment-se-faire-des-amis.jpg' },
+  { year: 2023, title: 'La formule de Dieu', author: 'José Rodrigues dos Santos', cover: 'la-formule-de-dieu.jpg' },
+  { year: 2023, title: 'La magie de la foi', author: 'Claude Bristol' },
+  { year: 2023, title: 'Qui a piqué mon fromage ?', author: 'Spencer Johnson' },
+  { year: 2023, title: 'La ferme des animaux', author: 'George Orwell', cover: 'la-ferme-des-animaux.jpg' },
+  { year: 2023, title: 'Harry Potter', author: 'J. K. Rowling' },
+  { year: 2023, title: 'Imparfaits, libres et heureux', author: 'Christophe André', cover: 'imparfaits-libres-et-heureux.jpg' },
+  { year: 2023, title: 'La Vie !', author: 'Louise Hay' },
+  { year: 2023, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'la-magie-de-voir-grand.jpg' },
 ];
 
 /* ════════════════════════════════════════════════════════════
@@ -286,17 +360,18 @@ function emptyState(icon, title, text) {
 }
 
 
-function readingItem(r) {
-  const inner =
-      '<div class="read-kind">' + esc(r.kind || 'Livre') + '</div>'
-    + '<div class="read-main">'
-    +   '<h3 class="read-title">' + esc(r.title) + '</h3>'
-    +   (r.author ? '<p class="read-author">' + esc(r.author) + '</p>' : '')
-    +   (r.note ? '<p class="read-note">' + esc(r.note) + '</p>' : '')
-    + '</div>';
-  return r.url
-    ? '<a class="read-item" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
-    : '<article class="read-item">' + inner + '</article>';
+function bookCard(b) {
+  /* Sans couverture, le titre devient lui-même la couverture : une
+     tranche typographique. Il n'est alors pas répété en dessous. */
+  const blank = !b.cover;
+  const cover = blank
+    ? '<div class="book-cover is-blank"><span>' + esc(b.title) + '</span></div>'
+    : '<div class="book-cover"><img src="assets/img/livres/' + esc(b.cover)
+      + '" alt="Couverture de ' + esc(b.title) + '" loading="lazy"></div>';
+  return '<article class="book">' + cover
+    + (blank ? '' : '<p class="book-title">' + esc(b.title) + '</p>')
+    + (b.author ? '<p class="book-author">' + esc(b.author) + '</p>' : '')
+    + '</article>';
 }
 
 
@@ -312,7 +387,10 @@ function renderTopics() {
   if (!host) return;
   host.innerHTML = topics().map(t =>
       '<a class="topic-card' + (t.empty ? ' is-empty' : '') + '" href="#' + esc(t.page) + '">'
-    + '<span class="topic-badge tone-' + t.tone + '">' + esc(t.badge) + '</span>'
+    + '<span class="topic-badge tone-' + t.tone + '">'
+    + (t.icon ? '<svg class="icon icon-xs" aria-hidden="true"><use href="#'
+        + esc(t.icon) + '"/></svg>' : '')
+    + esc(t.badge) + '</span>'
     + '<span class="topic-name">' + esc(t.title) + '</span>'
     + '<span class="topic-meta">' + esc(t.meta) + '</span>'
     + '<span class="topic-go">' + (t.empty ? 'Bientôt' : 'Lire')
@@ -324,21 +402,29 @@ function booksOfYear(y) { return READINGS.filter(r => r.year === y); }
 
 function topics() {
   const bible = {
-    badge: 'Lecture', tone: 'cyan',
+    /* Ce n'est pas une lecture de plus : c'est un défi mené à son
+       terme. D'où le ton sable, seul contre-ton de la palette. */
+    badge: 'Défi accompli', tone: 'sand', icon: 'i-check',
     title: 'J’ai lu la Bible en 127 jours',
     meta:  '73 livres · 31 janv. — 7 juin 2025',
     page:  'bible'
   };
-  return [bible].concat(YEARS.map(y => {
-    const n = booksOfYear(y).length;
-    return {
-      badge: 'Lecture', tone: 'cyan',
-      title: 'Mes lectures de ' + y,
-      meta:  n ? n + (n > 1 ? ' livres' : ' livre') : 'à venir',
-      page:  'lectures-' + y,
-      empty: n === 0
-    };
-  }));
+  const filled = YEARS.filter(y => booksOfYear(y).length).sort((a, b) => a - b);
+  const span = filled.length > 1
+    ? filled[0] + ' à ' + filled[filled.length - 1]
+    : String(filled[0] || '');
+  const lectures = {
+    badge: 'Lecture', tone: 'cyan', icon: 'i-book',
+    title: 'Mes lectures, année par année',
+    meta:  READINGS.length
+      ? READINGS.length + ' livres · ' + span
+      : 'à venir',
+    /* On entre par l'année la plus récente qui a des livres ;
+       les pastilles font le reste. */
+    page:  'lectures-' + (filled.length ? filled[filled.length - 1] : YEARS[0]),
+    empty: READINGS.length === 0
+  };
+  return [bible, lectures];
 }
 
 
@@ -444,6 +530,23 @@ function renderBible() {
 }
 
 
+/* Les années se parcourent depuis la page elle-même : une pastille
+   par année, celle qu'on lit en aplat. Une année sans livre reste
+   accessible — elle mène à son état vide, qui le dit. */
+function renderYearPills(current) {
+  const host = document.getElementById('year-pills');
+  if (!host) return;
+  host.innerHTML = YEARS.map(y => {
+    const n = booksOfYear(y).length;
+    const cur = y === current;
+    return '<a class="year-pill' + (cur ? ' is-current' : '')
+      + (n ? '' : ' is-empty') + '" href="#lectures-' + y + '"'
+      + (cur ? ' aria-current="page"' : '')
+      + '><span class="year-pill-y">' + y + '</span>'
+      + '<span class="year-pill-n">' + (n || '—') + '</span></a>';
+  }).join('');
+}
+
 /* Page d'une année : même bloc pour toutes, rempli à la volée. */
 function renderYear(year) {
   const list = document.getElementById('read-list');
@@ -452,13 +555,14 @@ function renderYear(year) {
   if (!list || !title) return;
 
   const books = booksOfYear(year);
+  renderYearPills(year);
   title.textContent = 'Mes lectures de ' + year;
   lead.textContent = books.length
     ? books.length + (books.length > 1 ? ' livres cette année-là' : ' livre cette année-là')
-      + ', et ce que j’en ai retenu.'
+      + '.'
     : 'Je n’ai pas encore reconstitué cette année.';
   list.innerHTML = books.length
-    ? books.map(readingItem).join('')
+    ? books.map(bookCard).join('')
     : emptyState('i-book', 'À reconstituer',
         'Les livres de ' + year + ' ne sont pas encore notés. Ils arriveront ici.');
 }
@@ -673,7 +777,7 @@ const ANIM_SELECTOR = [
   '.sec-hd', '.ab-state', '.ab-band', '.ab-quote', '.exp-item', '.edu-card', '.cert-card',
   '.drives-card', '.skill-cat-card', '.skill-bars-card',
   '.proj-card-v2', '.collab-banner', '.contact-form-card', '.contact-info-card',
-  '.avail-card', '.loc-card', '.read-item', '.topic-card'
+  '.avail-card', '.loc-card', '.book', '.topic-card'
 ].join(',');
 
 let revealObserver = null;
