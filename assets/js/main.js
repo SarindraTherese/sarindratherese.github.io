@@ -76,14 +76,14 @@ const DISCOVERIES = [
 
 const READINGS = [
   /* ── 2022 ── */
-  { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'le-guide-du-lightworker.jpg' },
-  { year: 2022, title: 'Penser comme un millionnaire', cover: 'penser-comme-un-millionnaire.jpg' },
-  { year: 2022, title: 'Apprendre à gérer son argent', cover: 'apprendre-a-gerer-son-argent.jpg' },
-  { year: 2022, title: 'L\'art de la confiance en soi', cover: 'l-art-de-la-confiance-en-soi.jpg' },
-  { year: 2022, title: 'La clé de votre énergie', author: 'Natacha Calestrémé', cover: 'la-cle-de-votre-energie.jpg' },
-  { year: 2022, title: 'Le guide détendu des émotions au travail', cover: 'le-guide-detendu-des-emotions-au-travail.jpg' },
-  { year: 2022, title: 'L\'obstacle est le chemin', author: 'Ryan Holiday', cover: 'l-obstacle-est-le-chemin.jpg' },
-  { year: 2022, title: 'Père riche, père pauvre', author: 'Robert Kiyosaki', cover: 'pere-riche-pere-pauvre.jpg' },
+  { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'guide_du_lightworker.jpeg' },
+  { year: 2022, title: 'Penser comme un millionnaire', cover: 'Penser_comme_un_millionnaire.jpg' },
+  { year: 2022, title: 'Apprendre à gérer son argent', cover: 'Apprendre à gérer son argent.jpeg' },
+  { year: 2022, title: 'L\'art de la confiance en soi', cover: 'L\'art de la confiance en soi.jpeg' },
+  { year: 2022, title: 'La clé de votre énergie', author: 'Natacha Calestrémé', cover: 'La cle de votre energie.jpg' },
+  { year: 2022, title: 'Le guide détendu des émotions au travail', cover: 'Le guide détendu des émotions au travail.jpg' },
+  { year: 2022, title: 'L\'obstacle est le chemin', author: 'Ryan Holiday', cover: 'L\'obstacle est le chemin.jpg' },
+  { year: 2022, title: 'Père riche, père pauvre', author: 'Robert Kiyosaki', cover: 'Père riche, père pauvre .jpg' },
   { year: 2022, title: 'La magie du rangement illustrée', author: 'Marie Kondo', cover: 'la-magie-du-rangement-illustree.jpg' },
   { year: 2022, title: 'The Personal MBA', author: 'Josh Kaufman', cover: 'the-personal-mba.jpg' },
   { year: 2022, title: 'Trouver ma place', cover: 'trouver-ma-place.jpg' },
@@ -542,7 +542,9 @@ function emptyState(icon, title, text) {
    n'est pas là, la carte retombe sur sa tranche typographique, où le
    titre tient lieu de couverture et n'est donc plus répété dessous. */
 function bookCard(b) {
-  const src = 'assets/img/livres/' + b.year + '/' + esc(b.cover);
+  /* Les noms de fichiers sont ceux de Sarindra : espaces, accents,
+     apostrophes. On les encode pour l'URL avant de les poser. */
+  const src = 'assets/img/livres/' + b.year + '/' + esc(encodeURIComponent(b.cover));
   /* Un livre peut avoir sa propre page ici — la Bible en a une. */
   const open  = b.page ? '<a class="book is-linked" href="#' + esc(b.page) + '">'
                        : '<article class="book">';

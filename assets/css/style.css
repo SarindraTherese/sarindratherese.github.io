@@ -1721,6 +1721,9 @@ a.read-item:hover .read-title { color: var(--cyan); }
   letter-spacing: -0.01em;
   color: var(--ink);
   overflow: hidden;
+  /* Un titre long ne doit pas déborder de sa tranche. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 .book-title {
   font-size: 13.5px;
