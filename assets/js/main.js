@@ -622,7 +622,7 @@ function topics() {
     empty: READINGS.length === 0
   };
   const finds = {
-    badge: 'Objet', tone: 'ink', icon: 'i-spark',
+    badge: 'Acquisition', tone: 'ink', icon: 'i-spark',
     title: 'Testé et adopté',
     meta:  DISCOVERIES.length
       ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' objets' : ' objet')
