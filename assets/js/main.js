@@ -74,6 +74,24 @@ const DISCOVERIES = [
 ];
 
 
+/* ════════════════════════════════════════════════════════════
+   GUIDES — mes guides de lecture.
+   Un guide répond à une question qu'on te pose vraiment : par où
+   commencer, quoi lire après tel livre, que lire quand on n'a pas
+   le temps. Chaque livre cité dit pourquoi il est là.
+     { title: 'Par où commencer',
+       lead:  'À qui ça s’adresse, en une phrase.',
+       books: [
+         { title: '…', author: '…',
+           why: 'Pourquoi celui-là, et pas un autre.' }
+       ] }
+
+   Tant que ce tableau est vide, la carte du Refuge affiche « à venir ».
+   ════════════════════════════════════════════════════════════ */
+const GUIDES = [
+];
+
+
 const READINGS = [
   /* ── 2022 ── */
   { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'guide_du_lightworker.jpeg' },
@@ -374,17 +392,19 @@ const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 const YEARS = [2026, 2025, 2024, 2023, 2022];
 const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
 
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds']
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'guides']
   .concat(YEAR_PAGES, ['contact']);
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Testé et adopté', contact: 'Contact' },
+    finds: 'Testé et adopté', guides: 'Mes guides de lecture',
+    contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
-const PAGE_PARENT = Object.assign({ bible: 'refuge', finds: 'refuge' },
+const PAGE_PARENT = Object.assign(
+  { bible: 'refuge', finds: 'refuge', guides: 'refuge' },
   Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
 
 /* Toutes les années partagent un même bloc de page. */
@@ -632,7 +652,16 @@ function topics() {
     page:  'finds',
     empty: DISCOVERIES.length === 0
   };
-  return [bible, lectures, finds];
+  const guides = {
+    badge: 'Conseil', tone: 'line', icon: 'i-pen',
+    title: 'Mes guides de lecture',
+    meta:  GUIDES.length
+      ? GUIDES.length + (GUIDES.length > 1 ? ' guides' : ' guide')
+      : 'à venir',
+    page:  'guides',
+    empty: GUIDES.length === 0
+  };
+  return [bible, lectures, finds, guides];
 }
 
 
@@ -708,6 +737,30 @@ function findCard(d) {
     ? '<a class="find is-linked" href="' + esc(d.url)
       + '" target="_blank" rel="noopener">' + body + '</a>'
     : '<article class="find">' + body + '</article>';
+}
+
+function renderGuides() {
+  const host = document.getElementById('guides');
+  const lead = document.getElementById('guides-lead');
+  if (!host) return;
+  if (lead) {
+    lead.textContent = GUIDES.length
+      ? 'Ce que je conseille, et pourquoi.'
+      : '';
+  }
+  host.innerHTML = GUIDES.length
+    ? GUIDES.map(g =>
+        '<article class="guide">'
+      + '<h4 class="guide-title">' + esc(g.title) + '</h4>'
+      + (g.lead ? '<p class="guide-lead">' + esc(g.lead) + '</p>' : '')
+      + '<ol class="guide-books">'
+      + (g.books || []).map(b =>
+          '<li><p class="guide-book">' + esc(b.title)
+        + (b.author ? '<span> · ' + esc(b.author) + '</span>' : '') + '</p>'
+        + (b.why ? '<p class="guide-why">' + esc(b.why) + '</p>' : '') + '</li>').join('')
+      + '</ol></article>').join('')
+    : emptyState('i-pen', 'À écrire',
+        'Je n’ai encore rien rédigé ici. Ça viendra.');
 }
 
 function renderFinds() {
@@ -1012,6 +1065,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
   renderTopics();
   renderFinds();
+  renderGuides();
   renderBible();
   initTabs();
   initTabLinks();

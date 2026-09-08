@@ -1392,51 +1392,28 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Seule exception aux capitales monospace du thème : une phrase de sept
    mots en capitales se déchiffre au lieu de se lire. La coupure est
    explicite, pour éviter un « en » orphelin en début de ligne. */
+/* La phrase tient sur une ligne : c'est une phrase, pas une affiche
+   en deux morceaux. Le 127 reste l'ancre, à 1,55 fois le corps. */
 .bible-claim {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+  display: block;
   margin-top: 16px;
   font-family: var(--display);
   font-weight: 700;
   text-transform: none;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.2;
+  font-size: clamp(20px, 3.1vw, 35px);
+  text-wrap: balance;
 }
-.bible-lead { font-size: clamp(20px, 2.6vw, 27px); }
-.bible-big {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: clamp(21px, 2.8vw, 29px);
-}
+.bible-lead,
+.bible-big { display: inline; font-size: inherit; }
 .bible-num {
   color: var(--cyan);
-  font-size: clamp(54px, 8.4vw, 92px);
-  line-height: 0.86;
+  font-size: 1.55em;
   letter-spacing: -0.05em;
 }
-.bible-sub {
-  font-size: 17.5px;
-  line-height: 1.65;
-  color: var(--body);
-  max-width: 54ch;
-  margin-top: var(--s4);
-}
-
 /* Annotations — pas des tuiles de KPI */
 /* La trame */
-.bible-note {
-  margin-top: var(--s5);
-  padding-left: var(--s4);
-  border-left: 2px solid var(--sand);
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: var(--body);
-  max-width: 68ch;
-}
-
 /* Le carnet, à plat : c'est lui la page, plus une annexe. */
 .bible-logtitle {
   margin: var(--s6) 0 var(--s4);
@@ -1774,3 +1751,58 @@ a.read-item:hover .read-title { color: var(--cyan); }
   color: var(--cyan);
 }
 .find.is-linked:hover .find-go { text-decoration: underline; }
+
+/* ── Mes guides de lecture ─────────────────────────────────────
+   Un guide se lit, il ne se survole pas : une colonne de texte,
+   pas une grille de cartes. Ton en filet — le quatrième et dernier,
+   après le cyan de la lecture, le sable de l'accompli et le neutre
+   des acquisitions. */
+.tone-line {
+  background: transparent;
+  color: var(--cyan);
+  box-shadow: inset 0 0 0 1px var(--cyan-line);
+}
+.guides { display: flex; flex-direction: column; gap: var(--s7); }
+.guide { max-width: 70ch; }
+.guide-title {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.guide-lead {
+  margin-top: 6px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.guide-books {
+  margin-top: var(--s4);
+  padding-left: 0;
+  list-style: none;
+  counter-reset: guide;
+}
+.guide-books li {
+  position: relative;
+  padding: 0 0 var(--s4) var(--s5);
+  counter-increment: guide;
+}
+.guide-books li::before {
+  content: counter(guide, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--cyan);
+}
+.guide-book { font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.guide-book span { font-weight: 400; color: var(--muted); }
+.guide-why {
+  margin-top: 3px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+}
