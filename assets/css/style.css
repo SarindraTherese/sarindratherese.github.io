@@ -1240,54 +1240,9 @@ body > footer {
 /* ============================================================
    NOTES & LECTURES
    ============================================================ */
-.offer-list, .read-list { display: flex; flex-direction: column; }
+.read-list { display: flex; flex-direction: column; }
 
-/* — Séances proposées — */
-.offer-item {
-  display: grid;
-  grid-template-columns: 148px 1fr;
-  gap: var(--s5);
-  padding: var(--s5) 0;
-  border-bottom: 1px solid var(--line-soft);
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.18s ease;
-}
-.offer-item:first-child { border-top: 1px solid var(--line); }
-a.offer-item:hover { background: var(--paper-2); }
-.offer-meta {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-top: 5px;
-}
-.offer-main { display: flex; flex-direction: column; gap: 10px; }
-.offer-title {
-  font-family: var(--display);
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-}
-a.offer-item:hover .offer-title { color: var(--cyan); }
-.offer-summary { font-size: 16.5px; line-height: 1.7; color: var(--body); max-width: 64ch; }
-.offer-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: var(--s1); }
-.offer-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-
-/* — Lectures, regroupées par année — */
+/* — Lectures d’une année — */
 .read-group + .read-group { margin-top: var(--s7); }
 .read-year {
   display: flex;
@@ -1389,10 +1344,8 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .avail-card[data-tone="muted"] .avail-dot::before { background: var(--muted);     box-shadow: 0 0 0 3px rgba(94,118,129,0.16); }
 
 @media (max-width: 860px) {
-  .offer-item, .read-item { grid-template-columns: 1fr; gap: var(--s2); }
-  .offer-meta { padding-top: 0; }
+  .read-item { grid-template-columns: 1fr; gap: var(--s2); }
   .read-kind { margin-top: 0; }
-  .offer-title { font-size: 16px; }
   .read-year h3 { font-size: 21px; }
   .empty-state { padding: var(--s5) var(--s4); }
 }
@@ -1663,69 +1616,76 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 
 /* ============================================================
-   SUJETS DU REFUGE — index cliquable
-   Un sujet occupe toute la largeur : c'est un texte, pas une
-   tuile. Filet en tête, chiffres en monospace en pied.
+   SUJETS DU REFUGE — grille de cartes
+   Même objet que les certifications : badge, titre, méta, lien.
    ============================================================ */
-.topics { display: flex; flex-direction: column; margin-bottom: var(--s7); }
-.topic {
-  display: block;
-  padding: var(--s5) 0;
-  border-top: 1px solid var(--line);
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.18s ease, padding 0.18s ease;
+.topics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s7);
 }
-.topic:last-child { border-bottom: 1px solid var(--line); }
-.topic:hover { background: var(--paper-2); padding-left: var(--s3); padding-right: var(--s3); }
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: var(--s4);
+  text-decoration: none;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.topic-card:hover {
+  border-color: var(--cyan-line);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.topic-badge {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: var(--r1);
+}
+.tone-cyan  { background: var(--cyan-soft); color: var(--cyan); }
+.topic-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  flex: 1;
+}
+.topic-card:hover .topic-name { color: var(--cyan); }
 .topic-meta {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-.topic-title {
-  font-family: var(--display);
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: clamp(19px, 2.4vw, 25px);
-  line-height: 1.22;
-  letter-spacing: -0.02em;
-  margin: 10px 0 12px;
-  max-width: 22ch;
-}
-.topic:hover .topic-title { color: var(--cyan); }
-.topic-dek { font-size: 16.5px; line-height: 1.68; color: var(--body); max-width: 62ch; }
-.topic-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s4);
-  flex-wrap: wrap;
-  margin-top: var(--s4);
-}
-.topic-stats { display: flex; flex-wrap: wrap; gap: 6px; }
-.topic-stats span {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
   color: var(--muted);
-  border: 1px solid var(--line);
-  padding: 3px 9px;
 }
 .topic-go {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cyan);
 }
-.topic:hover .topic-go .icon { transform: translateX(3px); }
 .topic-go .icon { transition: transform 0.18s ease; }
+.topic-card:hover .topic-go .icon { transform: translateX(3px); }
+
+/* Une année pas encore reconstituée reste accessible, mais s'annonce */
+.topic-card.is-empty { background: transparent; border-style: dashed; }
+.topic-card.is-empty .topic-name { color: var(--muted); font-weight: 500; }
+.topic-card.is-empty .topic-go { color: var(--muted); }
+
+@media (max-width: 1020px) { .topics { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .topics { grid-template-columns: 1fr; } }
 
 /* Retour vers le Refuge, en tête d'un sujet */
 .back-link {

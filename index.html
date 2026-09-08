@@ -71,7 +71,6 @@
     <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
     <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
-    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></symbol>
   </defs>
 </svg>
 
@@ -689,26 +688,26 @@
     <header class="refuge-open">
       <p class="refuge-eyebrow">Loin de l’écran</p>
       <h2 class="sec-title">Sarindra's <em>Refuge</em></h2>
-      <p class="refuge-lead">Le reste de ce site parle de ce que je construis. Cette page parle
-      de ce qui me construit — les livres sur lesquels je reviens, et les séances que je propose
-      à côté du travail data.</p>
-      <p class="refuge-note">Pas de calendrier, pas de plan. Ça se remplit au fil du temps.</p>
     </header>
 
     <div class="topics" id="topics"></div>
 
-    <div class="skills-tabs">
-      <button class="stab active" data-tab="reading">Livres</button>
-      <button class="stab" data-tab="sessions">Séances</button>
-    </div>
+  </div>
+</div>
 
-    <div class="skill-panel active" id="sp-reading">
-      <div class="read-list" id="read-list"></div>
-    </div>
-
-    <div class="skill-panel" id="sp-sessions">
-      <div class="offer-list" id="offer-list"></div>
-    </div>
+<!-- ══ SUJET : LIVRES D'UNE ANNÉE ══ -->
+<div class="page" id="page-books">
+  <div class="page-inner">
+    <a class="back-link" href="#refuge">
+      <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+      Sarindra's Refuge
+    </a>
+    <header class="refuge-open">
+      <p class="refuge-eyebrow" id="year-eyebrow">Lecture</p>
+      <h3 class="sec-title" id="year-title">Mes lectures</h3>
+      <p class="refuge-lead" id="year-lead"></p>
+    </header>
+    <div class="read-list" id="read-list"></div>
   </div>
 </div>
 

@@ -52,17 +52,8 @@ const AVAILABILITY_COPY = {
        note: 'Ce que j\'en retiens, en une phrase ou deux.',
        url: 'https://...' }        // facultatif
 
-   OFFERINGS — une séance ou un accompagnement que tu proposes :
-     { name: 'Lecture numérologique',
-       format: 'Visio',            // Visio | Sur place | Écrit
-       length: '60 min',
-       summary: 'Ce que la personne en retire.',
-       tags: ['Numérologie'],
-       url: 'https://...' }        // lien de réservation, facultatif
-
-   ⚠ Tant que ces tableaux sont vides, la page affiche un état
-   d'attente. Ajoute au moins une entrée dans chacun avant de
-   publier.
+   ⚠ Tant que ce tableau est vide, chaque année affiche un état
+   d'attente. Ajoute au moins un livre avant de publier.
    ════════════════════════════════════════════════════════════ */
 const READINGS = [
   // { year: 2023, title: '…', author: '…', kind: 'Livre', note: '…' },
@@ -124,20 +115,29 @@ const BIBLE = {
   ]
 };
 
-const OFFERINGS = [
-  // { name: '…', format: 'Visio', length: '60 min', summary: '…', tags: ['Numérologie'] },
-];
-
 /* ════════════════════════════════════════════════════════════
    3. NAVIGATION — routage par ancre, liens partageables
    ════════════════════════════════════════════════════════════ */
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'contact'];
-const PAGE_TITLES = { home: 'Home', about: 'About', projects: 'Projects',
-  skills: 'Skills', refuge: "Sarindra's Refuge", bible: '127 jours', contact: 'Contact' };
+/* Les années suivies. En ajouter une ici crée sa carte dans le Refuge et
+   sa page (#lectures-2021), sans toucher au HTML. */
+const YEARS = [2025, 2024, 2023, 2022];
+const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
+
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible']
+  .concat(YEAR_PAGES, ['contact']);
+const PAGE_TITLES = Object.assign(
+  { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
+    refuge: "Sarindra's Refuge", bible: '127 jours', contact: 'Contact' },
+  Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
+
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
-const PAGE_PARENT = { bible: 'refuge' };
+const PAGE_PARENT = Object.assign({ bible: 'refuge' },
+  Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
+
+/* Toutes les années partagent un même bloc de page. */
+function nodeIdFor(id) { return id.startsWith('lectures-') ? 'books' : id; }
 
 function trackVirtualPageView(id) {
   if (typeof window.gtag !== 'function') return;
@@ -152,9 +152,10 @@ function showPage(id, opts) {
   const options = opts || {};
 
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const target = document.getElementById('page-' + id);
+  const target = document.getElementById('page-' + nodeIdFor(id));
   if (!target) return;
   target.classList.add('active');
+  if (id.startsWith('lectures-')) renderYear(Number(id.slice(9)));
 
   document.querySelectorAll('#nav-links a').forEach(a => {
     a.classList.toggle('active', a.getAttribute('href') === '#' + (PAGE_PARENT[id] || id));
@@ -284,34 +285,6 @@ function emptyState(icon, title, text) {
     + '<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p></div>';
 }
 
-function renderOfferings() {
-  const host = document.getElementById('offer-list');
-  if (!host) return;
-
-  if (!OFFERINGS.length) {
-    host.innerHTML = emptyState('i-compass', 'Les séances, bientôt',
-      'Je mets en forme ce que je veux proposer ici, à côté du travail data. Le détail et la façon de réserver arriveront sur cette page.');
-    return;
-  }
-
-  host.innerHTML = OFFERINGS.map(o => {
-    const meta = [o.format, o.length].filter(Boolean).join(' · ');
-    const tags = (o.tags || []).map(t => '<span class="ptag">' + esc(t) + '</span>').join('');
-    const link = o.url
-      ? '<span class="offer-more">Book <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>'
-      : '';
-    const inner =
-        '<div class="offer-meta">' + esc(meta) + '</div>'
-      + '<div class="offer-main">'
-      +   '<h3 class="offer-title">' + esc(o.name) + '</h3>'
-      +   '<p class="offer-summary">' + esc(o.summary || '') + '</p>'
-      +   (tags || link ? '<div class="offer-foot">' + tags + link + '</div>' : '')
-      + '</div>';
-    return o.url
-      ? '<a class="offer-item" href="' + esc(o.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
-      : '<article class="offer-item">' + inner + '</article>';
-  }).join('');
-}
 
 function readingItem(r) {
   const inner =
@@ -326,14 +299,6 @@ function readingItem(r) {
     : '<article class="read-item">' + inner + '</article>';
 }
 
-function readingGroup(label, books) {
-  const n = books.length;
-  return '<section class="read-group">'
-    + '<header class="read-year"><h3>' + esc(label) + '</h3>'
-    + '<span>' + n + (n > 1 ? ' livres' : ' livre') + '</span></header>'
-    + books.map(readingItem).join('')
-    + '</section>';
-}
 
 /* ════════════════════════════════════════════════════════════
    SUJETS DU REFUGE
@@ -342,40 +307,40 @@ function readingGroup(label, books) {
      page: 'bible'          → une page interne (#bible)
      url:  'https://…'      → un texte publié ailleurs
    ════════════════════════════════════════════════════════════ */
-const TOPICS = [
-  {
-    kicker: 'Lecture',
-    date:   'Juin 2025',
-    title:  'J’ai lu la Bible en 127 jours',
-    dek:    'Cinq mois, soixante-treize livres, et dix-neuf jours d’arrêt en plein milieu. Ce qu’il y a derrière le chiffre.',
-    stats:  ['127 jours', '73 livres', '39 jours de lecture'],
-    page:   'bible'
-  }
-];
-
 function renderTopics() {
   const host = document.getElementById('topics');
   if (!host) return;
-  if (!TOPICS.length) {
-    host.innerHTML = emptyState('i-pen', 'Rien pour l’instant',
-      'C’est ici que viendront les textes plus longs.');
-    return;
-  }
-  host.innerHTML = TOPICS.map(t => {
-    const external = !t.page && t.url;
-    const href = t.page ? '#' + t.page : (t.url || '#');
-    const stats = (t.stats || []).map(x => '<span>' + esc(x) + '</span>').join('');
-    return '<a class="topic" href="' + esc(href) + '"'
-      + (external ? ' target="_blank" rel="noopener"' : '') + '>'
-      + '<p class="topic-meta">' + esc(t.kicker || '') + (t.date ? ' · ' + esc(t.date) : '') + '</p>'
-      + '<h3 class="topic-title">' + esc(t.title) + '</h3>'
-      + '<p class="topic-dek">' + esc(t.dek || '') + '</p>'
-      + '<div class="topic-foot"><div class="topic-stats">' + stats + '</div>'
-      + '<span class="topic-go">' + 'Lire'
-      + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-'
-      + (external ? 'ur' : 'right') + '"/></svg></span></div></a>';
-  }).join('');
+  host.innerHTML = topics().map(t =>
+      '<a class="topic-card' + (t.empty ? ' is-empty' : '') + '" href="#' + esc(t.page) + '">'
+    + '<span class="topic-badge tone-' + t.tone + '">' + esc(t.badge) + '</span>'
+    + '<span class="topic-name">' + esc(t.title) + '</span>'
+    + '<span class="topic-meta">' + esc(t.meta) + '</span>'
+    + '<span class="topic-go">' + (t.empty ? 'Bientôt' : 'Lire')
+    + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+    + '</span></a>').join('');
 }
+
+function booksOfYear(y) { return READINGS.filter(r => r.year === y); }
+
+function topics() {
+  const bible = {
+    badge: 'Lecture', tone: 'cyan',
+    title: 'J’ai lu la Bible en 127 jours',
+    meta:  '73 livres · 31 janv. — 7 juin 2025',
+    page:  'bible'
+  };
+  return [bible].concat(YEARS.map(y => {
+    const n = booksOfYear(y).length;
+    return {
+      badge: 'Lecture', tone: 'cyan',
+      title: 'Mes lectures de ' + y,
+      meta:  n ? n + (n > 1 ? ' livres' : ' livre') : 'à venir',
+      page:  'lectures-' + y,
+      empty: n === 0
+    };
+  }));
+}
+
 
 /* ── Lecture intégrale : trame des 127 jours + carnet ── */
 const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
@@ -478,22 +443,24 @@ function renderBible() {
         + items.map(row).join('') + '</div>').join('');
 }
 
-function renderReadings() {
-  const host = document.getElementById('read-list');
-  if (!host) return;
 
-  if (!READINGS.length) {
-    host.innerHTML = emptyState('i-book', 'L’étagère se remplit encore',
-      'Je lis bien plus que je n’en écris. Je reconstitue le carnet année par année — ce que j’ai lu, et la chose que j’en ai retenue.');
-    return;
-  }
+/* Page d'une année : même bloc pour toutes, rempli à la volée. */
+function renderYear(year) {
+  const list = document.getElementById('read-list');
+  const title = document.getElementById('year-title');
+  const lead = document.getElementById('year-lead');
+  if (!list || !title) return;
 
-  const undated = READINGS.filter(r => !r.year);
-  const years = [...new Set(READINGS.map(r => r.year).filter(Boolean))].sort((a, b) => b - a);
-
-  host.innerHTML =
-      (undated.length ? readingGroup('En cours de lecture', undated) : '')
-    + years.map(y => readingGroup(String(y), READINGS.filter(r => r.year === y))).join('');
+  const books = booksOfYear(year);
+  title.textContent = 'Mes lectures de ' + year;
+  lead.textContent = books.length
+    ? books.length + (books.length > 1 ? ' livres cette année-là' : ' livre cette année-là')
+      + ', et ce que j’en ai retenu.'
+    : 'Je n’ai pas encore reconstitué cette année.';
+  list.innerHTML = books.length
+    ? books.map(readingItem).join('')
+    : emptyState('i-book', 'À reconstituer',
+        'Les livres de ' + year + ' ne sont pas encore notés. Ils arriveront ici.');
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -706,7 +673,7 @@ const ANIM_SELECTOR = [
   '.sec-hd', '.ab-state', '.ab-band', '.ab-quote', '.exp-item', '.edu-card', '.cert-card',
   '.drives-card', '.skill-cat-card', '.skill-bars-card',
   '.proj-card-v2', '.collab-banner', '.contact-form-card', '.contact-info-card',
-  '.avail-card', '.loc-card', '.offer-item', '.read-item', '.topic'
+  '.avail-card', '.loc-card', '.read-item', '.topic-card'
 ].join(',');
 
 let revealObserver = null;
@@ -759,8 +726,6 @@ function animateCounters() {
    ════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
-  renderReadings();
-  renderOfferings();
   renderTopics();
   renderBible();
   initTabs();
