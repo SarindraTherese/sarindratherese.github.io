@@ -56,8 +56,9 @@ const AVAILABILITY_COPY = {
    `author` est facultatif : mieux vaut pas d'auteur qu'un faux.
    ════════════════════════════════════════════════════════════ */
 /* ════════════════════════════════════════════════════════════
-   DISCOVERIES — les belles découvertes.
-   Un objet, un service, un achat qui a changé quelque chose.
+   DISCOVERIES — testé et adopté.
+   Un objet acheté, essayé, et gardé. Ce qui n'a pas tenu n'a rien
+   à faire ici : c'est ce tri qui donne sa valeur à la liste.
      { name:  'Kindle',
        kind:  'Liseuse',              // la catégorie, en deux mots
        note:  'Pourquoi c’en est une belle.',   // tes mots, 1 à 3 phrases
@@ -68,8 +69,8 @@ const AVAILABILITY_COPY = {
    ════════════════════════════════════════════════════════════ */
 const DISCOVERIES = [
   { name: 'Kindle', kind: 'Liseuse', note: '' },
-  { name: 'Vanow', kind: '', note: '' },
-  { name: 'Bablov', kind: '', note: '' },
+  { name: 'Vanow', kind: 'Mug', note: '' },
+  { name: 'Bablov', kind: 'Tumbler', note: '' },
 ];
 
 
@@ -378,7 +379,7 @@ const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds'
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Belles découvertes', contact: 'Contact' },
+    finds: 'Testé et adopté', contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
@@ -621,10 +622,10 @@ function topics() {
     empty: READINGS.length === 0
   };
   const finds = {
-    badge: 'Découverte', tone: 'ink', icon: 'i-spark',
-    title: 'Belles découvertes',
+    badge: 'Objet', tone: 'ink', icon: 'i-spark',
+    title: 'Testé et adopté',
     meta:  DISCOVERIES.length
-      ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' trouvailles' : ' trouvaille')
+      ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' objets' : ' objet')
       : 'à venir',
     page:  'finds',
     empty: DISCOVERIES.length === 0
@@ -784,7 +785,7 @@ function renderFinds() {
   if (!host) return;
   if (lead) {
     lead.textContent = DISCOVERIES.length
-      ? 'Des objets et des achats qui valaient le coup.'
+      ? 'Des achats que je referais.'
       : '';
   }
   host.innerHTML = DISCOVERIES.length
