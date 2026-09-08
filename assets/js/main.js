@@ -618,9 +618,9 @@ function topics() {
     meta:  READINGS.length
       ? READINGS.length + ' livres · ' + span
       : 'à venir',
-    /* On entre par l'année la plus récente qui a des livres ;
-       les pastilles font le reste. */
-    page:  'lectures-' + (filled.length ? filled[filled.length - 1] : YEARS[0]),
+    /* On entre par la première année, comme les pastilles se lisent ;
+       elles font le reste. */
+    page:  'lectures-' + (filled.length ? filled[0] : YEARS[0]),
     empty: READINGS.length === 0
   };
   const finds = {
