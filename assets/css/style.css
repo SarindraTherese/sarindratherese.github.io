@@ -1243,32 +1243,6 @@ body > footer {
 .read-list { display: flex; flex-direction: column; }
 
 /* — Lectures d’une année — */
-.read-group + .read-group { margin-top: var(--s7); }
-.read-year {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s4);
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--cyan-fill);
-}
-.read-year h3 {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-.read-year span {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.read-group .read-item:first-child { border-top: 0; }
-
 .read-item {
   display: grid;
   grid-template-columns: 132px 1fr;
@@ -1346,7 +1320,6 @@ a.read-item:hover .read-title { color: var(--cyan); }
 @media (max-width: 860px) {
   .read-item { grid-template-columns: 1fr; gap: var(--s2); }
   .read-kind { margin-top: 0; }
-  .read-year h3 { font-size: 21px; }
   .empty-state { padding: var(--s5) var(--s4); }
 }
 
@@ -1399,12 +1372,6 @@ a.read-item:hover .read-title { color: var(--cyan); }
   line-height: 1.6;
   color: var(--ink);
   max-width: 46ch;
-}
-.refuge-note {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  color: var(--muted);
 }
 
 @media (max-width: 600px) {
