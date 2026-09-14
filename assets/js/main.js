@@ -701,12 +701,10 @@ function renderBible() {
 
   /* Une seule ligne sous le titre : ce que c'est, et sur quoi ça court.
      Les 127 jours doivent rester vérifiables — sans ces deux dates, le
-     carnet commence au 9 février et le compte ne tombe pas juste. La
-     cote fait la jonction, comme sur un plan. */
+     carnet commence au 9 février et le compte ne tombe pas juste. */
   const range = document.getElementById('bible-range');
   if (range) {
     range.innerHTML = '<span class="bible-what">Mon carnet de lecture</span>'
-      + '<i aria-hidden="true"></i>'
       + '<span class="bible-span">du ' + esc(enToutesLettres(BIBLE.start))
       + ' au ' + esc(enToutesLettres(BIBLE.end)) + ' '
       + esc(BIBLE.end.slice(0, 4)) + '</span>';

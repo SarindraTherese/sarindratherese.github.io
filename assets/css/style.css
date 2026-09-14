@@ -1753,7 +1753,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 14px;
+  gap: 6px var(--s4);
   margin-top: var(--s4);
   font-family: var(--mono);
   font-size: 13.5px;
@@ -1763,27 +1763,6 @@ a.read-item:hover .read-title { color: var(--cyan); }
    dates, donc c'est elle qui est dans l'encre. */
 .bible-what { color: var(--muted); }
 .bible-span { color: var(--ink); }
-/* Le trait entre les deux dates est une cote : deux repères d'extrémité
-   et la portée entre eux. C'est l'axe que le carnet déroule plus bas. */
-.bible-range i {
-  position: relative;
-  display: block;
-  width: clamp(44px, 11vw, 128px);
-  height: 1px;
-  background: var(--cyan-line);
-}
-.bible-range i::before,
-.bible-range i::after {
-  content: "";
-  position: absolute;
-  top: -4px;
-  width: 1px;
-  height: 9px;
-  background: var(--cyan-line);
-}
-.bible-range i::before { left: 0; }
-.bible-range i::after { right: 0; }
-
 /* Le carnet s'ouvre sous un filet, sans étiquette : la ligne au-dessus
    l'a déjà nommé. */
 .bible-log {
@@ -1792,10 +1771,8 @@ a.read-item:hover .read-title { color: var(--cyan); }
   border-top: 1px solid var(--line);
 }
 
-/* Sur écran étroit, la ligne passe à deux lignes et la cote s'efface :
-   elle joignait deux membres qui ne sont plus côte à côte. */
+/* Sur écran étroit, les deux membres passent l'un sous l'autre. */
 @media (max-width: 620px) {
-  .bible-range i { display: none; }
   .bible-range { gap: 4px 10px; }
 }
 
