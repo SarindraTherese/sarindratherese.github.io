@@ -129,7 +129,8 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
   top: 0; left: 0; right: 0;
   z-index: 200;
   height: var(--nav-h);
-  background: rgba(245, 248, 249, 0.88);
+  background: var(--paper);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
@@ -168,6 +169,33 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a.active { color: var(--ink); border-bottom-color: var(--cyan-fill); }
+
+/* Le Refuge n'est pas une page de portfolio : le lien le dit.
+   Un filet le détache du bloc professionnel, et il porte le sable
+   au repos — la seule tache chaude de la barre. */
+.nav-links a.nav-refuge {
+  position: relative;
+  margin-left: 15px;
+  color: var(--sand-text);
+}
+.nav-links a.nav-refuge::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 15px;
+  background: var(--line);
+}
+.nav-links a.nav-refuge:hover {
+  color: var(--sand-text);
+  background: var(--sand-soft);
+}
+.nav-links a.nav-refuge.active {
+  color: var(--sand-text);
+  border-bottom-color: var(--sand);
+}
 
 .nav-burger {
   display: none;
@@ -1212,80 +1240,9 @@ body > footer {
 /* ============================================================
    NOTES & LECTURES
    ============================================================ */
-.offer-list, .read-list { display: flex; flex-direction: column; }
+.read-list { display: flex; flex-direction: column; }
 
-/* — Séances proposées — */
-.offer-item {
-  display: grid;
-  grid-template-columns: 148px 1fr;
-  gap: var(--s5);
-  padding: var(--s5) 0;
-  border-bottom: 1px solid var(--line-soft);
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.18s ease;
-}
-.offer-item:first-child { border-top: 1px solid var(--line); }
-a.offer-item:hover { background: var(--paper-2); }
-.offer-meta {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-top: 5px;
-}
-.offer-main { display: flex; flex-direction: column; gap: 10px; }
-.offer-title {
-  font-family: var(--display);
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-}
-a.offer-item:hover .offer-title { color: var(--cyan); }
-.offer-summary { font-size: 16.5px; line-height: 1.7; color: var(--body); max-width: 64ch; }
-.offer-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: var(--s1); }
-.offer-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-
-/* — Lectures, regroupées par année — */
-.read-group + .read-group { margin-top: var(--s7); }
-.read-year {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s4);
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--cyan-fill);
-}
-.read-year h3 {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-.read-year span {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.read-group .read-item:first-child { border-top: 0; }
-
+/* — Lectures d’une année — */
 .read-item {
   display: grid;
   grid-template-columns: 132px 1fr;
@@ -1361,11 +1318,8 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .avail-card[data-tone="muted"] .avail-dot::before { background: var(--muted);     box-shadow: 0 0 0 3px rgba(94,118,129,0.16); }
 
 @media (max-width: 860px) {
-  .offer-item, .read-item { grid-template-columns: 1fr; gap: var(--s2); }
-  .offer-meta { padding-top: 0; }
+  .read-item { grid-template-columns: 1fr; gap: var(--s2); }
   .read-kind { margin-top: 0; }
-  .offer-title { font-size: 16px; }
-  .read-year h3 { font-size: 21px; }
   .empty-state { padding: var(--s5) var(--s4); }
 }
 
@@ -1388,3 +1342,580 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .fact-link:hover { color: var(--cyan); }
 .fact-link:hover .icon { transform: translateX(3px); }
 .fact-link:hover small { color: var(--cyan); }
+
+/* ============================================================
+   SARINDRA'S REFUGE
+   La page reste dans le thème Blueprint : c'est le lien de la barre
+   de navigation qui signale qu'elle mène ailleurs. Ici, seule
+   l'ouverture change de rythme.
+   ============================================================ */
+/* L'ouverture — une invitation, pas un en-tête de section */
+.refuge-open {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  max-width: 60ch;
+  padding-bottom: var(--s5);
+  margin-bottom: var(--s6);
+  border-bottom: 1px solid var(--line);
+}
+.refuge-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.refuge-lead {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 46ch;
+}
+
+@media (max-width: 600px) {
+  .refuge-lead { font-size: 18px; }
+}
+
+
+/* ============================================================
+   LECTURE INTÉGRALE — la trame des 127 jours
+   Le motif du site est déjà une grille : elle devient ici le
+   graphique. Pas d'axes, pas de légende, pas de tuiles.
+   ============================================================ */
+.bible {
+  padding-bottom: var(--s7);
+  margin-bottom: var(--s7);
+  border-bottom: 1px solid var(--line);
+}
+/* Seule exception aux capitales monospace du thème : une phrase de sept
+   mots en capitales se déchiffre au lieu de se lire. La coupure est
+   explicite, pour éviter un « en » orphelin en début de ligne. */
+/* La phrase tient sur une ligne : c'est une phrase, pas une affiche
+   en deux morceaux. Le 127 reste l'ancre, à 1,55 fois le corps. */
+.bible-claim {
+  display: block;
+  margin-top: var(--s3);
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  font-size: clamp(20px, 3.1vw, 35px);
+  text-wrap: balance;
+}
+.bible-lead,
+.bible-big { display: inline; font-size: inherit; }
+.bible-num {
+  color: var(--cyan);
+  font-size: 1.55em;
+  letter-spacing: -0.05em;
+}
+/* Annotations — pas des tuiles de KPI */
+/* La trame */
+/* Le carnet, à plat : c'est lui la page, plus une annexe. */
+@media (max-width: 860px) {
+  .bible-claim { max-width: none; }
+}
+
+/* ============================================================
+   SUJETS DU REFUGE — grille de cartes
+   Même objet que les certifications : badge, titre, méta, lien.
+   ============================================================ */
+.topics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s7);
+}
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: var(--s4);
+  text-decoration: none;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.topic-card:hover {
+  border-color: var(--cyan-line);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.topic-badge {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: var(--r1);
+}
+.tone-cyan  { background: var(--cyan-soft); color: var(--cyan); }
+/* Le sable est réservé à ce qui est accompli, pas à ce qui se poursuit
+   (#9A5019 sur #F0E1D2 : 4,64:1, AA). */
+.tone-sand  { background: var(--sand-soft); color: var(--sand-text); }
+/* L'icône du badge se cale sur la casse du texte, pas sur la ligne. */
+.topic-badge { display: inline-flex; align-items: center; gap: 6px; }
+.icon-xs { width: 12px; height: 12px; }
+.topic-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  flex: 1;
+}
+.topic-card:hover .topic-name { color: var(--cyan); }
+.topic-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.topic-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.topic-go .icon { transition: transform 0.18s ease; }
+.topic-card:hover .topic-go .icon { transform: translateX(3px); }
+
+/* Une année pas encore reconstituée reste accessible, mais s'annonce */
+.topic-card.is-empty { background: transparent; border-style: dashed; }
+.topic-card.is-empty .topic-name { color: var(--muted); font-weight: 500; }
+.topic-card.is-empty .topic-go { color: var(--muted); }
+
+@media (max-width: 1020px) { .topics { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .topics { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   L'ÉTAGÈRE — les livres d'une année
+   Les couvertures sont la seule couleur libre du site : le
+   Blueprint tient le cadre, les livres font le mur.
+   ============================================================ */
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+  gap: var(--s5) var(--s4);
+}
+.book { display: flex; flex-direction: column; gap: 10px; }
+.book-cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease;
+}
+.book:hover .book-cover { transform: translateY(-3px); }
+.book-cover img { width: 100%; height: 100%; object-fit: cover; }
+/* La tranche attend derrière l'image : elle n'apparaît que si le
+   fichier manque (voir bookNoCover). */
+.book-cover > span { display: none; }
+.book-cover.is-blank > span { display: block; }
+
+/* Sans couverture : une tranche typographique, pas un trou */
+.book-cover.is-blank {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 13px;
+  background: var(--surface);
+  border-style: dashed;
+  box-shadow: none;
+}
+.book-cover.is-blank span {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow: hidden;
+  /* Un titre long ne doit pas déborder de sa tranche. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.book-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.book-author {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .shelf { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--s4) var(--s3); }
+  .book-title { font-size: 12.5px; }
+}
+
+/* ── Les années, en pastilles ──────────────────────────────────
+   On passe d'une année à l'autre sans repasser par le Refuge.
+   L'année lue est en aplat cyan (blanc sur #0B7699 : 5,17:1, AA). */
+.years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--s6);
+}
+.year-pill {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-family: var(--mono);
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.year-pill:hover { border-color: var(--cyan-line); background: var(--cyan-soft); }
+.year-pill-y {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.year-pill-n {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.year-pill.is-current {
+  background: var(--cyan-fill);
+  border-color: var(--cyan-fill);
+}
+.year-pill.is-current .year-pill-y,
+.year-pill.is-current .year-pill-n { color: #fff; }
+/* Une année pas encore reconstituée : pointillé, comme les tranches. */
+.year-pill.is-empty { border-style: dashed; }
+.year-pill.is-empty .year-pill-y { color: var(--muted); }
+
+/* Un livre qui mène quelque part : ici la Bible, vers les 127 jours. */
+.book.is-linked { text-decoration: none; }
+.book.is-linked .book-cover { border-color: var(--sand-line); }
+.book.is-linked:hover .book-cover { border-color: var(--sand); }
+.book-go {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sand-text);
+}
+.book.is-linked:hover .book-go { text-decoration: underline; }
+
+/* ── Belles découvertes ────────────────────────────────────────
+   Ni une fiche produit, ni une étagère de couvertures : un objet,
+   ce qu'il est, et pourquoi il compte. Ton neutre (#0A2634 sur
+   #DBE7ED : 12,44:1) — le cyan reste à la lecture, le sable à ce
+   qui est accompli. */
+.tone-ink { background: var(--paper-2); color: var(--ink); }
+.finds {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: var(--s4);
+  /* Une carte sans photo ne s'étire pas à la hauteur de celles qui en
+     ont une : elle reste courte au lieu de montrer un vide. */
+  align-items: start;
+}
+.find {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  text-decoration: none;
+}
+.find.is-linked { transition: border-color 0.18s ease; }
+.find.is-linked:hover { border-color: var(--cyan-line); }
+/* Photos de produit, souvent carrées et détourées : on montre l'objet
+   entier plutôt que de le recadrer. D'où `contain` et non `cover`. */
+.find-shot {
+  /* Cadre carré : il accueille aussi bien un objet haut et étroit
+     qu'un objet large, sans qu'aucun n'apparaisse minuscule. */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px;
+  margin-bottom: 4px;
+  background: #fff;
+  border: 1px solid var(--line-soft);
+}
+.find-shot img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.find-kind {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.find-name {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.find-note { font-size: 14.5px; line-height: 1.6; color: var(--body); }
+.find-go {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.find.is-linked:hover .find-go { text-decoration: underline; }
+
+/* ── Mes guides de lecture ─────────────────────────────────────
+   Un guide se lit, il ne se survole pas : une colonne de texte,
+   pas une grille de cartes. Ton en filet — le quatrième et dernier,
+   après le cyan de la lecture, le sable de l'accompli et le neutre
+   des acquisitions. */
+.tone-line {
+  background: transparent;
+  color: var(--cyan);
+  box-shadow: inset 0 0 0 1px var(--cyan-line);
+}
+.guides { display: flex; flex-direction: column; gap: var(--s7); }
+.guide { max-width: 70ch; }
+.guide-title {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.guide-lead {
+  margin-top: 6px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.guide-books {
+  margin-top: var(--s4);
+  padding-left: 0;
+  list-style: none;
+  counter-reset: guide;
+}
+.guide-books li {
+  position: relative;
+  padding: 0 0 var(--s4) var(--s5);
+  counter-increment: guide;
+}
+.guide-books li::before {
+  content: counter(guide, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--cyan);
+}
+.guide-book { font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.guide-book span { font-weight: 400; color: var(--muted); }
+.guide-why {
+  margin-top: 3px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+/* La plage de dates : c'est elle qui rend les 127 jours vérifiables.
+   En bas de casse, pour ne pas faire une deuxième ligne de capitales
+   sous le surtitre — le titre doit rester seul entre les deux. */
+.bible-range {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px var(--s4);
+  margin-top: var(--s4);
+  font-family: var(--mono);
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+}
+/* Ce que c'est, puis sur quoi ça court : la seconde moitié porte les
+   dates, donc c'est elle qui est dans l'encre. */
+.bible-what { color: var(--muted); }
+.bible-span { color: var(--ink); }
+/* Le carnet s'ouvre sous un filet, sans étiquette : la ligne au-dessus
+   l'a déjà nommé. */
+.bible-log {
+  margin-top: var(--s6);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--line);
+}
+
+/* Sur écran étroit, les deux membres passent l'un sous l'autre. */
+@media (max-width: 620px) {
+  .bible-range { gap: 4px 10px; }
+}
+
+/* ── Le carnet des 127 jours ───────────────────────────────────
+   Une ligne de temps, pas un tableau. Un filet court du premier jour
+   au dernier ; les mois y sont des crans, les jours des points. Le
+   rythme n'est pas dessiné : il se lit dans la page, un jour où sept
+   livres s'achèvent tenant sept lignes. */
+.carnet {
+  list-style: none;
+  padding: 0;
+  max-width: 46ch;
+  /* Largeur commune au compte des mois et à la pastille : en `ch`,
+     elle vaudrait deux choses différentes selon la fonte. */
+  --w: min(21rem, 100% - var(--s4));
+  /* Le filet est l'axe : il ne s'interrompt jamais. */
+  border-left: 1px solid var(--cyan-line);
+}
+
+/* Un mois : son nom, une conduite, son compte. La conduite occupe le
+   vide au lieu de le laisser béer, et tient l'œil d'un bout à l'autre. */
+.carnet-month {
+  margin: var(--s6) 0 var(--s2);
+  padding-left: var(--s4);
+}
+.carnet-month:first-child { margin-top: 0; }
+.carnet-month h4 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Assez court pour que le compte reste lié à son mois. */
+  max-width: var(--w);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.carnet-month h4 i {
+  flex: 1;
+  height: 1px;
+  background: var(--cyan-line);
+}
+.carnet-n {
+  flex: none;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* Un jour est un point sur l'axe. Le quantième garde sa colonne, et
+   le zéro de tête aligne le 09 sur le 25. */
+.carnet-day {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+  padding: 9px 0 9px var(--s4);
+}
+/* Un anneau, pas un pâté : le trait de l'axe passe au travers. */
+.carnet-day::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 17px;
+  width: 7px;
+  height: 7px;
+  background: var(--paper);
+  border: 2px solid var(--cyan-fill);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.carnet-num {
+  flex: none;
+  width: 2.4em;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.carnet-books b {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+/* Le premier livre porte sa marque. Elle est posée au bord droit
+   commun plutôt que poussée par le contenu : ainsi elle tombe sous les
+   comptes des mois, quelle que soit la longueur du titre. */
+.carnet-tag {
+  position: absolute;
+  left: calc(var(--w) + var(--s4));
+  transform: translateX(-100%);
+  top: 8px;
+  padding: 3px 9px;
+  border: 1px solid var(--cyan-line);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+/* Sur un écran étroit, le compte du mois revient contre son nom. */
+@media (max-width: 600px) {
+  .carnet-month h4 { max-width: none; }
+  .carnet-day { padding-left: var(--s3); }
+  .carnet-month { padding-left: var(--s3); }
+  .carnet-month::before { width: 9px; }
+}
+/* Le silence : une hauteur proportionnelle à sa durée, et rien d'autre. */
+
+/* ── Fil d'Ariane ──────────────────────────────────────────────
+   En bas de casse, là où les surtitres sont en capitales : c'est un
+   chemin, pas une étiquette de plus. Le dernier maillon n'est pas un
+   lien — on y est déjà. */
+.crumbs { margin-bottom: var(--s5); }
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.crumbs li { display: flex; align-items: center; gap: 8px; }
+.crumbs li + li::before {
+  content: "/";
+  color: var(--line);
+}
+.crumbs a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.crumbs a:hover { color: var(--cyan); border-bottom-color: var(--cyan-line); }
+.crumbs [aria-current="page"] { color: var(--ink); }

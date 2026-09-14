@@ -44,41 +44,392 @@ const AVAILABILITY_COPY = {
    Aucun HTML à toucher. Les entrées s'affichent dans l'ordre
    du tableau — mets la plus récente en premier.
 
-   READINGS — un livre, et ce que tu en retiens.
-   Les livres se regroupent tout seuls par année, la plus récente
-   en haut. Une entrée sans `year` part dans « Currently reading ».
-     { year: 2023,
-       title: '...', author: '...', kind: 'Book',   // Book | Essay | Article
-       note: 'Ce que j\'en retiens, en une phrase ou deux.',
-       url: 'https://...' }        // facultatif
+   READINGS — un livre lu, une ligne.
+   L'année range le livre sur la bonne étagère (#lectures-2023).
+     { year: 2023, title: '…', author: '…', cover: 'le-petit-prince.jpg' }
 
-   OFFERINGS — une séance ou un accompagnement que tu proposes :
-     { name: 'Lecture numérologique',
-       format: 'Visio',            // Visio | Sur place | Écrit
-       length: '60 min',
-       summary: 'Ce que la personne en retire.',
-       tags: ['Numérologie'],
-       url: 'https://...' }        // lien de réservation, facultatif
+   La couverture se cherche dans assets/img/livres/<année>/<cover>.
+   Le fichier peut ne pas exister : la carte affiche alors son titre
+   en tranche typographique. Poser l'image au bon nom suffit à la
+   faire apparaître — il n'y a rien à changer ici.
 
-   ⚠ Tant que ces tableaux sont vides, la page affiche un état
-   d'attente. Ajoute au moins une entrée dans chacun avant de
-   publier.
+   `author` est facultatif : mieux vaut pas d'auteur qu'un faux.
    ════════════════════════════════════════════════════════════ */
-const READINGS = [
-  // { year: 2023, title: '…', author: '…', kind: 'Book', note: '…' },
+/* ════════════════════════════════════════════════════════════
+   DISCOVERIES — testé et adopté.
+   Un objet acheté, essayé, et gardé. Ce qui n'a pas tenu n'a rien
+   à faire ici : c'est ce tri qui donne sa valeur à la liste.
+     { name:  'Kindle',
+       kind:  'Liseuse',              // la catégorie, en deux mots
+       note:  'Pourquoi c’en est une belle.',   // tes mots, 1 à 3 phrases
+       image: 'kindle.jpg',           // dans assets/img/decouvertes/
+       url:   'https://…' }           // facultatif
+
+   `note`, `image` et `url` peuvent manquer : la carte s'adapte.
+   ════════════════════════════════════════════════════════════ */
+const DISCOVERIES = [
+  { name: 'Kindle', image: 'kindle.jpg' },
+  { name: 'Vanow', image: 'vanow.png' },
+  { name: 'Bablov', image: 'bablov.jpeg' },
 ];
 
-const OFFERINGS = [
-  // { name: '…', format: 'Visio', length: '60 min', summary: '…', tags: ['Numérologie'] },
+
+/* ════════════════════════════════════════════════════════════
+   GUIDES — mes guides de lecture.
+   Un guide répond à une question qu'on te pose vraiment : par où
+   commencer, quoi lire après tel livre, que lire quand on n'a pas
+   le temps. Chaque livre cité dit pourquoi il est là.
+     { title: 'Par où commencer',
+       lead:  'À qui ça s’adresse, en une phrase.',
+       books: [
+         { title: '…', author: '…',
+           why: 'Pourquoi celui-là, et pas un autre.' }
+       ] }
+
+   Tant que ce tableau est vide, la carte du Refuge affiche « à venir ».
+   ════════════════════════════════════════════════════════════ */
+const GUIDES = [
 ];
+
+
+const READINGS = [
+  /* ── 2022 ── */
+  { year: 2022, title: 'Le guide du lightworker', author: 'Isabelle Cerf', cover: 'guide_du_lightworker.jpeg' },
+  { year: 2022, title: 'Penser comme un millionnaire', author: 'Dean Graziosi', cover: 'Penser_comme_un_millionnaire.jpg' },
+  { year: 2022, title: 'Apprendre à gérer son argent', author: 'Eric Braun et Sandy Donovan', cover: 'Apprendre à gérer son argent.jpeg' },
+  { year: 2022, title: 'L\'art de la confiance en soi', author: 'Katty Kay et Claire Shipman', cover: 'L\'art de la confiance en soi.jpeg' },
+  { year: 2022, title: 'La clé de votre énergie', author: 'Natacha Calestrémé', cover: 'La cle de votre energie.jpg' },
+  { year: 2022, title: 'Le guide détendu des émotions au travail', author: 'Liz Fosslien et Mollie West Duffy', cover: 'Le guide détendu des émotions au travail.jpg' },
+  { year: 2022, title: 'L\'obstacle est le chemin', author: 'Ryan Holiday', cover: 'L\'obstacle est le chemin.jpg' },
+  { year: 2022, title: 'Père riche, père pauvre', author: 'Robert Kiyosaki', cover: 'Père riche, père pauvre .jpg' },
+  { year: 2022, title: 'La magie du rangement illustrée', author: 'Marie Kondo', cover: 'La magie du rangement illustrée.jpg' },
+  { year: 2022, title: 'The Personal MBA', author: 'Josh Kaufman', cover: 'The personal MBA.jpg' },
+  { year: 2022, title: 'Trouver ma place', author: 'Natacha Calestrémé', cover: 'Trouver ma place.jpg' },
+  { year: 2022, title: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une', author: 'Raphaëlle Giordano', cover: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une.jpg' },
+  { year: 2022, title: 'Le miracle de la pleine conscience', author: 'Thich Nhat Hanh', cover: 'Le miracle de la pleine conscience.jpg' },
+  { year: 2022, title: 'L\'homme qui voulait être heureux', author: 'Laurent Gounelle', cover: 'L\'homme qui voulait être heureux.jpg' },
+  { year: 2022, title: 'Le pouvoir du moment présent', author: 'Eckhart Tolle', cover: 'Le pouvoir du moment présent.jpg' },
+  { year: 2022, title: 'La puissance de l\'acceptation', author: 'Lise Bourbeau', cover: 'La Puissance de l\'acceptation.jpg' },
+  { year: 2022, title: 'L\'Alchimiste', author: 'Paulo Coelho', cover: 'L\'Alchimiste.jpg' },
+  { year: 2022, title: 'Les mots sont des fenêtres', author: 'Marshall Rosenberg', cover: 'Les mots sont des fenêtres.jpg' },
+  { year: 2022, title: 'Les 5 blessures', author: 'Lise Bourbeau', cover: 'Les 5 blessures.jpg' },
+  { year: 2022, title: 'Progressez à pas de géant', author: 'Anthony Robbins', cover: 'Progressez à pas de géant .jpg' },
+  { year: 2022, title: 'Miracle Morning', author: 'Hal Elrod', cover: 'Miracle Morning.jpg' },
+  { year: 2022, title: 'Qui es-tu ?', author: 'Lise Bourbeau', cover: 'Qui es tu?.jpg' },
+  { year: 2022, title: 'Devenir super-conscient', author: 'Joe Dispenza', cover: 'Devenir super-conscient .jpg' },
+  { year: 2022, title: 'Kilomètre zéro', author: 'Maud Ankaoua', cover: 'Kilomètre zéro.jpg' },
+  { year: 2022, title: 'Communiquer et guérir avec les anges', author: 'Doreen Virtue', cover: 'Communiquer et guérir avec les anges.jpg' },
+  { year: 2022, title: 'Révélez la sorcière qui dort en vous', author: 'Gabriela Herstik', cover: 'Révélez la sorcière qui dort en vous.jpg' },
+  { year: 2022, title: 'Le livre des esprits', author: 'Allan Kardec', cover: 'Le livre des esprits.jpg' },
+  { year: 2022, title: 'La prophétie des Andes', author: 'James Redfield', cover: 'La prophétie des Andes.jpg' },
+  { year: 2022, title: 'Écoute ton corps', author: 'Lise Bourbeau', cover: 'Écoute ton corps: La responsabilité, l\'engagement & la culpabilité.jpg' },
+  { year: 2022, title: 'Réfléchissez et devenez riche', author: 'Napoleon Hill', cover: 'reflechissez et devenez riche.jpg' },
+  { year: 2022, title: 'Les quatre accords toltèques', author: 'Don Miguel Ruiz', cover: 'Les quatre accords toltèques.jpg' },
+  { year: 2022, title: 'Prendre soin de l\'enfant intérieur', author: 'Thich Nhat Hanh', cover: 'Prendre soin de l\'enfant intérieur.jpg' },
+  { year: 2022, title: 'À la croisée des mondes', author: 'Philip Pullman', cover: 'À la croisée des mondes.jpg' },
+  /* ── 2023 ── */
+  { year: 2023, title: 'La Wicca', author: 'Scott Cunningham', cover: 'La wicca.jpg' },
+  { year: 2023, title: 'Trois minutes à méditer', author: 'Christophe André', cover: 'Trois minutes à méditer.jpg' },
+  { year: 2023, title: 'Le Petit Prince', author: 'Antoine de Saint-Exupéry', cover: 'Le Petit Prince.jpg' },
+  { year: 2023, title: 'Devenir', author: 'Michelle Obama', cover: 'Devenir.jpg' },
+  { year: 2023, title: 'Le charme discret de l\'intestin', author: 'Giulia Enders', cover: 'Le charme discret de l\'intestin.jpg' },
+  { year: 2023, title: 'Transformez votre vie', author: 'Louise Hay', cover: 'Transformez votre vie.jpg' },
+  { year: 2023, title: 'Deep Work', author: 'Cal Newport', cover: 'Deep Work.jpg' },
+  { year: 2023, title: 'Le livre des médiums', author: 'Allan Kardec', cover: 'Le livre des médiums.jpg' },
+  { year: 2023, title: 'Oser', author: 'Frédéric Fanget', cover: 'oser.jpg' },
+  { year: 2023, title: 'S\'ouvrir à l\'amour et au bonheur', author: 'Don Miguel Ruiz', cover: 'S\'ouvrir à l\'amour et au bonheur.jpg' },
+  { year: 2023, title: 'Orgueil et préjugés', author: 'Jane Austen', cover: 'Orgueil et préjugés.jpg' },
+  { year: 2023, title: 'Et si c\'était vrai', author: 'Marc Levy', cover: 'Et si c\'était vrai.jpg' },
+  { year: 2023, title: 'Conversations avec Dieu, tome 1', author: 'Neale Donald Walsch', cover: 'Conversations avec Dieu, tome 1.jpg' },
+  { year: 2023, title: 'La confiance en soi, une philosophie', author: 'Charles Pépin', cover: 'La confiance en soi, une philosophie.jpg' },
+  { year: 2023, title: 'Le jour où j\'ai appris à vivre', author: 'Laurent Gounelle', cover: 'Le jour où j\'ai appris à vivre.jpg' },
+  { year: 2023, title: 'Techniques de visualisation créatrice', author: 'Shakti Gawain', cover: 'Techniques de visualisation créatrice.jpg' },
+  { year: 2023, title: 'Da Vinci Code', author: 'Dan Brown', cover: 'Da Vinci Code.jpeg' },
+  { year: 2023, title: 'L\'Étranger', author: 'Albert Camus', cover: 'L\'Étranger.jpg' },
+  { year: 2023, title: 'Jamais plus', author: 'Colleen Hoover', cover: 'Jamais plus.jpg' },
+  { year: 2023, title: 'Petit traité de vie intérieure', author: 'Frédéric Lenoir', cover: 'Petit traité de vie intérieure.jpg' },
+  { year: 2023, title: 'Testament des abeilles', author: 'Natacha Calestrémé', cover: 'Testament des abeilles.jpg' },
+  { year: 2023, title: 'Le livre des coïncidences', author: 'Deepak Chopra', cover: 'Le livre des coïncidences.jpg' },
+  { year: 2023, title: 'Conversations avec Dieu, tome 2', author: 'Neale Donald Walsch', cover: 'Conversations avec Dieu, tome 2.jpg' },
+  { year: 2023, title: 'Nos étoiles contraires', author: 'John Green', cover: 'Nos étoiles contraires.jpg' },
+  { year: 2023, title: 'Il est grand temps de rallumer les étoiles', author: 'Virginie Grimaldi', cover: 'Il est grand temps de rallumer les étoiles.jpg' },
+  { year: 2023, title: 'Onze minutes', author: 'Paulo Coelho', cover: 'Onze minutes.jpg' },
+  { year: 2023, title: 'Tremblez mais osez', author: 'Susan Jeffers', cover: 'Tremblez mais osez.jpg' },
+  { year: 2023, title: 'La loi de l\'attraction', author: 'Esther et Jerry Hicks', cover: 'La loi de l\'attraction.jpg' },
+  { year: 2023, title: 'L\'estime de soi', author: 'Christophe André et François Lelord', cover: 'L\'estime de soi.jpg' },
+  { year: 2023, title: 'N\'ayez pas peur de la vie', author: 'Patricia Darré', cover: 'N\'ayez pas peur de la vie.jpg' },
+  { year: 2023, title: 'Steve Jobs', author: 'Walter Isaacson', cover: 'Steve Jobs.jpg' },
+  { year: 2023, title: 'Méditer, jour après jour', author: 'Christophe André', cover: 'Méditer, jour après jour.jpg' },
+  { year: 2023, title: 'La femme parfaite est une connasse', author: 'Anne-Sophie et Marie-Aldine Girard', cover: 'La femme parfaite est une connasse.jpg' },
+  { year: 2023, title: 'Comment se faire des amis', author: 'Dale Carnegie', cover: 'Comment se faire des amis.jpg' },
+  { year: 2023, title: 'La formule de Dieu', author: 'José Rodrigues dos Santos', cover: 'La formule de Dieu.jpg' },
+  { year: 2023, title: 'La magie de la foi', author: 'Joseph Murphy', cover: 'La magie de la foi.jpg' },
+  { year: 2023, title: 'Qui a piqué mon fromage ?', author: 'Spencer Johnson', cover: 'Qui a piqué mon fromage ?.jpg' },
+  { year: 2023, title: 'La ferme des animaux', author: 'George Orwell', cover: 'La ferme des animaux.jpg' },
+  { year: 2023, title: 'Harry Potter à l\'école des sorciers', author: 'J. K. Rowling', cover: 'Harry Potter à l\'école des sorciers.jpg' },
+  { year: 2023, title: 'Harry Potter et la chambre des secrets', author: 'J. K. Rowling', cover: 'Harry Potter et la chambre des secrets.jpg' },
+  { year: 2023, title: 'Imparfaits, libres et heureux', author: 'Christophe André', cover: 'Imparfaits, libres et heureux.jpg' },
+  { year: 2023, title: 'La vie !', author: 'Louise Hay', cover: 'La vie ! louise hay.jpg' },
+  { year: 2023, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'La magie de voir grand.jpg' },
+  /* ── 2024 ── */
+  { year: 2024, title: 'Quand on veut, on peut !', cover: 'quand-on-veut-on-peut.jpg' },
+  { year: 2024, title: 'Je pense trop', author: 'Christel Petitcollin', cover: 'je-pense-trop.jpg' },
+  { year: 2024, title: 'Il y a quelqu\'un dans la maison', author: 'Stephanie Perkins', cover: 'il-y-a-quelqu-un-dans-la-maison.jpg' },
+  { year: 2024, title: 'La tresse', author: 'Laetitia Colombani', cover: 'la-tresse.jpg' },
+  { year: 2024, title: 'Les impatientes', author: 'Djaïli Amadou Amal', cover: 'les-impatientes.jpg' },
+  { year: 2024, title: 'Plus rien ne pourra me blesser', author: 'David Goggins', cover: 'plus-rien-ne-pourra-me-blesser.jpg' },
+  { year: 2024, title: 'Numéro deux', author: 'David Foenkinos', cover: 'numero-deux.jpg' },
+  { year: 2024, title: 'Harry Potter et le prisonnier d\'Azkaban', author: 'J. K. Rowling', cover: 'harry-potter-et-le-prisonnier-d-azkaban.jpg' },
+  { year: 2024, title: 'Harry Potter et la coupe de feu', author: 'J. K. Rowling', cover: 'harry-potter-et-la-coupe-de-feu.jpg' },
+  { year: 2024, title: 'Les hauts de Hurlevent', author: 'Emily Brontë', cover: 'les-hauts-de-hurlevent.jpg' },
+  { year: 2024, title: 'Psychologie de la peur', author: 'Christophe André', cover: 'psychologie-de-la-peur.jpg' },
+  { year: 2024, title: 'Je revenais des autres', author: 'Mélissa Da Costa', cover: 'je-revenais-des-autres.jpg' },
+  { year: 2024, title: 'Le cinquième accord toltèque', author: 'Don Miguel Ruiz', cover: 'le-cinquieme-accord-tolteque.jpg' },
+  { year: 2024, title: 'The Subtle Art of Not Giving a F*ck', author: 'Mark Manson', cover: 'the-subtle-art-of-not-giving-a-f-ck.jpg' },
+  { year: 2024, title: 'Antigone', cover: 'antigone.jpg' },
+  { year: 2024, title: 'La magie de voir grand', author: 'David Schwartz', cover: 'la-magie-de-voir-grand.jpg' },
+  { year: 2024, title: 'Conversations avec Dieu, tome 1', author: 'Neale Donald Walsch', cover: 'conversations-avec-dieu-tome-1.jpg' },
+  { year: 2024, title: 'Juste avant le bonheur', author: 'Agnès Ledig', cover: 'juste-avant-le-bonheur.jpg' },
+  { year: 2024, title: 'Des fleurs pour Algernon', author: 'Daniel Keyes', cover: 'des-fleurs-pour-algernon.jpg' },
+  { year: 2024, title: 'L\'art d\'avoir toujours raison', author: 'Arthur Schopenhauer', cover: 'l-art-d-avoir-toujours-raison.jpg' },
+  { year: 2024, title: 'La délicatesse', author: 'David Foenkinos', cover: 'la-delicatesse.jpg' },
+  { year: 2024, title: 'The 5 Love Languages', author: 'Gary Chapman', cover: 'the-5-love-languages.jpg' },
+  { year: 2024, title: 'L\'art de la simplicité', author: 'Dominique Loreau', cover: 'l-art-de-la-simplicite.jpg' },
+  { year: 2024, title: 'Harry Potter et l\'ordre du Phénix', author: 'J. K. Rowling', cover: 'harry-potter-et-l-ordre-du-phenix.jpg' },
+  { year: 2024, title: 'Harry Potter et le prince de sang-mêlé', author: 'J. K. Rowling', cover: 'harry-potter-et-le-prince-de-sang-mele.jpg' },
+  { year: 2024, title: 'Harry Potter et les reliques de la mort', author: 'J. K. Rowling', cover: 'harry-potter-et-les-reliques-de-la-mort.jpg' },
+  { year: 2024, title: 'Toujours plus, + = +', author: 'Léna Situations', cover: 'toujours-plus.jpg' },
+  { year: 2024, title: 'Les douleurs fantômes', author: 'Mélissa Da Costa', cover: 'les-douleurs-fantomes.jpg' },
+  { year: 2024, title: 'Votre temps est infini', author: 'Fabien Olicard', cover: 'votre-temps-est-infini.jpg' },
+  { year: 2024, title: 'Tu comprendras quand tu seras plus grande', author: 'Virginie Grimaldi', cover: 'tu-comprendras-quand-tu-seras-plus-grande.jpg' },
+  { year: 2024, title: 'À tout jamais', author: 'Colleen Hoover', cover: 'a-tout-jamais.jpg' },
+  { year: 2024, title: 'Le premier jour du reste de ma vie', author: 'Virginie Grimaldi', cover: 'le-premier-jour-du-reste-de-ma-vie.jpg' },
+  { year: 2024, title: 'Origine', author: 'Dan Brown', cover: 'origine.jpg' },
+  { year: 2024, title: 'Les choses humaines', author: 'Karine Tuil', cover: 'les-choses-humaines.jpg' },
+  { year: 2024, title: 'L\'éveil de votre puissance intérieure', author: 'Anthony Robbins', cover: 'l-eveil-de-votre-puissance-interieure.jpg' },
+  { year: 2024, title: 'Bilbo le Hobbit', author: 'J. R. R. Tolkien', cover: 'bilbo-le-hobbit.jpg' },
+  { year: 2024, title: 'Demandez et vous recevrez', author: 'Pierre Morency', cover: 'demandez-et-vous-recevrez.jpg' },
+  { year: 2024, title: 'Les frères Karamazov', author: 'Fiodor Dostoïevski', cover: 'les-freres-karamazov.jpg' },
+  { year: 2024, title: 'Ne coupez jamais la poire en deux', author: 'Chris Voss', cover: 'ne-coupez-jamais-la-poire-en-deux.jpg' },
+  { year: 2024, title: 'Et n\'oublie pas d\'être heureux', author: 'Christophe André', cover: 'et-n-oublie-pas-d-etre-heureux.jpg' },
+  { year: 2024, title: 'Influence et manipulation', author: 'Robert Cialdini', cover: 'influence-et-manipulation.jpg' },
+  { year: 2024, title: 'Le prophète', author: 'Khalil Gibran', cover: 'le-prophete.jpg' },
+  { year: 2024, title: 'Harry Potter et l\'enfant maudit', author: 'J. K. Rowling', cover: 'harry-potter-et-l-enfant-maudit.jpg' },
+  { year: 2024, title: 'Lettres à un jeune poète', author: 'Rainer Maria Rilke', cover: 'lettres-a-un-jeune-poete.jpg' },
+  { year: 2024, title: 'Ainsi gèlent les bulles de savon', author: 'Mélissa Da Costa', cover: 'ainsi-gelent-les-bulles-de-savon.jpg' },
+  { year: 2024, title: 'La nuit des temps', author: 'René Barjavel', cover: 'la-nuit-des-temps.jpg' },
+  { year: 2024, title: 'Attendez-vous à un miracle', cover: 'attendez-vous-a-un-miracle.jpg' },
+  { year: 2024, title: 'Tout le bleu du ciel', author: 'Mélissa Da Costa', cover: 'tout-le-bleu-du-ciel.jpg' },
+  { year: 2024, title: 'Kama Sutra', cover: 'kama-sutra.jpg' },
+  { year: 2024, title: 'November 9', author: 'Colleen Hoover', cover: 'november-9.jpg' },
+  { year: 2024, title: 'Le seigneur des anneaux, tome 1 : La communauté de l\'anneau', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-1-la-communaute-de-l-an.jpg' },
+  { year: 2024, title: 'Le seigneur des anneaux, tome 2 : Les deux tours', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-2-les-deux-tours.jpg' },
+  { year: 2024, title: 'Le seigneur des anneaux, tome 3 : Le retour du roi', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-3-le-retour-du-roi.jpg' },
+  { year: 2024, title: 'Écoute ton corps', author: 'Lise Bourbeau', cover: 'ecoute-ton-corps.jpg' },
+  { year: 2024, title: 'Cessez d\'être gentil, soyez vrai !', author: 'Thomas d\'Ansembourg', cover: 'cessez-d-etre-gentil-soyez-vrai.jpg' },
+  { year: 2024, title: 'Libérez votre cerveau', author: 'Idriss Aberkane', cover: 'liberez-votre-cerveau.jpg' },
+  { year: 2024, title: 'Le pouvoir insoupçonné de tes blessures et de tes blocages', cover: 'le-pouvoir-insoupconne-de-tes-blessures-et-de-tes-bl.jpg' },
+  { year: 2024, title: 'Plus malin que le diable', author: 'Napoleon Hill', cover: 'plus-malin-que-le-diable.jpg' },
+  { year: 2024, title: 'Désenchantées', author: 'Marie Vareille', cover: 'desenchantees.jpg' },
+  /* ── 2025 ── */
+  { year: 2025, title: 'Affirmez-vous', author: 'Frédéric Fanget', cover: 'affirmez-vous.jpg' },
+  { year: 2025, title: 'Le journal d\'Anne Frank', author: 'Anne Frank', cover: 'le-journal-d-anne-frank.jpg' },
+  { year: 2025, title: 'Respire', cover: 'respire.jpg' },
+  { year: 2025, title: 'Les délices de Tokyo', author: 'Durian Sukegawa', cover: 'les-delices-de-tokyo.jpg' },
+  { year: 2025, title: 'Ainsi parlait Zarathoustra', author: 'Friedrich Nietzsche', cover: 'ainsi-parlait-zarathoustra.jpg' },
+  { year: 2025, title: 'Les sept maris d\'Evelyn Hugo', author: 'Taylor Jenkins Reid', cover: 'les-sept-maris-d-evelyn-hugo.jpg' },
+  { year: 2025, title: 'Le(s) vrai(es) amour(s)', cover: 'le-s-vrai-es-amour-s.jpg' },
+  { year: 2025, title: 'Les sirènes de Malibu', author: 'Taylor Jenkins Reid', cover: 'les-sirenes-de-malibu.jpg' },
+  { year: 2025, title: 'Ce que j\'aimerais te dire', author: 'Emeric Lebreton', cover: 'ce-que-j-aimerais-te-dire.jpg' },
+  { year: 2025, title: 'L\'intelligence émotionnelle, tome 1', author: 'Daniel Goleman', cover: 'l-intelligence-emotionnelle-tome-1.jpg' },
+  { year: 2025, title: 'La mort d\'Ivan Ilitch', author: 'Léon Tolstoï', cover: 'la-mort-d-ivan-ilitch.jpg' },
+  { year: 2025, title: 'La métamorphose', author: 'Franz Kafka', cover: 'la-metamorphose.jpg' },
+  { year: 2025, title: 'Sois heureux', author: 'Pape François', cover: 'sois-heureux.jpg' },
+  { year: 2025, title: 'La miséricorde', author: 'Pape François', cover: 'la-misericorde.jpg' },
+  { year: 2025, title: 'La force de la prière', author: 'Pape François', cover: 'la-force-de-la-priere.jpg' },
+  { year: 2025, title: 'La Bible', cover: 'la-bible.jpg', page: 'bible' },
+  { year: 2025, title: 'La joie de l\'Évangile', author: 'Pape François', cover: 'la-joie-de-l-evangile.jpg' },
+  { year: 2025, title: 'La peau de chagrin', author: 'Honoré de Balzac', cover: 'la-peau-de-chagrin.jpg' },
+  { year: 2025, title: 'La chambre de Giovanni', author: 'James Baldwin', cover: 'la-chambre-de-giovanni.jpg' },
+  { year: 2025, title: 'Le dernier jour d\'un condamné', author: 'Victor Hugo', cover: 'le-dernier-jour-d-un-condamne.jpg' },
+  { year: 2025, title: 'L\'éducation sentimentale', author: 'Gustave Flaubert', cover: 'l-education-sentimentale.jpg' },
+  { year: 2025, title: 'Ho\'oponopono', author: 'Maria-Elisa Hurtado-Graciet', cover: 'ho-oponopono.jpg' },
+  { year: 2025, title: 'Fahrenheit 451', author: 'Ray Bradbury', cover: 'fahrenheit-451.jpg' },
+  { year: 2025, title: 'Les lois de la nature humaine', author: 'Robert Greene', cover: 'les-lois-de-la-nature-humaine.jpg' },
+  { year: 2025, title: 'Vous êtes notre espoir pour demain', author: 'Pape François', cover: 'vous-etes-notre-espoir-pour-demain.jpg' },
+  { year: 2025, title: 'Pierre et Jean', author: 'Guy de Maupassant', cover: 'pierre-et-jean.jpg' },
+  { year: 2025, title: 'Un temps pour changer', author: 'Pape François', cover: 'un-temps-pour-changer.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 1', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-1.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 2', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-2.jpg' },
+  { year: 2025, title: 'En as-tu vraiment besoin ?', author: 'Pierre-Yves McSween', cover: 'en-as-tu-vraiment-besoin.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 3', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-3.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 4', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-4.jpg' },
+  { year: 2025, title: 'La vie', author: 'Pape François', cover: 'la-vie.jpg' },
+  { year: 2025, title: 'Histoire d\'une âme', author: 'Thérèse de Lisieux', cover: 'histoire-d-une-ame.jpg' },
+  { year: 2025, title: 'L\'imitation de Jésus-Christ', author: 'Thomas a Kempis', cover: 'l-imitation-de-jesus-christ.jpg' },
+  { year: 2025, title: 'Martin Eden', author: 'Jack London', cover: 'martin-eden.jpg' },
+  { year: 2025, title: 'Dieu est jeune', author: 'Pape François', cover: 'dieu-est-jeune.jpg' },
+  { year: 2025, title: 'L\'appel de la forêt', author: 'Jack London', cover: 'l-appel-de-la-foret.jpg' },
+  { year: 2025, title: 'La dame aux camélias', author: 'Alexandre Dumas fils', cover: 'la-dame-aux-camelias.jpg' },
+  { year: 2025, title: 'Prier le chapelet et aimer ça', cover: 'prier-le-chapelet-et-aimer-ca.jpg' },
+  { year: 2025, title: 'Commentaire de la Genèse', author: 'Jean Chrysostome', cover: 'commentaire-de-la-genese.jpg' },
+  { year: 2025, title: 'Le livre de la vie', author: 'Thérèse d\'Avila', cover: 'le-livre-de-la-vie.jpg' },
+  { year: 2025, title: '1984', author: 'George Orwell', cover: '1984.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 5', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-5.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 6', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-6.jpg' },
+  { year: 2025, title: 'Les carnets de l\'apothicaire, tome 7', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-7.jpg' },
+  { year: 2025, title: 'The Midnight Library', author: 'Matt Haig', cover: 'the-midnight-library.jpg' },
+  { year: 2025, title: 'Diary of a Wimpy Kid, tome 1', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-1.jpg' },
+  { year: 2025, title: 'Greenlights', author: 'Matthew McConaughey', cover: 'greenlights.jpg' },
+  { year: 2025, title: 'Le livre de ma mère', author: 'Albert Cohen', cover: 'le-livre-de-ma-mere.jpg' },
+  { year: 2025, title: 'Tuesdays with Morrie', author: 'Mitch Albom', cover: 'tuesdays-with-morrie.jpg' },
+  { year: 2025, title: 'Diary of a Wimpy Kid, tome 2 : Rodrick Rules', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-2-rodrick-rules.jpg' },
+  { year: 2025, title: 'Thérèse Raquin', author: 'Émile Zola', cover: 'therese-raquin.jpg' },
+  { year: 2025, title: 'L\'homme le plus riche de Babylone', author: 'George S. Clason', cover: 'l-homme-le-plus-riche-de-babylone.jpg' },
+  { year: 2025, title: 'La pitié dangereuse', author: 'Stefan Zweig', cover: 'la-pitie-dangereuse.jpg' },
+  /* ── 2026 ── */
+  { year: 2026, title: 'L\'imitation de Jésus-Christ', author: 'Thomas a Kempis', cover: 'l-imitation-de-jesus-christ.jpg' },
+  { year: 2026, title: 'The Happiness Project', author: 'Gretchen Rubin', cover: 'the-happiness-project.jpg' },
+  { year: 2026, title: 'Atomic Habits', author: 'James Clear', cover: 'atomic-habits.jpg' },
+  { year: 2026, title: 'Œuvres complètes', author: 'Jean Chrysostome', cover: 'uvres-completes.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 8', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-8.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 3 : The Last Straw', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-3-the-last-straw.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 9', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-9.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 10', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-10.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 11', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-11.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 12', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-12.jpg' },
+  { year: 2026, title: 'Les carnets de l\'apothicaire, tome 13', author: 'Natsu Hyuga', cover: 'les-carnets-de-l-apothicaire-tome-13.jpg' },
+  { year: 2026, title: 'Kiki\'s Delivery Service', author: 'Eiko Kadono', cover: 'kiki-s-delivery-service.jpg' },
+  { year: 2026, title: 'How to Win at Chess', author: 'Levy Rozman', cover: 'how-to-win-at-chess.jpg' },
+  { year: 2026, title: 'The Five People You Meet in Heaven', author: 'Mitch Albom', cover: 'the-five-people-you-meet-in-heaven.jpg' },
+  { year: 2026, title: 'Nine Days with Saint Joseph', cover: 'nine-days-with-saint-joseph.jpg' },
+  { year: 2026, title: 'The Secret', author: 'Rhonda Byrne', cover: 'the-secret.jpg' },
+  { year: 2026, title: 'Le joueur d\'échecs', author: 'Stefan Zweig', cover: 'le-joueur-d-echecs.jpg' },
+  { year: 2026, title: 'I Will Teach You to Be Rich', author: 'Ramit Sethi', cover: 'i-will-teach-you-to-be-rich.jpg' },
+  { year: 2026, title: 'Petit journal : La Miséricorde divine dans mon âme', author: 'Sainte Faustine Kowalska', cover: 'petit-journal-la-misericorde-divine-dans-mon-ame.jpg' },
+  { year: 2026, title: 'The Good Life Handbook', author: 'Épictète', cover: 'the-good-life-handbook.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 4 : Dog Days', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-4-dog-days.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 5 : The Ugly Truth', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-5-the-ugly-truth.jpg' },
+  { year: 2026, title: 'Pisse-mémé', cover: 'pisse-meme.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 6 : Cabin Fever', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-6-cabin-fever.jpg' },
+  { year: 2026, title: 'À l\'est d\'Éden', author: 'John Steinbeck', cover: 'a-l-est-d-eden.jpg' },
+  { year: 2026, title: 'The Devil\'s Sons, tome 1', cover: 'the-devil-s-sons-tome-1.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 33', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-33.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 34', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-34.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 35', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-35.jpg' },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tome 1', cover: 'though-i-am-an-inept-villainess-tome-1.jpg' },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tome 2', cover: 'though-i-am-an-inept-villainess-tome-2.jpg' },
+  { year: 2026, title: 'Though I Am an Inept Villainess, tome 3', cover: 'though-i-am-an-inept-villainess-tome-3.jpg' },
+  { year: 2026, title: 'Hunter x Hunter, tome 36', author: 'Yoshihiro Togashi', cover: 'hunter-x-hunter-tome-36.jpg' },
+  { year: 2026, title: 'Des souris et des hommes', author: 'John Steinbeck', cover: 'des-souris-et-des-hommes.jpg' },
+  { year: 2026, title: 'Madame Bovary', author: 'Gustave Flaubert', cover: 'madame-bovary.jpg' },
+  { year: 2026, title: 'Diary of a Wimpy Kid, tome 7 : The Third Wheel', author: 'Jeff Kinney', cover: 'diary-of-a-wimpy-kid-tome-7-the-third-wheel.jpg' },
+  { year: 2026, title: 'Numérologie', cover: 'numerologie.jpg' },
+];
+
+/* ════════════════════════════════════════════════════════════
+   3. LECTURE INTÉGRALE DE LA BIBLE — 31 jan → 7 juin 2025
+   ────────────────────────────────────────────────────────────
+   Carnet tel qu'il a été tenu. `date: null` = entrée non datée.
+   Tout le reste (durée, trame des 127 jours, journées actives,
+   pauses, densités) est calculé à partir de ce tableau : rien
+   n'est écrit en dur dans la page.
+   ════════════════════════════════════════════════════════════ */
+const BIBLE = {
+  edition: 'Bible de Jérusalem',
+  start:   '2025-01-31',
+  end:     '2025-06-07',
+  /* Neuf lignes du carnet couvrent plusieurs livres : 63 lignes = 73 livres,
+     soit 46 pour l'Ancien Testament et 27 pour le Nouveau — le canon complet.
+     Le total affiché est calculé d'ici, jamais écrit en dur. */
+  grouped: {
+    'Jean 1, 2 et 3': 3, 'Samuel': 2, 'Rois 1, 2': 2, 'Les chroniques': 2,
+    'Maccabées': 2, 'Corinthiens': 2, 'Thessaloniciens': 2, 'Timothée': 2,
+    'Pierre': 2
+  },
+  entries: [
+    ['Jean 1, 2 et 3', null],       ['Saint Mathieu', '2025-02-09'],
+    ['Saint Marc', '2025-02-10'],   ['Saint Luc', '2025-02-18'],
+    ['Saint Jean', '2025-02-25'],   ['Actes des apôtres', '2025-03-07'],
+    ['Genèse', '2025-03-15'],       ['Exode', '2025-03-20'],
+    ['Job', '2025-03-25'],          ['Lévitique', '2025-04-13'],
+    ['Nombres', '2025-04-16'],      ['Deutéronome', '2025-04-22'],
+    ['Josué', '2025-04-24'],        ['Juges', '2025-04-26'],
+    ['Ruth', '2025-04-27'],         ['Samuel', '2025-04-30'],
+    ['Rois 1, 2', '2025-05-06'],    ['Amos', '2025-05-07'],
+    ['Osée', '2025-05-07'],         ['Michée', '2025-05-07'],
+    ['Abdias', '2025-05-08'],       ['Jonas', '2025-05-08'],
+    ['Nahum', '2025-05-08'],        ['Joël', '2025-05-08'],
+    ['Habaquq', '2025-05-08'],      ['Sophonie', '2025-05-08'],
+    ['Aggée', '2025-05-09'],        ['Zacharie', '2025-05-09'],
+    ['Malachie', '2025-05-09'],     ['Les lamentations', '2025-05-09'],
+    ['Les chroniques', '2025-05-11'],['Daniel', '2025-05-13'],
+    ['Isaïe', '2025-05-16'],        ['Tobie', '2025-05-17'],
+    ['Judith', '2025-05-19'],       ['Jérémie', '2025-05-21'],
+    ['Baruch', '2025-05-23'],       ['Esther', '2025-05-24'],
+    ['Ézéchiel', '2025-05-27'],     ['Esdras', '2025-05-27'],
+    ['Néhémie', '2025-05-28'],      ['Ecclésiaste', '2025-05-29'],
+    ['Cantique des cantiques', '2025-05-29'], ['Sagesse', '2025-05-30'],
+    ['Maccabées', '2025-05-31'],    ['Romains', '2025-06-01'],
+    ['Proverbes', '2025-06-02'],    ['Corinthiens', '2025-06-02'],
+    ['Galates', '2025-06-03'],      ['Éphésiens', '2025-06-04'],
+    ['Philippiens', '2025-06-04'],  ['Colossiens', '2025-06-04'],
+    ['Thessaloniciens', '2025-06-04'], ['Psaumes', '2025-06-05'],
+    ['Timothée', '2025-06-05'],     ['Tite', '2025-06-05'],
+    ['Philémon', '2025-06-05'],     ['Hébreux', '2025-06-05'],
+    ['Jacques', '2025-06-05'],      ['Pierre', '2025-06-05'],
+    ['Jude', '2025-06-06'],         ['Apocalypse', '2025-06-06'],
+    ['Ecclésiastique', '2025-06-07']
+  ]
+};
 
 /* ════════════════════════════════════════════════════════════
    3. NAVIGATION — routage par ancre, liens partageables
    ════════════════════════════════════════════════════════════ */
 const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'contact'];
-const PAGE_TITLES = { home: 'Home', about: 'About', projects: 'Projects',
-  skills: 'Skills', refuge: "Sarindra's Refuge", contact: 'Contact' };
+/* Les années suivies. En ajouter une ici crée sa carte dans le Refuge et
+   sa page (#lectures-2021), sans toucher au HTML. */
+const YEARS = [2026, 2025, 2024, 2023, 2022];
+const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
+
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'guides']
+  .concat(YEAR_PAGES, ['contact']);
+const PAGE_TITLES = Object.assign(
+  { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
+    refuge: "Sarindra's Refuge", bible: '127 jours',
+    finds: 'Testé et adopté', guides: 'Mes guides de lecture',
+    contact: 'Contact' },
+  Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
+
+/* Les sujets du Refuge sont des pages à part ; la barre de navigation
+   doit rester allumée sur le Refuge quand on les lit. */
+const PAGE_PARENT = Object.assign(
+  { bible: 'refuge', finds: 'refuge', guides: 'refuge' },
+  Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
+
+/* Toutes les années partagent un même bloc de page. */
+/* Le fil d'Ariane se déduit de PAGE_PARENT : une sous-page ajoutée
+   plus tard l'obtient sans qu'on y touche. Les pages de premier niveau
+   n'en ont pas — un fil d'un seul maillon ne dit rien que la barre de
+   navigation ne dise déjà. */
+function trailOf(id) {
+  const trail = [];
+  for (let cur = id; cur; cur = PAGE_PARENT[cur]) trail.unshift(cur);
+  return trail;
+}
+
+function renderCrumbs(page, id) {
+  const host = page.querySelector('.crumbs');
+  if (!host) return;
+  const trail = trailOf(id);
+  if (trail.length < 2) { host.innerHTML = ''; return; }
+  host.innerHTML = '<ol>' + trail.map((p, i) => '<li>' + (i === trail.length - 1
+      ? '<span aria-current="page">' + esc(PAGE_TITLES[p] || p) + '</span>'
+      : '<a href="#' + esc(p) + '">' + esc(PAGE_TITLES[p] || p) + '</a>')
+    + '</li>').join('') + '</ol>';
+}
+
+function nodeIdFor(id) { return id.startsWith('lectures-') ? 'books' : id; }
 
 function trackVirtualPageView(id) {
   if (typeof window.gtag !== 'function') return;
@@ -93,12 +444,14 @@ function showPage(id, opts) {
   const options = opts || {};
 
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const target = document.getElementById('page-' + id);
+  const target = document.getElementById('page-' + nodeIdFor(id));
   if (!target) return;
   target.classList.add('active');
+  renderCrumbs(target, id);
+  if (id.startsWith('lectures-')) renderYear(Number(id.slice(9)));
 
   document.querySelectorAll('#nav-links a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    a.classList.toggle('active', a.getAttribute('href') === '#' + (PAGE_PARENT[id] || id));
     a.removeAttribute('aria-current');
     if (a.classList.contains('active')) a.setAttribute('aria-current', 'page');
   });
@@ -225,73 +578,297 @@ function emptyState(icon, title, text) {
     + '<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p></div>';
 }
 
-function renderOfferings() {
-  const host = document.getElementById('offer-list');
-  if (!host) return;
 
-  if (!OFFERINGS.length) {
-    host.innerHTML = emptyState('i-compass', 'Sessions coming soon',
-      'I\'m putting together the sessions I want to offer alongside my data work. Details and booking will land here.');
-    return;
+/* Une couverture se dépose dans assets/img/livres/<année>/<cover>.
+   Rien d'autre à faire : si le fichier est là, il s'affiche ; s'il
+   n'est pas là, la carte retombe sur sa tranche typographique, où le
+   titre tient lieu de couverture et n'est donc plus répété dessous. */
+function bookCard(b) {
+  /* Les noms de fichiers sont ceux de Sarindra : espaces, accents,
+     apostrophes. On les encode pour l'URL avant de les poser. */
+  const src = 'assets/img/livres/' + b.year + '/' + esc(encodeURIComponent(b.cover));
+  /* Un livre peut avoir sa propre page ici — la Bible en a une. */
+  const open  = b.page ? '<a class="book is-linked" href="#' + esc(b.page) + '">'
+                       : '<article class="book">';
+  const close = b.page ? '</a>' : '</article>';
+  return open
+    + '<div class="book-cover"><span>' + esc(b.title) + '</span>'
+    + '<img src="' + src + '" alt="Couverture de ' + esc(b.title)
+    + '" loading="lazy" onerror="bookNoCover(this)"></div>'
+    + '<p class="book-title">' + esc(b.title) + '</p>'
+    + (b.author ? '<p class="book-author">' + esc(b.author) + '</p>' : '')
+    + (b.page ? '<p class="book-go">Lire le récit'
+        + '<svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+        + '</p>' : '')
+    + close;
+}
+
+/* Image absente : on découvre la tranche et on retire le titre en
+   double. Appelé par l'attribut onerror, donc global. */
+function bookNoCover(img) {
+  const box = img.parentNode;
+  box.classList.add('is-blank');
+  img.remove();
+  const dup = box.parentNode.querySelector('.book-title');
+  if (dup) dup.remove();
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   SUJETS DU REFUGE
+   ────────────────────────────────────────────────────────────
+   Un sujet = une entrée ici. Deux façons de le relier :
+     page: 'bible'          → une page interne (#bible)
+     url:  'https://…'      → un texte publié ailleurs
+   ════════════════════════════════════════════════════════════ */
+function renderTopics() {
+  const host = document.getElementById('topics');
+  if (!host) return;
+  host.innerHTML = topics().map(t =>
+      '<a class="topic-card' + (t.empty ? ' is-empty' : '') + '" href="#' + esc(t.page) + '">'
+    + '<span class="topic-badge tone-' + t.tone + '">'
+    + (t.icon ? '<svg class="icon icon-xs" aria-hidden="true"><use href="#'
+        + esc(t.icon) + '"/></svg>' : '')
+    + esc(t.badge) + '</span>'
+    + '<span class="topic-name">' + esc(t.title) + '</span>'
+    + '<span class="topic-meta">' + esc(t.meta) + '</span>'
+    + '<span class="topic-go">' + (t.empty ? 'Bientôt' : 'Lire')
+    + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+    + '</span></a>').join('');
+}
+
+function booksOfYear(y) { return READINGS.filter(r => r.year === y); }
+
+const THIS_YEAR = new Date().getFullYear();
+
+function topics() {
+  const bible = {
+    /* Ce n'est pas une lecture de plus : c'est un défi mené à son
+       terme. D'où le ton sable, seul contre-ton de la palette. */
+    badge: 'Défi accompli', tone: 'sand', icon: 'i-check',
+    title: 'J’ai lu la Bible en 127 jours',
+    meta:  '73 livres · 31 janv. — 7 juin 2025',
+    page:  'bible'
+  };
+  const filled = YEARS.filter(y => booksOfYear(y).length).sort((a, b) => a - b);
+  const span = filled.length > 1
+    ? filled[0] + ' à ' + filled[filled.length - 1]
+    : String(filled[0] || '');
+  const lectures = {
+    badge: 'Lecture', tone: 'cyan', icon: 'i-book',
+    title: 'Mes lectures, année par année',
+    meta:  READINGS.length
+      ? READINGS.length + ' livres · ' + span
+      : 'à venir',
+    /* On entre par la première année, comme les pastilles se lisent ;
+       elles font le reste. */
+    page:  'lectures-' + (filled.length ? filled[0] : YEARS[0]),
+    empty: READINGS.length === 0
+  };
+  const finds = {
+    badge: 'Acquisition', tone: 'ink', icon: 'i-spark',
+    title: 'Testé et adopté',
+    meta:  DISCOVERIES.length
+      ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' objets' : ' objet')
+      : 'à venir',
+    page:  'finds',
+    empty: DISCOVERIES.length === 0
+  };
+  const guides = {
+    badge: 'Conseil', tone: 'line', icon: 'i-pen',
+    title: 'Mes guides de lecture',
+    meta:  GUIDES.length
+      ? GUIDES.length + (GUIDES.length > 1 ? ' guides' : ' guide')
+      : 'à venir',
+    page:  'guides',
+    empty: GUIDES.length === 0
+  };
+  return [bible, lectures, finds, guides];
+}
+
+
+/* ── Les 127 jours : le carnet ── */
+const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
+  'juillet','août','septembre','octobre','novembre','décembre'];
+
+
+function renderBible() {
+  const log = document.getElementById('bible-log');
+  if (!log) return;
+
+  const enToutesLettres = t =>
+    Number(t.slice(8)) + ' ' + FR_MONTHS[Number(t.slice(5, 7)) - 1];
+
+  /* Une seule ligne sous le titre : ce que c'est, et sur quoi ça court.
+     Les 127 jours doivent rester vérifiables — sans ces deux dates, le
+     carnet commence au 9 février et le compte ne tombe pas juste. */
+  const range = document.getElementById('bible-range');
+  if (range) {
+    range.innerHTML = '<span class="bible-what">Mon carnet de lecture</span>'
+      + '<span class="bible-span">du ' + esc(enToutesLettres(BIBLE.start))
+      + ' au ' + esc(enToutesLettres(BIBLE.end)) + ' '
+      + esc(BIBLE.end.slice(0, 4)) + '</span>';
+  }
+  const undated = BIBLE.entries.filter(e => !e[1]);
+  const dated = BIBLE.entries.filter(e => e[1])
+    .sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+
+  /* Un jour, et tout ce qui s'y est terminé. Les jours où sept livres
+     s'achèvent tiennent sept lignes : la grappe se voit sans qu'on ait
+     à la compter. */
+  const days = [];
+  dated.forEach(([name, d]) => {
+    const last = days[days.length - 1];
+    if (last && last.d === d) last.books.push(name);
+    else days.push({ d: d, books: [name] });
+  });
+
+  const nbLivres = n => n + (n > 1 ? ' livres' : ' livre');
+  /* Le nom du mois, une conduite, son compte : la conduite occupe le
+     vide plutôt que de le laisser béer. */
+  const moisRow = (nom, n) => '<li class="carnet-month"><h4>'
+    + '<span class="carnet-m">' + esc(nom) + '</span>'
+    + '<i aria-hidden="true"></i>'
+    + '<span class="carnet-n">' + nbLivres(n) + '</span></h4></li>';
+  const out = [];
+
+  /* La lecture commence le 31 janvier, mais le carnet ne dit pas quel
+     jour ce livre-là s'est terminé. Il garde donc son mois et un tiret
+     à la place du quantième : on n'invente pas une date. */
+  if (undated.length) {
+    out.push(moisRow('Janvier', undated.length));
+    /* Le premier livre du carnet : c'est là que tout commence. */
+    out.push('<li class="carnet-day"><span class="carnet-num">—</span>'
+      + '<span class="carnet-books">'
+      + undated.map(e => '<b>' + esc(e[0]) + '</b>').join('')
+      + '</span><span class="carnet-tag">Départ</span></li>');
   }
 
-  host.innerHTML = OFFERINGS.map(o => {
-    const meta = [o.format, o.length].filter(Boolean).join(' · ');
-    const tags = (o.tags || []).map(t => '<span class="ptag">' + esc(t) + '</span>').join('');
-    const link = o.url
-      ? '<span class="offer-more">Book <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>'
-      : '';
-    const inner =
-        '<div class="offer-meta">' + esc(meta) + '</div>'
-      + '<div class="offer-main">'
-      +   '<h3 class="offer-title">' + esc(o.name) + '</h3>'
-      +   '<p class="offer-summary">' + esc(o.summary || '') + '</p>'
-      +   (tags || link ? '<div class="offer-foot">' + tags + link + '</div>' : '')
-      + '</div>';
-    return o.url
-      ? '<a class="offer-item" href="' + esc(o.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
-      : '<article class="offer-item">' + inner + '</article>';
+  let mois = null;
+  days.forEach(jour => {
+    const m = Number(jour.d.slice(5, 7)) - 1;
+
+    if (m !== mois) {
+      mois = m;
+      const n = days.filter(x => Number(x.d.slice(5, 7)) - 1 === m)
+                    .reduce((t, x) => t + x.books.length, 0);
+      out.push(moisRow(FR_MONTHS[m], n));
+    }
+    out.push('<li class="carnet-day"><span class="carnet-num">'
+      + String(Number(jour.d.slice(8))).padStart(2, '0') + '</span>'
+      + '<span class="carnet-books">'
+      + jour.books.map(b => '<b>' + esc(b) + '</b>').join('')
+      + '</span></li>');
+  });
+
+  log.innerHTML = '<ol class="carnet">' + out.join('') + '</ol>';
+}
+
+
+/* Les années se parcourent depuis la page elle-même : une pastille
+   par année, celle qu'on lit en aplat. Une année sans livre reste
+   accessible — elle mène à son état vide, qui le dit. */
+function renderYearPills(current) {
+  const host = document.getElementById('year-pills');
+  if (!host) return;
+  /* Dans le sens de la lecture : on commence par la première année,
+     pas par la dernière. */
+  host.innerHTML = YEARS.slice().sort((a, b) => a - b).map(y => {
+    const n = booksOfYear(y).length;
+    const cur = y === current;
+    return '<a class="year-pill' + (cur ? ' is-current' : '')
+      + (n ? '' : ' is-empty') + '" href="#lectures-' + y + '"'
+      + (cur ? ' aria-current="page"' : '')
+      + '><span class="year-pill-y">' + y + '</span>'
+      + '<span class="year-pill-n">' + (n || '—') + '</span></a>';
   }).join('');
 }
 
-function readingItem(r) {
-  const inner =
-      '<div class="read-kind">' + esc(r.kind || 'Book') + '</div>'
-    + '<div class="read-main">'
-    +   '<h3 class="read-title">' + esc(r.title) + '</h3>'
-    +   (r.author ? '<p class="read-author">' + esc(r.author) + '</p>' : '')
-    +   (r.note ? '<p class="read-note">' + esc(r.note) + '</p>' : '')
-    + '</div>';
-  return r.url
-    ? '<a class="read-item" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
-    : '<article class="read-item">' + inner + '</article>';
+/* ── Belles découvertes ─────────────────────────────────────
+   Un objet par carte. Tout est facultatif sauf le nom : une
+   trouvaille peut n'être qu'un nom en attendant qu'elle soit
+   racontée, et la carte ne montre pas de trou pour autant. */
+function findCard(d) {
+  const img = d.image
+    ? '<div class="find-shot"><img src="assets/img/decouvertes/' + esc(d.image)
+      + '" alt="' + esc(d.name) + '" loading="lazy"'
+      + ' onerror="this.parentNode.remove()"></div>'
+    : '';
+  const link = d.url
+    ? '<span class="find-go">Voir'
+      + '<svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-ur"/></svg>'
+      + '</span>'
+    : '';
+  const body = img
+    + (d.kind ? '<p class="find-kind">' + esc(d.kind) + '</p>' : '')
+    + '<p class="find-name">' + esc(d.name) + '</p>'
+    + (d.note ? '<p class="find-note">' + esc(d.note) + '</p>' : '')
+    + link;
+  return d.url
+    ? '<a class="find is-linked" href="' + esc(d.url)
+      + '" target="_blank" rel="noopener">' + body + '</a>'
+    : '<article class="find">' + body + '</article>';
 }
 
-function readingGroup(label, books) {
-  const n = books.length;
-  return '<section class="read-group">'
-    + '<header class="read-year"><h3>' + esc(label) + '</h3>'
-    + '<span>' + n + (n > 1 ? ' books' : ' book') + '</span></header>'
-    + books.map(readingItem).join('')
-    + '</section>';
-}
-
-function renderReadings() {
-  const host = document.getElementById('read-list');
+function renderGuides() {
+  const host = document.getElementById('guides');
+  const lead = document.getElementById('guides-lead');
   if (!host) return;
-
-  if (!READINGS.length) {
-    host.innerHTML = emptyState('i-book', 'Reading log in progress',
-      'I read a lot — on data systems, on people, on how decisions get made. I\'m putting the log together, year by year, with a line on what I took from each book.');
-    return;
+  if (lead) {
+    lead.textContent = GUIDES.length
+      ? 'Ce que je conseille, et pourquoi.'
+      : '';
   }
+  host.innerHTML = GUIDES.length
+    ? GUIDES.map(g =>
+        '<article class="guide">'
+      + '<h4 class="guide-title">' + esc(g.title) + '</h4>'
+      + (g.lead ? '<p class="guide-lead">' + esc(g.lead) + '</p>' : '')
+      + '<ol class="guide-books">'
+      + (g.books || []).map(b =>
+          '<li><p class="guide-book">' + esc(b.title)
+        + (b.author ? '<span> · ' + esc(b.author) + '</span>' : '') + '</p>'
+        + (b.why ? '<p class="guide-why">' + esc(b.why) + '</p>' : '') + '</li>').join('')
+      + '</ol></article>').join('')
+    : emptyState('i-pen', 'À écrire',
+        'Je n’ai encore rien rédigé ici. Ça viendra.');
+}
 
-  const undated = READINGS.filter(r => !r.year);
-  const years = [...new Set(READINGS.map(r => r.year).filter(Boolean))].sort((a, b) => b - a);
+function renderFinds() {
+  const host = document.getElementById('finds');
+  const lead = document.getElementById('finds-lead');
+  if (!host) return;
+  if (lead) {
+    lead.textContent = DISCOVERIES.length
+      ? 'Des achats que je referais.'
+      : '';
+  }
+  host.innerHTML = DISCOVERIES.length
+    ? DISCOVERIES.map(findCard).join('')
+    : emptyState('i-spark', 'Bientôt',
+        'Cette étagère-là n’est pas encore garnie.');
+}
 
-  host.innerHTML =
-      (undated.length ? readingGroup('Currently reading', undated) : '')
-    + years.map(y => readingGroup(String(y), READINGS.filter(r => r.year === y))).join('');
+
+/* Page d'une année : même bloc pour toutes, rempli à la volée. */
+function renderYear(year) {
+  const list = document.getElementById('read-list');
+  const title = document.getElementById('year-title');
+  const lead = document.getElementById('year-lead');
+  if (!list || !title) return;
+
+  const books = booksOfYear(year);
+  const n = books.length;
+  renderYearPills(year);
+  title.textContent = 'Mes lectures de ' + year;
+  lead.textContent = n
+    ? n + (n > 1 ? ' livres' : ' livre')
+      + (year === THIS_YEAR ? ' depuis janvier.' : ' cette année-là.')
+    : 'Je n’ai pas encore reconstitué cette année.';
+  list.innerHTML = books.length
+    ? books.map(bookCard).join('')
+    : emptyState('i-book', 'À reconstituer',
+        'Les livres de ' + year + ' ne sont pas encore notés. Ils arriveront ici.');
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -504,7 +1081,7 @@ const ANIM_SELECTOR = [
   '.sec-hd', '.ab-state', '.ab-band', '.ab-quote', '.exp-item', '.edu-card', '.cert-card',
   '.drives-card', '.skill-cat-card', '.skill-bars-card',
   '.proj-card-v2', '.collab-banner', '.contact-form-card', '.contact-info-card',
-  '.avail-card', '.loc-card', '.offer-item', '.read-item'
+  '.avail-card', '.loc-card', '.book', '.topic-card'
 ].join(',');
 
 let revealObserver = null;
@@ -557,8 +1134,10 @@ function animateCounters() {
    ════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
-  renderReadings();
-  renderOfferings();
+  renderTopics();
+  renderFinds();
+  renderGuides();
+  renderBible();
   initTabs();
   initTabLinks();
   initProjectFilter();

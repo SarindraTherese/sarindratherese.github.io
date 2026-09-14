@@ -70,8 +70,8 @@
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
     <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M11 3.5 12.8 8.2 17.5 10l-4.7 1.8L11 16.5 9.2 11.8 4.5 10l4.7-1.8Z"/><path d="M18 14.5 18.9 17l2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9Z"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
-    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></symbol>
   </defs>
 </svg>
 
@@ -83,7 +83,7 @@
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
-    <a href="#refuge">Refuge</a>
+    <a class="nav-refuge" href="#refuge">Sarindra's Refuge</a>
     <a href="#contact">Contact</a>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
@@ -686,24 +686,68 @@
 <!-- ══ SARINDRA'S REFUGE ══ -->
 <div class="page" id="page-refuge">
   <div class="page-inner">
-    <div class="sec-hd">
+    <header class="refuge-open">
+      <p class="refuge-eyebrow">Loin de l’écran</p>
       <h2 class="sec-title">Sarindra's <em>Refuge</em></h2>
-      <p class="sec-sub">The other half of the desk — the books I read, year by year, and the
-      sessions I offer alongside my data work. No fixed schedule: this page grows as I go.</p>
-    </div>
+    </header>
 
-    <div class="skills-tabs">
-      <button class="stab active" data-tab="reading">Books</button>
-      <button class="stab" data-tab="sessions">Sessions</button>
-    </div>
+    <div class="topics" id="topics"></div>
 
-    <div class="skill-panel active" id="sp-reading">
-      <div class="read-list" id="read-list"></div>
-    </div>
+  </div>
+</div>
 
-    <div class="skill-panel" id="sp-sessions">
-      <div class="offer-list" id="offer-list"></div>
-    </div>
+<!-- ══ SUJET : LIVRES D'UNE ANNÉE ══ -->
+<div class="page" id="page-books">
+  <div class="page-inner">
+    <nav class="crumbs" aria-label="Fil d’Ariane"></nav>
+    <header class="refuge-open">
+      <p class="refuge-eyebrow" id="year-eyebrow">Lecture</p>
+      <h3 class="sec-title" id="year-title">Mes lectures</h3>
+      <p class="refuge-lead" id="year-lead"></p>
+    </header>
+    <nav class="years" id="year-pills" aria-label="Choisir une année"></nav>
+    <div class="shelf" id="read-list"></div>
+  </div>
+</div>
+
+<!-- ══ SUJET : 127 JOURS ══ -->
+<div class="page" id="page-guides">
+  <div class="page-inner">
+    <nav class="crumbs" aria-label="Fil d’Ariane"></nav>
+    <header class="refuge-open">
+      <p class="refuge-eyebrow">Conseil</p>
+      <h3 class="sec-title">Mes guides de <em>lecture</em></h3>
+      <p class="refuge-lead" id="guides-lead"></p>
+    </header>
+    <div class="guides" id="guides"></div>
+  </div>
+</div>
+
+<div class="page" id="page-finds">
+  <div class="page-inner">
+    <nav class="crumbs" aria-label="Fil d’Ariane"></nav>
+    <header class="refuge-open">
+      <p class="refuge-eyebrow">Acquisition</p>
+      <h3 class="sec-title">Testé et <em>adopté</em></h3>
+      <p class="refuge-lead" id="finds-lead"></p>
+    </header>
+    <div class="finds" id="finds"></div>
+  </div>
+</div>
+
+<div class="page" id="page-bible">
+  <div class="page-inner">
+    <nav class="crumbs" aria-label="Fil d’Ariane"></nav>
+    <section class="bible" aria-labelledby="bible-h">
+      <p class="refuge-eyebrow">Bible de Jérusalem</p>
+      <h3 class="bible-claim" id="bible-h">
+        <span class="bible-lead">J’ai lu la Bible en</span>
+        <span class="bible-big"><span class="bible-num">127</span> jours</span>
+      </h3>
+      <p class="bible-range" id="bible-range"></p>
+      <div class="bible-log" id="bible-log"></div>
+    </section>
+
   </div>
 </div>
 
