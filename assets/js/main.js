@@ -699,15 +699,16 @@ function renderBible() {
   const enToutesLettres = t =>
     Number(t.slice(8)) + ' ' + FR_MONTHS[Number(t.slice(5, 7)) - 1];
 
-  /* Les 127 jours doivent être vérifiables : sans ces deux dates, le
-     carnet commence au 9 février et le compte ne tombe pas juste.
-     Elles sont posées comme une cote de plan — les deux bouts de
-     l'axe que le carnet déroule ensuite. */
+  /* Une seule ligne sous le titre : ce que c'est, et sur quoi ça court.
+     Les 127 jours doivent rester vérifiables — sans ces deux dates, le
+     carnet commence au 9 février et le compte ne tombe pas juste. La
+     cote fait la jonction, comme sur un plan. */
   const range = document.getElementById('bible-range');
   if (range) {
-    range.innerHTML = '<span>' + esc(enToutesLettres(BIBLE.start)) + '</span>'
+    range.innerHTML = '<span class="bible-what">Mon carnet de lecture</span>'
       + '<i aria-hidden="true"></i>'
-      + '<span>' + esc(enToutesLettres(BIBLE.end)) + ' '
+      + '<span class="bible-span">du ' + esc(enToutesLettres(BIBLE.start))
+      + ' au ' + esc(enToutesLettres(BIBLE.end)) + ' '
       + esc(BIBLE.end.slice(0, 4)) + '</span>';
   }
   const undated = BIBLE.entries.filter(e => !e[1]);

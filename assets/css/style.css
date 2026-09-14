@@ -1750,15 +1750,19 @@ a.read-item:hover .read-title { color: var(--cyan); }
    En bas de casse, pour ne pas faire une deuxième ligne de capitales
    sous le surtitre — le titre doit rester seul entre les deux. */
 .bible-range {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
+  gap: 8px 14px;
   margin-top: var(--s4);
   font-family: var(--mono);
   font-size: 13.5px;
   letter-spacing: 0.04em;
-  color: var(--ink);
 }
+/* Ce que c'est, puis sur quoi ça court : la seconde moitié porte les
+   dates, donc c'est elle qui est dans l'encre. */
+.bible-what { color: var(--muted); }
+.bible-span { color: var(--ink); }
 /* Le trait entre les deux dates est une cote : deux repères d'extrémité
    et la portée entre eux. C'est l'axe que le carnet déroule plus bas. */
 .bible-range i {
@@ -1780,18 +1784,19 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .bible-range i::before { left: 0; }
 .bible-range i::after { right: 0; }
 
-/* Le titre du carnet, effacé par erreur avec les styles de l'ancienne
-   mise en colonnes : « .bible-log » est un préfixe de son nom. */
-.bible-logtitle {
-  margin: var(--s6) 0 var(--s5);
-  padding-top: var(--s4);
+/* Le carnet s'ouvre sous un filet, sans étiquette : la ligne au-dessus
+   l'a déjà nommé. */
+.bible-log {
+  margin-top: var(--s6);
+  padding-top: var(--s5);
   border-top: 1px solid var(--line);
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+}
+
+/* Sur écran étroit, la ligne passe à deux lignes et la cote s'efface :
+   elle joignait deux membres qui ne sont plus côte à côte. */
+@media (max-width: 620px) {
+  .bible-range i { display: none; }
+  .bible-range { gap: 4px 10px; }
 }
 
 /* ── Le carnet des 127 jours ───────────────────────────────────
