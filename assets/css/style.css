@@ -1785,35 +1785,26 @@ a.read-item:hover .read-title { color: var(--cyan); }
   list-style: none;
   padding: 0;
   max-width: 46ch;
+  /* Largeur commune au compte des mois et à la pastille : en `ch`,
+     elle vaudrait deux choses différentes selon la fonte. */
+  --w: min(21rem, 100% - var(--s4));
   /* Le filet est l'axe : il ne s'interrompt jamais. */
-  border-left: 1px solid var(--line-soft);
+  border-left: 1px solid var(--cyan-line);
 }
 
-/* Un mois est un cran sur l'axe : un trait court, son nom, son compte.
-   Pas de règle pleine largeur — ce serait un en-tête de tableau. */
+/* Un mois : son nom, une conduite, son compte. La conduite occupe le
+   vide au lieu de le laisser béer, et tient l'œil d'un bout à l'autre. */
 .carnet-month {
-  position: relative;
   margin: var(--s6) 0 var(--s2);
   padding-left: var(--s4);
 }
 .carnet-month:first-child { margin-top: 0; }
-.carnet-month::before {
-  content: "";
-  position: absolute;
-  left: -1px;
-  top: 8px;
-  width: 13px;
-  height: 1px;
-  background: var(--cyan-line);
-}
 .carnet-month h4 {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s4);
-  /* Le compte se cale sur le bord droit du carnet : une colonne
-     discrète, comme une note de marge dans un registre. */
-  max-width: 46ch;
+  align-items: center;
+  gap: 12px;
+  /* Assez court pour que le compte reste lié à son mois. */
+  max-width: var(--w);
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 600;
@@ -1821,7 +1812,13 @@ a.read-item:hover .read-title { color: var(--cyan); }
   text-transform: uppercase;
   color: var(--cyan);
 }
-.carnet-month h4 span {
+.carnet-month h4 i {
+  flex: 1;
+  height: 1px;
+  background: var(--cyan-line);
+}
+.carnet-n {
+  flex: none;
   font-weight: 400;
   letter-spacing: 0.04em;
   text-transform: none;
@@ -1834,23 +1831,26 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .carnet-day {
   position: relative;
   display: flex;
+  align-items: baseline;
   gap: var(--s3);
-  padding: 5px 0 5px var(--s4);
+  padding: 9px 0 9px var(--s4);
 }
+/* Un anneau, pas un pâté : le trait de l'axe passe au travers. */
 .carnet-day::before {
   content: "";
   position: absolute;
-  left: -3px;
-  top: 13px;
-  width: 5px;
-  height: 5px;
-  background: var(--cyan-fill);
+  left: -4px;
+  top: 17px;
+  width: 7px;
+  height: 7px;
+  background: var(--paper);
+  border: 2px solid var(--cyan-fill);
   border-radius: 50%;
+  box-sizing: border-box;
 }
 .carnet-num {
   flex: none;
   width: 2.4em;
-  padding-top: 2px;
   font-family: var(--mono);
   font-size: 12.5px;
   font-variant-numeric: tabular-nums;
@@ -1859,9 +1859,26 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .carnet-books b {
   display: block;
   font-size: 15.5px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   color: var(--ink);
+}
+/* Le premier livre porte sa marque. Elle est posée au bord droit
+   commun plutôt que poussée par le contenu : ainsi elle tombe sous les
+   comptes des mois, quelle que soit la longueur du titre. */
+.carnet-tag {
+  position: absolute;
+  left: calc(var(--w) + var(--s4));
+  transform: translateX(-100%);
+  top: 8px;
+  padding: 3px 9px;
+  border: 1px solid var(--cyan-line);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
 }
 
 /* Sur un écran étroit, le compte du mois revient contre son nom. */

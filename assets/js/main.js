@@ -724,18 +724,24 @@ function renderBible() {
   });
 
   const nbLivres = n => n + (n > 1 ? ' livres' : ' livre');
+  /* Le nom du mois, une conduite, son compte : la conduite occupe le
+     vide plutôt que de le laisser béer. */
+  const moisRow = (nom, n) => '<li class="carnet-month"><h4>'
+    + '<span class="carnet-m">' + esc(nom) + '</span>'
+    + '<i aria-hidden="true"></i>'
+    + '<span class="carnet-n">' + nbLivres(n) + '</span></h4></li>';
   const out = [];
 
   /* La lecture commence le 31 janvier, mais le carnet ne dit pas quel
      jour ce livre-là s'est terminé. Il garde donc son mois et un tiret
      à la place du quantième : on n'invente pas une date. */
   if (undated.length) {
-    out.push('<li class="carnet-month"><h4>Janvier'
-      + '<span>' + nbLivres(undated.length) + '</span></h4></li>');
+    out.push(moisRow('Janvier', undated.length));
+    /* Le premier livre du carnet : c'est là que tout commence. */
     out.push('<li class="carnet-day"><span class="carnet-num">—</span>'
       + '<span class="carnet-books">'
       + undated.map(e => '<b>' + esc(e[0]) + '</b>').join('')
-      + '</span></li>');
+      + '</span><span class="carnet-tag">Départ</span></li>');
   }
 
   let mois = null;
@@ -746,8 +752,7 @@ function renderBible() {
       mois = m;
       const n = days.filter(x => Number(x.d.slice(5, 7)) - 1 === m)
                     .reduce((t, x) => t + x.books.length, 0);
-      out.push('<li class="carnet-month"><h4>' + FR_MONTHS[m]
-        + '<span>' + nbLivres(n) + '</span></h4></li>');
+      out.push(moisRow(FR_MONTHS[m], n));
     }
     out.push('<li class="carnet-day"><span class="carnet-num">'
       + String(Number(jour.d.slice(8))).padStart(2, '0') + '</span>'
