@@ -700,11 +700,15 @@ function renderBible() {
     Number(t.slice(8)) + ' ' + FR_MONTHS[Number(t.slice(5, 7)) - 1];
 
   /* Les 127 jours doivent être vérifiables : sans ces deux dates, le
-     carnet commence au 9 février et le compte ne tombe pas juste. */
+     carnet commence au 9 février et le compte ne tombe pas juste.
+     Elles sont posées comme une cote de plan — les deux bouts de
+     l'axe que le carnet déroule ensuite. */
   const range = document.getElementById('bible-range');
   if (range) {
-    range.textContent = enToutesLettres(BIBLE.start) + ' — '
-      + enToutesLettres(BIBLE.end) + ' ' + BIBLE.end.slice(0, 4);
+    range.innerHTML = '<span>' + esc(enToutesLettres(BIBLE.start)) + '</span>'
+      + '<i aria-hidden="true"></i>'
+      + '<span>' + esc(enToutesLettres(BIBLE.end)) + ' '
+      + esc(BIBLE.end.slice(0, 4)) + '</span>';
   }
   const undated = BIBLE.entries.filter(e => !e[1]);
   const dated = BIBLE.entries.filter(e => e[1])

@@ -1750,12 +1750,35 @@ a.read-item:hover .read-title { color: var(--cyan); }
    En bas de casse, pour ne pas faire une deuxième ligne de capitales
    sous le surtitre — le titre doit rester seul entre les deux. */
 .bible-range {
-  margin-top: var(--s3);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: var(--s4);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 13.5px;
   letter-spacing: 0.04em;
-  color: var(--muted);
+  color: var(--ink);
 }
+/* Le trait entre les deux dates est une cote : deux repères d'extrémité
+   et la portée entre eux. C'est l'axe que le carnet déroule plus bas. */
+.bible-range i {
+  position: relative;
+  display: block;
+  width: clamp(44px, 11vw, 128px);
+  height: 1px;
+  background: var(--cyan-line);
+}
+.bible-range i::before,
+.bible-range i::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--cyan-line);
+}
+.bible-range i::before { left: 0; }
+.bible-range i::after { right: 0; }
 
 /* Le titre du carnet, effacé par erreur avec les styles de l'ancienne
    mise en colonnes : « .bible-log » est un préfixe de son nom. */
