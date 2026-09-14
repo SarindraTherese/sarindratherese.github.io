@@ -408,6 +408,27 @@ const PAGE_PARENT = Object.assign(
   Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
 
 /* Toutes les années partagent un même bloc de page. */
+/* Le fil d'Ariane se déduit de PAGE_PARENT : une sous-page ajoutée
+   plus tard l'obtient sans qu'on y touche. Les pages de premier niveau
+   n'en ont pas — un fil d'un seul maillon ne dit rien que la barre de
+   navigation ne dise déjà. */
+function trailOf(id) {
+  const trail = [];
+  for (let cur = id; cur; cur = PAGE_PARENT[cur]) trail.unshift(cur);
+  return trail;
+}
+
+function renderCrumbs(page, id) {
+  const host = page.querySelector('.crumbs');
+  if (!host) return;
+  const trail = trailOf(id);
+  if (trail.length < 2) { host.innerHTML = ''; return; }
+  host.innerHTML = '<ol>' + trail.map((p, i) => '<li>' + (i === trail.length - 1
+      ? '<span aria-current="page">' + esc(PAGE_TITLES[p] || p) + '</span>'
+      : '<a href="#' + esc(p) + '">' + esc(PAGE_TITLES[p] || p) + '</a>')
+    + '</li>').join('') + '</ol>';
+}
+
 function nodeIdFor(id) { return id.startsWith('lectures-') ? 'books' : id; }
 
 function trackVirtualPageView(id) {
@@ -426,6 +447,7 @@ function showPage(id, opts) {
   const target = document.getElementById('page-' + nodeIdFor(id));
   if (!target) return;
   target.classList.add('active');
+  renderCrumbs(target, id);
   if (id.startsWith('lectures-')) renderYear(Number(id.slice(9)));
 
   document.querySelectorAll('#nav-links a').forEach(a => {
