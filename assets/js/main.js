@@ -219,7 +219,7 @@ const READINGS = [
   { year: 2024, title: 'La nuit des temps', author: 'René Barjavel', cover: 'la-nuit-des-temps.jpg' },
   { year: 2024, title: 'Attendez-vous à un miracle', cover: 'attendez-vous-a-un-miracle.jpg' },
   { year: 2024, title: 'Tout le bleu du ciel', author: 'Mélissa Da Costa', cover: 'tout-le-bleu-du-ciel.jpg' },
-  { year: 2024, title: 'Kama Sutra', cover: 'kama-sutra.jpg' },
+  { year: 2024, title: 'Karma Sutra', cover: 'karma-sutra.jpg' },
   { year: 2024, title: 'November 9', author: 'Colleen Hoover', cover: 'november-9.jpg' },
   { year: 2024, title: 'Le seigneur des anneaux, tome 1 : La communauté de l\'anneau', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-1-la-communaute-de-l-an.jpg' },
   { year: 2024, title: 'Le seigneur des anneaux, tome 2 : Les deux tours', author: 'J. R. R. Tolkien', cover: 'le-seigneur-des-anneaux-tome-2-les-deux-tours.jpg' },
