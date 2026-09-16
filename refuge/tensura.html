@@ -40,16 +40,25 @@ h3{font-size:1.15rem;margin:0 0 3px}.jp{font-family:"Noto Sans JP","Yu Gothic",s
 @media(max-width:650px){.hero{padding-top:36px}main{padding-left:14px;padding-right:14px}.controls-inner{padding-left:14px;padding-right:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.portrait-wrap{height:190px}.card-body{padding:11px}h3{font-size:1rem}.jp{font-size:.87rem}.alias{font-size:.71rem}.card p{font-size:.81rem}.locked summary{align-items:flex-start}.locked summary .title{font-size:1.02rem}}
 @media(max-width:390px){.grid{grid-template-columns:1fr}.portrait-wrap{height:270px}.locked summary{padding:15px}.locked .grid{padding:0 12px 12px}.locked .warning{margin:0 12px 12px}}
 
-.back-refuge{display:inline-flex;align-items:center;gap:9px;color:var(--muted);text-decoration:none;
-font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;
-transition:color .18s}
-.back-refuge:hover{color:var(--text)}
-.back-refuge span{font-size:1.05em;line-height:1}
+/* Fil d'Ariane vers le Refuge — même chemin que sur le site, dessiné
+   dans la palette de cette page-ci. */
+.crumbs{margin-bottom:18px}
+.crumbs ol{display:flex;flex-wrap:wrap;align-items:center;gap:0 9px;padding:0;margin:0;list-style:none;
+font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.crumbs li{display:flex;align-items:center;gap:9px}
+.crumbs li+li::before{content:"/";font-weight:500;opacity:.45}
+.crumbs a{color:var(--muted);text-decoration:none;transition:color .18s}
+.crumbs a:hover{color:var(--text)}
+.crumbs [aria-current="page"]{color:var(--text)}
 </style>
 </head>
 <body>
 <header><div class="hero">
-  <a class="back-refuge" href="../#guides"><span>&#8592;</span> Sarindra’s Refuge</a>
+  <nav class="crumbs" aria-label="Fil d’Ariane"><ol>
+    <li><a href="../#refuge">Sarindra’s Refuge</a></li>
+    <li><a href="../#guides">Light novels japonais</a></li>
+    <li><span aria-current="page">That Time I Got Reincarnated as a Slime</span></li>
+  </ol></nav>
   <div class="eyebrow">Guide de lecture • light novel • anti-spoil</div>
   <h1>That Time I Got Reincarnated as a Slime — Qui est qui ?</h1>
   <p><strong>50 personnages</strong> avec portrait, écriture japonaise, variantes de nom utiles pour les recherches et un repère très court. Les sections futures sont repliées par volume pour ne pas te révéler des personnages trop tôt.</p>
