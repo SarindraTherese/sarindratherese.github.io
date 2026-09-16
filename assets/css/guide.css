@@ -397,18 +397,25 @@ footer a { color: var(--accent); }
   .card:hover, .chip:active { transform: none; }
 }
 
-/* ── Une page sans portraits ───────────────────────────────────
-   Le wiki qui héberge les images de Mushoku Tensei ne les sert
-   qu'aux pages de son propre domaine : depuis ici, c'est 403 à tous
-   les coups. Plutôt que cinquante-neuf cadres vides, la page s'assume
-   en texte, et le repère de volume rejoint la ligne de badges. */
-.no-portraits .portrait-wrap { display: none; }
-.no-portraits .grid { grid-template-columns: repeat(auto-fill, minmax(236px, 1fr)); }
-.no-portraits .card-body { padding: var(--s4) var(--s3); }
+/* ── Portraits et secours ──────────────────────────────────────
+   Les images de Mushoku Tensei viennent d'un wiki qui peut refuser de
+   les servir selon d'où vient la demande. Quand elles ne chargent pas,
+   des initiales prennent le relais ; le repère de volume, lui, vit
+   dans la ligne de badges, donc il survit dans les deux cas. */
 .topline { display: flex; flex-wrap: wrap; gap: 6px; }
 .badge-vol {
   background: var(--accent-fill);
   color: #fff;
+}
+.avatar.fallback {
+  width: 100%; height: 100%;
+  align-items: center; justify-content: center;
+  background: var(--paper-2);
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 /* Une note de volume : le même filet que les autres encadrés. */
 .volume-note {
