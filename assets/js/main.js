@@ -375,6 +375,37 @@ const BIBLE = {
     'Maccabées': 2, 'Corinthiens': 2, 'Thessaloniciens': 2, 'Timothée': 2,
     'Pierre': 2
   },
+  /* Les sept familles, dans l'ordre de la Bible de Jérusalem — l'édition
+     lue. Le classement de quatre livres varie selon les traditions :
+     les Lamentations et Baruch suivent ici Jérémie chez les prophètes,
+     Daniel est prophète, et Tobie, Judith, Esther et les Maccabées sont
+     rangés parmi les historiques. */
+  families: {
+    pentateuque: ['Genèse', 'Exode', 'Lévitique', 'Nombres', 'Deutéronome'],
+    historiques: ['Josué', 'Juges', 'Ruth', 'Samuel', 'Rois 1, 2',
+                  'Les chroniques', 'Esdras', 'Néhémie', 'Tobie', 'Judith',
+                  'Esther', 'Maccabées'],
+    poetiques:   ['Job', 'Psaumes', 'Proverbes', 'Ecclésiaste',
+                  'Cantique des cantiques', 'Sagesse', 'Ecclésiastique'],
+    prophetes:   ['Isaïe', 'Jérémie', 'Les lamentations', 'Baruch', 'Ézéchiel',
+                  'Daniel', 'Osée', 'Joël', 'Amos', 'Abdias', 'Jonas', 'Michée',
+                  'Nahum', 'Habaquq', 'Sophonie', 'Aggée', 'Zacharie', 'Malachie'],
+    evangiles:   ['Saint Mathieu', 'Saint Marc', 'Saint Luc', 'Saint Jean',
+                  'Actes des apôtres'],
+    lettres:     ['Romains', 'Corinthiens', 'Galates', 'Éphésiens', 'Philippiens',
+                  'Colossiens', 'Thessaloniciens', 'Timothée', 'Tite', 'Philémon',
+                  'Hébreux', 'Jacques', 'Pierre', 'Jean 1, 2 et 3', 'Jude'],
+    apocalypse:  ['Apocalypse']
+  },
+  familyNames: {
+    pentateuque: 'Pentateuque',
+    historiques: 'Livres historiques',
+    poetiques:   'Poétiques / sapientiaux',
+    prophetes:   'Prophètes',
+    evangiles:   'Évangiles / Actes',
+    lettres:     'Lettres',
+    apocalypse:  'Apocalypse'
+  },
   entries: [
     ['Jean 1, 2 et 3', null],       ['Saint Mathieu', '2025-02-09'],
     ['Saint Marc', '2025-02-10'],   ['Saint Luc', '2025-02-18'],
@@ -804,59 +835,76 @@ function renderBible() {
       + ' au ' + esc(enToutesLettres(BIBLE.end)) + ' '
       + esc(BIBLE.end.slice(0, 4)) + '</span>';
   }
-  const undated = BIBLE.entries.filter(e => !e[1]);
-  const dated = BIBLE.entries.filter(e => e[1])
-    .sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
 
-  /* Un jour, et tout ce qui s'y est terminé. Les jours où sept livres
-     s'achèvent tiennent sept lignes : la grappe se voit sans qu'on ait
-     à la compter. */
-  const days = [];
-  dated.forEach(([name, d]) => {
-    const last = days[days.length - 1];
-    if (last && last.d === d) last.books.push(name);
-    else days.push({ d: d, books: [name] });
-  });
+  /* Un livre → sa famille. La table est dans les données ; on l'inverse
+     ici plutôt que de répéter la famille sur chaque ligne du carnet. */
+  const famille = new Map();
+  Object.entries(BIBLE.families).forEach(([cle, livres]) =>
+    livres.forEach(l => famille.set(l, cle)));
 
-  const nbLivres = n => n + (n > 1 ? ' livres' : ' livre');
-  /* Le nom du mois, une conduite, son compte : la conduite occupe le
-     vide plutôt que de le laisser béer. */
-  const moisRow = (nom, n) => '<li class="carnet-month"><h4>'
-    + '<span class="carnet-m">' + esc(nom) + '</span>'
-    + '<i aria-hidden="true"></i>'
-    + '<span class="carnet-n">' + nbLivres(n) + '</span></h4></li>';
-  const out = [];
-
-  /* La lecture commence le 31 janvier, mais le carnet ne dit pas quel
-     jour ce livre-là s'est terminé. Il garde donc son mois et un tiret
-     à la place du quantième : on n'invente pas une date. */
-  if (undated.length) {
-    out.push(moisRow('Janvier', undated.length));
-    /* Le premier livre du carnet : c'est là que tout commence. */
-    out.push('<li class="carnet-day"><span class="carnet-num">—</span>'
-      + '<span class="carnet-books">'
-      + undated.map(e => '<b>' + esc(e[0]) + '</b>').join('')
-      + '</span><span class="carnet-tag">Départ</span></li>');
+  /* La légende : elle dit ce que la couleur signifie, et dit une fois
+     pour toutes que chaque case est un livre terminé. */
+  const leg = document.getElementById('bible-legend');
+  if (leg) {
+    const bloc = (titre, cles) =>
+      '<div class="bib-lgroup"><p class="bib-lname">' + esc(titre) + '</p>'
+      + cles.map(c => '<span class="bib-litem">'
+          + '<i class="bib-swatch f-' + c + '" aria-hidden="true"></i>'
+          + esc(BIBLE.familyNames[c]) + '</span>').join('')
+      + '</div>';
+    leg.innerHTML =
+        '<p class="bib-lintro">La couleur dit à quelle famille appartient le '
+      + 'livre. Chaque case marque un livre terminé ce jour-là.</p>'
+      + '<div class="bib-lcols">'
+      + bloc('Ancien Testament', ['pentateuque', 'historiques', 'poetiques', 'prophetes'])
+      + bloc('Nouveau Testament', ['evangiles', 'lettres', 'apocalypse'])
+      + '</div>';
   }
 
-  let mois = null;
-  days.forEach(jour => {
-    const m = Number(jour.d.slice(5, 7)) - 1;
+  /* Un jour, et tout ce qui s'y est terminé. Les jours où sept livres
+     s'achèvent portent sept étiquettes : la grappe se voit sans qu'on
+     ait à la compter. */
+  const jours = [];
+  const pousse = (cle, mois, libelle, nom) => {
+    const dernier = jours[jours.length - 1];
+    if (dernier && dernier.cle === cle) { dernier.livres.push(nom); return; }
+    jours.push({ cle: cle, mois: mois, libelle: libelle, livres: [nom] });
+  };
 
-    if (m !== mois) {
-      mois = m;
-      const n = days.filter(x => Number(x.d.slice(5, 7)) - 1 === m)
-                    .reduce((t, x) => t + x.books.length, 0);
-      out.push(moisRow(FR_MONTHS[m], n));
-    }
-    out.push('<li class="carnet-day"><span class="carnet-num">'
-      + String(Number(jour.d.slice(8))).padStart(2, '0') + '</span>'
-      + '<span class="carnet-books">'
-      + jour.books.map(b => '<b>' + esc(b) + '</b>').join('')
-      + '</span></li>');
+  /* La lecture commence le 31 janvier, mais le carnet ne dit pas quel
+     jour ce livre-là s'est terminé : il garde son mois et un tiret. */
+  BIBLE.entries.filter(e => !e[1])
+    .forEach(([nom]) => pousse('2025-01-x', 0, '—', nom));
+
+  BIBLE.entries.filter(e => e[1])
+    .sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0)
+    .forEach(([nom, d]) => pousse(d, Number(d.slice(5, 7)) - 1,
+      String(Number(d.slice(8))).padStart(2, '0') + ' '
+      + FR_MONTHS[Number(d.slice(5, 7)) - 1].slice(0, 4), nom));
+
+  const nbLivres = n => n + (n > 1 ? ' livres' : ' livre');
+  const mois = [];
+  jours.forEach(j => {
+    const dernier = mois[mois.length - 1];
+    if (dernier && dernier.m === j.mois) { dernier.jours.push(j); return; }
+    mois.push({ m: j.mois, jours: [j] });
   });
 
-  log.innerHTML = '<ol class="carnet">' + out.join('') + '</ol>';
+  log.innerHTML = mois.map((bloc, i) => {
+    const total = bloc.jours.reduce((n, j) => n + j.livres.length, 0);
+    return '<section class="bib-month">'
+      + '<header class="bib-mhead">'
+      + '<span class="bib-mnum">' + String(i + 1).padStart(2, '0') + '</span>'
+      + '<h4 class="bib-mtitle">' + FR_MONTHS[bloc.m] + '</h4>'
+      + '<span class="bib-mcount">' + nbLivres(total) + '</span></header>'
+      + '<div class="bib-days">'
+      + bloc.jours.map(j => '<article class="bib-day">'
+          + '<span class="bib-date">' + esc(j.libelle) + '</span>'
+          + j.livres.map(l => '<span class="bib-book f-'
+              + (famille.get(l) || 'apocalypse') + '">' + esc(l) + '</span>').join('')
+          + '</article>').join('')
+      + '</div></section>';
+  }).join('');
 }
 
 

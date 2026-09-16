@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parcours de lecture — Bible</title>
+  <style>
+    :root{
+      --bg:#eef6fa;
+      --ink:#102b3a;
+      --muted:#6d8591;
+      --line:#a9c8d7;
+      --grid:rgba(123,169,191,.16);
+      --paper:#fbfcfd;
+
+      /* Ancien Testament — palette chaude */
+      --pentateuque-bg:#f5eadf;
+      --pentateuque-accent:#b7662e;
+
+      --historiques-bg:#f3eee0;
+      --historiques-accent:#a9822f;
+
+      --poetiques-bg:#f5e8ec;
+      --poetiques-accent:#a95a74;
+
+      --prophetes-bg:#efe6f4;
+      --prophetes-accent:#7b5aa6;
+
+      /* Nouveau Testament — palette froide */
+      --evangiles-bg:#e4f1f5;
+      --evangiles-accent:#167d99;
+
+      --lettres-bg:#e5eef8;
+      --lettres-accent:#426fa5;
+
+      --apocalypse-bg:#e8ecef;
+      --apocalypse-accent:#455a66;
+
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        linear-gradient(var(--grid) 1px,transparent 1px),
+        linear-gradient(90deg,var(--grid) 1px,transparent 1px),
+        var(--bg);
+      background-size:32px 32px;
+      font-family:Arial,Helvetica,sans-serif;
+    }
+
+    .page{
+      width:min(var(--max),calc(100% - 46px));
+      margin:0 auto;
+      padding:70px 0 100px;
+    }
+
+    .sheet{
+      border:1px solid var(--line);
+      background:var(--paper);
+      box-shadow:0 18px 46px rgba(38,78,98,.06);
+    }
+
+    .sheet-head{
+      padding:30px 32px 28px;
+      border-bottom:1px solid var(--line);
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:end;
+      gap:24px;
+    }
+
+    .eyebrow{
+      margin-bottom:10px;
+      color:#0b789f;
+      font:700 11px/1 "Courier New",monospace;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      margin:0;
+      font-family:"Arial Narrow",Arial,sans-serif;
+      font-size:clamp(40px,5vw,62px);
+      line-height:.95;
+      letter-spacing:-.04em;
+      text-transform:uppercase;
+    }
+
+    .prototype{
+      color:#b86228;
+      font:700 10px/1.5 "Courier New",monospace;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .legend-wrap{
+      padding:22px 32px 24px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+
+    .legend-title{
+      margin:0 0 15px;
+      color:var(--muted);
+      font:700 10px/1 "Courier New",monospace;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .legend-groups{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+    }
+
+    .legend-group{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:10px 14px;
+    }
+
+    .legend-group-name{
+      width:100%;
+      color:var(--ink);
+      font:700 11px/1.4 "Courier New",monospace;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+
+    .legend-item{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:var(--muted);
+      font:11px/1.4 "Courier New",monospace;
+    }
+
+    .legend-swatch{
+      width:18px;
+      height:12px;
+      border-left:3px solid;
+    }
+
+    .month{
+      padding:30px 32px 34px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .month:last-child{border-bottom:0}
+
+    .month-head{
+      display:flex;
+      align-items:baseline;
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .month-num{
+      color:#0b789f;
+      font:700 11px/1 "Courier New",monospace;
+      letter-spacing:.12em;
+    }
+
+    .month-title{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.02em;
+    }
+
+    .days{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .day{
+      min-height:150px;
+      padding:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .day.pause{
+      background:#f8fafb;
+      color:#9babb2;
+    }
+
+    .day-number{
+      color:#587989;
+      font:700 10px/1 "Courier New",monospace;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .day.pause .day-number{color:#9babb2}
+
+    .pause-label{
+      margin-top:auto;
+      color:#b1bdc3;
+      font:italic 10px/1.4 "Courier New",monospace;
+    }
+
+    .book{
+      padding:8px 9px 9px;
+      border-left:3px solid;
+      font-family:"Courier New",monospace;
+    }
+
+    .book strong{
+      display:block;
+      margin-bottom:4px;
+      color:#173746;
+      font-size:11px;
+      line-height:1.25;
+    }
+
+    .book span{
+      display:block;
+      color:#627d89;
+      font-size:9px;
+      line-height:1.4;
+    }
+
+    .pentateuque{background:var(--pentateuque-bg);border-color:var(--pentateuque-accent)}
+    .historiques{background:var(--historiques-bg);border-color:var(--historiques-accent)}
+    .poetiques{background:var(--poetiques-bg);border-color:var(--poetiques-accent)}
+    .prophetes{background:var(--prophetes-bg);border-color:var(--prophetes-accent)}
+    .evangiles{background:var(--evangiles-bg);border-color:var(--evangiles-accent)}
+    .lettres{background:var(--lettres-bg);border-color:var(--lettres-accent)}
+    .apocalypse{background:var(--apocalypse-bg);border-color:var(--apocalypse-accent)}
+
+    .pentateuque-swatch{background:var(--pentateuque-bg);border-color:var(--pentateuque-accent)}
+    .historiques-swatch{background:var(--historiques-bg);border-color:var(--historiques-accent)}
+    .poetiques-swatch{background:var(--poetiques-bg);border-color:var(--poetiques-accent)}
+    .prophetes-swatch{background:var(--prophetes-bg);border-color:var(--prophetes-accent)}
+    .evangiles-swatch{background:var(--evangiles-bg);border-color:var(--evangiles-accent)}
+    .lettres-swatch{background:var(--lettres-bg);border-color:var(--lettres-accent)}
+    .apocalypse-swatch{background:var(--apocalypse-bg);border-color:var(--apocalypse-accent)}
+
+    .completion{
+      margin-top:4px;
+      color:#b86228 !important;
+      font-weight:700;
+    }
+
+    .note{
+      margin-top:22px;
+      color:var(--muted);
+      font:11px/1.6 "Courier New",monospace;
+    }
+
+    @media(max-width:900px){
+      .legend-groups{grid-template-columns:1fr}
+      .days{grid-template-columns:repeat(4,1fr)}
+    }
+
+    @media(max-width:620px){
+      .page{width:min(100% - 24px,var(--max));padding-top:46px}
+      .sheet-head{grid-template-columns:1fr;padding:24px 20px}
+      .legend-wrap,.month{padding-left:20px;padding-right:20px}
+      .days{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <header class="sheet-head">
+        <div>
+          <div class="eyebrow">Le parcours</div>
+          <h1>31 janvier — 7 juin 2025</h1>
+        </div>
+        <div class="prototype">Prototype visuel</div>
+      </header>
+
+      <section class="legend-wrap">
+        <p class="legend-title">Légende des couleurs</p>
+
+        <div class="legend-groups">
+          <div class="legend-group">
+            <div class="legend-group-name">Ancien Testament</div>
+            <div class="legend-item"><span class="legend-swatch pentateuque-swatch"></span>Pentateuque</div>
+            <div class="legend-item"><span class="legend-swatch historiques-swatch"></span>Livres historiques</div>
+            <div class="legend-item"><span class="legend-swatch poetiques-swatch"></span>Poétiques / sapientiaux</div>
+            <div class="legend-item"><span class="legend-swatch prophetes-swatch"></span>Prophètes</div>
+          </div>
+
+          <div class="legend-group">
+            <div class="legend-group-name">Nouveau Testament</div>
+            <div class="legend-item"><span class="legend-swatch evangiles-swatch"></span>Évangiles / Actes</div>
+            <div class="legend-item"><span class="legend-swatch lettres-swatch"></span>Lettres</div>
+            <div class="legend-item"><span class="legend-swatch apocalypse-swatch"></span>Apocalypse</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="month">
+        <div class="month-head">
+          <span class="month-num">01</span>
+          <h2 class="month-title">Janvier</h2>
+        </div>
+
+        <div class="days">
+          <article class="day">
+            <div class="day-number">31 jan</div>
+            <div class="book pentateuque">
+              <strong>Genèse</strong>
+              <span>lecture du jour</span>
+              <span class="completion">livre terminé</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="month">
+        <div class="month-head">
+          <span class="month-num">02</span>
+          <h2 class="month-title">Février</h2>
+        </div>
+
+        <div class="days">
+          <article class="day">
+            <div class="day-number">01 fév</div>
+            <div class="book pentateuque">
+              <strong>Exode</strong>
+              <span>chap. 1–12</span>
+            </div>
+          </article>
+
+          <article class="day">
+            <div class="day-number">02 fév</div>
+            <div class="book pentateuque">
+              <strong>Exode</strong>
+              <span class="completion">livre terminé</span>
+            </div>
+          </article>
+
+          <article class="day pause">
+            <div class="day-number">03 fév</div>
+            <div class="pause-label">pas de lecture</div>
+          </article>
+
+          <article class="day">
+            <div class="day-number">04 fév</div>
+            <div class="book pentateuque">
+              <strong>Lévitique</strong>
+              <span>lecture du jour</span>
+            </div>
+          </article>
+
+          <article class="day">
+            <div class="day-number">05 fév</div>
+            <div class="book pentateuque">
+              <strong>Lévitique</strong>
+              <span class="completion">livre terminé</span>
+            </div>
+            <div class="book pentateuque">
+              <strong>Nombres</strong>
+              <span>lecture du jour</span>
+            </div>
+          </article>
+
+          <article class="day">
+            <div class="day-number">06 fév</div>
+            <div class="book pentateuque">
+              <strong>Nombres</strong>
+              <span>suite</span>
+            </div>
+          </article>
+
+          <article class="day pause">
+            <div class="day-number">07 fév</div>
+            <div class="pause-label">pas de lecture</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="month">
+        <div class="month-head">
+          <span class="month-num">03</span>
+          <h2 class="month-title">Mars</h2>
+        </div>
+
+        <div class="days">
+          <article class="day">
+            <div class="day-number">12 mar</div>
+            <div class="book historiques">
+              <strong>Josué</strong>
+              <span>lecture du jour</span>
+            </div>
+          </article>
+
+          <article class="day">
+            <div class="day-number">13 mar</div>
+            <div class="book historiques">
+              <strong>Josué</strong>
+              <span class="completion">livre terminé</span>
+            </div>
+            <div class="book historiques">
+              <strong>Juges</strong>
+              <span>lecture du jour</span>
+            </div>
+          </article>
+
+          <article class="day">
+            <div class="day-number">14 mar</div>
+            <div class="book historiques">
+              <strong>Juges</strong>
+              <span>suite</span>
+            </div>
+          </article>
+
+          <article class="day pause">
+            <div class="day-number">15 mar</div>
+            <div class="pause-label">pas de lecture</div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <p class="note">
+      Les dates et livres de ce prototype servent seulement à montrer le rendu.
+      Dans la vraie page, on conserve tes données existantes. La couleur décrit la famille biblique du livre,
+      et non son statut de lecture. Aucun libellé « début du livre » n'est nécessaire.
+    </p>
+  </main>
+</body>
+</html>
