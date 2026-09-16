@@ -1423,79 +1423,13 @@ a.read-item:hover .read-title { color: var(--cyan); }
    SUJETS DU REFUGE — grille de cartes
    Même objet que les certifications : badge, titre, méta, lien.
    ============================================================ */
-.topics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s3);
-  margin-bottom: var(--s7);
-}
-.topic-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r2);
-  padding: var(--s4);
-  text-decoration: none;
-  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-}
-.topic-card:hover {
-  border-color: var(--cyan-line);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-.topic-badge {
-  align-self: flex-start;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 4px 9px;
-  border-radius: var(--r1);
-}
 .tone-cyan  { background: var(--cyan-soft); color: var(--cyan); }
 /* Le sable est réservé à ce qui est accompli, pas à ce qui se poursuit
    (#9A5019 sur #F0E1D2 : 4,64:1, AA). */
 .tone-sand  { background: var(--sand-soft); color: var(--sand-text); }
 /* L'icône du badge se cale sur la casse du texte, pas sur la ligne. */
-.topic-badge { display: inline-flex; align-items: center; gap: 6px; }
 .icon-xs { width: 12px; height: 12px; }
-.topic-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.35;
-  flex: 1;
-}
-.topic-card:hover .topic-name { color: var(--cyan); }
-.topic-meta {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
-.topic-go {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-.topic-go .icon { transition: transform 0.18s ease; }
-.topic-card:hover .topic-go .icon { transform: translateX(3px); }
-
 /* Une année pas encore reconstituée reste accessible, mais s'annonce */
-.topic-card.is-empty { background: transparent; border-style: dashed; }
-.topic-card.is-empty .topic-name { color: var(--muted); font-weight: 500; }
-.topic-card.is-empty .topic-go { color: var(--muted); }
-
-@media (max-width: 1020px) { .topics { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px)  { .topics { grid-template-columns: 1fr; } }
 
 /* ============================================================
    L'ÉTAGÈRE — les livres d'une année
@@ -1703,59 +1637,10 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Chaque guide est une page à part : la carte l'annonce, elle ne la
    contient pas. Elles s'empilent de haut en bas — deux blocs de texte
    côte à côte se lisent mal, et leurs hauteurs inégales se voyaient. */
-.guides {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s4);
-  max-width: 72ch;
-  margin-inline: auto;
-}
 /* Centrer les seules cartes laisserait le titre à gauche, décalé de
    quatre-vingts pixels. L'en-tête prend donc la même colonne : la
    section forme un bloc, centré d'un seul tenant. */
-#page-guides .crumbs,
-#page-guides .refuge-open { max-width: 72ch; margin-inline: auto; }
-.guide {
-  display: block;
-  padding: var(--s5);
-  background: var(--surface);
-  border: 1px solid var(--line-soft);
-  text-decoration: none;
-  transition: border-color 0.18s ease;
-}
-.guide:hover { border-color: var(--cyan-line); }
-.guide-meta {
-  margin-top: 5px;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-}
-.guide-go {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: var(--s4);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-.guide:hover .guide-go { text-decoration: underline; }
-.guide-title {
-  font-family: var(--display);
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-.guide-lead {
-  margin-top: 6px;
-  font-size: 15.5px;
-  line-height: 1.65;
-  color: var(--muted);
-}
+
 /* La plage de dates : c'est elle qui rend les 127 jours vérifiables.
    En bas de casse, pour ne pas faire une deuxième ligne de capitales
    sous le surtitre — le titre doit rester seul entre les deux. */
@@ -1982,7 +1867,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 :root { --snap: 120ms cubic-bezier(0.2, 0.8, 0.3, 1); }
 
 .btn-primary, .btn-ghost, .send-btn, .collab-btn,
-.year-pill, .topic-card, .chip,
+.year-pill, .rfg-item, .rfg-cta, .chip,
 .book.is-linked, .find.is-linked, .guide,
 .nav-toggle, .crumbs a {
   transition: background var(--snap), border-color var(--snap),
@@ -1991,15 +1876,8 @@ a.read-item:hover .read-title { color: var(--cyan); }
 
 /* L'enfoncement : un pixel, pas plus — c'est un appui, pas un rebond. */
 .btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
-.year-pill:active, .topic-card:active, .chip:active,
-.book.is-linked:active, .find.is-linked:active, .guide:active {
-  transform: translateY(1px);
-}
-
+.year-pill:active, .rfg-cta:active, .chip:active,
 /* Les cartes se soulèvent au survol, comme les couvertures de l'étagère. */
-.topic-card:hover, .find.is-linked:hover, .guide:hover { transform: translateY(-2px); }
-.topic-card:active, .find.is-linked:active, .guide:active { transform: translateY(0); }
-
 /* La pastille d'année s'affirme au survol au lieu de changer de filet. */
 .year-pill:hover { border-color: var(--cyan-fill); }
 .year-pill.is-current:active { background: var(--cyan); border-color: var(--cyan); }
@@ -2007,18 +1885,18 @@ a.read-item:hover .read-title { color: var(--cyan); }
 /* Bague de focus : aucun élément n'en avait, la navigation au clavier
    se faisait à l'aveugle. */
 .btn-primary:focus-visible, .btn-ghost:focus-visible, .send-btn:focus-visible,
-.collab-btn:focus-visible, .year-pill:focus-visible, .topic-card:focus-visible,
-.book.is-linked:focus-visible, .find.is-linked:focus-visible, .guide:focus-visible,
+.collab-btn:focus-visible, .year-pill:focus-visible, .rfg-item:focus-visible,
+.book.is-linked:focus-visible, .find.is-linked:focus-visible, .ln-item:focus-visible,
+.rfg-cta:focus-visible,
 .nav-links a:focus-visible, .crumbs a:focus-visible, .nav-toggle:focus-visible {
   outline: 2px solid var(--cyan-fill);
   outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .topic-card:hover, .find.is-linked:hover, .guide:hover,
+  .find.is-linked:hover,
   .btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
-  .year-pill:active, .topic-card:active, .chip:active,
-  .book.is-linked:active, .find.is-linked:active, .guide:active { transform: none; }
+  .year-pill:active, .rfg-cta:active, .chip:active,
 }
 
 /* Aucun mot seul en bout de paragraphe : `pretty` recule la coupure
@@ -2026,6 +1904,293 @@ a.read-item:hover .read-title { color: var(--cyan); }
    À ne pas confondre avec `balance`, qui raccourcit toutes les lignes
    et fait paraître le texte coupé au milieu de la page — il n'a sa
    place que dans les titres. */
-.refuge-lead, .guide-lead, .find-note, .conseil-why, .exp-desc, .sec-lead {
+
+/* ══════════════════════════════════════════════════════════════
+   LE REFUGE — un sommaire, puis un aperçu.
+
+   Plus de cartes translucides : le quadrillage reste au fond de page,
+   et les surfaces posées dessus sont franches. Le sommaire tient à
+   gauche, l'aperçu du sujet choisi occupe la droite.
+   ══════════════════════════════════════════════════════════════ */
+.rfg {
+  display: grid;
+  grid-template-columns: minmax(290px, 0.85fr) minmax(0, 1.35fr);
+  margin-top: var(--s6);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.rfg-index {
+  border-right: 1px solid var(--line);
+  padding: var(--s3) 0;
+}
+.rfg-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  width: 100%;
+  padding: var(--s4);
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+.rfg-item:first-child { border-top: 0; }
+.rfg-item:hover { background: var(--paper-2); }
+/* Le sujet ouvert : fond plein et un filet sable au bord — la même
+   couleur que l'onglet du refuge dans la navigation. */
+.rfg-item.active {
+  background: #fff;
+  box-shadow: inset 3px 0 0 var(--sand);
+}
+.rfg-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  padding-top: 2px;
+}
+.rfg-name {
+  display: block;
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.rfg-meta {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+/* Une hauteur plancher : sans elle, le panneau se rétracte sur le
+   sujet qui n'a pas de chiffres et la page saute à chaque clic. */
+.rfg-preview { display: flex; min-height: 440px; }
+.rfg-card {
+  display: none;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  padding: var(--s5);
+}
+.rfg-card.active { display: grid; animation: rfgIn 0.26s ease; }
+@keyframes rfgIn {
+  from { opacity: 0.25; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.rfg-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s4);
+}
+.rfg-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.rfg-status {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 5px;
+  text-align: right;
+}
+.rfg-body { display: grid; align-content: center; padding: var(--s5) 0; }
+.rfg-title {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--display);
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.rfg-copy {
+  max-width: 54ch;
+  margin: var(--s4) 0 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body);
   text-wrap: pretty;
+}
+.rfg-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s4);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+}
+.rfg-stats { display: flex; flex-wrap: wrap; gap: var(--s5); }
+.rfg-stat small {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rfg-stat strong {
+  font-family: var(--mono);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.rfg-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-decoration: none;
+}
+.rfg-cta:hover { gap: 14px; border-bottom-color: var(--cyan-line); }
+
+/* ── Light novels : une section à part ─────────────────────────
+   Ce ne sont pas des lectures terminées mais des repères, donc ils
+   ne partagent pas le sommaire du refuge. */
+.ln {
+  margin-top: var(--s7);
+  padding: var(--s5);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.ln-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s4);
+  align-items: end;
+  margin-bottom: var(--s5);
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid var(--line);
+}
+.ln-title {
+  margin: var(--s2) 0 0;
+  font-family: var(--display);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ln-title em { font-style: normal; color: var(--cyan); }
+.ln-note {
+  max-width: 58ch;
+  margin: var(--s3) 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body);
+  text-wrap: pretty;
+}
+.ln-tag {
+  flex: none;
+  padding: 7px 11px;
+  background: #fff;
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.ln-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.ln-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 168px;
+  padding: var(--s4);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  text-decoration: none;
+}
+a.ln-item:hover { background: var(--sand-soft); }
+.ln-no {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.ln-name {
+  margin-top: 6px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.ln-copy {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.ln-go {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: var(--s3);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+a.ln-item:hover .ln-go { gap: 12px; }
+/* Le guide à venir : présent, mais visiblement pas encore là. */
+.ln-item.is-coming { background: var(--paper-2); }
+.ln-item.is-coming .ln-no,
+.ln-item.is-coming .ln-go { color: var(--muted); }
+.ln-item.is-coming .ln-name { color: var(--muted); }
+
+@media (max-width: 1020px) {
+  .ln-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .rfg { grid-template-columns: 1fr; }
+  .rfg-index { border-right: 0; border-bottom: 1px solid var(--line); }
+  .rfg-card { padding: var(--s4); }
+}
+@media (max-width: 600px) {
+  .ln-list { grid-template-columns: 1fr; }
+  .ln-head { grid-template-columns: 1fr; align-items: start; }
+  .ln { padding: var(--s4) var(--s3); }
+  .rfg-bottom { flex-direction: column; align-items: flex-start; }
+  .rfg-title { max-width: none; }
 }

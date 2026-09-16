@@ -104,17 +104,20 @@ const GUIDES = [
         + 'Les classes sont celles du début de la série, pour ne pas révéler '
         + 'les changements de classement.',
     meta: '41 personnages',
+    short: '41 personnages, leurs classes de départ et les variantes de leurs noms.',
     href: 'refuge/classroom-of-the-elite.html' },
   { title: 'Mushoku Tensei', count: 59,
     lead: 'Rangés par volume, du premier au vingt-sixième : chaque volume '
         + 'reste replié jusqu\'à ouverture. Pas de kanji ici, seulement le nom '
         + 'utile pour lire la novel et ses variantes de traduction.',
     meta: '59 personnages · 26 volumes',
+    short: '59 personnages sur 26 volumes, à ouvrir au fur et à mesure.',
     href: 'refuge/mushoku-tensei.html' },
   { title: 'That Time I Got Reincarnated as a Slime', count: 50,
     lead: 'Rangés par volume : chaque volume reste replié tant qu\'on n\'y est '
         + 'pas arrivé. Ni évolutions, ni changements de statut, ni issues de combat.',
     meta: '50 personnages · 5 volumes',
+    short: '50 personnages rangés par volume, sans rien dévoiler de la suite.',
     href: 'refuge/tensura.html' },
 ];
 
@@ -417,19 +420,19 @@ const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 const YEARS = [2026, 2025, 2024, 2023, 2022];
 const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
 
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'guides', 'conseils']
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'conseils']
   .concat(YEAR_PAGES, ['contact']);
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Testé et adopté', guides: 'Light novels japonais',
-    conseils: 'Mes guides de lecture', contact: 'Contact' },
+    finds: 'Testé et adopté', conseils: 'Mes guides de lecture',
+    contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
 const PAGE_PARENT = Object.assign(
-  { bible: 'refuge', finds: 'refuge', guides: 'refuge', conseils: 'refuge' },
+  { bible: 'refuge', finds: 'refuge', conseils: 'refuge' },
   Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
 
 /* Toutes les années partagent un même bloc de page. */
@@ -646,82 +649,138 @@ function bookNoCover(img) {
      page: 'bible'          → une page interne (#bible)
      url:  'https://…'      → un texte publié ailleurs
    ════════════════════════════════════════════════════════════ */
-function renderTopics() {
-  const host = document.getElementById('topics');
-  if (!host) return;
-  host.innerHTML = topics().map(t =>
-      '<a class="topic-card' + (t.empty ? ' is-empty' : '') + '" href="#' + esc(t.page) + '">'
-    + '<span class="topic-badge tone-' + t.tone + '">'
-    + (t.icon ? '<svg class="icon icon-xs" aria-hidden="true"><use href="#'
-        + esc(t.icon) + '"/></svg>' : '')
-    + esc(t.badge) + '</span>'
-    + '<span class="topic-name">' + esc(t.title) + '</span>'
-    + '<span class="topic-meta">' + esc(t.meta) + '</span>'
-    + '<span class="topic-go">' + (t.empty ? 'Bientôt' : 'Lire')
-    + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
-    + '</span></a>').join('');
-}
-
+/* Les livres d'une année. Emporté par erreur avec l'ancienne grille
+   de cartes, alors qu'il sert aussi aux étagères. */
 function booksOfYear(y) { return READINGS.filter(r => r.year === y); }
-
 const THIS_YEAR = new Date().getFullYear();
 
-function topics() {
-  const bible = {
-    /* Ce n'est pas une lecture de plus : c'est un défi mené à son
-       terme. D'où le ton sable, seul contre-ton de la palette. */
-    badge: 'Défi accompli', tone: 'sand', icon: 'i-check',
-    title: 'J’ai lu la Bible en 127 jours',
-    meta:  '73 livres · 31 janv. — 7 juin 2025',
-    page:  'bible'
-  };
-  const filled = YEARS.filter(y => booksOfYear(y).length).sort((a, b) => a - b);
-  const span = filled.length > 1
-    ? filled[0] + ' à ' + filled[filled.length - 1]
-    : String(filled[0] || '');
-  const lectures = {
-    badge: 'Lecture', tone: 'cyan', icon: 'i-book',
-    title: 'Mes lectures, année par année',
-    meta:  READINGS.length
-      ? READINGS.length + ' livres · ' + span
-      : 'à venir',
-    /* On entre par la première année, comme les pastilles se lisent ;
-       elles font le reste. */
-    page:  'lectures-' + (filled.length ? filled[0] : YEARS[0]),
-    empty: READINGS.length === 0
-  };
-  const finds = {
-    badge: 'Acquisition', tone: 'ink', icon: 'i-spark',
-    title: 'Testé et adopté',
-    meta:  DISCOVERIES.length
-      ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' objets' : ' objet')
-      : 'à venir',
-    page:  'finds',
-    empty: DISCOVERIES.length === 0
-  };
-  const guides = {
-    badge: 'Astuce', tone: 'line', icon: 'i-pin',
-    title: 'Light novels japonais',
-    /* Deux séries, et le nombre de noms à retenir dans les deux. */
-    meta:  GUIDES.length
-      ? GUIDES.length + ' séries · '
-        + GUIDES.reduce((n, g) => n + (g.count || 0), 0) + ' personnages'
-      : 'à venir',
-    page:  'guides',
-    empty: GUIDES.length === 0
-  };
-  const conseils = {
-    badge: 'Conseil', tone: 'line-sand', icon: 'i-pen',
-    title: 'Mes guides de lecture',
-    meta:  CONSEILS.length
-      ? CONSEILS.length + (CONSEILS.length > 1 ? ' guides' : ' guide')
-      : 'à venir',
-    page:  'conseils',
-    empty: CONSEILS.length === 0
-  };
-  return [bible, lectures, finds, guides, conseils];
+
+/* ════════════════════════════════════════════════════════════
+   LE REFUGE — un sommaire, puis un aperçu.
+   Quatre sujets à gauche, celui qu'on choisit développé à droite.
+   Les chiffres viennent des données : personne ne les recopie.
+   ════════════════════════════════════════════════════════════ */
+function refugeTopics() {
+  const annees = YEARS.filter(y => booksOfYear(y).length).sort((a, b) => a - b);
+  const jours  = 127;
+
+  return [
+    { id: 'bible', page: 'bible',
+      kicker: 'Défi accompli', tone: 'sand', icon: 'i-check',
+      title:  'J’ai lu la Bible en 127 jours',
+      meta:   '31 janv. — 7 juin 2025',
+      status: 'Carnet de lecture',
+      copy:   'J’ai noté chaque jour où je terminais un livre. Le carnet est là, '
+            + 'tel que je l’ai tenu, sans rien y ajouter après coup.',
+      stats:  [['Durée', jours + ' jours'], ['Livres', '73'],
+               ['Période', '31/01 → 07/06']],
+      cta:    'Voir le carnet' },
+
+    { id: 'reads', page: 'lectures-' + (annees[0] || YEARS[0]),
+      kicker: 'Lecture', tone: 'cyan', icon: 'i-book',
+      title:  'Mes lectures, année après année',
+      meta:   READINGS.length ? READINGS.length + ' livres depuis ' + annees[0] : 'à venir',
+      status: 'Année par année',
+      copy:   'Tous les livres que j’ai lus depuis ' + (annees[0] || '') + ', rangés par année. '
+            + 'Certains m’ont marquée, d’autres beaucoup moins.',
+      stats:  [['Total', READINGS.length + ' livres'],
+               ['Première année', String(annees[0] || '—')],
+               ['En cours', String(annees[annees.length - 1] || '—')]],
+      cta:    'Parcourir les années',
+      empty:  READINGS.length === 0 },
+
+    { id: 'tested', page: 'finds',
+      kicker: 'Acquisition', tone: 'ink', icon: 'i-spark',
+      title:  'Testé et adopté',
+      meta:   DISCOVERIES.length
+              ? DISCOVERIES.length + (DISCOVERIES.length > 1 ? ' objets' : ' objet')
+              : 'à venir',
+      status: 'Ce que j’utilise',
+      copy:   'Des objets que j’utilise vraiment, pas une liste d’achats. '
+            + 'S’ils sont là, c’est que je les ai gardés.',
+      stats:  [['Objets', String(DISCOVERIES.length)]],
+      cta:    'Voir la liste',
+      empty:  DISCOVERIES.length === 0 },
+
+    { id: 'advice', page: 'conseils',
+      kicker: 'Conseil', tone: 'line-sand', icon: 'i-pen',
+      title:  'Mes guides de lecture',
+      meta:   CONSEILS.length
+              ? CONSEILS.length + (CONSEILS.length > 1 ? ' guides' : ' guide')
+              : 'rien d’écrit pour l’instant',
+      status: 'À écrire',
+      copy:   'Par où commencer, quoi lire après tel livre. Je n’ai encore rien '
+            + 'rédigé ici, mais l’endroit est prêt.',
+      stats:  [],
+      cta:    CONSEILS.length ? 'Lire' : 'Bientôt',
+      empty:  CONSEILS.length === 0 }
+  ];
 }
 
+function renderRefuge() {
+  const index = document.getElementById('rfg-index');
+  const vue   = document.getElementById('rfg-preview');
+  if (!index || !vue) return;
+  const sujets = refugeTopics();
+
+  index.innerHTML = sujets.map((t, i) =>
+      '<button class="rfg-item' + (i === 0 ? ' active' : '') + '"'
+    + ' type="button" data-cible="' + esc(t.id) + '"'
+    + ' aria-controls="vue-' + esc(t.id) + '" aria-selected="' + (i === 0) + '">'
+    + '<span class="rfg-num">' + String(i + 1).padStart(2, '0') + '</span>'
+    + '<span><span class="rfg-name">' + esc(t.title) + '</span>'
+    + '<span class="rfg-meta">' + esc(t.meta) + '</span></span>'
+    + '</button>').join('');
+
+  vue.innerHTML = sujets.map((t, i) =>
+      '<article class="rfg-card' + (i === 0 ? ' active' : '') + '" id="vue-' + esc(t.id) + '">'
+    + '<div class="rfg-top">'
+    + '<span class="rfg-kicker tone-' + t.tone + '">'
+    + '<svg class="icon icon-xs" aria-hidden="true"><use href="#' + esc(t.icon) + '"/></svg>'
+    + esc(t.kicker) + '</span>'
+    + '<span class="rfg-status">' + esc(t.status) + '</span></div>'
+    + '<div class="rfg-body"><h3 class="rfg-title">' + esc(t.title) + '</h3>'
+    + '<p class="rfg-copy">' + esc(t.copy) + '</p></div>'
+    + '<div class="rfg-bottom">'
+    + '<div class="rfg-stats">' + t.stats.map(([k, v]) =>
+        '<span class="rfg-stat"><small>' + esc(k) + '</small><strong>'
+        + esc(v) + '</strong></span>').join('') + '</div>'
+    + '<a class="rfg-cta" href="#' + esc(t.page) + '">' + esc(t.cta)
+    + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+    + '</a></div></article>').join('');
+
+  index.querySelectorAll('.rfg-item').forEach(b => {
+    b.addEventListener('click', () => {
+      index.querySelectorAll('.rfg-item').forEach(x => {
+        x.classList.remove('active'); x.setAttribute('aria-selected', 'false');
+      });
+      vue.querySelectorAll('.rfg-card').forEach(c => c.classList.remove('active'));
+      b.classList.add('active'); b.setAttribute('aria-selected', 'true');
+      const cible = document.getElementById('vue-' + b.dataset.cible);
+      if (cible) cible.classList.add('active');
+    });
+  });
+}
+
+/* Les light novels ne sont pas des lectures finies : ils ont leur
+   propre section, sous le refuge, et mènent droit aux guides. */
+function renderLightNovels() {
+  const host = document.getElementById('ln-list');
+  if (!host) return;
+  host.innerHTML = GUIDES.map((g, i) =>
+      '<a class="ln-item" href="' + esc(g.href) + '">'
+    + '<span class="ln-no">Guide ' + String(i + 1).padStart(2, '0') + '</span>'
+    + '<span class="ln-name">' + esc(g.title) + '</span>'
+    + '<span class="ln-copy">' + esc(g.short || g.meta) + '</span>'
+    + '<span class="ln-go">Ouvrir'
+    + '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+    + '</span></a>').join('')
+    + '<div class="ln-item is-coming">'
+    + '<span class="ln-no">À venir</span>'
+    + '<span class="ln-name">Prochain guide</span>'
+    + '<span class="ln-copy">Il s’en ajoutera au fil de mes lectures.</span>'
+    + '<span class="ln-go">Bientôt</span></div>';
+}
 
 /* ── Les 127 jours : le carnet ── */
 const FR_MONTHS = ['janvier','février','mars','avril','mai','juin',
@@ -868,31 +927,6 @@ function renderConseils() {
         'Je n\u2019ai encore rien rédigé ici. Ça viendra.');
 }
 
-function renderGuides() {
-  const host = document.getElementById('guides');
-  const lead = document.getElementById('guides-lead');
-  if (!host) return;
-  if (lead) {
-    lead.textContent = GUIDES.length
-      /* Ces guides servent à qui les ouvre, pas seulement à moi :
-         la phrase ne se met donc pas à la première personne. */
-      ? 'De quoi ne pas se perdre dans les noms, sans rien gâcher de la suite.'
-      : '';
-  }
-  /* Chaque guide est une page entière, hors de ce site-ci : elle a sa
-     propre mise en pages, sa recherche et son thème. */
-  host.innerHTML = GUIDES.length
-    ? GUIDES.map(g =>
-        '<a class="guide" href="' + esc(g.href) + '">'
-      + '<h4 class="guide-title">' + esc(g.title) + '</h4>'
-      + (g.meta ? '<p class="guide-meta">' + esc(g.meta) + '</p>' : '')
-      + (g.lead ? '<p class="guide-lead">' + esc(g.lead) + '</p>' : '')
-      + '<span class="guide-go">Ouvrir'
-      + '<svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
-      + '</span></a>').join('')
-    : emptyState('i-pen', 'À écrire',
-        'Je n\u2019ai encore rien rédigé ici. Ça viendra.');
-}
 
 function renderFinds() {
   const host = document.getElementById('finds');
@@ -1194,9 +1228,9 @@ function animateCounters() {
    ════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
-  renderTopics();
+  renderRefuge();
+  renderLightNovels();
   renderFinds();
-  renderGuides();
   renderConseils();
   renderBible();
   initTabs();
