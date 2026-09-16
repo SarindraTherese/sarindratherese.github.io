@@ -1963,3 +1963,53 @@ a.read-item:hover .read-title { color: var(--cyan); }
   line-height: 1.65;
   color: var(--body);
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MOUVEMENT — ce qu'on clique doit répondre.
+
+   Tout le site transitionnait en 0,18 s sans le moindre état pressé :
+   on ne sentait rien sous le doigt. Une seule courbe, rapide et sèche,
+   et un enfoncement d'un pixel partout où l'on clique. Le focus clavier
+   reçoit enfin une bague visible — il n'en avait aucune.
+   ══════════════════════════════════════════════════════════════ */
+:root { --snap: 120ms cubic-bezier(0.2, 0.8, 0.3, 1); }
+
+.btn-primary, .btn-ghost, .send-btn, .collab-btn,
+.year-pill, .topic-card, .chip,
+.book.is-linked, .find.is-linked, .guide,
+.nav-toggle, .crumbs a {
+  transition: background var(--snap), border-color var(--snap),
+              color var(--snap), transform var(--snap), box-shadow var(--snap);
+}
+
+/* L'enfoncement : un pixel, pas plus — c'est un appui, pas un rebond. */
+.btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
+.year-pill:active, .topic-card:active, .chip:active,
+.book.is-linked:active, .find.is-linked:active, .guide:active {
+  transform: translateY(1px);
+}
+
+/* Les cartes se soulèvent au survol, comme les couvertures de l'étagère. */
+.topic-card:hover, .find.is-linked:hover, .guide:hover { transform: translateY(-2px); }
+.topic-card:active, .find.is-linked:active, .guide:active { transform: translateY(0); }
+
+/* La pastille d'année s'affirme au survol au lieu de changer de filet. */
+.year-pill:hover { border-color: var(--cyan-fill); }
+.year-pill.is-current:active { background: var(--cyan); border-color: var(--cyan); }
+
+/* Bague de focus : aucun élément n'en avait, la navigation au clavier
+   se faisait à l'aveugle. */
+.btn-primary:focus-visible, .btn-ghost:focus-visible, .send-btn:focus-visible,
+.collab-btn:focus-visible, .year-pill:focus-visible, .topic-card:focus-visible,
+.book.is-linked:focus-visible, .find.is-linked:focus-visible, .guide:focus-visible,
+.nav-links a:focus-visible, .crumbs a:focus-visible, .nav-toggle:focus-visible {
+  outline: 2px solid var(--cyan-fill);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topic-card:hover, .find.is-linked:hover, .guide:hover,
+  .btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
+  .year-pill:active, .topic-card:active, .chip:active,
+  .book.is-linked:active, .find.is-linked:active, .guide:active { transform: none; }
+}
