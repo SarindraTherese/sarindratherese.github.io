@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom of the Elite — Guide visuel des personnages</title>
+<style>
+:root {
+  --bg:#0d0f14; --bg2:#11141b; --panel:#171a21; --panel2:#20242d; --text:#f4f5f7; --muted:#aeb4c0;
+  --accent:#b8003b; --accent2:#e13b68; --line:#303540; --input:#191d25; --card1:#1b1f28; --card2:#151820;
+  --header1:#151923; --header2:#0d0f14; --tip1:rgba(184,0,59,.18); --tip2:rgba(255,255,255,.03);
+  --shadow:rgba(0,0,0,.18);
+}
+html[data-theme="light"] {
+  --bg:#f6f0e3; --bg2:#eee4d2; --panel:#fffaf0; --panel2:#f2e7d7; --text:#2f2a24; --muted:#6f665c;
+  --accent:#9d1b44; --accent2:#c54a70; --line:#d8cbb8; --input:#fffaf0; --card1:#fffdf8; --card2:#f6efe4;
+  --header1:#f4e7d4; --header2:#eadcc8; --tip1:rgba(157,27,68,.10); --tip2:rgba(255,255,255,.65);
+  --shadow:rgba(80,55,30,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,var(--header2),var(--bg2) 36%,var(--bg));color:var(--text);
+font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+header{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:
+radial-gradient(circle at 85% 20%,rgba(184,0,59,.35),transparent 28%),
+linear-gradient(135deg,var(--header1),var(--header2) 65%);}
+.hero{max-width:1250px;margin:auto;padding:54px 24px 36px}
+.eyebrow{color:#ff7199;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em}
+h1{font-size:clamp(2rem,5vw,4.3rem);line-height:.98;margin:10px 0 16px;max-width:900px}
+.hero p{max-width:820px;color:var(--muted);font-size:1.05rem;margin:0}
+.controls{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 91%, transparent);backdrop-filter:blur(14px);
+border-bottom:1px solid var(--line)}
+.controls-inner{max-width:1250px;margin:auto;padding:12px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{flex:1 1 330px;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:14px;
+padding:12px 15px;font-size:1rem;outline:none;color:var(--text)}
+.search:focus{border-color:#d52c5c;box-shadow:0 0 0 3px rgba(213,44,92,.15)}
+.search::placeholder{
+  color:var(--muted);
+  opacity:.82;
+}
+html[data-theme="light"] .search::placeholder{
+  color:#8a7d6d;
+  opacity:.9;
+}
+
+.search:-webkit-autofill,
+.search:-webkit-autofill:hover,
+.search:-webkit-autofill:focus{
+  -webkit-text-fill-color:var(--text);
+  caret-color:var(--text);
+  transition:background-color 9999s ease-out 0s;
+}
+
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:9px 12px;
+cursor:pointer;font-weight:700;font-size:.84rem}
+.chip.active,.chip:hover{background:#a90035;border-color:#d93d69;color:#fff}
+.theme-toggle{
+  display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);
+  color:var(--text);border-radius:999px;padding:9px 12px;cursor:pointer;font-weight:800;font-size:.84rem
+}
+.theme-toggle:hover{border-color:var(--accent2)}
+.theme-toggle .icon{font-size:1rem;line-height:1}
+html[data-theme="light"] .portrait-wrap{
+  background:linear-gradient(150deg,#b63c61 0 56%,#fff9ef 56% 73%,#ded1bd 73%);
+}
+html[data-theme="light"] .warning{
+  background:#fff4d8;color:#5f4a20;border-color:#d6bd7f;
+}
+html[data-theme="light"] .badge{
+  background:#efe4d4;border-color:#d8cbb8;color:#4d453d;
+}
+html[data-theme="light"] .chip.active,
+html[data-theme="light"] .chip:hover{
+  background:#9d1b44;border-color:#b72f59;color:#fff;
+}
+
+main{max-width:1250px;margin:auto;padding:28px 24px 80px}
+.tip{background:linear-gradient(135deg,var(--tip1),var(--tip2));border:1px solid #4a2634;
+border-radius:18px;padding:16px 18px;color:var(--text);margin-bottom:30px}
+.tip b{color:#ff87a8}
+.section{margin:0 0 42px}
+.section h2,.year2-block summary span{font-size:1.5rem;font-weight:850}
+.section h2{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.section h2 span{font-size:.78rem;color:#f07a9b;background:#2a1720;border:1px solid #5a2536;border-radius:999px;padding:4px 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:linear-gradient(180deg,var(--card1),var(--card2));border:1px solid #2d323d;border-radius:18px;overflow:hidden;
+box-shadow:0 12px 34px var(--shadow);transition:transform .18s,border-color .18s;min-width:0}
+.card:hover{transform:translateY(-3px);border-color:#6a3345}
+.portrait-wrap{height:250px;background:linear-gradient(150deg,#8d002d 0 56%,#f2f2f4 56% 73%,#161922 73%);
+display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden}
+.portrait{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 10px 13px rgba(0,0,0,.35))}
+.img-fallback{display:none;color:#ccc;align-self:center}
+.img-error .img-fallback{display:block}
+.card-body{padding:15px}
+.topline{display:flex;justify-content:space-between;gap:6px;margin-bottom:7px}
+.badge{font-size:.72rem;font-weight:850;padding:4px 8px;border-radius:999px;background:#252a35;border:1px solid #3b4250;color:#dce0e7}
+h3{font-size:1.18rem;margin:0 0 3px}
+.jp{font-family:"Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;color:#ff779f;font-size:1rem;font-weight:700}
+.order{font-size:.8rem;color:#adb4c0;margin-top:3px}
+.alias{font-size:.8rem;color:#f3b7ca;margin-top:3px}
+.card p{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+.year2-block{border:1px solid #5a2638;background:var(--panel);border-radius:18px;padding:0;margin-top:44px}
+.year2-block summary{cursor:pointer;list-style:none;padding:18px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.year2-block summary::-webkit-details-marker{display:none}
+.year2-block summary::after{content:"＋";font-size:1.5rem;color:#ff7da2}
+.year2-block[open] summary::after{content:"−"}
+.year2-block summary small{color:var(--muted);font-weight:500}
+.year2-block .grid{padding:0 18px 18px}
+.warning{margin:0 18px 16px;border:1px solid #6b4c20;background:#2c2417;color:#f2d9a8;border-radius:12px;padding:10px 12px}
+.empty{display:none;text-align:center;color:var(--muted);padding:40px 10px}
+footer{border-top:1px solid var(--line);color:var(--muted);padding:24px;max-width:1250px;margin:auto;font-size:.82rem}
+footer a{color:#e4688d}
+.hidden{display:none!important}
+@media(max-width:650px){
+  .hero{padding-top:36px} main{padding-left:14px;padding-right:14px}
+  .controls-inner{padding-left:14px;padding-right:14px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .portrait-wrap{height:190px} .card-body{padding:11px} h3{font-size:1rem}
+  .jp{font-size:.88rem} .order,.alias{font-size:.72rem} .card p{font-size:.82rem}
+  .year2-block summary{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:390px){.grid{grid-template-columns:1fr} .portrait-wrap{height:270px}}
+
+.back-refuge{display:inline-flex;align-items:center;gap:9px;color:var(--muted);text-decoration:none;
+font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;
+transition:color .18s}
+.back-refuge:hover{color:var(--text)}
+.back-refuge span{font-size:1.05em;line-height:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <a class="back-refuge" href="../#guides"><span>&#8592;</span> Sarindra’s Refuge</a>
+  <div class="eyebrow">Guide de lecture • sans gros spoilers</div>
+    <h1>Classroom of the Elite — Qui est qui ?</h1>
+    <p><strong>41 personnages</strong> avec portrait, nom romanisé, kanji, ordre japonais et un repère très court.
+       Les classes de la première année sont indiquées telles qu’elles sont <strong>au début de la série</strong>, pour éviter de révéler les changements de classement.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <input id="search" class="search" type="search" placeholder="Chercher : Ayanokouji, Ayanokoji, Horikita, 龍園, classe B…" autocomplete="off">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Changer le thème">
+      <span class="icon">🌙</span><span class="label">Mode nuit</span>
+    </button>
+    <div class="chips" aria-label="Filtres">
+      <button class="chip active" data-filter="all">Tous</button>
+      <button class="chip" data-filter="D">1-D</button>
+      <button class="chip" data-filter="A">1-A</button>
+      <button class="chip" data-filter="B">1-B</button>
+      <button class="chip" data-filter="C">1-C</button>
+      <button class="chip" data-filter="Conseil">Conseil</button>
+      <button class="chip" data-filter="Adulte">Adultes</button>
+      <button class="chip" data-filter="Nouveau">2e année</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="tip"><b>Astuce noms japonais :</b> dans les romans/traductions tu peux voir « Kiyotaka Ayanokōji », alors que l’ordre japonais est « Ayanokōji Kiyotaka ». La fiche affiche les deux et ajoute les variantes fréquentes du novel, par exemple « Ayanokouji », pour faciliter les recherches.</div>
+  
+        <section class="section">
+          <h2>Première année — Classe D <span>17</span></h2>
+          <div class="grid">
+        <article class="card" data-search="kiyotaka ayanokōji ayanokōji kiyotaka 綾小路清隆 1-d (début) d protagoniste. très discret, peu expressif et difficile à lire. ayanokouji ayanokoji" data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/1n.png" alt="Kiyotaka Ayanokōji" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Kiyotaka Ayanokōji</h3>
+            <div class="jp">綾小路清隆</div>
+            <div class="order"><strong>Ordre japonais :</strong> Ayanokōji Kiyotaka</div>
+            <div class="alias"><strong>Novel / recherche :</strong> Kiyotaka Ayanokouji / Ayanokouji Kiyotaka</div>
+            <p>Protagoniste. Très discret, peu expressif et difficile à lire.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="suzune horikita horikita suzune 堀北鈴音 1-d (début) d voisine de classe d’ayanokōji. sérieuse, solitaire et déterminée à atteindre la classe a. ayanokouji ayanokoji" data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/2n.png" alt="Suzune Horikita" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Suzune Horikita</h3>
+            <div class="jp">堀北鈴音</div>
+            <div class="order"><strong>Ordre japonais :</strong> Horikita Suzune</div>
+            <p>Voisine de classe d’Ayanokōji. Sérieuse, solitaire et déterminée à atteindre la classe A.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="kikyō kushida kushida kikyō 櫛田桔梗 1-d (début) d très sociable et populaire. elle cherche à bien s’entendre avec tout le monde." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/4n.png" alt="Kikyō Kushida" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Kikyō Kushida</h3>
+            <div class="jp">櫛田桔梗</div>
+            <div class="order"><strong>Ordre japonais :</strong> Kushida Kikyō</div>
+            <p>Très sociable et populaire. Elle cherche à bien s’entendre avec tout le monde.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="kei karuizawa karuizawa kei 軽井沢恵 1-d (début) d une des filles les plus influentes de la classe, très attentive à sa place dans le groupe." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/3n.png" alt="Kei Karuizawa" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Kei Karuizawa</h3>
+            <div class="jp">軽井沢恵</div>
+            <div class="order"><strong>Ordre japonais :</strong> Karuizawa Kei</div>
+            <p>Une des filles les plus influentes de la classe, très attentive à sa place dans le groupe.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="airi sakura sakura airi 佐倉愛里 1-d (début) d très timide et réservée. on la voit souvent avec ses lunettes." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/10n.png" alt="Airi Sakura" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Airi Sakura</h3>
+            <div class="jp">佐倉愛里</div>
+            <div class="order"><strong>Ordre japonais :</strong> Sakura Airi</div>
+            <p>Très timide et réservée. On la voit souvent avec ses lunettes.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="yōsuke hirata hirata yōsuke 平田洋介 1-d (début) d garçon populaire, calme et conciliant. il joue naturellement un rôle de rassembleur. yousuke yosuke" data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/11n.png" alt="Yōsuke Hirata" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Yōsuke Hirata</h3>
+            <div class="jp">平田洋介</div>
+            <div class="order"><strong>Ordre japonais :</strong> Hirata Yōsuke</div>
+            <div class="alias"><strong>Novel / recherche :</strong> Yousuke Hirata / Hirata Yousuke</div>
+            <p>Garçon populaire, calme et conciliant. Il joue naturellement un rôle de rassembleur.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="rokusuke kōenji kōenji rokusuke 高円寺六助 1-d (début) d très sûr de lui, excentrique, athlétique et difficile à faire coopérer. kouenji koenji" data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/12n.png" alt="Rokusuke Kōenji" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Rokusuke Kōenji</h3>
+            <div class="jp">高円寺六助</div>
+            <div class="order"><strong>Ordre japonais :</strong> Kōenji Rokusuke</div>
+            <div class="alias"><strong>Novel / recherche :</strong> Rokusuke Kouenji / Kouenji Rokusuke</div>
+            <p>Très sûr de lui, excentrique, athlétique et difficile à faire coopérer.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="ken sudō sudō ken 須藤健 1-d (début) d grand sportif, surtout passionné de basket. impulsif mais très énergique." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/13n.png" alt="Ken Sudō" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Ken Sudō</h3>
+            <div class="jp">須藤健</div>
+            <div class="order"><strong>Ordre japonais :</strong> Sudō Ken</div>
+            <p>Grand sportif, surtout passionné de basket. Impulsif mais très énergique.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="kanji ike ike kanji 池寛治 1-d (début) d bavard, sociable et bon pour mettre l’ambiance. à l’aise en activités de plein air." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/14n.png" alt="Kanji Ike" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Kanji Ike</h3>
+            <div class="jp">池寛治</div>
+            <div class="order"><strong>Ordre japonais :</strong> Ike Kanji</div>
+            <p>Bavard, sociable et bon pour mettre l’ambiance. À l’aise en activités de plein air.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="haruki yamauchi yamauchi haruki 山内春樹 1-d (début) d membre du trio souvent vu avec ike et sudō. aime se donner de l’importance." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/15n.png" alt="Haruki Yamauchi" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Haruki Yamauchi</h3>
+            <div class="jp">山内春樹</div>
+            <div class="order"><strong>Ordre japonais :</strong> Yamauchi Haruki</div>
+            <p>Membre du trio souvent vu avec Ike et Sudō. Aime se donner de l’importance.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="teruhiko yukimura yukimura teruhiko 幸村輝彦 1-d (début) d très bon élève, sérieux et plutôt réservé. souvent associé aux séances d’étude." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/16n.png" alt="Teruhiko Yukimura" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Teruhiko Yukimura</h3>
+            <div class="jp">幸村輝彦</div>
+            <div class="order"><strong>Ordre japonais :</strong> Yukimura Teruhiko</div>
+            <p>Très bon élève, sérieux et plutôt réservé. Souvent associé aux séances d’étude.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="haruka hasebe hasebe haruka 長谷部波瑠加 1-d (début) d fille plutôt indépendante, au ton détendu. se rapproche d’un petit groupe d’amis." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/27n.png" alt="Haruka Hasebe" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Haruka Hasebe</h3>
+            <div class="jp">長谷部波瑠加</div>
+            <div class="order"><strong>Ordre japonais :</strong> Hasebe Haruka</div>
+            <p>Fille plutôt indépendante, au ton détendu. Se rapproche d’un petit groupe d’amis.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="akito miyake miyake akito 三宅明人 1-d (début) d garçon calme et discret, membre du club de tir à l’arc." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/2d9.webp" alt="Akito Miyake" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Akito Miyake</h3>
+            <div class="jp">三宅明人</div>
+            <div class="order"><strong>Ordre japonais :</strong> Miyake Akito</div>
+            <p>Garçon calme et discret, membre du club de tir à l’arc.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="maya satō satō maya 佐藤麻耶 1-d (début) d amie proche de karuizawa. sociable et souvent présente dans le groupe des filles." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/28n.png" alt="Maya Satō" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Maya Satō</h3>
+            <div class="jp">佐藤麻耶</div>
+            <div class="order"><strong>Ordre japonais :</strong> Satō Maya</div>
+            <p>Amie proche de Karuizawa. Sociable et souvent présente dans le groupe des filles.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="chiaki matsushita matsushita chiaki 松下千秋 1-d (début) d discrète et observatrice. elle se fait rarement remarquer au premier abord." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/29n.png" alt="Chiaki Matsushita" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Chiaki Matsushita</h3>
+            <div class="jp">松下千秋</div>
+            <div class="order"><strong>Ordre japonais :</strong> Matsushita Chiaki</div>
+            <p>Discrète et observatrice. Elle se fait rarement remarquer au premier abord.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="mei-yu wang wang mei-yu 王美雨 1-d (début) d élève d’origine chinoise, studieuse et douce. surnommée « mii-chan »." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/25n.png" alt="Mei-Yu Wang" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Mei-Yu Wang</h3>
+            <div class="jp">王美雨</div>
+            <div class="order"><strong>Ordre japonais :</strong> Wang Mei-Yu</div>
+            <p>Élève d’origine chinoise, studieuse et douce. Surnommée « Mii-chan ».</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="satsuki shinohara shinohara satsuki 篠原さつき 1-d (début) d fille franche, souvent avec karuizawa, satō et matsushita." data-tag="D">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/2d15.webp" alt="Satsuki Shinohara" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-d">1-D (début)</span>
+            </div>
+            <h3>Satsuki Shinohara</h3>
+            <div class="jp">篠原さつき</div>
+            <div class="order"><strong>Ordre japonais :</strong> Shinohara Satsuki</div>
+            <p>Fille franche, souvent avec Karuizawa, Satō et Matsushita.</p>
+          </div>
+        </article>
+        </div>
+        </section>
+        
+        <section class="section">
+          <h2>Première année — Classe A <span>4</span></h2>
+          <div class="grid">
+        <article class="card" data-search="arisu sakayanagi sakayanagi arisu 坂柳有栖 1-a (début) a une des figures centrales de la classe a. très intelligente et facilement reconnaissable à sa canne." data-tag="A">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/5n.png" alt="Arisu Sakayanagi" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-a">1-A (début)</span>
+            </div>
+            <h3>Arisu Sakayanagi</h3>
+            <div class="jp">坂柳有栖</div>
+            <div class="order"><strong>Ordre japonais :</strong> Sakayanagi Arisu</div>
+            <p>Une des figures centrales de la classe A. Très intelligente et facilement reconnaissable à sa canne.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="kōhei katsuragi katsuragi kōhei 葛城康平 1-a (début) a élève sérieux, méthodique et imposant. une figure importante de la classe a. kouhei kohei" data-tag="A">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/6n.png" alt="Kōhei Katsuragi" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-a">1-A (début)</span>
+            </div>
+            <h3>Kōhei Katsuragi</h3>
+            <div class="jp">葛城康平</div>
+            <div class="order"><strong>Ordre japonais :</strong> Katsuragi Kōhei</div>
+            <div class="alias"><strong>Novel / recherche :</strong> Kouhei Katsuragi / Katsuragi Kouhei</div>
+            <p>Élève sérieux, méthodique et imposant. Une figure importante de la classe A.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="masayoshi hashimoto hashimoto masayoshi 橋本正義 1-a (début) a sociable, observateur et habile à se mêler aux différents groupes." data-tag="A">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/22n.png" alt="Masayoshi Hashimoto" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-a">1-A (début)</span>
+            </div>
+            <h3>Masayoshi Hashimoto</h3>
+            <div class="jp">橋本正義</div>
+            <div class="order"><strong>Ordre japonais :</strong> Hashimoto Masayoshi</div>
+            <p>Sociable, observateur et habile à se mêler aux différents groupes.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="masumi kamuro kamuro masumi 神室真澄 1-a (début) a fille au caractère assez froid, souvent liée aux affaires de sakayanagi." data-tag="A">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/30n.png" alt="Masumi Kamuro" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-a">1-A (début)</span>
+            </div>
+            <h3>Masumi Kamuro</h3>
+            <div class="jp">神室真澄</div>
+            <div class="order"><strong>Ordre japonais :</strong> Kamuro Masumi</div>
+            <p>Fille au caractère assez froid, souvent liée aux affaires de Sakayanagi.</p>
+          </div>
+        </article>
+        </div>
+        </section>
+        
+        <section class="section">
+          <h2>Première année — Classe B <span>2</span></h2>
+          <div class="grid">
+        <article class="card" data-search="honami ichinose ichinose honami 一之瀬帆波 1-b (début) b leader très populaire de la classe b. chaleureuse, sociable et appréciée par beaucoup d’élèves." data-tag="B">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/7n.png" alt="Honami Ichinose" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-b">1-B (début)</span>
+            </div>
+            <h3>Honami Ichinose</h3>
+            <div class="jp">一之瀬帆波</div>
+            <div class="order"><strong>Ordre japonais :</strong> Ichinose Honami</div>
+            <p>Leader très populaire de la classe B. Chaleureuse, sociable et appréciée par beaucoup d’élèves.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="ryūji kanzaki kanzaki ryūji 神崎隆二 1-b (début) b calme, sérieux et réfléchi. souvent aux côtés d’ichinose." data-tag="B">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/17n.png" alt="Ryūji Kanzaki" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-b">1-B (début)</span>
+            </div>
+            <h3>Ryūji Kanzaki</h3>
+            <div class="jp">神崎隆二</div>
+            <div class="order"><strong>Ordre japonais :</strong> Kanzaki Ryūji</div>
+            <p>Calme, sérieux et réfléchi. Souvent aux côtés d’Ichinose.</p>
+          </div>
+        </article>
+        </div>
+        </section>
+        
+        <section class="section">
+          <h2>Première année — Classe C <span>4</span></h2>
+          <div class="grid">
+        <article class="card" data-search="kakeru ryūen ryūen kakeru 龍園翔 1-c (début) c leader très agressif et rusé de la classe c. impossible à confondre une fois rencontré. ryuuen ryuen" data-tag="C">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/8n.png" alt="Kakeru Ryūen" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-c">1-C (début)</span>
+            </div>
+            <h3>Kakeru Ryūen</h3>
+            <div class="jp">龍園翔</div>
+            <div class="order"><strong>Ordre japonais :</strong> Ryūen Kakeru</div>
+            <div class="alias"><strong>Novel / recherche :</strong> Kakeru Ryuuen / Ryuuen Kakeru</div>
+            <p>Leader très agressif et rusé de la classe C. Impossible à confondre une fois rencontré.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="mio ibuki ibuki mio 伊吹澪 1-c (début) c fille sportive, combative et solitaire. très directe dans sa manière de parler." data-tag="C">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/9n.png" alt="Mio Ibuki" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-c">1-C (début)</span>
+            </div>
+            <h3>Mio Ibuki</h3>
+            <div class="jp">伊吹澪</div>
+            <div class="order"><strong>Ordre japonais :</strong> Ibuki Mio</div>
+            <p>Fille sportive, combative et solitaire. Très directe dans sa manière de parler.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="hiyori shiina shiina hiyori 椎名ひより 1-c (début) c très calme, douce et passionnée de lecture. souvent associée à la bibliothèque." data-tag="C">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/23n.png" alt="Hiyori Shiina" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-c">1-C (début)</span>
+            </div>
+            <h3>Hiyori Shiina</h3>
+            <div class="jp">椎名ひより</div>
+            <div class="order"><strong>Ordre japonais :</strong> Shiina Hiyori</div>
+            <p>Très calme, douce et passionnée de lecture. Souvent associée à la bibliothèque.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="daichi ishizaki ishizaki daichi 石崎大地 1-c (début) c grand gaillard assez brutal dans ses manières, souvent lié au groupe de ryūen. ryuuen ryuen" data-tag="C">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/31n.png" alt="Daichi Ishizaki" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-c">1-C (début)</span>
+            </div>
+            <h3>Daichi Ishizaki</h3>
+            <div class="jp">石崎大地</div>
+            <div class="order"><strong>Ordre japonais :</strong> Ishizaki Daichi</div>
+            <p>Grand gaillard assez brutal dans ses manières, souvent lié au groupe de Ryūen.</p>
+          </div>
+        </article>
+        </div>
+        </section>
+        
+        <section class="section">
+          <h2>Élèves plus âgés / Conseil des élèves <span>5</span></h2>
+          <div class="grid">
+        <article class="card" data-search="manabu horikita horikita manabu 堀北学 3-a au début conseil grand frère de suzune et président du conseil des élèves au début de l’histoire." data-tag="Conseil">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/18n.png" alt="Manabu Horikita" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-conseil">3-A au début</span>
+            </div>
+            <h3>Manabu Horikita</h3>
+            <div class="jp">堀北学</div>
+            <div class="order"><strong>Ordre japonais :</strong> Horikita Manabu</div>
+            <p>Grand frère de Suzune et président du conseil des élèves au début de l’histoire.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="akane tachibana tachibana akane 橘茜 3-a au début conseil secrétaire du conseil des élèves, souvent aux côtés de manabu horikita." data-tag="Conseil">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/19n.png" alt="Akane Tachibana" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-conseil">3-A au début</span>
+            </div>
+            <h3>Akane Tachibana</h3>
+            <div class="jp">橘茜</div>
+            <div class="order"><strong>Ordre japonais :</strong> Tachibana Akane</div>
+            <p>Secrétaire du conseil des élèves, souvent aux côtés de Manabu Horikita.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="miyabi nagumo nagumo miyabi 南雲雅 2-a au début conseil élève très influent de l’année supérieure, charismatique et ambitieux." data-tag="Conseil">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/24n.png" alt="Miyabi Nagumo" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-conseil">2-A au début</span>
+            </div>
+            <h3>Miyabi Nagumo</h3>
+            <div class="jp">南雲雅</div>
+            <div class="order"><strong>Ordre japonais :</strong> Nagumo Miyabi</div>
+            <p>Élève très influent de l’année supérieure, charismatique et ambitieux.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="nazuna asahina asahina nazuna 朝比奈なずな 2-a au début conseil élève de l’année supérieure, facile à approcher et proche de nagumo sans lui ressembler." data-tag="Conseil">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/26n.png" alt="Nazuna Asahina" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-conseil">2-A au début</span>
+            </div>
+            <h3>Nazuna Asahina</h3>
+            <div class="jp">朝比奈なずな</div>
+            <div class="order"><strong>Ordre japonais :</strong> Asahina Nazuna</div>
+            <p>Élève de l’année supérieure, facile à approcher et proche de Nagumo sans lui ressembler.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="ikuto kiriyama kiriyama ikuto 桐山生叶 année supérieure conseil membre important du conseil des élèves, sérieux et réservé." data-tag="Conseil">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/3b1.webp" alt="Ikuto Kiriyama" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-conseil">Année supérieure</span>
+            </div>
+            <h3>Ikuto Kiriyama</h3>
+            <div class="jp">桐山生叶</div>
+            <div class="order"><strong>Ordre japonais :</strong> Kiriyama Ikuto</div>
+            <p>Membre important du conseil des élèves, sérieux et réservé.</p>
+          </div>
+        </article>
+        </div>
+        </section>
+        
+        <section class="section">
+          <h2>Professeurs / Adultes <span>3</span></h2>
+          <div class="grid">
+        <article class="card" data-search="sae chabashira chabashira sae 茶柱佐枝 professeure adulte professeure principale de la classe d’ayanokōji au début. froide et très directe. ayanokouji ayanokoji" data-tag="Adulte">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/20n.png" alt="Sae Chabashira" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-adulte">Professeure</span>
+            </div>
+            <h3>Sae Chabashira</h3>
+            <div class="jp">茶柱佐枝</div>
+            <div class="order"><strong>Ordre japonais :</strong> Chabashira Sae</div>
+            <p>Professeure principale de la classe d’Ayanokōji au début. Froide et très directe.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="chie hoshinomiya hoshinomiya chie 星之宮知恵 professeure adulte professeure de la classe b au début. plus légère et chaleureuse dans son attitude." data-tag="Adulte">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/3rd/assets/character/21n.png" alt="Chie Hoshinomiya" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-adulte">Professeure</span>
+            </div>
+            <h3>Chie Hoshinomiya</h3>
+            <div class="jp">星之宮知恵</div>
+            <div class="order"><strong>Ordre japonais :</strong> Hoshinomiya Chie</div>
+            <p>Professeure de la classe B au début. Plus légère et chaleureuse dans son attitude.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="tsukishiro tsukishiro 月城 administration adulte membre de l’administration qui devient important à la transition vers la deuxième année." data-tag="Adulte">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/t3.webp" alt="Tsukishiro" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-adulte">Administration</span>
+            </div>
+            <h3>Tsukishiro</h3>
+            <div class="jp">月城</div>
+            <div class="order"><strong>Ordre japonais :</strong> Tsukishiro</div>
+            <p>Membre de l’administration qui devient important à la transition vers la deuxième année.</p>
+          </div>
+        </article>
+        </div>
+        </section>
+        
+        <details class="year2-block" id="year2">
+          <summary>
+            <span>À ouvrir quand tu commences la 2e année</span>
+            <small>6 nouveaux personnages — section volontairement repliée</small>
+          </summary>
+          <div class="warning">⚠️ Ouvre cette section seulement lorsque tu arrives au début de la <strong>2e année</strong>.</div>
+          <div class="grid">
+        <article class="card" data-search="tsubasa nanase nanase tsubasa 七瀬翼 nouvelle 1-d nouveau nouvelle élève polie, sociable et compétente. parle souvent avec beaucoup de respect." data-tag="Nouveau">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/1d1.webp" alt="Tsubasa Nanase" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-nouveau">Nouvelle 1-D</span>
+            </div>
+            <h3>Tsubasa Nanase</h3>
+            <div class="jp">七瀬翼</div>
+            <div class="order"><strong>Ordre japonais :</strong> Nanase Tsubasa</div>
+            <p>Nouvelle élève polie, sociable et compétente. Parle souvent avec beaucoup de respect.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="kazuomi hōsen hōsen kazuomi 宝泉和臣 nouvelle 1-d nouveau très grand, intimidant et agressif. leader marquant parmi les nouveaux élèves." data-tag="Nouveau">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/1d2.webp" alt="Kazuomi Hōsen" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-nouveau">Nouvelle 1-D</span>
+            </div>
+            <h3>Kazuomi Hōsen</h3>
+            <div class="jp">宝泉和臣</div>
+            <div class="order"><strong>Ordre japonais :</strong> Hōsen Kazuomi</div>
+            <p>Très grand, intimidant et agressif. Leader marquant parmi les nouveaux élèves.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="sakurako tsubaki tsubaki sakurako 椿桜子 nouvelle 1-c nouveau nouvelle élève calme, détachée et très observatrice." data-tag="Nouveau">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/1c1.webp" alt="Sakurako Tsubaki" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-nouveau">Nouvelle 1-C</span>
+            </div>
+            <h3>Sakurako Tsubaki</h3>
+            <div class="jp">椿桜子</div>
+            <div class="order"><strong>Ordre japonais :</strong> Tsubaki Sakurako</div>
+            <p>Nouvelle élève calme, détachée et très observatrice.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="riku utomiya utomiya riku 宇都宮陸 nouvelle 1-c nouveau nouveau garçon athlétique, sérieux et protecteur envers ses camarades." data-tag="Nouveau">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/1c2.webp" alt="Riku Utomiya" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-nouveau">Nouvelle 1-C</span>
+            </div>
+            <h3>Riku Utomiya</h3>
+            <div class="jp">宇都宮陸</div>
+            <div class="order"><strong>Ordre japonais :</strong> Utomiya Riku</div>
+            <p>Nouveau garçon athlétique, sérieux et protecteur envers ses camarades.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="takuya yagami yagami takuya 八神拓也 nouvelle 1-b nouveau nouveau garçon poli, studieux et très facile d’approche." data-tag="Nouveau">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/1b1.webp" alt="Takuya Yagami" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-nouveau">Nouvelle 1-B</span>
+            </div>
+            <h3>Takuya Yagami</h3>
+            <div class="jp">八神拓也</div>
+            <div class="order"><strong>Ordre japonais :</strong> Yagami Takuya</div>
+            <p>Nouveau garçon poli, studieux et très facile d’approche.</p>
+          </div>
+        </article>
+        
+        <article class="card" data-search="ichika amasawa amasawa ichika 天沢一夏 nouvelle 1-a nouveau nouvelle élève brillante, joueuse et très libre dans sa façon d’agir." data-tag="Nouveau">
+          <div class="portrait-wrap">
+            <img class="portrait" src="https://you-zitsu.com/assets/character/c/1a1.webp" alt="Ichika Amasawa" loading="lazy"
+                 onerror="this.closest('.portrait-wrap').classList.add('img-error'); this.style.display='none';">
+            <div class="img-fallback">Image indisponible</div>
+          </div>
+          <div class="card-body">
+            <div class="topline">
+              <span class="badge badge-nouveau">Nouvelle 1-A</span>
+            </div>
+            <h3>Ichika Amasawa</h3>
+            <div class="jp">天沢一夏</div>
+            <div class="order"><strong>Ordre japonais :</strong> Amasawa Ichika</div>
+            <p>Nouvelle élève brillante, joueuse et très libre dans sa façon d’agir.</p>
+          </div>
+        </article>
+        </div>
+        </details>
+        
+  <div id="empty" class="empty">Aucun personnage ne correspond à ta recherche.</div>
+</main>
+
+<footer>
+  Portraits issus des sites officiels de l’anime <em>Classroom of the Elite</em> (KADOKAWA / comité de production), utilisés ici comme aide visuelle de lecture.
+  Sources principales :
+  <a href="https://you-zitsu.com/3rd/character.html" target="_blank" rel="noopener">personnages 3rd Season</a> ·
+  <a href="https://you-zitsu.com/character.html" target="_blank" rel="noopener">personnages 4th Season</a>.
+  Les images sont chargées depuis le site officiel : une connexion Internet est donc nécessaire pour les afficher.
+</footer>
+
+<script>
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('cotE-theme');
+const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+const initialTheme = savedTheme || (prefersLight ? 'light' : 'dark');
+root.setAttribute('data-theme', initialTheme);
+
+function updateThemeButton() {
+  const light = root.getAttribute('data-theme') === 'light';
+  themeToggle.querySelector('.icon').textContent = light ? '☀️' : '🌙';
+  themeToggle.querySelector('.label').textContent = light ? 'Mode ivoire' : 'Mode nuit';
+  themeToggle.setAttribute('aria-pressed', light ? 'true' : 'false');
+}
+updateThemeButton();
+
+themeToggle.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('cotE-theme', next);
+  updateThemeButton();
+});
+
+const search = document.getElementById('search');
+const chips = [...document.querySelectorAll('.chip')];
+const cards = [...document.querySelectorAll('.card')];
+const empty = document.getElementById('empty');
+let activeFilter = 'all';
+
+function normalize(s) {
+  return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+
+function applyFilters() {
+  const q = normalize(search.value.trim());
+  let shown = 0;
+  cards.forEach(card => {
+    const text = normalize(card.dataset.search);
+    const tag = card.dataset.tag;
+    const okFilter = activeFilter === 'all' || tag === activeFilter;
+    const okSearch = !q || text.includes(q);
+    const show = okFilter && okSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) shown++;
+  });
+
+  document.querySelectorAll('.section').forEach(section => {
+    const visible = section.querySelectorAll('.card:not(.hidden)').length > 0;
+    section.classList.toggle('hidden', !visible);
+  });
+
+  const year2 = document.querySelector('.year2-block');
+  if (year2) {
+    const visibleYear2 = year2.querySelectorAll('.card:not(.hidden)').length > 0;
+    year2.classList.toggle('hidden', !visibleYear2);
+    if (activeFilter === 'Nouveau' || (q && visibleYear2)) year2.open = true;
+  }
+
+  empty.style.display = shown ? 'none' : 'block';
+}
+
+search.addEventListener('input', applyFilters);
+chips.forEach(chip => chip.addEventListener('click', () => {
+  chips.forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  activeFilter = chip.dataset.filter;
+  applyFilters();
+}));
+</script>
+</body>
+</html>

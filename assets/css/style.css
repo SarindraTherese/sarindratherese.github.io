@@ -1691,9 +1691,8 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 .find.is-linked:hover .find-go { text-decoration: underline; }
 
-/* ── Mes guides de lecture ─────────────────────────────────────
-   Un guide se lit, il ne se survole pas : une colonne de texte,
-   pas une grille de cartes. Ton en filet — le quatrième et dernier,
+/* ── Light novels japonais ─────────────────────────────────────
+   Ton en filet — le quatrième et dernier,
    après le cyan de la lecture, le sable de l'accompli et le neutre
    des acquisitions. */
 .tone-line {
@@ -1701,8 +1700,42 @@ a.read-item:hover .read-title { color: var(--cyan); }
   color: var(--cyan);
   box-shadow: inset 0 0 0 1px var(--cyan-line);
 }
-.guides { display: flex; flex-direction: column; gap: var(--s7); }
-.guide { max-width: 70ch; }
+/* Chaque guide est une page à part : la carte l'annonce, elle ne la
+   contient pas. */
+.guides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--s4);
+  align-items: start;
+}
+.guide {
+  display: block;
+  padding: var(--s5);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  text-decoration: none;
+  transition: border-color 0.18s ease;
+}
+.guide:hover { border-color: var(--cyan-line); }
+.guide-meta {
+  margin-top: 5px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.guide-go {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--s4);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.guide:hover .guide-go { text-decoration: underline; }
 .guide-title {
   font-family: var(--display);
   font-size: 21px;
@@ -1716,36 +1749,6 @@ a.read-item:hover .read-title { color: var(--cyan); }
   line-height: 1.65;
   color: var(--muted);
 }
-.guide-books {
-  margin-top: var(--s4);
-  padding-left: 0;
-  list-style: none;
-  counter-reset: guide;
-}
-.guide-books li {
-  position: relative;
-  padding: 0 0 var(--s4) var(--s5);
-  counter-increment: guide;
-}
-.guide-books li::before {
-  content: counter(guide, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 2px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--cyan);
-}
-.guide-book { font-size: 15.5px; font-weight: 600; color: var(--ink); }
-.guide-book span { font-weight: 400; color: var(--muted); }
-.guide-why {
-  margin-top: 3px;
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--body);
-}
-
 /* La plage de dates : c'est elle qui rend les 127 jours vérifiables.
    En bas de casse, pour ne pas faire une deuxième ligne de capitales
    sous le surtitre — le titre doit rester seul entre les deux. */
@@ -1919,3 +1922,44 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 .crumbs a:hover { color: var(--cyan); border-bottom-color: var(--cyan-line); }
 .crumbs [aria-current="page"] { color: var(--ink); }
+
+/* ── Mes guides de lecture ─────────────────────────────────────
+   Un conseil se lit, il ne se survole pas : une colonne de texte,
+   pas une grille de cartes. Cinquième et dernier ton — le sable en
+   filet, pendant du cyan en filet des guides de personnages. */
+.tone-line-sand {
+  background: transparent;
+  color: var(--sand-text);
+  box-shadow: inset 0 0 0 1px var(--sand-line);
+}
+.conseils { display: flex; flex-direction: column; gap: var(--s7); }
+.conseil { max-width: 70ch; }
+.conseil-books {
+  margin-top: var(--s4);
+  padding-left: 0;
+  list-style: none;
+  counter-reset: conseil;
+}
+.conseil-books li {
+  position: relative;
+  padding: 0 0 var(--s4) var(--s5);
+  counter-increment: conseil;
+}
+.conseil-books li::before {
+  content: counter(conseil, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--sand-text);
+}
+.conseil-book { font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.conseil-book span { font-weight: 400; color: var(--muted); }
+.conseil-why {
+  margin-top: 3px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+}

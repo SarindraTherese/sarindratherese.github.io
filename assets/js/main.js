@@ -75,20 +75,41 @@ const DISCOVERIES = [
 
 
 /* ════════════════════════════════════════════════════════════
-   GUIDES — mes guides de lecture.
-   Un guide répond à une question qu'on te pose vraiment : par où
+   GUIDES — les astuces pour ne pas se perdre.
+   Lire un light novel japonais, c'est d'abord retenir qui est qui :
+   des dizaines de noms, deux ordres possibles (Ayanokōji Kiyotaka
+   ou Kiyotaka Ayanokōji) et des romanisations qui varient d'une
+   traduction à l'autre. Chaque guide est une page à part, avec sa
+   recherche et ses sections repliées tant qu'on n'y est pas arrivé.
+     { title: '…', lead: '…', meta: '…', href: 'refuge/….html' }
+   ════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+   CONSEILS — mes guides de lecture.
+   Un guide répond à une question qu'on pose vraiment : par où
    commencer, quoi lire après tel livre, que lire quand on n'a pas
    le temps. Chaque livre cité dit pourquoi il est là.
      { title: 'Par où commencer',
        lead:  'À qui ça s’adresse, en une phrase.',
-       books: [
-         { title: '…', author: '…',
-           why: 'Pourquoi celui-là, et pas un autre.' }
-       ] }
+       books: [ { title: '…', author: '…', why: '…' } ] }
 
    Tant que ce tableau est vide, la carte du Refuge affiche « à venir ».
    ════════════════════════════════════════════════════════════ */
+const CONSEILS = [
+];
+
+
 const GUIDES = [
+  { title: 'Classroom of the Elite', count: 41,
+    lead: 'Portrait, kanji, ordre japonais et un repère court pour chacun. '
+        + 'Les classes sont celles du début de la série, pour ne pas révéler '
+        + 'les changements de classement.',
+    meta: '41 personnages',
+    href: 'refuge/classroom-of-the-elite.html' },
+  { title: 'That Time I Got Reincarnated as a Slime', count: 50,
+    lead: 'Rangés par volume : chaque volume reste replié tant qu\'on n\'y est '
+        + 'pas arrivé. Ni évolutions, ni changements de statut, ni issues de combat.',
+    meta: '50 personnages · 5 volumes',
+    href: 'refuge/tensura.html' },
 ];
 
 
@@ -390,19 +411,19 @@ const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 const YEARS = [2026, 2025, 2024, 2023, 2022];
 const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
 
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'guides']
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'guides', 'conseils']
   .concat(YEAR_PAGES, ['contact']);
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Testé et adopté', guides: 'Mes guides de lecture',
-    contact: 'Contact' },
+    finds: 'Testé et adopté', guides: 'Light novels japonais',
+    conseils: 'Mes guides de lecture', contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
 const PAGE_PARENT = Object.assign(
-  { bible: 'refuge', finds: 'refuge', guides: 'refuge' },
+  { bible: 'refuge', finds: 'refuge', guides: 'refuge', conseils: 'refuge' },
   Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
 
 /* Toutes les années partagent un même bloc de page. */
@@ -673,15 +694,26 @@ function topics() {
     empty: DISCOVERIES.length === 0
   };
   const guides = {
-    badge: 'Conseil', tone: 'line', icon: 'i-pen',
-    title: 'Mes guides de lecture',
+    badge: 'Astuce', tone: 'line', icon: 'i-pin',
+    title: 'Light novels japonais',
+    /* Deux séries, et le nombre de noms à retenir dans les deux. */
     meta:  GUIDES.length
-      ? GUIDES.length + (GUIDES.length > 1 ? ' guides' : ' guide')
+      ? GUIDES.length + ' séries · '
+        + GUIDES.reduce((n, g) => n + (g.count || 0), 0) + ' personnages'
       : 'à venir',
     page:  'guides',
     empty: GUIDES.length === 0
   };
-  return [bible, lectures, finds, guides];
+  const conseils = {
+    badge: 'Conseil', tone: 'line-sand', icon: 'i-pen',
+    title: 'Mes guides de lecture',
+    meta:  CONSEILS.length
+      ? CONSEILS.length + (CONSEILS.length > 1 ? ' guides' : ' guide')
+      : 'à venir',
+    page:  'conseils',
+    empty: CONSEILS.length === 0
+  };
+  return [bible, lectures, finds, guides, conseils];
 }
 
 
@@ -808,28 +840,50 @@ function findCard(d) {
     : '<article class="find">' + body + '</article>';
 }
 
+function renderConseils() {
+  const host = document.getElementById('conseils');
+  const lead = document.getElementById('conseils-lead');
+  if (!host) return;
+  if (lead) {
+    lead.textContent = CONSEILS.length ? 'Ce que je conseille, et pourquoi.' : '';
+  }
+  host.innerHTML = CONSEILS.length
+    ? CONSEILS.map(g =>
+        '<article class="conseil">'
+      + '<h4 class="guide-title">' + esc(g.title) + '</h4>'
+      + (g.lead ? '<p class="guide-lead">' + esc(g.lead) + '</p>' : '')
+      + '<ol class="conseil-books">'
+      + (g.books || []).map(b =>
+          '<li><p class="conseil-book">' + esc(b.title)
+        + (b.author ? '<span> · ' + esc(b.author) + '</span>' : '') + '</p>'
+        + (b.why ? '<p class="conseil-why">' + esc(b.why) + '</p>' : '') + '</li>').join('')
+      + '</ol></article>').join('')
+    : emptyState('i-pen', 'À écrire',
+        'Je n\u2019ai encore rien rédigé ici. Ça viendra.');
+}
+
 function renderGuides() {
   const host = document.getElementById('guides');
   const lead = document.getElementById('guides-lead');
   if (!host) return;
   if (lead) {
     lead.textContent = GUIDES.length
-      ? 'Ce que je conseille, et pourquoi.'
+      ? 'De quoi ne pas me perdre dans les noms, sans rien me gâcher de la suite.'
       : '';
   }
+  /* Chaque guide est une page entière, hors de ce site-ci : elle a sa
+     propre mise en pages, sa recherche et son thème. */
   host.innerHTML = GUIDES.length
     ? GUIDES.map(g =>
-        '<article class="guide">'
+        '<a class="guide" href="' + esc(g.href) + '">'
       + '<h4 class="guide-title">' + esc(g.title) + '</h4>'
+      + (g.meta ? '<p class="guide-meta">' + esc(g.meta) + '</p>' : '')
       + (g.lead ? '<p class="guide-lead">' + esc(g.lead) + '</p>' : '')
-      + '<ol class="guide-books">'
-      + (g.books || []).map(b =>
-          '<li><p class="guide-book">' + esc(b.title)
-        + (b.author ? '<span> · ' + esc(b.author) + '</span>' : '') + '</p>'
-        + (b.why ? '<p class="guide-why">' + esc(b.why) + '</p>' : '') + '</li>').join('')
-      + '</ol></article>').join('')
+      + '<span class="guide-go">Ouvrir'
+      + '<svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+      + '</span></a>').join('')
     : emptyState('i-pen', 'À écrire',
-        'Je n’ai encore rien rédigé ici. Ça viendra.');
+        'Je n\u2019ai encore rien rédigé ici. Ça viendra.');
 }
 
 function renderFinds() {
@@ -1135,6 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTopics();
   renderFinds();
   renderGuides();
+  renderConseils();
   renderBible();
   initTabs();
   initTabLinks();

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>That Time I Got Reincarnated as a Slime — Guide visuel sans spoilers</title>
+<style>
+:root{
+ --bg:#0b1217;--bg2:#101b22;--panel:#13232a;--panel2:#0e1a20;--text:#f4fbff;--muted:#a8bbc5;
+ --accent:#4dd8d0;--accent2:#69b9ff;--line:#27404a;--input:#102027;--card1:#172a31;--card2:#0f1d23;
+ --header1:#112d34;--header2:#081218;--tip1:rgba(77,216,208,.16);--tip2:rgba(105,185,255,.05);--shadow:rgba(0,0,0,.24);
+ --warning:#312a18;--warningBorder:#79642a;--warningText:#f7e7a8;
+}
+html[data-theme="light"]{
+ --bg:#f4f1e8;--bg2:#e9f1ee;--panel:#fffdf6;--panel2:#f5f0e6;--text:#243238;--muted:#66757a;
+ --accent:#158f91;--accent2:#377daf;--line:#cad9d5;--input:#fffdf7;--card1:#fffdf8;--card2:#eef5f2;
+ --header1:#dff1ed;--header2:#f7f0df;--tip1:rgba(21,143,145,.10);--tip2:rgba(55,125,175,.06);--shadow:rgba(40,70,70,.10);
+ --warning:#fff3cf;--warningBorder:#d3ba6d;--warningText:#604f20;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,var(--header2),var(--bg2) 34%,var(--bg));color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+header{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(circle at 84% 16%,rgba(77,216,208,.28),transparent 27%),radial-gradient(circle at 74% 60%,rgba(105,185,255,.16),transparent 30%),linear-gradient(135deg,var(--header1),var(--header2) 68%)}
+.hero{max-width:1250px;margin:auto;padding:54px 24px 38px}.eyebrow{color:#7cebe5;font-size:.78rem;font-weight:850;text-transform:uppercase;letter-spacing:.16em}
+h1{font-size:clamp(2rem,5vw,4.2rem);line-height:.99;margin:10px 0 16px;max-width:990px}.hero p{max-width:900px;color:var(--muted);font-size:1.04rem;margin:0}
+.controls{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 91%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.controls-inner{max-width:1250px;margin:auto;padding:12px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{flex:1 1 330px;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:12px 15px;font-size:1rem;outline:none}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,216,208,.14)}.search::placeholder{color:var(--muted);opacity:.85}
+.theme-toggle,.chip{background:var(--panel);border:1px solid var(--line);color:var(--text);cursor:pointer;font-weight:800}.theme-toggle{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 12px;font-size:.84rem}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border-radius:999px;padding:9px 12px;font-size:.82rem}.chip.active,.chip:hover{background:#167f83;border-color:#4dd8d0;color:white}
+main{max-width:1250px;margin:auto;padding:28px 24px 80px}.tip{background:linear-gradient(135deg,var(--tip1),var(--tip2));border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:18px;padding:16px 18px;color:var(--text);margin-bottom:26px}.tip b{color:#78e5df}
+.no-spoil{display:flex;gap:12px;align-items:flex-start;margin:0 0 30px;padding:14px 16px;border:1px dashed var(--line);border-radius:15px;background:var(--panel2);color:var(--muted)}.no-spoil strong{color:var(--text)}
+.section{margin:0 0 42px}.section h2{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;font-size:1.48rem}.section h2 span,.locked summary .count{font-size:.76rem;color:#9af3ee;background:rgba(19,110,112,.24);border:1px solid rgba(77,216,208,.28);border-radius:999px;padding:4px 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}.card{background:linear-gradient(180deg,var(--card1),var(--card2));border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 34px var(--shadow);transition:transform .18s,border-color .18s;min-width:0}.card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.portrait-wrap{height:255px;background:radial-gradient(circle at 50% 82%,rgba(97,196,208,.22),transparent 34%),linear-gradient(150deg,#173b43 0 58%,#dff9f4 58% 72%,#0b171c 72%);display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden}.portrait{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 10px 13px rgba(0,0,0,.36))}.img-fallback{display:none;color:var(--muted);align-self:center;text-align:center;padding:20px}.img-error .img-fallback{display:block}
+.card-body{padding:15px}.topline{display:flex;justify-content:space-between;gap:6px;margin-bottom:7px}.badge{font-size:.72rem;font-weight:850;padding:4px 8px;border-radius:999px;background:rgba(53,105,111,.25);border:1px solid var(--line);color:#d8f9f7}html[data-theme="light"] .badge{color:#31575a;background:#e5f2ef}
+h3{font-size:1.15rem;margin:0 0 3px}.jp{font-family:"Noto Sans JP","Yu Gothic",sans-serif;color:#6de4dc;font-size:.96rem;font-weight:750}.alias{font-size:.79rem;color:#b9d7e6;margin-top:4px}.card p{color:var(--muted);font-size:.89rem;margin:10px 0 0}
+.locked{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:0;margin-top:28px;overflow:hidden}.locked summary{cursor:pointer;list-style:none;padding:18px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:850}.locked summary::-webkit-details-marker{display:none}.locked summary .title{display:flex;align-items:center;gap:10px;font-size:1.28rem}.locked summary::after{content:"＋";font-size:1.5rem;color:var(--accent)}.locked[open] summary::after{content:"−"}.locked .desc{color:var(--muted);font-size:.86rem;font-weight:500;margin-top:3px}.locked .warning{margin:0 18px 16px;border:1px solid var(--warningBorder);background:var(--warning);color:var(--warningText);border-radius:12px;padding:10px 12px}.locked .grid{padding:0 18px 18px}
+.stop{margin-top:34px;padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(77,216,208,.11),rgba(105,185,255,.05));border:1px solid var(--line)}.stop strong{color:var(--text)}.stop p{margin:6px 0 0;color:var(--muted)}
+.empty{display:none;text-align:center;color:var(--muted);padding:40px 10px}footer{border-top:1px solid var(--line);color:var(--muted);padding:24px;max-width:1250px;margin:auto;font-size:.82rem}footer a{color:var(--accent2)}.hidden{display:none!important}
+@media(max-width:650px){.hero{padding-top:36px}main{padding-left:14px;padding-right:14px}.controls-inner{padding-left:14px;padding-right:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.portrait-wrap{height:190px}.card-body{padding:11px}h3{font-size:1rem}.jp{font-size:.87rem}.alias{font-size:.71rem}.card p{font-size:.81rem}.locked summary{align-items:flex-start}.locked summary .title{font-size:1.02rem}}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.portrait-wrap{height:270px}.locked summary{padding:15px}.locked .grid{padding:0 12px 12px}.locked .warning{margin:0 12px 12px}}
+
+.back-refuge{display:inline-flex;align-items:center;gap:9px;color:var(--muted);text-decoration:none;
+font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;
+transition:color .18s}
+.back-refuge:hover{color:var(--text)}
+.back-refuge span{font-size:1.05em;line-height:1}
+</style>
+</head>
+<body>
+<header><div class="hero">
+  <a class="back-refuge" href="../#guides"><span>&#8592;</span> Sarindra’s Refuge</a>
+  <div class="eyebrow">Guide de lecture • light novel • anti-spoil</div>
+  <h1>That Time I Got Reincarnated as a Slime — Qui est qui ?</h1>
+  <p><strong>50 personnages</strong> avec portrait, écriture japonaise, variantes de nom utiles pour les recherches et un repère très court. Les sections futures sont repliées par volume pour ne pas te révéler des personnages trop tôt.</p>
+</div></header>
+
+<div class="controls"><div class="controls-inner">
+  <input id="search" class="search" type="search" placeholder="Chercher : Rimuru, Shizu, ベニマル, Souei, Hinata…" autocomplete="off">
+  <button id="themeToggle" class="theme-toggle" type="button" aria-label="Changer le thème"><span class="icon">🌙</span><span class="label">Mode nuit</span></button>
+  <div class="chips" aria-label="Filtres">
+    <button class="chip active" data-filter="all">Tous</button>
+    <button class="chip" data-filter="v1">Vol. 1</button>
+    <button class="chip" data-filter="v2">Vol. 2</button>
+    <button class="chip" data-filter="v3">Vol. 3</button>
+    <button class="chip" data-filter="v4">Vol. 4</button>
+    <button class="chip" data-filter="v5">Vol. 5</button>
+  </div>
+</div></div>
+
+<main>
+  <div class="tip"><b>Astuce pour le novel :</b> plusieurs traductions utilisent des variantes différentes — par exemple <strong>Soei / Souei</strong>, <strong>Hakuro / Hakurou</strong>, <strong>Gabiru / Gabil</strong> ou <strong>Carrion / Carillon</strong>. La recherche accepte les variantes affichées sur les fiches.</div>
+  <div class="no-spoil"><div>🛡️</div><div><strong>Protection anti-spoil :</strong> je n’indique volontairement ni les évolutions de race, ni les changements de statut, ni les relations futures, ni les résultats de combats. Même les personnages très connus de la série sont décrits seulement comme ils peuvent être compris lorsqu’ils apparaissent.</div></div>
+  <section class="section" data-section="v1">
+          <h2>Volume 1 — tu peux regarder dès le début <span>16</span></h2>
+          <div class="grid"><article class="card" data-search="rimuru tempest リムル＝テンペスト rimuru / rimuru tempest slime • protagoniste le protagoniste. un ancien humain réincarné en slime, curieux, pragmatique et très adaptable. rimuru v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/rimuru/character-image.png?v=6" alt="Rimuru Tempest" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Slime • protagoniste</span></div>
+        <h3>Rimuru Tempest</h3>
+        <div class="jp">リムル＝テンペスト</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Rimuru / Rimuru Tempest</div>
+        <p>Le protagoniste. Un ancien humain réincarné en slime, curieux, pragmatique et très adaptable.</p>
+      </div>
+    </article>
+<article class="card" data-search="great sage 大賢者 great sage / grand sage / daikenja compétence une compétence qui répond à rimuru et analyse ce qu’il rencontre. à retenir comme sa « voix d’assistance ». greatsage v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/greatsage/character-image.png?v=6" alt="Great Sage" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Compétence</span></div>
+        <h3>Great Sage</h3>
+        <div class="jp">大賢者</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Great Sage / Grand Sage / Daikenja</div>
+        <p>Une compétence qui répond à Rimuru et analyse ce qu’il rencontre. À retenir comme sa « voix d’assistance ».</p>
+      </div>
+    </article>
+<article class="card" data-search="veldora tempest ヴェルドラ＝テンペスト veldora / veldora tempest dragon le dragon des tempêtes rencontré par rimuru au tout début de son aventure. veldora v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/veldora/character-image.png?v=6" alt="Veldora Tempest" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Dragon</span></div>
+        <h3>Veldora Tempest</h3>
+        <div class="jp">ヴェルドラ＝テンペスト</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Veldora / Veldora Tempest</div>
+        <p>Le Dragon des Tempêtes rencontré par Rimuru au tout début de son aventure.</p>
+      </div>
+    </article>
+<article class="card" data-search="shizue izawa — « shizu » シズ / 井沢静江 shizu / shizue izawa aventurière une aventurière japonaise venue d’un autre monde, facilement reconnaissable à son masque. shizu v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/shizu/character-image.png?v=6" alt="Shizue Izawa — « Shizu »" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aventurière</span></div>
+        <h3>Shizue Izawa — « Shizu »</h3>
+        <div class="jp">シズ / 井沢静江</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Shizu / Shizue Izawa</div>
+        <p>Une aventurière japonaise venue d’un autre monde, facilement reconnaissable à son masque.</p>
+      </div>
+    </article>
+<article class="card" data-search="rigurd リグルド rigurd / rigurdo gobelin l’un des premiers gobelins importants rencontrés par rimuru. sérieux et très respectueux. rigurd v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/rigurd/character-image.png?v=6" alt="Rigurd" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Gobelin</span></div>
+        <h3>Rigurd</h3>
+        <div class="jp">リグルド</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Rigurd / Rigurdo</div>
+        <p>L’un des premiers gobelins importants rencontrés par Rimuru. Sérieux et très respectueux.</p>
+      </div>
+    </article>
+<article class="card" data-search="rigur リグル rigur gobelin jeune gobelin du village. à ne pas confondre avec rigurd. rigur v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/rigur/character-image.png?v=6" alt="Rigur" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Gobelin</span></div>
+        <h3>Rigur</h3>
+        <div class="jp">リグル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Rigur</div>
+        <p>Jeune gobelin du village. À ne pas confondre avec Rigurd.</p>
+      </div>
+    </article>
+<article class="card" data-search="gobta ゴブタ gobta / gobuta gobelin petit gobelin comique, souvent sous-estimé et très facile à reconnaître une fois rencontré. gobta v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/gobta/character-image.png?v=6" alt="Gobta" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Gobelin</span></div>
+        <h3>Gobta</h3>
+        <div class="jp">ゴブタ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Gobta / Gobuta</div>
+        <p>Petit gobelin comique, souvent sous-estimé et très facile à reconnaître une fois rencontré.</p>
+      </div>
+    </article>
+<article class="card" data-search="ranga ランガ ranga loup grand loup noir loyal à rimuru. son nom revient très souvent. ranga v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/ranga/character-image.png?v=6" alt="Ranga" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Loup</span></div>
+        <h3>Ranga</h3>
+        <div class="jp">ランガ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ranga</div>
+        <p>Grand loup noir loyal à Rimuru. Son nom revient très souvent.</p>
+      </div>
+    </article>
+<article class="card" data-search="kaijin カイジン kaijin nain • forgeron forgeron nain de dwargon. costaud, direct et très compétent dans son métier. kaijin v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/kaijin/character-image.png?v=6" alt="Kaijin" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Nain • forgeron</span></div>
+        <h3>Kaijin</h3>
+        <div class="jp">カイジン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kaijin</div>
+        <p>Forgeron nain de Dwargon. Costaud, direct et très compétent dans son métier.</p>
+      </div>
+    </article>
+<article class="card" data-search="gazel dwargo ガゼル・ドワルゴ gazel / gazel dwargo roi de dwargon le roi du royaume nain de dwargon. calme, imposant et très observateur. gazel v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/gazel/character-image.png?v=6" alt="Gazel Dwargo" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Roi de Dwargon</span></div>
+        <h3>Gazel Dwargo</h3>
+        <div class="jp">ガゼル・ドワルゴ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Gazel / Gazel Dwargo</div>
+        <p>Le roi du royaume nain de Dwargon. Calme, imposant et très observateur.</p>
+      </div>
+    </article>
+<article class="card" data-search="vesta ベスター vesta dwargon un haut responsable nain que rimuru rencontre à dwargon. vesta v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/vesta/character-image.png?v=6" alt="Vesta" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Dwargon</span></div>
+        <h3>Vesta</h3>
+        <div class="jp">ベスター</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Vesta</div>
+        <p>Un haut responsable nain que Rimuru rencontre à Dwargon.</p>
+      </div>
+    </article>
+<article class="card" data-search="eren エレン eren / elen aventurière magicienne d’un trio d’aventuriers humains. enjouée et curieuse. eren v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/eren/character-image.png?v=6" alt="Eren" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aventurière</span></div>
+        <h3>Eren</h3>
+        <div class="jp">エレン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Eren / Elen</div>
+        <p>Magicienne d’un trio d’aventuriers humains. Enjouée et curieuse.</p>
+      </div>
+    </article>
+<article class="card" data-search="gido ギド gido aventurier membre du même trio qu’eren et kaval. plutôt prudent et pratique. gido v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/gido/character-image.png?v=6" alt="Gido" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aventurier</span></div>
+        <h3>Gido</h3>
+        <div class="jp">ギド</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Gido</div>
+        <p>Membre du même trio qu’Eren et Kaval. Plutôt prudent et pratique.</p>
+      </div>
+    </article>
+<article class="card" data-search="kaval カバル kaval / kabaru aventurier le chef du trio d’aventuriers avec eren et gido. bien intentionné malgré ses maladresses. kaval v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/kaval/character-image.png?v=6" alt="Kaval" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aventurier</span></div>
+        <h3>Kaval</h3>
+        <div class="jp">カバル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kaval / Kabaru</div>
+        <p>Le chef du trio d’aventuriers avec Eren et Gido. Bien intentionné malgré ses maladresses.</p>
+      </div>
+    </article>
+<article class="card" data-search="ifrit イフリート ifrit esprit du feu un puissant esprit du feu qui apparaît dans l’histoire de shizu. ifrit v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/ifrit/character-image.png?v=6" alt="Ifrit" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Esprit du feu</span></div>
+        <h3>Ifrit</h3>
+        <div class="jp">イフリート</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ifrit</div>
+        <p>Un puissant esprit du feu qui apparaît dans l’histoire de Shizu.</p>
+      </div>
+    </article>
+<article class="card" data-search="leon レオン leon / leon cromwell nom à retenir un nom important lié au passé de shizu. le guide n’en dit volontairement pas davantage. leon v1" data-tag="v1">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/leon/character-image.png?v=6" alt="Leon" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Nom à retenir</span></div>
+        <h3>Leon</h3>
+        <div class="jp">レオン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Leon / Leon Cromwell</div>
+        <p>Un nom important lié au passé de Shizu. Le guide n’en dit volontairement pas davantage.</p>
+      </div>
+    </article></div>
+        </section><details class="locked" data-section="v2" id="v2">
+          <summary><div><div class="title">🔒 Volume 2 — ouvre quand tu commences le volume 2 <span class="count">10</span></div><div class="desc">Personnages qui deviennent utiles à reconnaître à partir du volume 2.</div></div></summary>
+          <div class="warning">⚠️ Section volontairement fermée. Ouvre-la seulement lorsque tu es arrivé à ce volume. Les fiches ne racontent ni issue de combat, ni évolution, ni révélation future.</div>
+          <div class="grid"><article class="card" data-search="benimaru ベニマル benimaru ogre guerrier ogre aux cheveux rouges. fier, direct et naturellement porté vers le commandement. benimaru v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/benimaru/character-image.png?v=6" alt="Benimaru" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Ogre</span></div>
+        <h3>Benimaru</h3>
+        <div class="jp">ベニマル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Benimaru</div>
+        <p>Guerrier ogre aux cheveux rouges. Fier, direct et naturellement porté vers le commandement.</p>
+      </div>
+    </article>
+<article class="card" data-search="shuna シュナ shuna ogre princesse ogre, sœur de benimaru. douce, raffinée et très habile de ses mains. shuna v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/shuna/character-image.png?v=6" alt="Shuna" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Ogre</span></div>
+        <h3>Shuna</h3>
+        <div class="jp">シュナ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Shuna</div>
+        <p>Princesse ogre, sœur de Benimaru. Douce, raffinée et très habile de ses mains.</p>
+      </div>
+    </article>
+<article class="card" data-search="shion シオン shion ogre grande guerrière ogre aux cheveux violets. très expressive et extrêmement dévouée. shion v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/shion/character-image.png?v=6" alt="Shion" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Ogre</span></div>
+        <h3>Shion</h3>
+        <div class="jp">シオン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Shion</div>
+        <p>Grande guerrière ogre aux cheveux violets. Très expressive et extrêmement dévouée.</p>
+      </div>
+    </article>
+<article class="card" data-search="soei ソウエイ soei / souei ogre ogre discret au style de ninja, spécialisé dans l’observation et les déplacements rapides. soei v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/soei/character-image.png?v=6" alt="Soei" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Ogre</span></div>
+        <h3>Soei</h3>
+        <div class="jp">ソウエイ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Soei / Souei</div>
+        <p>Ogre discret au style de ninja, spécialisé dans l’observation et les déplacements rapides.</p>
+      </div>
+    </article>
+<article class="card" data-search="hakuro ハクロウ hakuro / hakurou ogre vieux maître d’armes, posé et redoutable au sabre. hakuro v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/hakuro/character-image.png?v=6" alt="Hakuro" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Ogre</span></div>
+        <h3>Hakuro</h3>
+        <div class="jp">ハクロウ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Hakuro / Hakurou</div>
+        <p>Vieux maître d’armes, posé et redoutable au sabre.</p>
+      </div>
+    </article>
+<article class="card" data-search="kurobe クロベエ kurobe / kurobee ogre • artisan ogre massif surtout associé à la forge et à l’artisanat. kurobe v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/kurobe/character-image.png?v=6" alt="Kurobe" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Ogre • artisan</span></div>
+        <h3>Kurobe</h3>
+        <div class="jp">クロベエ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kurobe / Kurobee</div>
+        <p>Ogre massif surtout associé à la forge et à l’artisanat.</p>
+      </div>
+    </article>
+<article class="card" data-search="geld ゲルド geld orc orc imposant et réservé. retenir surtout son nom : il revient régulièrement. geld v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/geld/character-image.png?v=6" alt="Geld" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Orc</span></div>
+        <h3>Geld</h3>
+        <div class="jp">ゲルド</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Geld</div>
+        <p>Orc imposant et réservé. Retenir surtout son nom : il revient régulièrement.</p>
+      </div>
+    </article>
+<article class="card" data-search="gabiru ガビル gabiru / gabil homme-lézard guerrier homme-lézard très théâtral, sûr de lui et difficile à oublier. gabiru v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/gabiru/character-image.png?v=6" alt="Gabiru" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Homme-lézard</span></div>
+        <h3>Gabiru</h3>
+        <div class="jp">ガビル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Gabiru / Gabil</div>
+        <p>Guerrier homme-lézard très théâtral, sûr de lui et difficile à oublier.</p>
+      </div>
+    </article>
+<article class="card" data-search="soka ソーカ soka / souka homme-lézard jeune femme homme-lézard, plus calme et disciplinée que gabiru. soka v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/soka/character-image.png?v=6" alt="Soka" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Homme-lézard</span></div>
+        <h3>Soka</h3>
+        <div class="jp">ソーカ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Soka / Souka</div>
+        <p>Jeune femme homme-lézard, plus calme et disciplinée que Gabiru.</p>
+      </div>
+    </article>
+<article class="card" data-search="treyni トレイニー treyni / trainy dryade dryade considérée comme une gardienne de la grande forêt de jura. treyni v2" data-tag="v2">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/treyni/character-image.png?v=6" alt="Treyni" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Dryade</span></div>
+        <h3>Treyni</h3>
+        <div class="jp">トレイニー</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Treyni / Trainy</div>
+        <p>Dryade considérée comme une gardienne de la grande forêt de Jura.</p>
+      </div>
+    </article></div>
+        </details><details class="locked" data-section="v3" id="v3">
+          <summary><div><div class="title">🔒 Volume 3 — ouvre quand tu commences le volume 3 <span class="count">7</span></div><div class="desc">Nouveaux noms importants à partir du volume 3.</div></div></summary>
+          <div class="warning">⚠️ Section volontairement fermée. Ouvre-la seulement lorsque tu es arrivé à ce volume. Les fiches ne racontent ni issue de combat, ni évolution, ni révélation future.</div>
+          <div class="grid"><article class="card" data-search="milim nava ミリム・ナーヴァ milim / milim nava demon lord petite fille à l’apparence innocente mais connue comme une demon lord extraordinairement puissante. milim v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/milim/character-image.png?v=6" alt="Milim Nava" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Demon Lord</span></div>
+        <h3>Milim Nava</h3>
+        <div class="jp">ミリム・ナーヴァ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Milim / Milim Nava</div>
+        <p>Petite fille à l’apparence innocente mais connue comme une Demon Lord extraordinairement puissante.</p>
+      </div>
+    </article>
+<article class="card" data-search="carrion カリオン carrion / carillon demon lord demon lord à l’allure bestiale, lié au royaume d’eurazania. carrion v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/carrion/character-image.png?v=6" alt="Carrion" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Demon Lord</span></div>
+        <h3>Carrion</h3>
+        <div class="jp">カリオン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Carrion / Carillon</div>
+        <p>Demon Lord à l’allure bestiale, lié au royaume d’Eurazania.</p>
+      </div>
+    </article>
+<article class="card" data-search="clayman クレイマン clayman demon lord demon lord élégant et calculateur. son nom commence à revenir dans les discussions politiques. clayman v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/clayman/character-image.png?v=6" alt="Clayman" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Demon Lord</span></div>
+        <h3>Clayman</h3>
+        <div class="jp">クレイマン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Clayman</div>
+        <p>Demon Lord élégant et calculateur. Son nom commence à revenir dans les discussions politiques.</p>
+      </div>
+    </article>
+<article class="card" data-search="laplace ラプラス laplace harlequin personnage masqué au ton léger et moqueur, affilié à un groupe de clowns mystérieux. laplace v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/laplace/character-image.png?v=6" alt="Laplace" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Harlequin</span></div>
+        <h3>Laplace</h3>
+        <div class="jp">ラプラス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Laplace</div>
+        <p>Personnage masqué au ton léger et moqueur, affilié à un groupe de clowns mystérieux.</p>
+      </div>
+    </article>
+<article class="card" data-search="youm ヨウム youm / yohm humain aventurier humain robuste, franc et assez charismatique. youm v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/youm/character-image.png?v=6" alt="Youm" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Humain</span></div>
+        <h3>Youm</h3>
+        <div class="jp">ヨウム</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Youm / Yohm</div>
+        <p>Aventurier humain robuste, franc et assez charismatique.</p>
+      </div>
+    </article>
+<article class="card" data-search="fuze フューズ fuze / fuse guilde responsable de la guilde de blumund. souvent dépassé par l’ampleur des événements. fuze v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/fuze/character-image.png?v=6" alt="Fuze" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Guilde</span></div>
+        <h3>Fuze</h3>
+        <div class="jp">フューズ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Fuze / Fuse</div>
+        <p>Responsable de la guilde de Blumund. Souvent dépassé par l’ampleur des événements.</p>
+      </div>
+    </article>
+<article class="card" data-search="veryard ベルヤード veryard noble noble de blumund impliqué dans les relations avec tempest. veryard v3" data-tag="v3">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/veryard/character-image.png?v=6" alt="Veryard" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Noble</span></div>
+        <h3>Veryard</h3>
+        <div class="jp">ベルヤード</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Veryard</div>
+        <p>Noble de Blumund impliqué dans les relations avec Tempest.</p>
+      </div>
+    </article></div>
+        </details><details class="locked" data-section="v4" id="v4">
+          <summary><div><div class="title">🔒 Volume 4 — ouvre quand tu commences le volume 4 <span class="count">11</span></div><div class="desc">Nouveaux personnages rencontrés pendant la phase suivante du voyage.</div></div></summary>
+          <div class="warning">⚠️ Section volontairement fermée. Ouvre-la seulement lorsque tu es arrivé à ce volume. Les fiches ne racontent ni issue de combat, ni évolution, ni révélation future.</div>
+          <div class="grid"><article class="card" data-search="mjollmile ミョルマイル mjollmile marchand marchand humain très à l’aise avec l’argent, les affaires et les réseaux commerciaux. mjollmile v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/mjollmile/character-image.png?v=6" alt="Mjollmile" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Marchand</span></div>
+        <h3>Mjollmile</h3>
+        <div class="jp">ミョルマイル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Mjollmile</div>
+        <p>Marchand humain très à l’aise avec l’argent, les affaires et les réseaux commerciaux.</p>
+      </div>
+    </article>
+<article class="card" data-search="yuuki kagurazaka ユウキ yuuki / yuuki kagurazaka guilde jeune japonais d’un autre monde occupant un poste important dans la free guild. yuuki v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/yuuki/character-image.png?v=6" alt="Yuuki Kagurazaka" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Guilde</span></div>
+        <h3>Yuuki Kagurazaka</h3>
+        <div class="jp">ユウキ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Yuuki / Yuuki Kagurazaka</div>
+        <p>Jeune Japonais d’un autre monde occupant un poste important dans la Free Guild.</p>
+      </div>
+    </article>
+<article class="card" data-search="kenya misaki ケンヤ kenya / kenya misaki élève un des cinq jeunes élèves liés à shizu. énergique et bagarreur. kenya v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/kenya/character-image.png?v=6" alt="Kenya Misaki" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Élève</span></div>
+        <h3>Kenya Misaki</h3>
+        <div class="jp">ケンヤ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kenya / Kenya Misaki</div>
+        <p>Un des cinq jeunes élèves liés à Shizu. Énergique et bagarreur.</p>
+      </div>
+    </article>
+<article class="card" data-search="ryota sekiguchi リョウタ ryota / ryota sekiguchi élève un des cinq élèves. plus timide et réservé que kenya. ryota v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/ryota/character-image.png?v=6" alt="Ryota Sekiguchi" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Élève</span></div>
+        <h3>Ryota Sekiguchi</h3>
+        <div class="jp">リョウタ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ryota / Ryota Sekiguchi</div>
+        <p>Un des cinq élèves. Plus timide et réservé que Kenya.</p>
+      </div>
+    </article>
+<article class="card" data-search="gail gibson ゲイル gail / gail gibson élève le plus âgé des cinq élèves, avec une attitude un peu plus posée. gail v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/gail/character-image.png?v=6" alt="Gail Gibson" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Élève</span></div>
+        <h3>Gail Gibson</h3>
+        <div class="jp">ゲイル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Gail / Gail Gibson</div>
+        <p>Le plus âgé des cinq élèves, avec une attitude un peu plus posée.</p>
+      </div>
+    </article>
+<article class="card" data-search="alice rondo アリス alice / alice rondo élève la plus jeune du groupe des cinq élèves. vive et expressive. alice v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/alice/character-image.png?v=6" alt="Alice Rondo" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Élève</span></div>
+        <h3>Alice Rondo</h3>
+        <div class="jp">アリス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Alice / Alice Rondo</div>
+        <p>La plus jeune du groupe des cinq élèves. Vive et expressive.</p>
+      </div>
+    </article>
+<article class="card" data-search="chloe aubert クロエ chloe / chloe aubert élève jeune élève discrète qui aime beaucoup les livres. chloe v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/chloe/character-image.png?v=6" alt="Chloe Aubert" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Élève</span></div>
+        <h3>Chloe Aubert</h3>
+        <div class="jp">クロエ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Chloe / Chloe Aubert</div>
+        <p>Jeune élève discrète qui aime beaucoup les livres.</p>
+      </div>
+    </article>
+<article class="card" data-search="ramiris ラミリス ramiris demon lord petite créature féerique extrêmement bavarde, qui se présente comme une demon lord. ramiris v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/ramiris/character-image.png?v=6" alt="Ramiris" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Demon Lord</span></div>
+        <h3>Ramiris</h3>
+        <div class="jp">ラミリス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ramiris</div>
+        <p>Petite créature féerique extrêmement bavarde, qui se présente comme une Demon Lord.</p>
+      </div>
+    </article>
+<article class="card" data-search="albis アルビス albis eurazania une des trois guerrières principales d’eurazania. calme et impressionnante. albis v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/albis/character-image.png?v=6" alt="Albis" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Eurazania</span></div>
+        <h3>Albis</h3>
+        <div class="jp">アルビス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Albis</div>
+        <p>Une des trois guerrières principales d’Eurazania. Calme et impressionnante.</p>
+      </div>
+    </article>
+<article class="card" data-search="suphia スフィア suphia / sophia eurazania guerrière d’eurazania au tempérament explosif, très directe dans ses réactions. suphia v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/suphia/character-image.png?v=6" alt="Suphia" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Eurazania</span></div>
+        <h3>Suphia</h3>
+        <div class="jp">スフィア</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Suphia / Sophia</div>
+        <p>Guerrière d’Eurazania au tempérament explosif, très directe dans ses réactions.</p>
+      </div>
+    </article>
+<article class="card" data-search="grucius グルーシス grucius eurazania guerrier d’eurazania à l’allure décontractée mais physiquement puissant. grucius v4" data-tag="v4">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/grucius/character-image.png?v=6" alt="Grucius" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Eurazania</span></div>
+        <h3>Grucius</h3>
+        <div class="jp">グルーシス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Grucius</div>
+        <p>Guerrier d’Eurazania à l’allure décontractée mais physiquement puissant.</p>
+      </div>
+    </article></div>
+        </details><details class="locked" data-section="v5" id="v5">
+          <summary><div><div class="title">🔒 Volume 5 — ouvre quand tu commences le volume 5 <span class="count">6</span></div><div class="desc">Nouveaux personnages du volume 5. Descriptions volontairement très neutres.</div></div></summary>
+          <div class="warning">⚠️ Section volontairement fermée. Ouvre-la seulement lorsque tu es arrivé à ce volume. Les fiches ne racontent ni issue de combat, ni évolution, ni révélation future.</div>
+          <div class="grid"><article class="card" data-search="mjurran ミュウラン mjurran / myulan magicienne magicienne mystérieuse qui apparaît autour d’un groupe d’aventuriers humains. mjurran v5" data-tag="v5">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/mjurran/character-image.png?v=6" alt="Mjurran" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Magicienne</span></div>
+        <h3>Mjurran</h3>
+        <div class="jp">ミュウラン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Mjurran / Myulan</div>
+        <p>Magicienne mystérieuse qui apparaît autour d’un groupe d’aventuriers humains.</p>
+      </div>
+    </article>
+<article class="card" data-search="kyoya tachibana キョウヤ kyoya / kyouya tachibana autre-mondien jeune homme venu d’un autre monde, particulièrement doué avec une épée. kyoya v5" data-tag="v5">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/kyoya/character-image.png?v=6" alt="Kyoya Tachibana" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Autre-mondien</span></div>
+        <h3>Kyoya Tachibana</h3>
+        <div class="jp">キョウヤ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kyoya / Kyouya Tachibana</div>
+        <p>Jeune homme venu d’un autre monde, particulièrement doué avec une épée.</p>
+      </div>
+    </article>
+<article class="card" data-search="shogo taguchi ショウゴ shogo / shougo taguchi autre-mondien jeune homme venu d’un autre monde, brutal et très sûr de sa force physique. shogo v5" data-tag="v5">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/shogo/character-image.png?v=6" alt="Shogo Taguchi" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Autre-mondien</span></div>
+        <h3>Shogo Taguchi</h3>
+        <div class="jp">ショウゴ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Shogo / Shougo Taguchi</div>
+        <p>Jeune homme venu d’un autre monde, brutal et très sûr de sa force physique.</p>
+      </div>
+    </article>
+<article class="card" data-search="kirara mizutani キララ kirara / kirara mizutani autre-mondienne jeune femme venue d’un autre monde, arrogante et provocatrice. kirara v5" data-tag="v5">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/kirara/character-image.png?v=6" alt="Kirara Mizutani" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Autre-mondienne</span></div>
+        <h3>Kirara Mizutani</h3>
+        <div class="jp">キララ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kirara / Kirara Mizutani</div>
+        <p>Jeune femme venue d’un autre monde, arrogante et provocatrice.</p>
+      </div>
+    </article>
+<article class="card" data-search="hinata sakaguchi ヒナタ hinata / hinata sakaguchi chevalière chevalière humaine extrêmement sérieuse et disciplinée. un nom majeur à retenir à partir d’ici. hinata v5" data-tag="v5">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/hinata/character-image.png?v=6" alt="Hinata Sakaguchi" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Chevalière</span></div>
+        <h3>Hinata Sakaguchi</h3>
+        <div class="jp">ヒナタ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Hinata / Hinata Sakaguchi</div>
+        <p>Chevalière humaine extrêmement sérieuse et disciplinée. Un nom majeur à retenir à partir d’ici.</p>
+      </div>
+    </article>
+<article class="card" data-search="diablo ディアブロ diablo démon démon à l’apparence très élégante et au comportement étonnamment poli. diablo v5" data-tag="v5">
+      <div class="portrait-wrap">
+        <img class="portrait" src="https://www.ten-sura.com/4GfGdAp7/wp-content/themes/tensura_portal/assets/images/character/diablo/character-image.png?v=6" alt="Diablo" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Démon</span></div>
+        <h3>Diablo</h3>
+        <div class="jp">ディアブロ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Diablo</div>
+        <p>Démon à l’apparence très élégante et au comportement étonnamment poli.</p>
+      </div>
+    </article></div>
+        </details>
+  <div class="stop"><strong>Volumes 6 et suivants : volontairement absents.</strong><p>Le casting devient beaucoup plus grand et plusieurs simples noms constituent déjà des spoilers. Quand tu arrives au volume 6, tu pourras me demander d’étendre ce même fichier jusqu’au volume que tu lis.</p></div>
+  <div id="empty" class="empty">Aucun personnage ne correspond à ta recherche dans les sections affichées.</div>
+</main>
+<footer>
+  Portraits chargés depuis le portail officiel japonais de <em>That Time I Got Reincarnated as a Slime</em>. Une connexion Internet est nécessaire pour les afficher.<br>
+  Sources : <a href="https://www.ten-sura.com/character" target="_blank" rel="noopener">portail officiel — personnages</a> · <a href="https://yenpress.com/series/that-time-i-got-reincarnated-as-a-slime-light-novel" target="_blank" rel="noopener">Yen Press — light novel</a>.<br>
+  Guide conçu comme aide visuelle de lecture, avec descriptions volontairement limitées pour éviter les spoilers.
+</footer>
+<script>
+const root=document.documentElement;
+const themeToggle=document.getElementById('themeToggle');
+const savedTheme=localStorage.getItem('tensura-theme');
+const prefersLight=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches;
+root.setAttribute('data-theme',savedTheme||(prefersLight?'light':'dark'));
+function updateThemeButton(){const light=root.getAttribute('data-theme')==='light';themeToggle.querySelector('.icon').textContent=light?'☀️':'🌙';themeToggle.querySelector('.label').textContent=light?'Mode ivoire':'Mode nuit';}
+updateThemeButton();
+themeToggle.addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='light'?'dark':'light';root.setAttribute('data-theme',next);localStorage.setItem('tensura-theme',next);updateThemeButton();});
+
+const search=document.getElementById('search');
+const chips=[...document.querySelectorAll('.chip')];
+const cards=[...document.querySelectorAll('.card')];
+const empty=document.getElementById('empty');
+let activeFilter='all';
+function normalize(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function applyFilters(){
+  const q=normalize(search.value.trim()); let shown=0;
+  cards.forEach(card=>{
+    const text=normalize(card.dataset.search); const tag=card.dataset.tag;
+    const okFilter=activeFilter==='all'||tag===activeFilter;
+    const okSearch=!q||text.includes(q); const show=okFilter&&okSearch;
+    card.classList.toggle('hidden',!show); if(show) shown++;
+  });
+  document.querySelectorAll('.section,.locked').forEach(section=>{
+    const visible=section.querySelectorAll('.card:not(.hidden)').length>0;
+    section.classList.toggle('hidden',!visible);
+  });
+  // On ne force jamais l'ouverture d'une section future : la recherche ne doit pas provoquer un spoiler.
+  empty.style.display=shown?'none':'block';
+}
+search.addEventListener('input',applyFilters);
+chips.forEach(chip=>chip.addEventListener('click',()=>{chips.forEach(c=>c.classList.remove('active'));chip.classList.add('active');activeFilter=chip.dataset.filter;applyFilters();}));
+</script>
+</body></html>
