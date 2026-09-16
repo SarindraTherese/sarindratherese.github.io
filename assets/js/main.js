@@ -868,7 +868,9 @@ function renderGuides() {
   if (!host) return;
   if (lead) {
     lead.textContent = GUIDES.length
-      ? 'De quoi ne pas me perdre dans les noms, sans rien me gâcher de la suite.'
+      /* Ces guides servent à qui les ouvre, pas seulement à moi :
+         la phrase ne se met donc pas à la première personne. */
+      ? 'De quoi ne pas se perdre dans les noms, sans rien gâcher de la suite.'
       : '';
   }
   /* Chaque guide est une page entière, hors de ce site-ci : elle a sa
