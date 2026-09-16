@@ -1444,6 +1444,52 @@ a.read-item:hover .read-title { color: var(--cyan); }
   grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
   gap: var(--s5) var(--s4);
 }
+
+/* ── L'étagère découpée par mois ───────────────────────────────────
+   Même langage que le carnet biblique — numéro, mois, décompte à
+   droite — mais des classes à part : les deux pages restent libres
+   d'évoluer chacune de son côté. */
+.shelf.is-grouped { display: block; }
+.yr-month {
+  padding: var(--s5) 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.yr-month:first-child { padding-top: 0; }
+.yr-month:last-child  { border-bottom: 0; padding-bottom: 0; }
+.yr-mhead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+.yr-mnum {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+}
+.yr-mtitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.yr-mcount {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.yr-books {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+  gap: var(--s5) var(--s4);
+}
 .book { display: flex; flex-direction: column; gap: 10px; }
 .book-cover {
   position: relative;
