@@ -23,6 +23,11 @@
   --s1: 4px;  --s2: 8px;  --s3: 16px; --s4: 24px;
   --s5: 32px; --s6: 48px; --s7: 64px;
 
+  /* Mêmes largeurs que le site : la page, puis la colonne de texte.
+     Deux bords droits, pas trois. */
+  --maxw: 1120px;
+  --measure: 72ch;
+
   /* Une seule courbe pour tout ce qui répond au doigt : rapide et sèche. */
   --snap: 120ms cubic-bezier(0.2, 0.8, 0.3, 1);
 
@@ -57,7 +62,7 @@ body {
 
 /* ── En-tête ───────────────────────────────────────────────── */
 header { border-bottom: 1px solid var(--line); }
-.hero { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s5); }
+.hero { max-width: var(--maxw); margin: auto; padding: var(--s6) var(--s4) var(--s5); }
 .eyebrow {
   font-family: var(--mono);
   font-size: 11.5px;
@@ -89,16 +94,17 @@ h1 em {
   letter-spacing: -0.01em;
   color: var(--accent);
 }
-/* Le chapeau tient en deux lignes : c'est la longueur du texte qui
-   décide de la coupure, pas la chasse. `balance` les égalise — il ne
-   vaut que sur trois lignes ou moins, au-delà il dégrade. */
+/* Pas de `balance` ici : il égalise les lignes en les raccourcissant
+   toutes, si bien que le texte s'arrête loin du bord et paraît coupé au
+   milieu de la page. Les lignes remplissent la mesure ; seule la
+   dernière est courte, et `pretty` l'empêche d'être orpheline. */
 .hero p {
-  max-width: 58ch;
+  max-width: var(--measure);
   margin: 0;
   color: var(--body);
   font-size: 16.5px;
   line-height: 1.7;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 /* Un nombre ne se sépare jamais de ce qu'il compte. */
 .hero p strong { white-space: nowrap; }
@@ -129,7 +135,7 @@ h1 em {
   border-bottom: 1px solid var(--line);
 }
 .controls-inner {
-  max-width: 1180px; margin: auto; padding: 12px var(--s4);
+  max-width: var(--maxw); margin: auto; padding: 12px var(--s4);
   display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
 }
 .search {
@@ -178,11 +184,11 @@ h1 em {
 .chip.active:hover { background: var(--accent); border-color: var(--accent); }
 
 /* ── Corps ─────────────────────────────────────────────────── */
-main { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s7); }
+main { max-width: var(--maxw); margin: auto; padding: var(--s6) var(--s4) var(--s7); }
 
 /* Encadrés : un filet à gauche, comme les notes du site. */
 .tip, .no-spoil, .warning, .stop {
-  max-width: 64ch;
+  max-width: var(--measure);
   margin: 0 0 var(--s5);
   padding-left: var(--s4);
   border-left: 2px solid var(--accent-line);
@@ -349,10 +355,10 @@ main { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s7); 
   color: var(--muted);
 }
 footer {
-  max-width: 1180px; margin: auto;
+  max-width: var(--maxw); margin: auto;
   padding: var(--s5) var(--s4) var(--s6);
   border-top: 1px solid var(--line);
-  max-width: 72ch;
+  max-width: var(--measure);
   font-size: 13px;
   line-height: 1.7;
   color: var(--muted);
