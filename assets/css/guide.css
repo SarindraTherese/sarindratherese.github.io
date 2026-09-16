@@ -1,0 +1,318 @@
+/* ══════════════════════════════════════════════════════════════
+   GUIDE — le Blueprint appliqué aux pages de personnages.
+
+   Même grammaire que le site : papier quadrillé, machine à écrire,
+   filets fins, angles droits, aucune ombre. Une seule chose change
+   d'une page à l'autre — la teinte d'accent, que chaque page déclare
+   en tête. Le reste est commun, donc identique par construction.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --paper:     #E4EDF1;
+  --paper-2:   #DBE7ED;
+  --surface:   #F4F9FB;
+  --line:      #A9C4D1;
+  --line-soft: #C6D9E2;
+  --ink:       #0A2634;   /* 13,20:1 */
+  --body:      #2E4E5E;   /*  7,47:1 */
+  --muted:     #4E6D7C;   /*  4,65:1 */
+
+  --display: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans:    "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --s1: 4px;  --s2: 8px;  --s3: 16px; --s4: 24px;
+  --s5: 32px; --s6: 48px; --s7: 64px;
+
+  /* Repli si la page oublie de déclarer sa teinte. */
+  --accent:      #0A6A8A;
+  --accent-fill: #0B7699;
+  --accent-soft: #CFE6EE;
+  --accent-line: #9BC7D9;
+  --grid: rgba(11, 118, 153, 0.085);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[hidden], .hidden { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+/* ── En-tête ───────────────────────────────────────────────── */
+header { border-bottom: 1px solid var(--line); }
+.hero { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s5); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+h1 {
+  margin: var(--s3) 0 var(--s4);
+  max-width: 22ch;
+  font-family: var(--display);
+  font-size: clamp(22px, 3.4vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.hero p { max-width: 68ch; margin: 0; color: var(--body); font-size: 16px; }
+.hero strong { color: var(--ink); font-weight: 600; }
+
+/* ── Fil d'Ariane ──────────────────────────────────────────── */
+.crumbs { margin-bottom: var(--s5); }
+.crumbs ol {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0 8px; padding: 0; margin: 0; list-style: none;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em;
+}
+.crumbs li { display: flex; align-items: center; gap: 8px; }
+.crumbs li + li::before { content: "/"; color: var(--line); }
+.crumbs a {
+  color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .18s ease, border-color .18s ease;
+}
+.crumbs a:hover { color: var(--accent); border-bottom-color: var(--accent-line); }
+.crumbs [aria-current="page"] { color: var(--ink); }
+
+/* ── Barre de recherche et filtres ─────────────────────────── */
+.controls {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.controls-inner {
+  max-width: 1180px; margin: auto; padding: 12px var(--s4);
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+}
+.search {
+  flex: 1 1 320px;
+  padding: 11px 13px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  outline: none;
+}
+.search::placeholder { color: var(--muted); }
+.search:focus {
+  border-color: var(--accent-line);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+}
+.chips { display: flex; gap: 7px; flex-wrap: wrap; }
+.chip {
+  padding: 9px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+}
+.chip:hover { border-color: var(--accent-line); color: var(--accent); }
+.chip.active {
+  background: var(--accent-fill);
+  border-color: var(--accent-fill);
+  color: #fff;
+}
+
+/* ── Corps ─────────────────────────────────────────────────── */
+main { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s7); }
+
+/* Encadrés : un filet à gauche, comme les notes du site. */
+.tip, .no-spoil, .warning, .stop {
+  max-width: 78ch;
+  margin: 0 0 var(--s5);
+  padding-left: var(--s4);
+  border-left: 2px solid var(--accent-line);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body);
+}
+.no-spoil { display: flex; gap: var(--s3); align-items: flex-start; }
+.warning { border-left-color: var(--accent-fill); margin: 0 0 var(--s4); }
+.stop { border-left-color: var(--line); color: var(--muted); }
+.tip b, .tip strong, .no-spoil strong, .warning strong, .stop strong {
+  color: var(--ink); font-weight: 600;
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+.section { margin: 0 0 var(--s7); }
+.section h2 {
+  display: flex; align-items: center; gap: var(--s3);
+  margin: 0 0 var(--s5);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--display);
+  font-size: clamp(16px, 1.9vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.section h2 span, .count {
+  flex: none;
+  padding: 3px 9px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+/* ── Fiches ────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
+  gap: var(--s4);
+}
+.card {
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  min-width: 0;
+  transition: border-color .18s ease;
+}
+.card:hover { border-color: var(--accent-line); }
+.portrait-wrap {
+  aspect-ratio: 3 / 4;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 10px 10px 0;
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--line-soft);
+  overflow: hidden;
+}
+.portrait { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.img-fallback {
+  display: none; align-self: center;
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+}
+.img-error .img-fallback { display: block; }
+.card-body { padding: var(--s3); }
+.topline { margin-bottom: 9px; }
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.card h3 {
+  margin: 0 0 3px;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", var(--sans);
+  font-size: 14px;
+  color: var(--accent);
+}
+.order, .alias {
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.order strong, .alias strong { font-weight: 500; color: var(--body); }
+.card p { margin: 10px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--body); }
+
+/* ── Blocs repliés (volumes, 2e année) ─────────────────────── */
+.year2-block, .locked {
+  margin-top: var(--s6);
+  background: var(--surface);
+  border: 1px dashed var(--accent-line);
+}
+.year2-block summary, .locked summary {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--s3);
+  padding: var(--s4);
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--display);
+  font-weight: 700;
+  color: var(--ink);
+}
+.year2-block summary::-webkit-details-marker,
+.locked summary::-webkit-details-marker { display: none; }
+.year2-block summary::after, .locked summary::after {
+  content: "+";
+  flex: none;
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--accent);
+}
+.year2-block[open] summary::after, .locked[open] summary::after { content: "–"; }
+.year2-block summary span, .locked summary .title {
+  display: flex; align-items: center; gap: var(--s3);
+  font-size: clamp(15px, 1.8vw, 19px);
+  letter-spacing: -0.02em;
+}
+.year2-block summary small, .locked summary .desc {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.year2-block .grid, .locked .grid { padding: 0 var(--s4) var(--s4); }
+.year2-block .warning, .locked .warning { margin: 0 var(--s4) var(--s4); }
+
+/* ── Pied et état vide ─────────────────────────────────────── */
+.empty {
+  display: none;
+  padding: var(--s6) 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+footer {
+  max-width: 1180px; margin: auto;
+  padding: var(--s5) var(--s4) var(--s6);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+footer a { color: var(--accent); }
+
+@media (max-width: 650px) {
+  .hero { padding: var(--s5) var(--s3) var(--s4); }
+  main, .controls-inner, footer { padding-left: var(--s3); padding-right: var(--s3); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+  .year2-block summary, .locked summary { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 390px) { .grid { grid-template-columns: 1fr; } }
