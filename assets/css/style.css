@@ -1708,7 +1708,13 @@ a.read-item:hover .read-title { color: var(--cyan); }
   flex-direction: column;
   gap: var(--s4);
   max-width: 72ch;
+  margin-inline: auto;
 }
+/* Centrer les seules cartes laisserait le titre à gauche, décalé de
+   quatre-vingts pixels. L'en-tête prend donc la même colonne : la
+   section forme un bloc, centré d'un seul tenant. */
+#page-guides .crumbs,
+#page-guides .refuge-open { max-width: 72ch; margin-inline: auto; }
 .guide {
   display: block;
   padding: var(--s5);
