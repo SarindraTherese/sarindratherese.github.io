@@ -262,7 +262,7 @@ const READINGS = [
   /* ── 2025 ── */
   { year: 2025, title: 'Affirmez-vous', author: 'Frédéric Fanget', cover: 'Affirmez-vous.jpg' },
   { year: 2025, title: 'Le journal d\'Anne Frank', author: 'Anne Frank', cover: 'Le journal d\'Anne Frank.jpg' },
-  { year: 2025, title: 'Respire', author: 'Maud Ankaoua', cover: 'Respire.jpg' },
+  { year: 2025, title: 'Respire !', author: 'Maud Ankaoua', cover: 'Respire.jpg' },
   { year: 2025, title: 'Les délices de Tokyo', author: 'Durian Sukegawa', cover: 'Les délices de Tokyo.jpg' },
   { year: 2025, title: 'Ainsi parlait Zarathoustra', author: 'Friedrich Nietzsche', cover: 'Ainsi parlait Zarathoustra.jpg' },
   { year: 2025, title: 'Les sept maris d\'Evelyn Hugo', author: 'Taylor Jenkins Reid', cover: 'Les sept maris d\'Evelyn Hugo.jpg' },
@@ -300,7 +300,7 @@ const READINGS = [
   { year: 2025, title: 'L\'appel de la forêt', author: 'Jack London', cover: 'L\'appel de la forêt.jpg' },
   { year: 2025, title: 'La dame aux camélias', author: 'Alexandre Dumas fils', cover: 'La dame aux camélias.jpg' },
   { year: 2025, title: 'Prier le chapelet et aimer ça', author: 'V. Finet', cover: 'Prier le chapelet et aimer ça.jpg' },
-  { year: 2025, title: 'Commentaire de la Genèse', author: 'Jean Chrysostome', cover: 'Commentaire de la Genèse.jpg' },
+  { year: 2025, title: 'Commentaire sur la Genèse', author: 'Jean Chrysostome', cover: 'Commentaire de la Genèse.jpg' },
   { year: 2025, title: 'Le livre de la vie', author: 'Thérèse d\'Avila', cover: 'Le livre de la vie.jpg' },
   { year: 2025, title: '1984', author: 'George Orwell', cover: '1984.jpg' },
   { year: 2025, title: 'Les carnets de l\'apothicaire, tome 5', author: 'Natsu Hyuga', cover: 'Les Carnets de l\'apothicaire T05.jpg' },
