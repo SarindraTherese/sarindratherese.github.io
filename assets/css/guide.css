@@ -89,7 +89,17 @@ h1 em {
   letter-spacing: -0.01em;
   color: var(--accent);
 }
-.hero p { max-width: 68ch; margin: 0; color: var(--body); font-size: 16px; }
+/* Chasse resserrée et lignes équilibrées : à 68 caractères, le texte
+   se coupait sur « Les », « de », et laissait une dernière ligne
+   orpheline. `balance` répartit la matière sur toutes les lignes. */
+.hero p {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--body);
+  font-size: 16.5px;
+  line-height: 1.7;
+  text-wrap: balance;
+}
 .hero strong { color: var(--ink); font-weight: 600; }
 
 /* ── Fil d'Ariane ──────────────────────────────────────────── */
@@ -170,13 +180,14 @@ main { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s7); 
 
 /* Encadrés : un filet à gauche, comme les notes du site. */
 .tip, .no-spoil, .warning, .stop {
-  max-width: 78ch;
+  max-width: 64ch;
   margin: 0 0 var(--s5);
   padding-left: var(--s4);
   border-left: 2px solid var(--accent-line);
   font-size: 15px;
   line-height: 1.7;
   color: var(--body);
+  text-wrap: pretty;
 }
 .no-spoil { display: flex; gap: var(--s3); align-items: flex-start; }
 .warning { border-left-color: var(--accent-fill); margin: 0 0 var(--s4); }
@@ -270,7 +281,14 @@ main { max-width: 1180px; margin: auto; padding: var(--s6) var(--s4) var(--s7); 
   color: var(--muted);
 }
 .order strong, .alias strong { font-weight: 500; color: var(--body); }
-.card p { margin: 10px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--body); }
+.card p {
+  margin: 10px 0 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--body);
+  /* Dans une colonne étroite, on évite surtout le mot esseulé. */
+  text-wrap: pretty;
+}
 
 /* ── Blocs repliés (volumes, 2e année) ─────────────────────── */
 .year2-block, .locked {
@@ -332,9 +350,11 @@ footer {
   max-width: 1180px; margin: auto;
   padding: var(--s5) var(--s4) var(--s6);
   border-top: 1px solid var(--line);
+  max-width: 72ch;
   font-size: 13px;
   line-height: 1.7;
   color: var(--muted);
+  text-wrap: pretty;
 }
 footer a { color: var(--accent); }
 
