@@ -197,7 +197,8 @@ main { max-width: var(--maxw); margin: auto; padding: var(--s6) var(--s4) var(--
   color: var(--body);
   text-wrap: pretty;
 }
-.no-spoil { display: flex; gap: var(--s3); align-items: flex-start; }
+/* Les trois guides l'écrivent pareil : l'emoji entre dans le gras,
+   le bloc reste une simple colonne de texte. */
 .warning { border-left-color: var(--accent-fill); margin: 0 0 var(--s4); }
 .stop { border-left-color: var(--line); color: var(--muted); }
 .tip b, .tip strong, .no-spoil strong, .warning strong, .stop strong {
@@ -281,14 +282,14 @@ main { max-width: var(--maxw); margin: auto; padding: var(--s6) var(--s4) var(--
   font-size: 14px;
   color: var(--accent);
 }
-.order, .alias {
+.order, .alias, .aliases {
   margin-top: 4px;
   font-family: var(--mono);
   font-size: 10.5px;
   line-height: 1.5;
   color: var(--muted);
 }
-.order strong, .alias strong { font-weight: 500; color: var(--body); }
+.order strong, .alias strong, .aliases strong { font-weight: 500; color: var(--body); }
 .card p {
   margin: 10px 0 0;
   font-size: 13.5px;
@@ -330,12 +331,16 @@ main { max-width: var(--maxw); margin: auto; padding: var(--s6) var(--s4) var(--
 }
 .year2-block[open] summary::after, .locked[open] summary::after { transform: rotate(180deg); }
 .year2-block[open] summary::after, .locked[open] summary::after { content: "–"; }
-.year2-block summary span, .locked summary .title {
+.year2-block summary span,
+.locked summary span,
+.locked summary .title {
   display: flex; align-items: center; gap: var(--s3);
   font-size: clamp(15px, 1.8vw, 19px);
   letter-spacing: -0.02em;
 }
-.year2-block summary small, .locked summary .desc {
+.year2-block summary small,
+.locked summary small,
+.locked summary .desc {
   display: block;
   margin-top: 5px;
   font-family: var(--sans);
@@ -390,4 +395,29 @@ footer a { color: var(--accent); }
     transition-duration: 0.01ms !important;
   }
   .card:hover, .chip:active { transform: none; }
+}
+
+/* ── Une page sans portraits ───────────────────────────────────
+   Le wiki qui héberge les images de Mushoku Tensei ne les sert
+   qu'aux pages de son propre domaine : depuis ici, c'est 403 à tous
+   les coups. Plutôt que cinquante-neuf cadres vides, la page s'assume
+   en texte, et le repère de volume rejoint la ligne de badges. */
+.no-portraits .portrait-wrap { display: none; }
+.no-portraits .grid { grid-template-columns: repeat(auto-fill, minmax(236px, 1fr)); }
+.no-portraits .card-body { padding: var(--s4) var(--s3); }
+.topline { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge-vol {
+  background: var(--accent-fill);
+  color: #fff;
+}
+/* Une note de volume : le même filet que les autres encadrés. */
+.volume-note {
+  max-width: var(--measure);
+  margin: 0 var(--s4) var(--s4);
+  padding-left: var(--s4);
+  border-left: 2px solid var(--line);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  text-wrap: pretty;
 }

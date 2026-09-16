@@ -105,6 +105,12 @@ const GUIDES = [
         + 'les changements de classement.',
     meta: '41 personnages',
     href: 'refuge/classroom-of-the-elite.html' },
+  { title: 'Mushoku Tensei', count: 59,
+    lead: 'Rangés par volume, du premier au vingt-sixième : chaque volume '
+        + 'reste replié jusqu\'à ouverture. Pas de kanji ici, seulement le nom '
+        + 'utile pour lire la novel et ses variantes de traduction.',
+    meta: '59 personnages · 26 volumes',
+    href: 'refuge/mushoku-tensei.html' },
   { title: 'That Time I Got Reincarnated as a Slime', count: 50,
     lead: 'Rangés par volume : chaque volume reste replié tant qu\'on n\'y est '
         + 'pas arrivé. Ni évolutions, ni changements de statut, ni issues de combat.',
