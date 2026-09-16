@@ -55,8 +55,12 @@
   /* Rayons — angles vifs : c'est un plan, pas une carte */
   --r1: 0px; --r2: 0px; --r3: 0px; --pill: 999px;
 
-  /* Aucune ombre portée : la profondeur vient du trait */
+  /* Aucune ombre portée : la profondeur vient du trait.
+     Seule exception, le carnet biblique : ses fiches se posent sur le
+     quadrillage au lieu d'y être découpées, d'où ce très léger décollement. */
   --shadow: none;
+  --lift:      0 1px 1px rgba(10, 38, 52, 0.05), 0 10px 22px -12px rgba(10, 38, 52, 0.20);
+  --lift-wide: 0 1px 1px rgba(10, 38, 52, 0.04), 0 18px 40px -22px rgba(10, 38, 52, 0.24);
 
   --nav-h: 64px;
   --maxw: 1120px;
@@ -2114,6 +2118,7 @@ a.ln-item:hover .ln-go { gap: 12px; }
   padding: var(--s4);
   background: var(--surface);
   border: 1px solid var(--line);
+  box-shadow: var(--lift-wide);
 }
 .bib-lintro {
   max-width: 62ch;
@@ -2203,6 +2208,7 @@ a.ln-item:hover .ln-go { gap: 12px; }
   padding: 11px;
   background: #fff;
   border: 1px solid var(--line-soft);
+  box-shadow: var(--lift);
 }
 .bib-date {
   font-family: var(--mono);
