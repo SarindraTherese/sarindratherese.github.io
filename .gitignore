@@ -1,3 +1,7 @@
 # Documents de travail privés — ne doivent jamais partir sur GitHub Pages.
 # Le préfixe « _ » les exclut aussi du build Jekyll, par sécurité.
 _design/
+
+# Sorties régénérables de l'étape 0 : images converties et captures de
+# référence. Les scripts qui les produisent, eux, sont versionnés.
+_migration/out/

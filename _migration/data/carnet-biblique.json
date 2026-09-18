@@ -1,0 +1,358 @@
+{
+  "edition": "Bible de Jérusalem",
+  "debut": "2025-01-31",
+  "fin": "2025-06-07",
+  "familles": {
+    "pentateuque": [
+      "Genèse",
+      "Exode",
+      "Lévitique",
+      "Nombres",
+      "Deutéronome"
+    ],
+    "historiques": [
+      "Josué",
+      "Juges",
+      "Ruth",
+      "Samuel",
+      "Rois 1, 2",
+      "Les chroniques",
+      "Esdras",
+      "Néhémie",
+      "Tobie",
+      "Judith",
+      "Esther",
+      "Maccabées"
+    ],
+    "poetiques": [
+      "Job",
+      "Psaumes",
+      "Proverbes",
+      "Ecclésiaste",
+      "Cantique des cantiques",
+      "Sagesse",
+      "Ecclésiastique"
+    ],
+    "prophetes": [
+      "Isaïe",
+      "Jérémie",
+      "Les lamentations",
+      "Baruch",
+      "Ézéchiel",
+      "Daniel",
+      "Osée",
+      "Joël",
+      "Amos",
+      "Abdias",
+      "Jonas",
+      "Michée",
+      "Nahum",
+      "Habaquq",
+      "Sophonie",
+      "Aggée",
+      "Zacharie",
+      "Malachie"
+    ],
+    "evangiles": [
+      "Saint Mathieu",
+      "Saint Marc",
+      "Saint Luc",
+      "Saint Jean",
+      "Actes des apôtres"
+    ],
+    "lettres": [
+      "Romains",
+      "Corinthiens",
+      "Galates",
+      "Éphésiens",
+      "Philippiens",
+      "Colossiens",
+      "Thessaloniciens",
+      "Timothée",
+      "Tite",
+      "Philémon",
+      "Hébreux",
+      "Jacques",
+      "Pierre",
+      "Jean 1, 2 et 3",
+      "Jude"
+    ],
+    "apocalypse": [
+      "Apocalypse"
+    ]
+  },
+  "nomsFamilles": {
+    "pentateuque": "Pentateuque",
+    "historiques": "Livres historiques",
+    "poetiques": "Poétiques / sapientiaux",
+    "prophetes": "Prophètes",
+    "evangiles": "Évangiles / Actes",
+    "lettres": "Lettres",
+    "apocalypse": "Apocalypse"
+  },
+  "groupes": {
+    "Jean 1, 2 et 3": 3,
+    "Samuel": 2,
+    "Rois 1, 2": 2,
+    "Les chroniques": 2,
+    "Maccabées": 2,
+    "Corinthiens": 2,
+    "Thessaloniciens": 2,
+    "Timothée": 2,
+    "Pierre": 2
+  },
+  "entrees": [
+    {
+      "livre": "Jean 1, 2 et 3",
+      "date": null
+    },
+    {
+      "livre": "Saint Mathieu",
+      "date": "2025-02-09"
+    },
+    {
+      "livre": "Saint Marc",
+      "date": "2025-02-10"
+    },
+    {
+      "livre": "Saint Luc",
+      "date": "2025-02-18"
+    },
+    {
+      "livre": "Saint Jean",
+      "date": "2025-02-25"
+    },
+    {
+      "livre": "Actes des apôtres",
+      "date": "2025-03-07"
+    },
+    {
+      "livre": "Genèse",
+      "date": "2025-03-15"
+    },
+    {
+      "livre": "Exode",
+      "date": "2025-03-20"
+    },
+    {
+      "livre": "Job",
+      "date": "2025-03-25"
+    },
+    {
+      "livre": "Lévitique",
+      "date": "2025-04-13"
+    },
+    {
+      "livre": "Nombres",
+      "date": "2025-04-16"
+    },
+    {
+      "livre": "Deutéronome",
+      "date": "2025-04-22"
+    },
+    {
+      "livre": "Josué",
+      "date": "2025-04-24"
+    },
+    {
+      "livre": "Juges",
+      "date": "2025-04-26"
+    },
+    {
+      "livre": "Ruth",
+      "date": "2025-04-27"
+    },
+    {
+      "livre": "Samuel",
+      "date": "2025-04-30"
+    },
+    {
+      "livre": "Rois 1, 2",
+      "date": "2025-05-06"
+    },
+    {
+      "livre": "Amos",
+      "date": "2025-05-07"
+    },
+    {
+      "livre": "Osée",
+      "date": "2025-05-07"
+    },
+    {
+      "livre": "Michée",
+      "date": "2025-05-07"
+    },
+    {
+      "livre": "Abdias",
+      "date": "2025-05-08"
+    },
+    {
+      "livre": "Jonas",
+      "date": "2025-05-08"
+    },
+    {
+      "livre": "Nahum",
+      "date": "2025-05-08"
+    },
+    {
+      "livre": "Joël",
+      "date": "2025-05-08"
+    },
+    {
+      "livre": "Habaquq",
+      "date": "2025-05-08"
+    },
+    {
+      "livre": "Sophonie",
+      "date": "2025-05-08"
+    },
+    {
+      "livre": "Aggée",
+      "date": "2025-05-09"
+    },
+    {
+      "livre": "Zacharie",
+      "date": "2025-05-09"
+    },
+    {
+      "livre": "Malachie",
+      "date": "2025-05-09"
+    },
+    {
+      "livre": "Les lamentations",
+      "date": "2025-05-09"
+    },
+    {
+      "livre": "Les chroniques",
+      "date": "2025-05-11"
+    },
+    {
+      "livre": "Daniel",
+      "date": "2025-05-13"
+    },
+    {
+      "livre": "Isaïe",
+      "date": "2025-05-16"
+    },
+    {
+      "livre": "Tobie",
+      "date": "2025-05-17"
+    },
+    {
+      "livre": "Judith",
+      "date": "2025-05-19"
+    },
+    {
+      "livre": "Jérémie",
+      "date": "2025-05-21"
+    },
+    {
+      "livre": "Baruch",
+      "date": "2025-05-23"
+    },
+    {
+      "livre": "Esther",
+      "date": "2025-05-24"
+    },
+    {
+      "livre": "Ézéchiel",
+      "date": "2025-05-27"
+    },
+    {
+      "livre": "Esdras",
+      "date": "2025-05-27"
+    },
+    {
+      "livre": "Néhémie",
+      "date": "2025-05-28"
+    },
+    {
+      "livre": "Ecclésiaste",
+      "date": "2025-05-29"
+    },
+    {
+      "livre": "Cantique des cantiques",
+      "date": "2025-05-29"
+    },
+    {
+      "livre": "Sagesse",
+      "date": "2025-05-30"
+    },
+    {
+      "livre": "Maccabées",
+      "date": "2025-05-31"
+    },
+    {
+      "livre": "Romains",
+      "date": "2025-06-01"
+    },
+    {
+      "livre": "Proverbes",
+      "date": "2025-06-02"
+    },
+    {
+      "livre": "Corinthiens",
+      "date": "2025-06-02"
+    },
+    {
+      "livre": "Galates",
+      "date": "2025-06-03"
+    },
+    {
+      "livre": "Éphésiens",
+      "date": "2025-06-04"
+    },
+    {
+      "livre": "Philippiens",
+      "date": "2025-06-04"
+    },
+    {
+      "livre": "Colossiens",
+      "date": "2025-06-04"
+    },
+    {
+      "livre": "Thessaloniciens",
+      "date": "2025-06-04"
+    },
+    {
+      "livre": "Psaumes",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Timothée",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Tite",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Philémon",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Hébreux",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Jacques",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Pierre",
+      "date": "2025-06-05"
+    },
+    {
+      "livre": "Jude",
+      "date": "2025-06-06"
+    },
+    {
+      "livre": "Apocalypse",
+      "date": "2025-06-06"
+    },
+    {
+      "livre": "Ecclésiastique",
+      "date": "2025-06-07"
+    }
+  ]
+}

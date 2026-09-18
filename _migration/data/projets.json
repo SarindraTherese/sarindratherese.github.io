@@ -1,0 +1,178 @@
+[
+  {
+    "categorie": "Generative AI",
+    "code": "ai",
+    "vedette": true,
+    "titre": "Automated Document Processing System",
+    "periode": "Jan 2026 – Feb 2026",
+    "contexte": "AI / Data Engineer — Hairun Technology",
+    "architecture": [
+      "PDF / DOCX",
+      "OCR",
+      "LLM structuring",
+      "JSON",
+      "Flask API",
+      "n8n delivery"
+    ],
+    "points": [
+      "Hybrid OCR + LLM pipeline for extraction and structuring of PDF/DOCX documents",
+      "Normalization and standardized JSON output for integration into business systems",
+      "Flask API exposing results for external consumption",
+      "Full workflow automation via n8n — validation, report generation and delivery"
+    ],
+    "impact": "Significant reduction in manual processing time and improved data reliability.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "OpenAI API",
+      "n8n"
+    ]
+  },
+  {
+    "categorie": "Analytics",
+    "code": "an",
+    "vedette": false,
+    "titre": "Recycling Machine Performance Dashboard",
+    "periode": "Apr – Jun 2025",
+    "contexte": "Data Analyst — Recycling industry",
+    "architecture": [
+      "Machine data",
+      "Power BI model",
+      "KPI dashboard"
+    ],
+    "points": [
+      "Design of machine performance tracking dashboards",
+      "Definition and optimization of KPIs to improve operational data readability",
+      "Data analysis to identify anomalies and areas for improvement"
+    ],
+    "impact": "Better visibility into equipment performance and support for operational decisions.",
+    "technologies": [
+      "Power BI",
+      "DAX"
+    ]
+  },
+  {
+    "categorie": "Generative AI",
+    "code": "ai",
+    "vedette": false,
+    "titre": "Document Processing System (AI-Enhanced)",
+    "periode": "Dec 2024 – Mar 2025",
+    "contexte": "Personal project — AI & Data",
+    "architecture": [
+      "PDF / ZIP",
+      "OCR",
+      "LLM",
+      "Pydantic JSON"
+    ],
+    "points": [
+      "Multi-format pipeline (PDF/ZIP) with OCR extraction and LLM-based structuring",
+      "Data validation and normalization with Pydantic",
+      "Structured JSON output ready for downstream systems"
+    ],
+    "impact": "Automation of complex document processing and reduction of manual work.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "Pydantic"
+    ]
+  },
+  {
+    "categorie": "Generative AI",
+    "code": "ai",
+    "vedette": false,
+    "titre": "Medical AI Assistant",
+    "periode": "Dec 2024 – Mar 2025",
+    "contexte": "Personal project — AI & Data",
+    "architecture": [
+      "Symptoms",
+      "LLM analysis",
+      "Streamlit UI"
+    ],
+    "points": [
+      "LLM-based symptom analysis system with an integrated data pipeline",
+      "Automated recommendation generation towards the right specialists",
+      "Interactive Streamlit user interface"
+    ],
+    "impact": "Improved accessibility to initial medical guidance.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "Streamlit"
+    ]
+  },
+  {
+    "categorie": "Data Engineering",
+    "code": "de",
+    "vedette": false,
+    "titre": "Real-Time Infrastructure Monitoring Pipeline",
+    "periode": "Jan – Jul 2024",
+    "contexte": "Data Engineer — KAPSDATA",
+    "architecture": [
+      "System metrics",
+      "Kafka",
+      "InfluxDB",
+      "Grafana"
+    ],
+    "points": [
+      "Kafka pipeline collecting and processing system metrics (CPU, memory, resources)",
+      "Integration into InfluxDB for time-series storage and analysis",
+      "Grafana dashboards for real-time performance monitoring"
+    ],
+    "impact": "Better visibility into system performance and faster anomaly detection.",
+    "technologies": [
+      "Kafka",
+      "Java",
+      "InfluxDB",
+      "Grafana"
+    ]
+  },
+  {
+    "categorie": "Analytics",
+    "code": "an",
+    "vedette": false,
+    "titre": "Financial Dashboard — Insurance Sector",
+    "periode": "Aug – Oct 2023",
+    "contexte": "Data Analyst — Insurance industry",
+    "architecture": [
+      "Financial data",
+      "DAX model",
+      "Gateway refresh",
+      "Power BI Service"
+    ],
+    "points": [
+      "Consolidated dashboard (revenue, premiums, collections, unpaid) with YTD/MTD analyses",
+      "Identification of at-risk accounts through receivables analysis (top debtors)",
+      "Deployment on Power BI Service with Gateway for automated data refresh"
+    ],
+    "impact": "Better financial visibility, prioritized collection actions and centralized data access.",
+    "technologies": [
+      "Power BI",
+      "DAX",
+      "Power BI Service"
+    ]
+  },
+  {
+    "categorie": "Data Engineering",
+    "code": "de",
+    "vedette": false,
+    "titre": "Elasticsearch → Kafka → InfluxDB Pipeline",
+    "periode": "Sep 2022 – Jan 2023",
+    "contexte": "Data Engineer — KAPSDATA",
+    "architecture": [
+      "Elasticsearch",
+      "Kafka",
+      "InfluxDB"
+    ],
+    "points": [
+      "Data pipelines with transformation, filtering and stream routing",
+      "Contribution to structuring a real-time data architecture",
+      "Stream optimization to improve pipeline performance"
+    ],
+    "impact": "Improved data stream reliability and overall system performance.",
+    "technologies": [
+      "Kafka",
+      "Python",
+      "Elasticsearch"
+    ]
+  }
+]

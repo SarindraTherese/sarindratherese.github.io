@@ -1,0 +1,207 @@
+{
+  "familles": [
+    {
+      "famille": "Languages & frameworks",
+      "entrees": [
+        "Python (NumPy, Pandas)",
+        "Flask · Django · Streamlit",
+        "Java",
+        "Pydantic · REST API"
+      ]
+    },
+    {
+      "famille": "Generative AI & LLMs",
+      "entrees": [
+        "OpenAI API (GPT-4)",
+        "Claude Code",
+        "OCR — PyMuPDF, Pytesseract",
+        "n8n automation"
+      ]
+    },
+    {
+      "famille": "Big data & pipelines",
+      "entrees": [
+        "Apache Kafka",
+        "PySpark",
+        "Apache Airflow",
+        "Elasticsearch · InfluxDB"
+      ]
+    },
+    {
+      "famille": "Visualization & BI",
+      "entrees": [
+        "Power BI (DAX, KPI)",
+        "Grafana",
+        "YTD / MTD analyses",
+        "Dashboard design"
+      ]
+    },
+    {
+      "famille": "Databases",
+      "entrees": [
+        "PostgreSQL · MySQL",
+        "SQL Server",
+        "Elasticsearch · InfluxDB",
+        "NoSQL"
+      ]
+    },
+    {
+      "famille": "Tools & workflow",
+      "entrees": [
+        "n8n (automation)",
+        "Git & versioning",
+        "PDF / ZIP processing",
+        "JSON / Pydantic"
+      ]
+    }
+  ],
+  "groupes": [
+    {
+      "groupe": "Programming languages",
+      "barres": [
+        {
+          "libelle": "Python",
+          "pourcentage": 95
+        },
+        {
+          "libelle": "SQL",
+          "pourcentage": 88
+        },
+        {
+          "libelle": "Flask / Streamlit",
+          "pourcentage": 85
+        },
+        {
+          "libelle": "Java",
+          "pourcentage": 75
+        },
+        {
+          "libelle": "Django",
+          "pourcentage": 70
+        }
+      ]
+    },
+    {
+      "groupe": "AI & data tools",
+      "barres": [
+        {
+          "libelle": "OpenAI API",
+          "pourcentage": 90
+        },
+        {
+          "libelle": "Apache Kafka",
+          "pourcentage": 88
+        },
+        {
+          "libelle": "Claude Code",
+          "pourcentage": 85
+        },
+        {
+          "libelle": "n8n",
+          "pourcentage": 85
+        },
+        {
+          "libelle": "PySpark",
+          "pourcentage": 80
+        }
+      ]
+    },
+    {
+      "groupe": "Visualization & databases",
+      "barres": [
+        {
+          "libelle": "Power BI",
+          "pourcentage": 92
+        },
+        {
+          "libelle": "PostgreSQL",
+          "pourcentage": 85
+        },
+        {
+          "libelle": "Grafana",
+          "pourcentage": 82
+        },
+        {
+          "libelle": "InfluxDB",
+          "pourcentage": 80
+        },
+        {
+          "libelle": "Elasticsearch",
+          "pourcentage": 78
+        }
+      ]
+    }
+  ],
+  "graphiques": {
+    "radar": [
+      {
+        "libelle": "Data Engineering",
+        "pourcentage": 88
+      },
+      {
+        "libelle": "Generative AI",
+        "pourcentage": 87
+      },
+      {
+        "libelle": "Analytics / BI",
+        "pourcentage": 92
+      },
+      {
+        "libelle": "Python / Dev",
+        "pourcentage": 95
+      },
+      {
+        "libelle": "Big Data",
+        "pourcentage": 83
+      },
+      {
+        "libelle": "Databases",
+        "pourcentage": 85
+      }
+    ],
+    "barres1": [
+      {
+        "libelle": "Python",
+        "pourcentage": 95
+      },
+      {
+        "libelle": "SQL",
+        "pourcentage": 88
+      },
+      {
+        "libelle": "Flask",
+        "pourcentage": 85
+      },
+      {
+        "libelle": "Java",
+        "pourcentage": 75
+      },
+      {
+        "libelle": "Django",
+        "pourcentage": 70
+      }
+    ],
+    "barres2": [
+      {
+        "libelle": "Power BI",
+        "pourcentage": 92
+      },
+      {
+        "libelle": "OpenAI",
+        "pourcentage": 90
+      },
+      {
+        "libelle": "Kafka",
+        "pourcentage": 88
+      },
+      {
+        "libelle": "Claude Code",
+        "pourcentage": 85
+      },
+      {
+        "libelle": "PySpark",
+        "pourcentage": 80
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "etat": "selective",
+  "miseAJour": "2026-09",
+  "textes": {
+    "open": {
+      "label": "Available for new opportunities",
+      "text": "I’m open to freelance missions, consulting and roles in Data Analytics, Data Engineering or Generative AI.",
+      "tone": "ok"
+    },
+    "selective": {
+      "label": "Not actively looking",
+      "text": "I’m currently engaged on a project and not actively looking. I’m still glad to talk about interesting data and AI work — just get in touch.",
+      "tone": "sand"
+    },
+    "closed": {
+      "label": "Currently unavailable",
+      "text": "My schedule is full at the moment and I’m not taking on new work. Feel free to write anyway — I’ll reply when things open up.",
+      "tone": "muted"
+    }
+  }
+}
