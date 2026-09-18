@@ -69,8 +69,9 @@ const AVAILABILITY_COPY = {
    ════════════════════════════════════════════════════════════ */
 const DISCOVERIES = [
   { name: 'Kindle', image: 'kindle.jpg' },
-  { name: 'Vanow', image: 'vanow.png' },
+  { name: 'Page turner', image: 'Pink Page Turner.jpg' },
   { name: 'Bablov', image: 'bablov.jpeg' },
+  { name: 'Vanow', image: 'vanow.png' },
 ];
 
 
@@ -84,10 +85,10 @@ const DISCOVERIES = [
      { title: '…', lead: '…', meta: '…', href: 'refuge/….html' }
    ════════════════════════════════════════════════════════════ */
 /* ════════════════════════════════════════════════════════════
-   CONSEILS — mes guides de lecture.
-   Un guide répond à une question qu'on pose vraiment : par où
-   commencer, quoi lire après tel livre, que lire quand on n'a pas
-   le temps. Chaque livre cité dit pourquoi il est là.
+   CONSEILS — mes recommandations.
+   Une recommandation répond à une question qu'on pose vraiment : par
+   où commencer, quoi lire après tel livre, que regarder sur tel sujet.
+   Chaque entrée citée dit pourquoi elle est là.
      { title: 'Par où commencer',
        lead:  'À qui ça s’adresse, en une phrase.',
        books: [ { title: '…', author: '…', why: '…' } ] }
@@ -456,7 +457,7 @@ const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds'
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Testé et adopté', conseils: 'Mes guides de lecture',
+    finds: 'Testé et adopté', conseils: 'Mes recommandations',
     contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
@@ -735,13 +736,13 @@ function refugeTopics() {
 
     { id: 'advice', page: 'conseils',
       kicker: 'Conseil', tone: 'line-sand', icon: 'i-pen',
-      title:  'Mes guides de lecture',
+      title:  'Mes recommandations',
       meta:   CONSEILS.length
-              ? CONSEILS.length + (CONSEILS.length > 1 ? ' guides' : ' guide')
+              ? CONSEILS.length + (CONSEILS.length > 1 ? ' recommandations' : ' recommandation')
               : 'rien d’écrit pour l’instant',
       status: 'À écrire',
-      copy:   'Par où commencer, quoi lire après tel livre. Je n’ai encore rien '
-            + 'rédigé ici, mais l’endroit est prêt.',
+      copy:   'Livres, vidéos et ressources que je pourrais conseiller à partir '
+            + 'de mes expériences et de mes apprentissages.',
       stats:  [],
       cta:    CONSEILS.length ? 'Lire' : 'Bientôt',
       empty:  CONSEILS.length === 0 }
@@ -933,7 +934,9 @@ function renderYearPills(current) {
    racontée, et la carte ne montre pas de trou pour autant. */
 function findCard(d) {
   const img = d.image
-    ? '<div class="find-shot"><img src="assets/img/decouvertes/' + esc(d.image)
+    /* Noms de fichiers libres : espaces et accents passent par l'encodage,
+       comme pour les couvertures. */
+    ? '<div class="find-shot"><img src="assets/img/decouvertes/' + esc(encodeURIComponent(d.image))
       + '" alt="' + esc(d.name) + '" loading="lazy"'
       + ' onerror="this.parentNode.remove()"></div>'
     : '';
@@ -958,7 +961,8 @@ function renderConseils() {
   const lead = document.getElementById('conseils-lead');
   if (!host) return;
   if (lead) {
-    lead.textContent = CONSEILS.length ? 'Ce que je conseille, et pourquoi.' : '';
+    lead.textContent = 'Livres, vidéos et ressources que je pourrais conseiller '
+                     + 'à partir de mes expériences et de mes apprentissages.';
   }
   host.innerHTML = CONSEILS.length
     ? CONSEILS.map(g =>

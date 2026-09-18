@@ -1613,7 +1613,9 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .tone-ink { background: var(--paper-2); color: var(--ink); }
 .finds {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  /* 232px laisse passer quatre objets sur une ligne dans les 1024px
+     disponibles, et retombe à trois puis deux quand l'écran rétrécit. */
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
   gap: var(--s4);
   /* Une carte sans photo ne s'étire pas à la hauteur de celles qui en
      ont une : elle reste courte au lieu de montrer un vide. */
@@ -1763,7 +1765,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .crumbs a:hover { color: var(--cyan); border-bottom-color: var(--cyan-line); }
 .crumbs [aria-current="page"] { color: var(--ink); }
 
-/* ── Mes guides de lecture ─────────────────────────────────────
+/* ── Mes recommandations ───────────────────────────────────────
    Un conseil se lit, il ne se survole pas : une colonne de texte,
    pas une grille de cartes. Cinquième et dernier ton — le sable en
    filet, pendant du cyan en filet des guides de personnages. */
