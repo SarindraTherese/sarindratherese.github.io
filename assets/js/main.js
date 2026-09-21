@@ -186,6 +186,14 @@ const GUIDES = [
     meta: '39 personnages · 3 parties',
     short: '39 personnages rangés par partie, à ouvrir au fur et à mesure.',
     href: 'refuge/ascendance-of-a-bookworm.html' },
+  { title: '86 — EIGHTY-SIX', count: 41,
+    lead: 'Les essentiels d\'abord, puis l\'escadron Spearhead au complet, '
+        + 'la République et les volumes suivants — chaque section repliée '
+        + 'jusqu\'à ouverture. Chaque pilote porte aussi son Personal Name, '
+        + 'le nom de code sous lequel on le désigne au combat.',
+    meta: '41 personnages · 4 sections',
+    short: '41 personnages et leurs noms de code, les sections tardives repliées.',
+    href: 'refuge/eighty-six.html' },
 ];
 
 
@@ -761,6 +769,7 @@ const THIS_YEAR = new Date().getFullYear();
 function refugeTopics() {
   const annees = YEARS.filter(y => booksOfYear(y).length).sort((a, b) => a - b);
   const jours  = 127;
+  const recos  = CONSEILS.reduce((n, d) => n + d.items.length, 0);
 
   return [
     { id: 'bible', page: 'bible',
@@ -800,18 +809,22 @@ function refugeTopics() {
       cta:    'Voir la liste',
       empty:  DISCOVERIES.length === 0 },
 
+    /* CONSEILS compte des dossiers, pas des recommandations. Annoncer
+       « 5 recommandations » alors que les cinq dossiers sont vides
+       serait faux : on compte les entrées, et on nomme les dossiers. */
     { id: 'advice', page: 'conseils',
       kicker: 'Conseil', tone: 'line-sand', icon: 'i-pen',
       title:  'Mes recommandations',
-      meta:   CONSEILS.length
-              ? CONSEILS.length + (CONSEILS.length > 1 ? ' recommandations' : ' recommandation')
-              : 'rien d’écrit pour l’instant',
-      status: 'À écrire',
-      copy:   'Livres, vidéos et ressources que je pourrais conseiller à partir '
-            + 'de mes expériences et de mes apprentissages.',
-      stats:  [],
-      cta:    CONSEILS.length ? 'Lire' : 'Bientôt',
-      empty:  CONSEILS.length === 0 }
+      meta:   recos
+              ? recos + (recos > 1 ? ' recommandations' : ' recommandation')
+              : CONSEILS.length + ' dossiers, encore vides',
+      status: recos ? 'À jour' : 'À écrire',
+      copy:   'Livres, vidéos, séries et ressources que j’ai aimés et que '
+            + 'j’ai envie de partager.',
+      stats:  recos ? [['Dossiers', String(CONSEILS.length)],
+                       ['Entrées',  String(recos)]] : [],
+      cta:    recos ? 'Voir' : 'Bientôt',
+      empty:  recos === 0 }
   ];
 }
 
