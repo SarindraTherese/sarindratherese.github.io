@@ -16,6 +16,35 @@
      'selective' → pas en recherche active, mais joignable
      'closed'    → indisponible pour le moment
    ════════════════════════════════════════════════════════════ */
+/* Le jour où Sarindra a commencé à tenir sa liste. La première
+   lecture de 2022 est notée en avril : les deux concordent. */
+const LITERARY_START = '2022-04-12';
+
+/* Les livres qu'elle possède, pas ceux qu'elle a lus : les deux
+   nombres sont proches et se confondraient sans cette distinction. */
+const PHYSICAL_BOOKS = 261;
+
+/* Deux marathons relevés dans son suivi. Le nombre de pages est la
+   somme des relevés quotidiens, jamais une estimation :
+     Seigneur des anneaux — 1–5, 9–13 et 17–21 novembre 2024
+     Karamazov            — 13 au 29 août 2024, 17 relevés
+   Le calendrier du premier couvre trois semaines, mais ce sont bien
+   quinze jours de lecture : ne pas « corriger » ce chiffre. */
+/* La liseuse : date d'acquisition, bibliothèque embarquée, et ce qui
+   y a été lu. Les 86 ne se soustraient pas des 225 lectures — ce sont
+   deux comptes distincts, l'un par support, l'autre par livre. */
+const LISEUSE = {
+  modele: 'Kindle girlie',
+  depuis: '2024-12-14',
+  ebooks: 2300,
+  lus:    86
+};
+
+const PROUESSES = [
+  { quoi: 'Les trois tomes du Seigneur des anneaux', pages: 1780, jours: 15 },
+  { quoi: 'Les frères Karamazov, Dostoïevski',       pages: 1195, jours: 17 }
+];
+
 const AVAILABILITY = 'selective';
 const AVAILABILITY_UPDATED = '2026-09';   // AAAA-MM — à mettre à jour avec le statut
 
@@ -766,7 +795,73 @@ function refugeTopics() {
   ];
 }
 
+/* « Anniversaire littéraire » — la durée et le nombre de livres se
+   recalculent à chaque affichage plutôt que d'être recopiés dans le
+   HTML : c'est la règle du site, aucun chiffre écrit deux fois.
+   En années et mois pleins, pas en jours : « 4 ans et 5 mois » se lit,
+   « 1 623 jours » se compte. */
+function dureeDepuis(depart, maintenant) {
+  let annees = maintenant.getFullYear() - depart.getFullYear();
+  let mois = maintenant.getMonth() - depart.getMonth();
+  if (maintenant.getDate() < depart.getDate()) mois -= 1;
+  if (mois < 0) { annees -= 1; mois += 12; }
+  if (annees < 0) return null;
+  const a = annees ? annees + (annees > 1 ? ' ans' : ' an') : '';
+  const m = mois ? mois + ' mois' : '';
+  return (a && m) ? a + ' et ' + m : (a || m || 'moins d’un mois');
+}
+
+function renderSince() {
+  const cible = document.getElementById('rfg-since');
+  if (!cible) return;
+  const depart = new Date(LITERARY_START + 'T00:00:00');
+
+  /* La date s'écrit depuis la même constante que la durée. L'avoir
+     aussi en dur dans le HTML en aurait fait deux sources pour un
+     seul fait, et la première à dériver aurait menti sans bruit. */
+  const debut = document.getElementById('rfg-start');
+  if (debut) {
+    debut.textContent = depart.toLocaleDateString('fr-FR',
+      { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  const duree = dureeDepuis(depart, new Date());
+  const livres = READINGS.length;
+  cible.textContent = duree
+    ? duree + ' · ' + livres + (livres > 1 ? ' livres lus' : ' livre lu')
+    : '';
+
+  const etagere = document.getElementById('rfg-shelf');
+  if (etagere) {
+    etagere.textContent = PHYSICAL_BOOKS
+      + (PHYSICAL_BOOKS > 1 ? ' livres physiques' : ' livre physique');
+  }
+
+  /* Ce qui fait la prouesse, c'est le volume, pas la mise en page :
+     un encadré prendrait plus de place qu'il n'en dit. */
+  const liseuse = document.getElementById('rfg-reader');
+  if (liseuse) {
+    const d = new Date(LISEUSE.depuis + 'T00:00:00');
+    liseuse.textContent = LISEUSE.modele + ' depuis le '
+      + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    const note = document.getElementById('rfg-reader-note');
+    if (note) {
+      note.textContent = 'plus de ' + LISEUSE.ebooks.toLocaleString('fr-FR')
+                       + ' ebooks · ' + LISEUSE.lus + ' lus';
+    }
+  }
+
+  const feats = document.getElementById('rfg-feats');
+  if (feats) {
+    feats.innerHTML = PROUESSES.map(p =>
+      '<span class="feat">' + esc(p.quoi)
+      + '<small>' + p.pages.toLocaleString('fr-FR') + ' pages en '
+      + p.jours + ' jours</small></span>').join('');
+  }
+}
+
 function renderRefuge() {
+  renderSince();
   const index = document.getElementById('rfg-index');
   const vue   = document.getElementById('rfg-preview');
   if (!index || !vue) return;

@@ -1363,6 +1363,164 @@ a.read-item:hover .read-title { color: var(--cyan); }
   margin-bottom: var(--s6);
   border-bottom: 1px solid var(--line);
 }
+/* ── L'ouverture du Refuge ─────────────────────────────────────────
+   Une planche photographique épinglée sur le plan : l'image occupe sa
+   propre colonne et déborde jusqu'aux bords de la bande, le texte se
+   pose sur le papier alterné. Les repères d'angle reprennent le
+   vocabulaire de dessin technique du site — ils sont tracés dans le
+   ton clair de la charte, jamais en blanc pur. */
+.rfg-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  border: 1px solid var(--line);
+  margin-bottom: var(--s7);
+  overflow: hidden;
+}
+.rfg-shot {
+  position: relative;
+  margin: 0;
+  line-height: 0;
+  /* Sur grand écran c'est la colonne de texte qui fixe la hauteur : la
+     photo s'y étire, sinon un vide s'ouvre sous elle. Le minimum la
+     garde présente même si le texte raccourcit. */
+  height: 100%;
+  min-height: 420px;
+  background: var(--ink);
+}
+.rfg-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* La source est déjà recadrée au 4:5 du cadre : rien à repositionner. */
+  object-position: center;
+}
+/* Quatre équerres, une par angle : deux dégradés horizontaux et deux
+   verticaux par pseudo-élément. Purement décoratif, donc invisible
+   aux lecteurs d'écran. */
+.rfg-shot::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--paper) 0 0) 0 0        / 18px 1px no-repeat,
+    linear-gradient(var(--paper) 0 0) 0 0        / 1px 18px no-repeat,
+    linear-gradient(var(--paper) 0 0) 100% 0     / 18px 1px no-repeat,
+    linear-gradient(var(--paper) 0 0) 100% 0     / 1px 18px no-repeat,
+    linear-gradient(var(--paper) 0 0) 0 100%     / 18px 1px no-repeat,
+    linear-gradient(var(--paper) 0 0) 0 100%     / 1px 18px no-repeat,
+    linear-gradient(var(--paper) 0 0) 100% 100%  / 18px 1px no-repeat,
+    linear-gradient(var(--paper) 0 0) 100% 100%  / 1px 18px no-repeat;
+  opacity: 0.9;
+}
+.rfg-hero-text {
+  display: flex;
+  flex-direction: column;
+  padding: var(--s6);
+  background: var(--paper-2);
+  border-left: 1px solid var(--line);
+}
+/* Le texte se centre dans la hauteur libre ; les liens, eux, se posent
+   au bas de la bande. Sans cette séparation le bloc entier flotterait
+   au milieu, et la colonne n'aurait plus de pied. */
+.rfg-hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s2);
+}
+/* Le titre colle à son surtitre, le chapeau reprend de l'air : la
+   hiérarchie se lit dans l'écart, pas dans la taille seule. */
+.rfg-hero-body .sec-title { font-size: clamp(24px, 3.2vw, 34px); margin-top: 2px; }
+.rfg-hero-body .refuge-lead { margin-top: var(--s2); }
+/* Le filet chaud passe en tiret devant le surtitre au lieu d'occuper
+   sa propre ligne : même signal d'annotation, une rangée de moins, et
+   l'entête démarre plus franchement. */
+.rfg-hero .refuge-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+.rfg-hero .refuge-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  flex: none;
+  background: var(--sand);
+}
+.rfg-hero-text .refuge-lead { max-width: 46ch; }
+
+/* La fiche et les liens vivent dans la même colonne que le titre.
+   Le motif .fact vient de la page À propos : même grille, même
+   typographie, aucune variante inventée pour l'occasion. */
+.rfg-facts {
+  margin-top: var(--s3);
+  max-width: 46ch;
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line);
+}
+/* Colonne élargie : « Anniversaire littéraire » ne tient pas dans les
+   104 px du motif d'origine, et le couper sur deux lignes gâcherait
+   l'alignement de la date. */
+.rfg-facts .fact { grid-template-columns: 146px minmax(0, 1fr); padding: 9px 0; }
+.rfg-facts .fact:first-child { padding-top: 0; }
+/* L'anecdote suit la même grille que les données : la fiche n'a qu'une
+   forme, un libellé à gauche et sa valeur à droite. Seule sa hauteur
+   de ligne s'ouvre un peu, parce qu'elle tient sur trois lignes. */
+.rfg-facts .fact dd { line-height: 1.5; }
+/* Le gris des libellés ne tient que 4,15:1 sur le papier alterné.
+   Celui-ci monte à 5,05:1 sans alourdir la mention. */
+.rfg-facts .fact dt { color: #476373; }
+.rfg-facts .fact dd small { color: #476373; margin-top: 4px; }
+/* Plusieurs prouesses dans une même ligne de fiche : chacune garde son
+   bloc, séparé du suivant sans filet — la fiche n'a qu'un niveau. */
+#rfg-feats .feat { display: block; }
+#rfg-feats .feat + .feat { margin-top: 10px; }
+
+.rfg-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s4);
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+}
+.rfg-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--cyan-line);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cyan);
+  text-decoration: none;
+}
+.rfg-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+@media (max-width: 860px) {
+  .rfg-hero { grid-template-columns: minmax(0, 1fr); }
+  /* Empilée, la photo n'a plus de colonne voisine pour lui donner sa
+     hauteur : elle reprend le 4:5 du recadrage. Un 4:3 recouperait les
+     jambes, alors que le sujet est la silhouette entière. */
+  .rfg-shot { height: auto; min-height: 0; aspect-ratio: 4 / 5; }
+  .rfg-hero-text {
+    padding: var(--s4);
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Sous 480 px, les 146 px du libellé ne laissent plus assez de place
+     à la valeur : elle se casse en deux. La fiche passe en colonne. */
+  .rfg-facts .fact { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+}
+
 .refuge-eyebrow {
   font-family: var(--mono);
   font-size: 11px;
@@ -1817,7 +1975,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 :root { --snap: 120ms cubic-bezier(0.2, 0.8, 0.3, 1); }
 
 .btn-primary, .btn-ghost, .send-btn, .collab-btn,
-.year-pill, .rfg-item, .rfg-cta, .chip,
+.year-pill, .rfg-item, .rfg-cta, .rfg-link, .chip,
 .book.is-linked, .find.is-linked, .guide,
 .nav-toggle, .crumbs a {
   transition: background var(--snap), border-color var(--snap),
@@ -1826,7 +1984,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 
 /* L'enfoncement : un pixel, pas plus — c'est un appui, pas un rebond. */
 .btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
-.year-pill:active, .rfg-cta:active, .chip:active,
+.year-pill:active, .rfg-cta:active, .rfg-link:active, .chip:active,
 /* Les cartes se soulèvent au survol, comme les couvertures de l'étagère. */
 /* La pastille d'année s'affirme au survol au lieu de changer de filet. */
 .year-pill:hover { border-color: var(--cyan-fill); }
