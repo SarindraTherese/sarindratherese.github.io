@@ -70,6 +70,7 @@ const AVAILABILITY_COPY = {
 const DISCOVERIES = [
   { name: 'Kindle', image: 'kindle.jpg' },
   { name: 'Page turner', image: 'Pink Page Turner.jpg' },
+  { name: 'Phone holder', image: 'Phone holder.png' },
   { name: 'Bablov', image: 'bablov.jpeg' },
   { name: 'Vanow', image: 'vanow.png' },
 ];
@@ -120,6 +121,22 @@ const GUIDES = [
     meta: '50 personnages · 5 volumes',
     short: '50 personnages rangés par volume, sans rien dévoiler de la suite.',
     href: 'refuge/tensura.html' },
+  { title: 'The Apothecary Diaries', count: 26,
+    lead: 'Les essentiels sont ouverts d\'emblée ; deux sections restent '
+        + 'repliées, pour les noms dont le rôle se précise plus loin. Les '
+        + 'transcriptions chinoises varient d\'une traduction à l\'autre, '
+        + 'les variantes sont sur les fiches.',
+    meta: '26 personnages · 3 sections',
+    short: '26 personnages du palais intérieur, les plus tardifs repliés.',
+    href: 'refuge/the-apothecary-diaries.html' },
+  { title: 'Ascendance of a Bookworm', count: 39,
+    lead: 'Rangés par partie, de la fille d\'un soldat au temple : chaque '
+        + 'partie s\'ouvre quand on y arrive. Le prénom de l\'héroïne change '
+        + 'selon les traductions — Maïn, Myne, Main — les trois fonctionnent '
+        + 'dans la recherche.',
+    meta: '39 personnages · 3 parties',
+    short: '39 personnages rangés par partie, à ouvrir au fur et à mesure.',
+    href: 'refuge/ascendance-of-a-bookworm.html' },
 ];
 
 

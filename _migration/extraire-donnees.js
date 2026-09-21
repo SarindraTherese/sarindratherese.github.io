@@ -14,10 +14,19 @@ const path = require('path');
 
 const RACINE = path.join(__dirname, '..');
 const SORTIE = path.join(__dirname, 'data');
-const FIN_DES_DONNEES = 452;          // dernière ligne avant le routeur
-
-const source = fs.readFileSync(path.join(RACINE, 'assets/js/main.js'), 'utf8')
-  .split('\n').slice(0, FIN_DES_DONNEES).join('\n');
+/* La zone de données s'arrête juste avant `const YEARS`, qui ouvre le
+   routeur. On cherche ce repère plutôt que de figer un numéro de ligne :
+   ajouter un guide ou un livre décale tout, et une borne périmée
+   tronquerait l'extraction en silence. */
+const REPERE = /^const YEARS = /m;
+const complet = fs.readFileSync(path.join(RACINE, 'assets/js/main.js'), 'utf8');
+const coupe = complet.search(REPERE);
+if (coupe < 0) {
+  console.error('Refus : le repère `const YEARS` est introuvable dans main.js.');
+  process.exit(1);
+}
+const source = complet.slice(0, coupe)
+  + complet.slice(coupe).split('\n')[0];   // on garde la ligne YEARS elle-même
 
 /* Garde-fou : si quelqu'un déplace du code dans cette zone, on
    s'arrête au lieu d'exécuter quelque chose d'inattendu. */
