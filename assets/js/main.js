@@ -115,17 +115,37 @@ const DISCOVERIES = [
      { title: '…', lead: '…', meta: '…', href: 'refuge/….html' }
    ════════════════════════════════════════════════════════════ */
 /* ════════════════════════════════════════════════════════════
-   CONSEILS — mes recommandations.
-   Une recommandation répond à une question qu'on pose vraiment : par
-   où commencer, quoi lire après tel livre, que regarder sur tel sujet.
-   Chaque entrée citée dit pourquoi elle est là.
-     { title: 'Par où commencer',
-       lead:  'À qui ça s’adresse, en une phrase.',
-       books: [ { title: '…', author: '…', why: '…' } ] }
+   CONSEILS — mes recommandations, rangées par dossier.
+   Un dossier par type de contenu. Chaque entrée dit pourquoi elle est
+   là, et porte un lien quand la ressource est en ligne.
+     { id: 'medium', nom: 'Medium',
+       lead: 'À quoi sert ce dossier, en une phrase.',
+       items: [ { titre: '…', par: '…', pourquoi: '…', url: 'https://…' } ] }
 
-   Tant que ce tableau est vide, la carte du Refuge affiche « à venir ».
+   `par` et `pourquoi` sont facultatifs. Avec `url`, le titre devient un
+   lien qui s'ouvre dans un nouvel onglet ; sans, il reste du texte.
+   Un dossier sans entrée s'affiche quand même : il annonce ce qui vient.
    ════════════════════════════════════════════════════════════ */
 const CONSEILS = [
+  { id: 'livres',  nom: 'Livres',
+    lead: 'Les livres que j\'ai vraiment aimés et que je pourrais recommander '
+        + 'sans hésiter.',
+    items: [] },
+  { id: 'youtube', nom: 'YouTube',
+    lead: 'Les chaînes et vidéos que je trouve intéressantes, utiles ou '
+        + 'simplement agréables à regarder.',
+    items: [] },
+  { id: 'anime',   nom: 'Anime',
+    lead: 'Les anime qui m\'ont marquée, ceux que j\'ai aimés jusqu\'au bout '
+        + 'et que j\'ai envie de faire découvrir.',
+    items: [] },
+  { id: 'medium',  nom: 'Medium',
+    lead: 'Les articles que je garde et relis.',
+    items: [] },
+  { id: 'kdramas', nom: 'K-dramas',
+    lead: 'Les séries coréennes que j\'ai regardées jusqu\'au bout — et que je '
+        + 'recommande vraiment.',
+    items: [] }
 ];
 
 
@@ -1069,26 +1089,66 @@ function findCard(d) {
 }
 
 function renderConseils() {
-  const host = document.getElementById('conseils');
-  const lead = document.getElementById('conseils-lead');
-  if (!host) return;
+  const arbre = document.getElementById('reco-tree');
+  const vue   = document.getElementById('reco-panel');
+  const lead  = document.getElementById('conseils-lead');
   if (lead) {
-    lead.textContent = 'Livres, vidéos et ressources que je pourrais conseiller '
-                     + 'à partir de mes expériences et de mes apprentissages.';
+    lead.textContent = 'Livres, vidéos, séries et ressources que j\u2019ai aimés '
+                     + 'et que j\u2019ai envie de partager.';
   }
-  host.innerHTML = CONSEILS.length
-    ? CONSEILS.map(g =>
-        '<article class="conseil">'
-      + '<h4 class="guide-title">' + esc(g.title) + '</h4>'
-      + (g.lead ? '<p class="guide-lead">' + esc(g.lead) + '</p>' : '')
-      + '<ol class="conseil-books">'
-      + (g.books || []).map(b =>
-          '<li><p class="conseil-book">' + esc(b.title)
-        + (b.author ? '<span> · ' + esc(b.author) + '</span>' : '') + '</p>'
-        + (b.why ? '<p class="conseil-why">' + esc(b.why) + '</p>' : '') + '</li>').join('')
-      + '</ol></article>').join('')
-    : emptyState('i-pen', 'À écrire',
-        'Je n\u2019ai encore rien rédigé ici. Ça viendra.');
+  if (!arbre || !vue) return;
+
+  arbre.innerHTML =
+      '<p class="reco-root">'
+    + '<svg class="icon icon-sm icon-fill" aria-hidden="true"><use href="#i-folder-open"/></svg>'
+    + 'Recommandations</p>'
+    + '<ul>' + CONSEILS.map((d, i) =>
+        '<li><button class="reco-folder' + (i === 0 ? ' active' : '') + '"'
+      + ' type="button" data-cible="' + esc(d.id) + '"'
+      + ' aria-controls="dossier-' + esc(d.id) + '" aria-selected="' + (i === 0) + '">'
+      + '<svg class="icon icon-sm icon-fill" aria-hidden="true"><use href="#i-folder"/></svg>'
+      + esc(d.nom) + '</button></li>').join('') + '</ul>';
+
+  vue.innerHTML = CONSEILS.map((d, i) =>
+      '<article class="reco-card' + (i === 0 ? ' active' : '') + '"'
+    + ' id="dossier-' + esc(d.id) + '">'
+    + '<svg class="reco-glyph icon-fill" aria-hidden="true"><use href="#i-folder"/></svg>'
+    + '<p class="reco-kicker">Dossier sélectionné</p>'
+    + '<h4 class="reco-title">' + esc(d.nom) + '</h4>'
+    + '<p class="reco-lead">' + esc(d.lead) + '</p>'
+    + (d.items.length
+        ? '<ul class="reco-items">' + d.items.map(it => {
+            /* Avec une URL le titre devient un lien externe ; sans, il
+               reste du texte. Pas de lien vide, jamais. */
+            const nom = it.url
+              ? '<a class="reco-out" href="' + esc(it.url) + '" target="_blank"'
+                + ' rel="noopener">' + esc(it.titre)
+                + '<svg class="icon icon-xs" aria-hidden="true">'
+                + '<use href="#i-arrow-ur"/></svg></a>'
+              : esc(it.titre);
+            return '<li><p class="reco-item">' + nom
+              + (it.par ? '<span> · ' + esc(it.par) + '</span>' : '') + '</p>'
+              + (it.pourquoi ? '<p class="reco-why">' + esc(it.pourquoi) + '</p>' : '')
+              + '</li>';
+          }).join('') + '</ul>'
+        : '')
+    + '<p class="reco-note">Une sélection personnelle, pas un classement.</p>'
+    + '</article>').join('');
+
+  /* Même mécanique que le sommaire du Refuge : on bascule une classe,
+     rien n'est reconstruit. */
+  arbre.querySelectorAll('.reco-folder').forEach(b => {
+    b.addEventListener('click', () => {
+      arbre.querySelectorAll('.reco-folder').forEach(x => {
+        x.classList.remove('active');
+        x.setAttribute('aria-selected', 'false');
+      });
+      b.classList.add('active');
+      b.setAttribute('aria-selected', 'true');
+      vue.querySelectorAll('.reco-card').forEach(c =>
+        c.classList.toggle('active', c.id === 'dossier-' + b.dataset.cible));
+    });
+  });
 }
 
 
