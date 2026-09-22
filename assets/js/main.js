@@ -378,7 +378,22 @@ const CONSEILS = [
     ] },
   { id: 'anime',   nom: 'Anime & manga', icone: 'i-spark',
     lead: 'Les anime et les mangas qui m\'ont marquée.',
-    items: [] },
+    items: [
+      { titre: 'Hunter \u00D7 Hunter',
+        image: 'anime/hunter-x-hunter.webp' },
+      { titre: 'Les Carnets de l\'Apothicaire',
+        image: 'anime/the-apothecary-diaries.webp' },
+      { titre: 'JoJo\'s Bizarre Adventure',
+        image: 'anime/jojos-bizarre-adventure.webp' },
+      { titre: 'Yu Yu Hakusho',
+        image: 'anime/yu-yu-hakusho.webp' },
+      { titre: 'Mushoku Tensei: Jobless Reincarnation',
+        image: 'anime/mushoku-tensei.webp' },
+      { titre: 'One Piece',
+        image: 'anime/one-piece.webp' },
+      { titre: 'Though I Am an Inept Villainess',
+        image: 'anime/though-i-am-an-inept-villainess.webp' }
+    ] },
   { id: 'youtube', nom: 'YouTube', icone: 'i-video',
     lead: 'Les chaînes et vidéos que je trouve intéressantes, utiles ou '
         + 'simplement agréables à regarder.',
