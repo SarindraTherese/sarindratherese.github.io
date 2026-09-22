@@ -115,7 +115,7 @@ const DISCOVERIES = [
      { title: '…', lead: '…', meta: '…', href: 'refuge/….html' }
    ════════════════════════════════════════════════════════════ */
 /* ════════════════════════════════════════════════════════════
-   CONSEILS — mes coups de cœur, rangés par dossier.
+   CONSEILS — mes favoris et recommandations, rangés par dossier.
    Un dossier par type de contenu. Chaque entrée dit pourquoi elle est
    là, et porte un lien quand la ressource est en ligne.
      { id: 'articles', nom: 'Articles & lectures web',
@@ -781,19 +781,19 @@ const GA_MEASUREMENT_ID = 'G-T01M8EW56C';
 const YEARS = [2026, 2025, 2024, 2023, 2022];
 const YEAR_PAGES = YEARS.map(y => 'lectures-' + y);
 
-const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'conseils']
+const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds', 'favoris']
   .concat(YEAR_PAGES, ['contact']);
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Testé et adopté', conseils: 'Mes coups de cœur',
+    finds: 'Testé et adopté', favoris: 'Mes favoris & recommandations',
     contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
 /* Les sujets du Refuge sont des pages à part ; la barre de navigation
    doit rester allumée sur le Refuge quand on les lit. */
 const PAGE_PARENT = Object.assign(
-  { bible: 'refuge', finds: 'refuge', conseils: 'refuge' },
+  { bible: 'refuge', finds: 'refuge', favoris: 'refuge' },
   Object.fromEntries(YEAR_PAGES.map(id => [id, 'refuge'])));
 
 /* Toutes les années partagent un même bloc de page. */
@@ -858,8 +858,24 @@ function showPage(id, opts) {
   trackVirtualPageView(id);
 }
 
+/* Cette page s'est d'abord appelée « conseils ». L'adresse a pu être
+   partagée ou mise en favori avant d'être renommée : on la fait
+   toujours aboutir plutôt que de retomber sur l'accueil. */
+const ANCIENNES_ADRESSES = { conseils: 'favoris', 'coups-de-coeur': 'favoris' };
+
 function currentHashPage() {
-  return (location.hash || '#home').replace('#', '').split('?')[0];
+  const id = (location.hash || '#home').replace('#', '').split('?')[0];
+  return ANCIENNES_ADRESSES[id] || id;
+}
+
+/* Et on remet l'adresse au propre dans la barre, pour que ce qu'on y
+   recopie soit le lien actuel. replaceState ne déclenche pas de
+   hashchange : pas de boucle. */
+function corrigerAdresse() {
+  const brut = (location.hash || '#home').replace('#', '').split('?')[0];
+  if (ANCIENNES_ADRESSES[brut]) {
+    history.replaceState(null, '', '#' + ANCIENNES_ADRESSES[brut]);
+  }
 }
 
 /* ── Menu mobile ── */
@@ -1065,13 +1081,13 @@ function refugeTopics() {
       empty:  DISCOVERIES.length === 0 },
 
     /* CONSEILS compte des dossiers, pas des entrées. Annoncer
-       « 5 coups de cœur » alors que les cinq dossiers sont vides
+       « 5 favoris » alors que les cinq dossiers sont vides
        serait faux : on compte les entrées, et on nomme les dossiers. */
-    { id: 'advice', page: 'conseils',
+    { id: 'advice', page: 'favoris',
       kicker: 'Conseil', tone: 'line-sand', icon: 'i-pen',
-      title:  'Mes coups de cœur',
+      title:  'Mes favoris & recommandations',
       meta:   recos
-              ? recos + (recos > 1 ? ' coups de cœur' : ' coup de cœur')
+              ? recos + (recos > 1 ? ' favoris' : ' favori')
               : CONSEILS.length + ' dossiers, encore vides',
       status: recos ? 'À jour' : 'À écrire',
       copy:   'Livres, vidéos, séries et ressources que j’ai aimés et que '
@@ -1428,7 +1444,7 @@ function recoFormat(img) {
 function renderConseils() {
   const arbre = document.getElementById('reco-tree');
   const vue   = document.getElementById('reco-panel');
-  const lead  = document.getElementById('conseils-lead');
+  const lead  = document.getElementById('favoris-lead');
   if (lead) {
     lead.textContent = 'Livres, vidéos, séries et ressources que j\u2019ai aimés '
                      + 'et que j\u2019ai envie de partager.';
@@ -1898,7 +1914,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  window.addEventListener('hashchange', () => showPage(currentHashPage()));
+  window.addEventListener('hashchange', () => {
+    corrigerAdresse();
+    showPage(currentHashPage());
+  });
+  corrigerAdresse();
   showPage(currentHashPage(), { silent: true });
 
   setTimeout(animateCounters, 700);
