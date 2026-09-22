@@ -115,36 +115,276 @@ const DISCOVERIES = [
      { title: '…', lead: '…', meta: '…', href: 'refuge/….html' }
    ════════════════════════════════════════════════════════════ */
 /* ════════════════════════════════════════════════════════════
-   CONSEILS — mes recommandations, rangées par dossier.
+   CONSEILS — mes coups de cœur, rangés par dossier.
    Un dossier par type de contenu. Chaque entrée dit pourquoi elle est
    là, et porte un lien quand la ressource est en ligne.
-     { id: 'medium', nom: 'Medium',
+     { id: 'articles', nom: 'Articles & lectures web',
        lead: 'À quoi sert ce dossier, en une phrase.',
        items: [ { titre: '…', par: '…', pourquoi: '…', url: 'https://…' } ] }
 
    `par` et `pourquoi` sont facultatifs. Avec `url`, le titre devient un
    lien qui s'ouvre dans un nouvel onglet ; sans, il reste du texte.
    Un dossier sans entrée s'affiche quand même : il annonce ce qui vient.
+
+   Une entrée qui porte `image` rejoint le mur d'affiches au lieu de la
+   liste ; les deux peuvent coexister dans un même dossier.
+       image: 'goblin.webp'   // dans assets/img/dramas/
+       large: true            // visuel horizontal : il prend deux colonnes
+       etat:  'En cours'      // pastille posée sur l'image
+   `large` décrit le format du fichier, pas un choix de mise en page : une
+   affiche verticale l'omet. En cas d'oubli, le rendu se corrige tout seul
+   à l'affichage de l'image — mais la grille aura sauté une fois.
    ════════════════════════════════════════════════════════════ */
 const CONSEILS = [
-  { id: 'livres',  nom: 'Livres',
+  { id: 'livres',  nom: 'Livres', icone: 'i-book',
     lead: 'Les livres que j\'ai vraiment aimés et que je pourrais recommander '
         + 'sans hésiter.',
+    items: [
+      /* ── 2022 ── */
+      { an: 2022, titre: 'La clé de votre énergie',
+        par: 'Natacha Calestrémé',
+        image: 'livres/2022/La cle de votre energie.jpg' },
+      { an: 2022, titre: 'Père riche, père pauvre',
+        par: 'Robert Kiyosaki',
+        image: 'livres/2022/Père riche, père pauvre .jpg' },
+      { an: 2022, titre: 'L\'homme qui voulait être heureux',
+        par: 'Laurent Gounelle',
+        image: 'livres/2022/L\'homme qui voulait être heureux.jpg' },
+      { an: 2022, titre: 'Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une',
+        par: 'Raphaëlle Giordano',
+        image: 'livres/2022/Ta deuxième vie commence quand tu comprends que tu n\'en as qu\'une.jpg' },
+      { an: 2022, titre: 'L\'Alchimiste',
+        par: 'Paulo Coelho',
+        image: 'livres/2022/L\'Alchimiste.jpg' },
+      { an: 2022, titre: 'La puissance de l\'acceptation',
+        par: 'Lise Bourbeau',
+        image: 'livres/2022/La Puissance de l\'acceptation.jpg' },
+      { an: 2022, titre: 'Les 5 blessures',
+        par: 'Lise Bourbeau',
+        image: 'livres/2022/Les 5 blessures.jpg' },
+      { an: 2022, titre: 'Les mots sont des fenêtres',
+        par: 'Marshall Rosenberg',
+        image: 'livres/2022/Les mots sont des fenêtres.jpg' },
+      { an: 2022, titre: 'Kilomètre zéro',
+        par: 'Maud Ankaoua',
+        image: 'livres/2022/Kilomètre zéro.jpg' },
+      { an: 2022, titre: 'Réfléchissez et devenez riche',
+        par: 'Napoleon Hill',
+        image: 'livres/2022/reflechissez et devenez riche.jpg' },
+      { an: 2022, titre: 'Écoute ton corps',
+        par: 'Lise Bourbeau',
+        image: 'livres/2022/Écoute ton corps: La responsabilité, l\'engagement & la culpabilité.jpg' },
+      { an: 2022, titre: 'Les quatre accords toltèques',
+        par: 'Don Miguel Ruiz',
+        image: 'livres/2022/Les quatre accords toltèques.jpg' },
+      { an: 2022, titre: 'À la croisée des mondes',
+        par: 'Philip Pullman',
+        image: 'livres/2022/À la croisée des mondes.jpg' },
+      /* ── 2023 ── */
+      { an: 2023, titre: 'Devenir',
+        par: 'Michelle Obama',
+        image: 'livres/2023/Devenir.jpg' },
+      { an: 2023, titre: 'Transformez votre vie',
+        par: 'Louise Hay',
+        image: 'livres/2023/Transformez votre vie.jpg' },
+      { an: 2023, titre: 'Orgueil et préjugés',
+        par: 'Jane Austen',
+        image: 'livres/2023/Orgueil et préjugés.jpg' },
+      { an: 2023, titre: 'Oser',
+        par: 'Frédéric Fanget',
+        image: 'livres/2023/oser.jpg' },
+      { an: 2023, titre: 'Conversations avec Dieu, tome 1',
+        par: 'Neale Donald Walsch',
+        image: 'livres/2023/Conversations avec Dieu, tome 1.jpg' },
+      { an: 2023, titre: 'Jamais plus',
+        par: 'Colleen Hoover',
+        image: 'livres/2023/Jamais plus.jpg' },
+      { an: 2023, titre: 'Il est grand temps de rallumer les étoiles',
+        par: 'Virginie Grimaldi',
+        image: 'livres/2023/Il est grand temps de rallumer les étoiles.jpg' },
+      { an: 2023, titre: 'Nos étoiles contraires',
+        par: 'John Green',
+        image: 'livres/2023/Nos étoiles contraires.jpg' },
+      { an: 2023, titre: 'L\'estime de soi',
+        par: 'Christophe André et François Lelord',
+        image: 'livres/2023/L\'estime de soi.jpg' },
+      { an: 2023, titre: 'Onze minutes',
+        par: 'Paulo Coelho',
+        image: 'livres/2023/Onze minutes.jpg' },
+      { an: 2023, titre: 'Steve Jobs',
+        par: 'Walter Isaacson',
+        image: 'livres/2023/Steve Jobs.jpg' },
+      { an: 2023, titre: 'Comment se faire des amis',
+        par: 'Dale Carnegie',
+        image: 'livres/2023/Comment se faire des amis.jpg' },
+      { an: 2023, titre: 'Méditer, jour après jour',
+        par: 'Christophe André',
+        image: 'livres/2023/Méditer, jour après jour.jpg' },
+      { an: 2023, titre: 'Harry Potter à l\'école des sorciers',
+        par: 'J. K. Rowling',
+        image: 'livres/2023/Harry Potter à l\'école des sorciers.jpg' },
+      { an: 2023, titre: 'La ferme des animaux',
+        par: 'George Orwell',
+        image: 'livres/2023/La ferme des animaux.jpg' },
+      { an: 2023, titre: 'Imparfaits, libres et heureux',
+        par: 'Christophe André',
+        image: 'livres/2023/Imparfaits, libres et heureux.jpg' },
+      /* ── 2024 ── */
+      { an: 2024, titre: 'Les impatientes',
+        par: 'Djaïli Amadou Amal',
+        image: 'livres/2024/Les impatientes.jpg' },
+      { an: 2024, titre: 'Numéro deux',
+        par: 'David Foenkinos',
+        image: 'livres/2024/Numéro deux.jpg' },
+      { an: 2024, titre: 'Plus rien ne pourra me blesser',
+        par: 'David Goggins',
+        image: 'livres/2024/Plus rien ne pourra me blesser.jpg' },
+      { an: 2024, titre: 'Je revenais des autres',
+        par: 'Mélissa Da Costa',
+        image: 'livres/2024/Je revenais des autres.jpg' },
+      { an: 2024, titre: 'The Subtle Art of Not Giving a F*ck',
+        par: 'Mark Manson',
+        image: 'livres/2024/The Subtle Art of Not Giving a F*ck.jpg' },
+      { an: 2024, titre: 'Des fleurs pour Algernon',
+        par: 'Daniel Keyes',
+        image: 'livres/2024/Des fleurs pour Algernon.jpg' },
+      { an: 2024, titre: 'Les douleurs fantômes',
+        par: 'Mélissa Da Costa',
+        image: 'livres/2024/Les douleurs fantômes.jpg' },
+      { an: 2024, titre: 'Le premier jour du reste de ma vie',
+        par: 'Virginie Grimaldi',
+        image: 'livres/2024/Le premier jour du reste de ma vie.jpg' },
+      { an: 2024, titre: 'Tu comprendras quand tu seras plus grande',
+        par: 'Virginie Grimaldi',
+        image: 'livres/2024/Tu comprendras quand tu seras plus grande.jpg' },
+      { an: 2024, titre: 'L\'éveil de votre puissance intérieure',
+        par: 'Anthony Robbins',
+        image: 'livres/2024/L\'éveil de votre puissance intérieure.jpg' },
+      { an: 2024, titre: 'Bilbo le Hobbit',
+        par: 'J. R. R. Tolkien',
+        image: 'livres/2024/Bilbo le Hobbit.jpg' },
+      { an: 2024, titre: 'Les frères Karamazov',
+        par: 'Fiodor Dostoïevski',
+        image: 'livres/2024/Les frères Karamazov.jpg' },
+      { an: 2024, titre: 'Le seigneur des anneaux, tome 1 : La communauté de l\'anneau',
+        par: 'J. R. R. Tolkien',
+        image: 'livres/2024/Le seigneur des anneaux, tome 1 : La communauté de l\'anneau.jpg' },
+      { an: 2024, titre: 'Le seigneur des anneaux, tome 2 : Les deux tours',
+        par: 'J. R. R. Tolkien',
+        image: 'livres/2024/Le seigneur des anneaux, tome 2 : Les deux tours.jpg' },
+      { an: 2024, titre: 'Le seigneur des anneaux, tome 3 : Le retour du roi',
+        par: 'J. R. R. Tolkien',
+        image: 'livres/2024/Le seigneur des anneaux, tome 3 : Le retour du roi.jpg' },
+      /* ── 2025 ── */
+      { an: 2025, titre: 'Le journal d\'Anne Frank',
+        par: 'Anne Frank',
+        image: 'livres/2025/Le journal d\'Anne Frank.jpg' },
+      { an: 2025, titre: 'Le(s) vrai(es) amour(s)',
+        par: 'Taylor Jenkins Reid',
+        image: 'livres/2025/Le(s) vrai(es) amour(s).jpg' },
+      { an: 2025, titre: 'Les sept maris d\'Evelyn Hugo',
+        par: 'Taylor Jenkins Reid',
+        image: 'livres/2025/Les sept maris d\'Evelyn Hugo.jpg' },
+      { an: 2025, titre: 'Ce que j\'aimerais te dire',
+        par: 'Emeric Lebreton',
+        image: 'livres/2025/Ce que j\'aimerais te dire.jpg' },
+      { an: 2025, titre: 'La mort d\'Ivan Ilitch',
+        par: 'Léon Tolstoï',
+        image: 'livres/2025/La mort d\'Ivan Ilitch.jpg' },
+      { an: 2025, titre: 'La métamorphose',
+        par: 'Franz Kafka',
+        image: 'livres/2025/La métamorphose.jpg' },
+      { an: 2025, titre: 'Sois heureux',
+        par: 'Pape François',
+        image: 'livres/2025/Sois heureux.jpg' },
+      { an: 2025, titre: 'La Bible',
+        image: 'livres/2025/La bible.jpeg' },
+      { an: 2025, titre: 'La chambre de Giovanni',
+        par: 'James Baldwin',
+        image: 'livres/2025/La chambre de Giovanni.jpg' },
+      { an: 2025, titre: 'Les lois de la nature humaine',
+        par: 'Robert Greene',
+        image: 'livres/2025/Les lois de la nature humaine.jpg' },
+      { an: 2025, titre: 'En as-tu vraiment besoin ?',
+        par: 'Pierre-Yves McSween',
+        image: 'livres/2025/En as-tu vraiment besoin ?.jpg' },
+      { an: 2025, titre: 'Histoire d\'une âme',
+        par: 'Thérèse de Lisieux',
+        image: 'livres/2025/Histoire d\'une âme.jpg' },
+      { an: 2025, titre: 'Commentaire sur la Genèse',
+        par: 'Jean Chrysostome',
+        image: 'livres/2025/Commentaire de la Genèse.jpg' },
+      { an: 2025, titre: 'Martin Eden',
+        par: 'Jack London',
+        image: 'livres/2025/Martin Eden.jpg' },
+      { an: 2025, titre: '1984',
+        par: 'George Orwell',
+        image: 'livres/2025/1984.jpg' },
+      { an: 2025, titre: 'The Midnight Library',
+        par: 'Matt Haig',
+        image: 'livres/2025/The Midnight Library.jpg' },
+      { an: 2025, titre: 'Tuesdays with Morrie',
+        par: 'Mitch Albom',
+        image: 'livres/2025/Tuesdays with Morrie.jpg' },
+      { an: 2025, titre: 'L\'homme le plus riche de Babylone',
+        par: 'George S. Clason',
+        image: 'livres/2025/L\'homme le plus riche de Babylone.jpg' },
+      { an: 2025, titre: 'La pitié dangereuse',
+        par: 'Stefan Zweig',
+        image: 'livres/2025/La pitié dangereuse.jpg' },
+      /* ── 2026 ── */
+      { an: 2026, titre: 'L\'imitation de Jésus-Christ',
+        par: 'Thomas a Kempis',
+        image: 'livres/2026/L\'imitation de Jésus-Christ.jpg' },
+      { an: 2026, titre: 'Le joueur d\'échecs',
+        par: 'Stefan Zweig',
+        image: 'livres/2026/Le joueur d\'échecs.jpg' },
+      { an: 2026, titre: 'Diary of Saint Maria Faustina Kowalska: Divine Mercy in My Soul',
+        par: 'Sainte Faustine Kowalska',
+        image: 'livres/2026/Diary of Saint Maria Faustina Kowalska: Divine Mercy in My Soul.jpg' },
+      { an: 2026, titre: 'The Devil\'s Sons, tome 1',
+        par: 'Chloé Wallerand',
+        image: 'livres/2026/The Devil\'s Sons, tome 1.jpg' },
+      { an: 2026, titre: 'À l\'est d\'Éden',
+        par: 'John Steinbeck',
+        image: 'livres/2026/À l\'est d\'Éden.jpg' },
+      { an: 2026, titre: 'Madame Bovary',
+        par: 'Gustave Flaubert',
+        image: 'livres/2026/Madame Bovary.jpg' }
+    ] },
+  { id: 'dramas',  nom: 'K-drama & J-drama', visuel: 'Affiche', icone: 'i-play',
+    lead: 'Les séries que j\'ai aimées.',
+    items: [
+      { titre: 'Scarlet Heart: Ryeo',
+        image: 'dramas/scarlet-heart-ryeo.webp' },
+      { titre: 'Bride of the Century',
+        image: 'dramas/bride-of-the-century.webp', large: true },
+      { titre: 'Weightlifting Fairy Kim Bok-joo',
+        image: 'dramas/weightlifting-fairy-kim-bok-joo.webp' },
+      { titre: 'Kill Me, Heal Me',
+        image: 'dramas/kill-me-heal-me.webp', large: true, etat: 'En cours' },
+      { titre: 'Goblin',
+        image: 'dramas/goblin.webp', large: true },
+      { titre: 'Business Proposal',
+        image: 'dramas/business-proposal.webp' },
+      { titre: 'Master\'s Sun',
+        image: 'dramas/masters-sun.webp', large: true },
+      { titre: 'Mr Queen',
+        image: 'dramas/mr-queen.webp', large: true },
+      { titre: 'Marry My Husband', par: 'J-drama',
+        image: 'dramas/marry-my-husband-japan.webp' },
+      { titre: 'Twenty-Five Twenty-One',
+        image: 'dramas/twenty-five-twenty-one.webp', etat: 'En cours' }
+    ] },
+  { id: 'anime',   nom: 'Anime & manga', icone: 'i-spark',
+    lead: 'Les anime et les mangas qui m\'ont marquée.',
     items: [] },
-  { id: 'youtube', nom: 'YouTube',
+  { id: 'youtube', nom: 'YouTube', icone: 'i-video',
     lead: 'Les chaînes et vidéos que je trouve intéressantes, utiles ou '
         + 'simplement agréables à regarder.',
     items: [] },
-  { id: 'anime',   nom: 'Anime',
-    lead: 'Les anime qui m\'ont marquée, ceux que j\'ai aimés jusqu\'au bout '
-        + 'et que j\'ai envie de faire découvrir.',
-    items: [] },
-  { id: 'medium',  nom: 'Medium',
+  { id: 'articles', nom: 'Articles & lectures web', icone: 'i-pen',
     lead: 'Les articles que je garde et relis.',
-    items: [] },
-  { id: 'kdramas', nom: 'K-dramas',
-    lead: 'Les séries coréennes que j\'ai regardées jusqu\'au bout — et que je '
-        + 'recommande vraiment.',
     items: [] }
 ];
 
@@ -531,7 +771,7 @@ const PAGES = ['home', 'about', 'projects', 'skills', 'refuge', 'bible', 'finds'
 const PAGE_TITLES = Object.assign(
   { home: 'Home', about: 'About', projects: 'Projects', skills: 'Skills',
     refuge: "Sarindra's Refuge", bible: '127 jours',
-    finds: 'Testé et adopté', conseils: 'Mes recommandations',
+    finds: 'Testé et adopté', conseils: 'Mes coups de cœur',
     contact: 'Contact' },
   Object.fromEntries(YEARS.map(y => ['lectures-' + y, 'Mes lectures de ' + y])));
 
@@ -809,14 +1049,14 @@ function refugeTopics() {
       cta:    'Voir la liste',
       empty:  DISCOVERIES.length === 0 },
 
-    /* CONSEILS compte des dossiers, pas des recommandations. Annoncer
-       « 5 recommandations » alors que les cinq dossiers sont vides
+    /* CONSEILS compte des dossiers, pas des entrées. Annoncer
+       « 5 coups de cœur » alors que les cinq dossiers sont vides
        serait faux : on compte les entrées, et on nomme les dossiers. */
     { id: 'advice', page: 'conseils',
       kicker: 'Conseil', tone: 'line-sand', icon: 'i-pen',
-      title:  'Mes recommandations',
+      title:  'Mes coups de cœur',
       meta:   recos
-              ? recos + (recos > 1 ? ' recommandations' : ' recommandation')
+              ? recos + (recos > 1 ? ' coups de cœur' : ' coup de cœur')
               : CONSEILS.length + ' dossiers, encore vides',
       status: recos ? 'À jour' : 'À écrire',
       copy:   'Livres, vidéos, séries et ressources que j’ai aimés et que '
@@ -1101,6 +1341,75 @@ function findCard(d) {
     : '<article class="find">' + body + '</article>';
 }
 
+/* Avec une URL le titre devient un lien externe ; sans, il reste du
+   texte. Pas de lien vide, jamais. */
+function recoNom(it) {
+  return it.url
+    ? '<a class="reco-out" href="' + esc(it.url) + '" target="_blank"'
+      + ' rel="noopener">' + esc(it.titre)
+      + '<svg class="icon icon-xs" aria-hidden="true">'
+      + '<use href="#i-arrow-ur"/></svg></a>'
+    : esc(it.titre);
+}
+
+
+/* Le mur d'affiches — les entrées qui portent une image.
+   Toutes les tuiles ont la même hauteur ; c'est la largeur qui varie,
+   pour que chaque visuel garde son format. Voir .reco-wall dans la
+   feuille de style : le pourquoi du découpage y est écrit.
+
+   Un seul mur, sans section par année : c'est la pastille qui dit
+   l'année, la répéter en en-tête ne dirait rien de plus. */
+function recoMur(items, visuel) {
+  return items.length ? murHTML(items, visuel) : '';
+}
+
+
+/* L'année sur laquelle un dossier s'ouvre : la plus ancienne, comme
+   sa liste. Vide si le dossier n'est pas rangé par année. */
+function recoPremiereAnnee(d) {
+  const ans = d.items.map(it => it.an).filter(Boolean);
+  return ans.length ? String(Math.min(...ans)) : '';
+}
+
+
+function murHTML(items, visuel) {
+  return '<ul class="reco-wall">' + items.map(it =>
+      '<li' + (it.large ? ' class="is-wide"' : '')
+    /* L'année voyage avec la tuile : le filtre n'a pas à relire les
+       données pour savoir ce qu'il masque. */
+    + ' data-an="' + (it.an || '') + '">'
+    + '<span class="reco-shot">'
+    + '<img src="assets/img/' + esc(cheminImg(it.image)) + '"'
+    + ' alt="' + esc(visuel || 'Couverture') + ' de ' + esc(it.titre) + '" loading="lazy"'
+    + ' onload="recoFormat(this)">'
+    + (it.etat ? '<b class="reco-etat">' + esc(it.etat) + '</b>' : '')
+    + '</span>'
+    + '<p class="reco-nom">' + recoNom(it)
+    + (it.par ? '<span>' + esc(it.par) + '</span>' : '') + '</p>'
+    + (it.pourquoi ? '<p class="reco-note-tuile">' + esc(it.pourquoi) + '</p>' : '')
+    + '</li>').join('') + '</ul>';
+}
+
+
+/* Les noms de fichiers sont ceux de Sarindra — espaces, accents,
+   apostrophes — et le chemin en compte plusieurs niveaux. On encode
+   segment par segment : encoder d'un bloc transformerait les « / »
+   en %2F et l'image ne serait plus trouvée. */
+function cheminImg(chemin) {
+  return chemin.split('/').map(encodeURIComponent).join('/');
+}
+
+
+/* Filet de sécurité : `large` est déclaré à la main dans CONSEILS, et
+   c'est le genre de détail qu'on oublie. L'image chargée sait, elle.
+   Appelé par l'attribut onload, donc global. */
+function recoFormat(img) {
+  const tuile = img.closest('li');
+  if (tuile) tuile.classList.toggle('is-wide', img.naturalWidth > img.naturalHeight);
+}
+
+
 function renderConseils() {
   const arbre = document.getElementById('reco-tree');
   const vue   = document.getElementById('reco-panel');
@@ -1111,41 +1420,42 @@ function renderConseils() {
   }
   if (!arbre || !vue) return;
 
+  /* La colonne ne porte que les dossiers : les années sont dans le
+     panneau, en pastilles, juste au-dessus des couvertures qu'elles
+     filtrent. Une commande se place près de ce qu'elle commande. */
   arbre.innerHTML =
-      '<p class="reco-root">'
-    + '<svg class="icon icon-sm icon-fill" aria-hidden="true"><use href="#i-folder-open"/></svg>'
-    + 'Recommandations</p>'
+      '<p class="reco-root">Bibliothèque</p>'
     + '<ul>' + CONSEILS.map((d, i) =>
         '<li><button class="reco-folder' + (i === 0 ? ' active' : '') + '"'
       + ' type="button" data-cible="' + esc(d.id) + '"'
       + ' aria-controls="dossier-' + esc(d.id) + '" aria-selected="' + (i === 0) + '">'
-      + '<svg class="icon icon-sm icon-fill" aria-hidden="true"><use href="#i-folder"/></svg>'
-      + esc(d.nom) + '</button></li>').join('') + '</ul>';
+      + '<span class="reco-ico">'
+      + '<svg class="icon icon-sm" aria-hidden="true"><use href="#' + esc(d.icone) + '"/></svg>'
+      + '</span><span class="reco-nomdoss">' + esc(d.nom) + '</span></button></li>')
+      .join('') + '</ul>';
+
 
   vue.innerHTML = CONSEILS.map((d, i) =>
       '<article class="reco-card' + (i === 0 ? ' active' : '') + '"'
-    + ' id="dossier-' + esc(d.id) + '">'
-    + '<svg class="reco-glyph icon-fill" aria-hidden="true"><use href="#i-folder"/></svg>'
-    + '<p class="reco-kicker">Dossier sélectionné</p>'
+    + ' id="dossier-' + esc(d.id) + '" data-an="' + recoPremiereAnnee(d) + '">'
+    + '<p class="reco-kicker">Ma sélection</p>'
     + '<h4 class="reco-title">' + esc(d.nom) + '</h4>'
     + '<p class="reco-lead">' + esc(d.lead) + '</p>'
-    + (d.items.length
-        ? '<ul class="reco-items">' + d.items.map(it => {
-            /* Avec une URL le titre devient un lien externe ; sans, il
-               reste du texte. Pas de lien vide, jamais. */
-            const nom = it.url
-              ? '<a class="reco-out" href="' + esc(it.url) + '" target="_blank"'
-                + ' rel="noopener">' + esc(it.titre)
-                + '<svg class="icon icon-xs" aria-hidden="true">'
-                + '<use href="#i-arrow-ur"/></svg></a>'
-              : esc(it.titre);
-            return '<li><p class="reco-item">' + nom
+    + recoOutils(d)
+    + recoMur(d.items.filter(it => it.image), d.visuel)
+    + (d.items.some(it => !it.image)
+        ? '<ul class="reco-items">' + d.items.filter(it => !it.image).map(it => {
+            return '<li><p class="reco-item">' + recoNom(it)
               + (it.par ? '<span> · ' + esc(it.par) + '</span>' : '') + '</p>'
               + (it.pourquoi ? '<p class="reco-why">' + esc(it.pourquoi) + '</p>' : '')
               + '</li>';
           }).join('') + '</ul>'
         : '')
-    + '<p class="reco-note">Une sélection personnelle, pas un classement.</p>'
+    /* Le site a déjà son bloc « rien ici pour l'instant » : on le
+       reprend plutôt que d'en dessiner un second. */
+    + (d.items.length ? '' : emptyState(d.icone, 'Sélection à venir',
+        'La mise en page est prête : ce dossier s’affichera dès qu’il '
+      + 'aura sa première entrée.'))
     + '</article>').join('');
 
   /* Même mécanique que le sommaire du Refuge : on bascule une classe,
@@ -1161,6 +1471,66 @@ function renderConseils() {
       vue.querySelectorAll('.reco-card').forEach(c =>
         c.classList.toggle('active', c.id === 'dossier-' + b.dataset.cible));
     });
+  });
+
+  /* Année et recherche filtrent le même mur, et s'additionnent :
+     on relance donc le même tri dans les deux cas. */
+  vue.querySelectorAll('.reco-years .year-pill').forEach(b => {
+    b.addEventListener('click', () => {
+      const carte = b.closest('.reco-card');
+      carte.querySelectorAll('.year-pill').forEach(x => {
+        x.classList.remove('is-current');
+        x.setAttribute('aria-pressed', 'false');
+      });
+      b.classList.add('is-current');
+      b.setAttribute('aria-pressed', 'true');
+      carte.dataset.an = b.dataset.an || '';
+      recoFiltrer(carte);
+    });
+  });
+  vue.querySelectorAll('.reco-card').forEach(recoFiltrer);
+}
+
+
+
+
+/* Années et recherche. Rien de tout cela n'apparaît sur un dossier
+   qu'on embrasse d'un coup d'œil : dix affiches se parcourent plus
+   vite qu'elles ne se cherchent. */
+/* Les onglets d'année, et rien d'autre. Pas de champ de recherche :
+   une année compte treize à dix-neuf titres, tous visibles d'un coup
+   — on les parcourt plus vite qu'on ne les cherche. Le compte, lui,
+   est déjà porté par l'onglet, comme dans « Mes lectures ».
+
+   Pas de « Tout » non plus : une année est toujours choisie, la
+   première par défaut. Les couvertures affichées disent donc toujours
+   une année précise, et l'en-tête d'année devient inutile.
+
+   Ce sont les onglets de « Mes lectures », repris tels quels : le
+   même geste doit se présenter partout sous la même forme, sinon on
+   le réapprend d'une page à l'autre. */
+function recoOutils(d) {
+  const ans = [...new Set(d.items.filter(it => it.an).map(it => it.an))]
+                .sort((a, b) => a - b);
+  if (!ans.length) return '';
+  return '<div class="reco-years" role="group" aria-label="Filtrer par année">'
+    + ans.map((a, i) => {
+        const n = d.items.filter(it => it.an === a).length;
+        return '<button class="year-pill' + (i === 0 ? ' is-current' : '')
+          + '" type="button" data-an="' + a + '"'
+          + ' aria-pressed="' + (i === 0) + '">'
+          + '<span class="year-pill-y">' + a + '</span>'
+          + '<span class="year-pill-n">' + n + '</span></button>';
+      }).join('')
+    + '</div>';
+}
+
+
+function recoFiltrer(carte) {
+  const an = carte.dataset.an || '';
+  if (!an) return;
+  carte.querySelectorAll('.reco-wall li').forEach(li => {
+    li.hidden = li.dataset.an !== an;
   });
 }
 

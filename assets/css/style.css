@@ -1923,7 +1923,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .crumbs a:hover { color: var(--cyan); border-bottom-color: var(--cyan-line); }
 .crumbs [aria-current="page"] { color: var(--ink); }
 
-/* ── Mes recommandations ───────────────────────────────────────
+/* ── Mes coups de cœur ───────────────────────────────────────
    Un conseil se lit, il ne se survole pas : une colonne de texte,
    pas une grille de cartes. Cinquième et dernier ton — le sable en
    filet, pendant du cyan en filet des guides de personnages. */
@@ -1932,132 +1932,141 @@ a.read-item:hover .read-title { color: var(--cyan); }
   color: var(--sand-text);
   box-shadow: inset 0 0 0 1px var(--sand-line);
 }
-/* ── Mes recommandations — l'arbre de dossiers ─────────────────────
-   Un sommaire à gauche, le dossier choisi à droite : même mécanique
-   que le Refuge, mais dessinée comme une arborescence de fichiers,
-   parce que c'est ainsi qu'elle se range dans la tête. */
+/* Sans surtitre ni puces, l'en-tête de cette page respire trop : le
+   même rythme qu'ailleurs y laisse une bande vide, puisqu'il n'y a
+   plus qu'un titre et une phrase à y loger. On resserre ici seulement
+   — les autres sous-pages gardent le leur, où le surtitre occupe la
+   place. */
+#page-conseils .page-inner { padding-top: var(--s6); }
+#page-conseils .crumbs { margin-bottom: var(--s3); }
+#page-conseils .refuge-open {
+  padding-bottom: var(--s4);
+  margin-bottom: var(--s5);
+}
+
+/* ── Mes coups de cœur ───────────────────────────────────────────
+   La structure vient de sa maquette — colonne « Bibliothèque »,
+   panneau, onglets d'année, recherche, compteur, grille à quatre
+   colonnes. Les formes, elles, sont celles du site : angles vifs,
+   filets d'un pixel, aucune ombre portée.
+
+   La maquette proposait des cartes arrondies posées sur des ombres.
+   Repris tel quel, le même sélecteur d'année existait deux fois dans
+   le site sous deux dessins — carré dans « Mes lectures », arrondi
+   ici. Un geste identique doit garder une forme identique : les
+   onglets, la recherche et le bloc vide réutilisent donc les
+   composants qui existaient déjà.
+   ───────────────────────────────────────────────────────────────── */
 .reco {
   display: grid;
-  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
-  gap: var(--s6);
+  grid-template-columns: minmax(0, 238px) minmax(0, 1fr);
+  gap: var(--s5);
   align-items: start;
 }
 
 /* Les icônes du sprite sont au trait ; un dossier se lit mieux plein. */
 .icon-fill { fill: currentColor; stroke: none; }
 
-.reco-tree { padding-top: var(--s2); }
+/* ── La colonne « Bibliothèque » ─────────────────────────────────── */
+.reco-tree {
+  position: sticky;
+  top: calc(var(--nav-h) + 14px);
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
 .reco-root {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0 0 10px;
+  margin: 4px 6px 12px;
   font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-.reco-root .icon { color: var(--sand); }
-.reco-tree ul {
-  list-style: none;
-  margin: 0;
-  padding: 0 0 0 16px;
-  position: relative;
-}
-/* Le trait vertical s'arrête au dernier embranchement : une
-   arborescence ne pend pas dans le vide. */
-.reco-tree ul::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 19px;
-  width: 1px;
-  background: var(--line);
-}
-.reco-tree li { position: relative; }
-.reco-tree li::before {
-  content: "";
-  position: absolute;
-  left: -8px;
-  top: 19px;
-  width: 11px;
-  height: 1px;
-  background: var(--line);
-}
+.reco-tree ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .reco-folder {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
   width: 100%;
-  padding: 9px 11px;
+  padding: 12px 13px;
   background: transparent;
   border: 1px solid transparent;
   border-left: 2px solid transparent;
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--body);
   text-align: left;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
-.reco-folder .icon { color: var(--sand); }
-.reco-folder:hover { background: var(--surface); color: var(--ink); }
+.reco-folder:hover { background: var(--paper-2); }
 .reco-folder.active {
   background: #fff;
   border-color: var(--line-soft);
   border-left-color: var(--cyan);
-  color: var(--ink);
 }
+/* La pastille d'icône de la maquette : carré adouci, sable pâle. */
+.reco-ico {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: var(--sand-soft);
+  color: var(--sand-text);        /* 5,00:1 sur --sand-soft */
+}
+.reco-ico .icon { width: 15px; height: 15px; }
+.reco-nomdoss { font-size: 14px; font-weight: 700; color: var(--ink); }
 
-.reco-panel { position: relative; }
+/* ── Le panneau ──────────────────────────────────────────────────── */
+.reco-panel { position: relative; min-width: 0; }
 .reco-card {
   display: none;
   flex-direction: column;
-  gap: var(--s2);
   padding: var(--s5);
   background: var(--surface);
   border: 1px solid var(--line);
 }
 .reco-card.active { display: flex; }
-.reco-glyph {
-  width: 42px;
-  height: 42px;
-  color: var(--sand);
-  margin-bottom: var(--s2);
-}
+/* Le filet sable devant l'intitulé — le seul ornement de la maquette
+   qui porte du sens : il rattache la page à l'accent chaud du site. */
 .reco-kicker {
-  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 9px;
   font-family: var(--mono);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--cyan);
 }
+.reco-kicker::before { content: ""; width: 24px; height: 2px; background: var(--sand); }
 .reco-title {
   margin: 0;
   font-family: var(--display);
-  font-size: 22px;
+  font-size: clamp(28px, 3.4vw, 42px);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.045em;
   color: var(--ink);
 }
-.reco-lead { margin: 0; max-width: 56ch; font-size: 15.5px; color: var(--body); }
-/* La note ferme le dossier, qu'il soit rempli ou non : elle ne dit pas
-   un état, elle dit comment lire ce qui s'y trouve. */
-.reco-note {
-  margin: var(--s4) 0 0;
-  padding-top: var(--s3);
-  border-top: 1px solid var(--line-soft);
-  font-family: var(--mono);
-  font-size: 12.5px;
-  color: var(--muted);
+.reco-lead {
+  margin: 12px 0 0;
+  max-width: 62ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--body);
 }
 
-.reco-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s3); }
-.reco-item { margin: 0; font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.reco-items {
+  list-style: none;
+  margin: 25px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+.reco-item { margin: 0; font-size: 15.5px; font-weight: 700; color: var(--ink); }
 .reco-item span { font-weight: 400; color: var(--muted); }
 .reco-out {
   display: inline-flex;
@@ -2070,9 +2079,127 @@ a.read-item:hover .read-title { color: var(--cyan); }
 .reco-out:hover { color: var(--ink); }
 .reco-why { margin: 3px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
 
-@media (max-width: 720px) {
+
+/* ── Les onglets d'année ────────────────────────────────────────
+   Ce sont ceux de « Mes lectures » (.year-pill) ; seul le curseur
+   change, l'original étant un lien et non un bouton.
+   ───────────────────────────────────────────────────────────────── */
+.reco-years { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--s4); }
+.reco-years .year-pill { cursor: pointer; }
+
+/* ── Le mur d'affiches ────────────────────────────────────────────
+   Les visuels arrivent dans deux formats : l'affiche verticale (2:3)
+   et le visuel horizontal (4:3, parfois 16:9). Aucun cadre commun ne
+   peut les recadrer sans amputer un titre — essayé : en 2:3 centré,
+   « Kill Me, Heal Me » devient « LL ME / HEAL » et « Master's Sun »
+   perd son soleil. Les mettre entiers dans un cadre vertical laisse,
+   à l'inverse, un tiers de vide sous chaque visuel horizontal.
+
+   Alors chacun garde son format et c'est la HAUTEUR qui est commune :
+   l'affiche occupe une colonne, le visuel horizontal en occupe deux.
+   Deux colonnes valent exactement le double d'une seule… plus la
+   gouttière. C'est ce « plus la gouttière » qui déforme, et il faut
+   le retrancher : d'où le calc() ci-dessous.
+
+   La hauteur se déduit de la largeur, jamais d'un nombre de pixels :
+   une hauteur figée tenait à quatre colonnes, et écrasait les
+   affiches d'un tiers dès que la grille retombait à deux.
+   ───────────────────────────────────────────────────────────────── */
+.reco-wall {
+  --mur-gap: 22px;
+  list-style: none;
+  margin: 25px 0 0;
+  padding: 0;
+  display: grid;
+  /* Quatre colonnes, comme la maquette. Un nombre fixe, jamais
+     `auto-fill` : un visuel horizontal occupe deux colonnes, et il en
+     faut donc toujours au moins deux, sur le plus étroit des écrans
+     comme ailleurs. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* `dense` fait remonter une affiche dans le trou qu'un visuel large
+     laisse en fin de ligne. Sans lui, un visuel qui ne tient pas dans
+     la place restante saute la ligne et laisse le vide derrière lui. */
+  grid-auto-flow: dense;
+  align-items: start;
+  gap: var(--mur-gap);
+}
+.reco-wall .is-wide { grid-column: span 2; }
+/* Un padding en pourcentage se calcule sur la LARGEUR du parent : c'est
+   ce qui permet de lier la hauteur à la colonne. 150 % d'une colonne
+   pour l'affiche ; pour le visuel large, 75 % de deux colonnes — soit
+   sa propre largeur moins la gouttière. Les deux tombent juste. */
+.reco-shot {
+  position: relative;
+  display: block;
+  height: 0;
+  padding-top: 150%;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+/* Le même décollement que sur les étagères de lecture — trois pixels
+   et un filet qui s'assombrit, sans ombre portée. */
+.reco-wall li:hover .reco-shot {
+  transform: translateY(-3px);
+  border-color: var(--cyan-line);
+}
+.is-wide .reco-shot { padding-top: calc((100% - var(--mur-gap)) * 0.75); }
+.reco-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* La pastille se pose dans l'image, pas à côté : l'état se lit avec
+   l'affiche, et la légende reste au titre seul. */
+.reco-etat {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 3px 8px;
+  background: var(--sand);
+  color: #fff;               /* 4,61:1 sur --sand */
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.reco-nom {
+  margin: 13px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.reco-nom span {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--muted);
+}
+/* La note de la maquette : pourquoi cette entrée est là. */
+.reco-note-tuile {
+  margin: 9px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--body);
+  text-wrap: pretty;
+}
+/* Un dossier qui a les deux : le mur d'abord, la liste ensuite. */
+.reco-wall + .reco-items { margin-top: var(--s3); }
+
+@media (max-width: 1000px) {
+  .reco-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .reco-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); --mur-gap: 14px; }
+}
+@media (max-width: 820px) {
   .reco { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
-  .reco-card { padding: var(--s4); }
+  .reco-tree { position: static; }
+  .reco-card { padding: var(--s5) var(--s4); }
 }
 
 /* ══════════════════════════════════════════════════════════════
