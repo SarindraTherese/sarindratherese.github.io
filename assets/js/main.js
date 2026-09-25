@@ -102,6 +102,9 @@ const DISCOVERIES = [
   { name: 'Phone holder', image: 'Phone holder.png' },
   { name: 'Bablov', image: 'bablov.jpeg' },
   { name: 'Vanow', image: 'vanow.png' },
+  { name: 'Walnut Sesame and Black Bean Powder',
+    image: 'walnut-sesame-black-bean-powder.webp' },
+  { name: 'Nescafé', image: 'nescafe.webp' },
 ];
 
 
@@ -336,6 +339,9 @@ const CONSEILS = [
       { an: 2026, titre: 'L\'imitation de Jésus-Christ',
         par: 'Thomas a Kempis',
         image: 'livres/2026/L\'imitation de Jésus-Christ.jpg' },
+      { an: 2026, titre: 'Œuvres complètes',
+        par: 'Jean Chrysostome',
+        image: 'livres/2026/Œuvres complètes.jpg' },
       { an: 2026, titre: 'Le joueur d\'échecs',
         par: 'Stefan Zweig',
         image: 'livres/2026/Le joueur d\'échecs.jpg' },
@@ -449,6 +455,22 @@ const GUIDES = [
     meta: '41 personnages · 4 sections',
     short: '41 personnages et leurs noms de code, les sections tardives repliées.',
     href: 'refuge/eighty-six.html' },
+  { title: 'Re:Zero — Starting Life in Another World', count: 30,
+    lead: 'Rangés par volume de première apparition : les essentiels ouverts, '
+        + 'puis la capitale, le manoir, la sélection royale et la suite, chaque '
+        + 'section repliée jusqu\'à ouverture. Beaucoup de ces personnages sont '
+        + 'presque toujours appelés par leur surnom — Ferris, Al, Betty.',
+    meta: '30 personnages · 5 sections',
+    short: '30 personnages rangés par volume, et les surnoms sous lesquels on les désigne.',
+    href: 'refuge/re-zero.html' },
+  { title: 'Sword Art Online', count: 24,
+    lead: 'Presque tous ont deux noms — celui du joueur et celui de la vie '
+        + 'réelle — et changent d\'apparence en changeant de monde. Chaque '
+        + 'fiche donne les deux, et les sections suivent les volumes : les '
+        + 'essentiels ouverts, le reste replié jusqu\'à ouverture.',
+    meta: '24 personnages · 5 sections',
+    short: '24 personnages, leur nom de joueur et leur nom réel.',
+    href: 'refuge/sword-art-online.html' },
 ];
 
 
@@ -828,9 +850,83 @@ function trackVirtualPageView(id) {
   });
 }
 
+/* ── Mémoire de défilement ──────────────────────────────────────
+   Quitter une page pour une autre, puis y revenir, doit reposer le
+   regard là où on l'avait laissé. Sans cela on remonte tout en haut,
+   et il faut refaire le chemin jusqu'au lien qu'on venait d'ouvrir —
+   d'autant plus long que le Refuge est une longue page.
+
+   On ne restaure que sur un RETOUR : bouton « précédent » du
+   navigateur, ou fil d'Ariane. Un lien de la barre de navigation est
+   un départ, pas un retour : il ouvre la page par le haut.
+
+   Reconnaître un retour ne va pas de soi : `popstate` se déclenche à
+   CHAQUE changement d'ancre, y compris sur un lien ordinaire — s'y
+   fier ferait de toute navigation un retour. On estampille donc
+   chaque entrée d'historique au passage. Une entrée déjà estampillée,
+   c'est qu'on y est déjà venu : on y revient. Une entrée neuve porte
+   un state nul — c'est un lien qu'on vient d'ouvrir. */
+/* Les guides de personnages sont de vraies pages : les ouvrir quitte
+   le document, et la mémoire vive s'efface. On la confie donc à la
+   session du navigateur, qui survit d'une page à l'autre sans rien
+   laisser après la fermeture de l'onglet. Le stockage peut être
+   refusé — navigation privée, réglages — et l'absence de mémoire
+   n'est pas une panne : on retombe alors sur le haut de page. */
+const CLE_POSITIONS = 'refuge:positions';
+
+function lirePositions() {
+  try { return JSON.parse(sessionStorage.getItem(CLE_POSITIONS)) || {}; }
+  catch (e) { return {}; }
+}
+
+function ecrirePositions() {
+  try { sessionStorage.setItem(CLE_POSITIONS, JSON.stringify(POSITIONS)); }
+  catch (e) { /* rien à faire : la page marche sans */ }
+}
+
+const POSITIONS = lirePositions();
+let pageCourante = null;
+let retourEnCours = false;
+let rangHistorique = 0;
+
+function marquerRetour() { retourEnCours = true; }
+
+function naviguer() {
+  corrigerAdresse();
+  const revient = retourEnCours
+    || (history.state != null && history.state.rang != null);
+  retourEnCours = false;
+  showPage(currentHashPage(), { reprendre: revient });
+  if (history.state == null) {
+    history.replaceState({ rang: ++rangHistorique }, '');
+  }
+  ecrirePositions();
+}
+
+
+/* Revenir d'un guide, c'est revenir d'un autre document : soit par le
+   bouton « précédent », soit par le lien de retour du guide. Les deux
+   méritent la même reprise, et se reconnaissent ici. */
+function arriveDUnRetour() {
+  const nav = performance.getEntriesByType
+    && performance.getEntriesByType('navigation')[0];
+  if (nav && nav.type === 'back_forward') return true;
+  /* Un lien venu d'une autre page du site — le « ← Sarindra's Refuge »
+     d'un guide, par exemple. Un lien partagé, lui, vient d'ailleurs ou
+     de nulle part : il ouvre la page par le haut. */
+  return !!document.referrer && document.referrer.indexOf(location.origin) === 0
+      && document.referrer.split('#')[0] !== location.href.split('#')[0];
+}
+
+
 function showPage(id, opts) {
   if (!PAGES.includes(id)) id = 'home';
   const options = opts || {};
+
+  /* On relève la position de la page qu'on quitte avant de la
+     masquer : après, window.scrollY ne parle plus d'elle. */
+  if (pageCourante && pageCourante !== id) POSITIONS[pageCourante] = window.scrollY;
+  const reprise = options.reprendre && POSITIONS[id] != null ? POSITIONS[id] : null;
 
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + nodeIdFor(id));
@@ -849,8 +945,14 @@ function showPage(id, opts) {
   document.title = (id === 'home' ? '' : (PAGE_TITLES[id] || id) + ' — ')
     + 'Sarindra Thérèse Randriambeloson — Data & AI Engineer';
 
+  pageCourante = id;
   if (!options.silent) {
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    /* Un retour se pose d'un coup, sans glissement : c'est un
+       rétablissement, pas un déplacement. */
+    window.scrollTo({
+      top: reprise != null ? reprise : 0,
+      behavior: (reprise != null || prefersReducedMotion()) ? 'auto' : 'smooth'
+    });
   }
 
   if (id === 'skills') setTimeout(animateBars, 200);
@@ -874,7 +976,7 @@ function currentHashPage() {
 function corrigerAdresse() {
   const brut = (location.hash || '#home').replace('#', '').split('?')[0];
   if (ANCIENNES_ADRESSES[brut]) {
-    history.replaceState(null, '', '#' + ANCIENNES_ADRESSES[brut]);
+    history.replaceState(history.state, '', '#' + ANCIENNES_ADRESSES[brut]);
   }
 }
 
@@ -1914,12 +2016,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  window.addEventListener('hashchange', () => {
-    corrigerAdresse();
-    showPage(currentHashPage());
+  /* Le navigateur restaure lui aussi le défilement sur « précédent »,
+     mais ici toutes les pages partagent un document : sa mesure ne veut
+     rien dire. On la coupe, et on tient la nôtre. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  /* Le fil d'Ariane remonte d'un cran : c'est un retour, lui aussi.
+     Le clic est écouté au niveau du document parce que les fils sont
+     redessinés à chaque changement de page. */
+  document.addEventListener('click', e => {
+    if (e.target.closest && e.target.closest('.crumbs a')) marquerRetour();
   });
+
+  window.addEventListener('hashchange', naviguer);
+
+  /* Avant de quitter le document, on note où on en était. */
+  window.addEventListener('pagehide', () => {
+    if (pageCourante) POSITIONS[pageCourante] = window.scrollY;
+    ecrirePositions();
+  });
+  /* Page ressortie du cache du navigateur : le script ne repart pas,
+     mais le défilement, lui, est à remettre. */
+  window.addEventListener('pageshow', e => {
+    if (!e.persisted) return;
+    const id = currentHashPage();
+    if (POSITIONS[id] != null) window.scrollTo({ top: POSITIONS[id], behavior: 'auto' });
+  });
+
   corrigerAdresse();
-  showPage(currentHashPage(), { silent: true });
+  const repriseAuChargement = arriveDUnRetour()
+    && POSITIONS[currentHashPage()] != null;
+  showPage(currentHashPage(),
+    { silent: !repriseAuChargement, reprendre: repriseAuChargement });
+  if (history.state == null) history.replaceState({ rang: ++rangHistorique }, '');
+  ecrirePositions();
 
   setTimeout(animateCounters, 700);
 });

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sword Art Online — Guide visuel sans spoilers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"/>
+<link rel="stylesheet" href="../assets/css/guide.css"/>
+<style>
+/* La seule chose qui distingue cette page d'une autre : sa teinte.
+   Bleu d'interface — celui du logo et des mondes virtuels de la série.
+   Volontairement plus clair et plus saturé que le bleu nuit du guide
+   86 : l'assombrir rapprochait les deux au point de les confondre. */
+:root {
+  --accent:      #0063BA;   /* 5,06:1 sur le papier */
+  --accent-fill: #0063BA;   /* blanc dessus : 6,01:1 */
+  --accent-soft: #C5DAEC;
+  --accent-line: #7BAAD5;
+  --grid: rgba(0, 99, 186, 0.08);
+}
+</style>
+</head>
+<body>
+<header><div class="hero">
+  <nav class="crumbs" aria-label="Fil d’Ariane"><ol>
+    <li><a href="../index.html#refuge">Sarindra’s Refuge</a></li>
+    <li><span aria-current="page">Sword Art Online</span></li>
+  </ol></nav>
+  <div class="eyebrow">Guide de lecture • light novel • anti-spoil</div>
+  <h1>Sword Art Online<em>Qui est qui ?</em></h1>
+  <p><strong>24 personnages</strong>, avec portrait, nom de joueur, nom réel et un repère court. Les sections suivantes restent repliées tant qu’on n’y est pas.</p>
+</div></header>
+
+<div class="controls"><div class="controls-inner">
+  <input id="search" class="search" type="search" placeholder="Chercher : Kirito, Asuna, Kazuto, シノン, Leafa…" autocomplete="off">
+  <div class="chips" aria-label="Filtres">
+    <button class="chip active" data-filter="all">Tous</button>
+      <button class="chip" data-filter="core">Essentiels</button>
+      <button class="chip" data-filter="alo">Monde des fées</button>
+      <button class="chip" data-filter="ggo">Monde des armes</button>
+      <button class="chip" data-filter="rosario">Volume 7</button>
+      <button class="chip" data-filter="alicization">L’autre monde</button>
+  </div>
+</div></div>
+
+<main>
+  <div class="tip"><b>Astuce pour le novel :</b> presque tout le monde a <strong>deux noms</strong> — celui du joueur et celui de la vie réelle. <strong>Kirito</strong> est Kirigaya Kazuto, <strong>Asuna</strong> est Yuuki Asuna, <strong>Leafa</strong> est Kirigaya Suguha, <strong>Sinon</strong> est Asada Shino. Changer de monde change aussi l’avatar : le même personnage n’a pas la même apparence d’un volume à l’autre. Les fiches donnent les deux noms, et la recherche accepte l’un comme l’autre.</div>
+  <div class="no-spoil">🛡️ <strong>Protection anti-spoil :</strong> chaque personnage n’est décrit que tel qu’il apparaît la première fois. Ni les liens entre eux, ni les rôles qu’ils prennent ensuite, ni la moindre issue ne sont indiqués. Les sections sont rangées par volume.</div>
+  <section class="section" data-section="core">
+    <h2>Les personnages essentiels <span>9</span></h2>
+    <div class="grid"><article class="card" data-search="kirito kirigaya kazuto キリト（桐ヶ谷 和人） kirito / kirigaya kazuto / kazuto kirigaya / kiri aincrad joueur solitaire, vetu de noir. le recit suit son point de vue." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/kirito.webp" alt="Kirito" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Kirito</h3>
+        <div class="jp">キリト（桐ヶ谷 和人）</div>
+        <div class="alias"><strong>Nom réel :</strong> Kirigaya Kazuto</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kirito / Kirigaya Kazuto / Kazuto Kirigaya / Kiri</div>
+        <p>Joueur solitaire, vêtu de noir. Le récit suit son point de vue.</p>
+      </div>
+    </article>
+<article class="card" data-search="asuna yuuki asuna アスナ（結城 明日奈） asuna / yuuki asuna / asuna yuuki aincrad bretteuse d’une rapidite remarquable, surnommee « l’eclair »." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/asuna.webp" alt="Asuna" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Asuna</h3>
+        <div class="jp">アスナ（結城 明日奈）</div>
+        <div class="alias"><strong>Nom réel :</strong> Yuuki Asuna</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Asuna / Yuuki Asuna / Asuna Yuuki</div>
+        <p>Bretteuse d’une rapidité remarquable, surnommée « l’Éclair ».</p>
+      </div>
+    </article>
+<article class="card" data-search="klein tsuboi ryoutarou クライン（壷井 遼太郎） klein / tsuboi ryoutarou / ryotaro tsuboi aincrad le tout premier joueur que kirito aide, bandeau au front et barbe de trois jours." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/klein.webp" alt="Klein" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Klein</h3>
+        <div class="jp">クライン（壷井 遼太郎）</div>
+        <div class="alias"><strong>Nom réel :</strong> Tsuboi Ryoutarou</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Klein / Tsuboi Ryoutarou / Ryotaro Tsuboi</div>
+        <p>Le tout premier joueur que Kirito aide, bandeau au front et barbe de trois jours.</p>
+      </div>
+    </article>
+<article class="card" data-search="agil andrew gilbert mills エキル（アントリュー・キルハート・ミルス） agil / eugil / andrew gilbert mills aincrad marchand et hachier, carrure imposante et voix posee." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/agil.webp" alt="Agil" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Agil</h3>
+        <div class="jp">エギル（アンドリュー・ギルバート・ミルズ）</div>
+        <div class="alias"><strong>Nom réel :</strong> Andrew Gilbert Mills</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Agil / Eugil / Andrew Gilbert Mills</div>
+        <p>Marchand et hachier, carrure imposante et voix posée.</p>
+      </div>
+    </article>
+<article class="card" data-search="lisbeth shinozaki rika リスヘット（篠崎 里香） lisbeth / liz / shinozaki rika / rika shinozaki aincrad forgeronne d’armes, franche et d’humeur vive." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/lisbeth.webp" alt="Lisbeth" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Lisbeth</h3>
+        <div class="jp">リズベット（篠崎 里香）</div>
+        <div class="alias"><strong>Nom réel :</strong> Shinozaki Rika</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Lisbeth / Liz / Shinozaki Rika / Rika Shinozaki</div>
+        <p>Forgeronne d’armes, franche et d’humeur vive.</p>
+      </div>
+    </article>
+<article class="card" data-search="silica ayano keiko シリカ（綾野 珪子） silica / ayano keiko / keiko ayano aincrad jeune dresseuse de betes, accompagnee d’un petit dragon." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/silica.webp" alt="Silica" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Silica</h3>
+        <div class="jp">シリカ（綾野 珪子）</div>
+        <div class="alias"><strong>Nom réel :</strong> Ayano Keiko</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Silica / Ayano Keiko / Keiko Ayano</div>
+        <p>Jeune dresseuse de bêtes, accompagnée d’un petit dragon.</p>
+      </div>
+    </article>
+<article class="card" data-search="yui — ユイ yui / yui-chan aincrad petite fille rencontree dans la foret, sans souvenir de son passe." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/yui.webp" alt="Yui" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Yui</h3>
+        <div class="jp">ユイ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Yui / Yui-chan</div>
+        <p>Petite fille rencontrée dans la forêt, sans souvenir de son passé.</p>
+      </div>
+    </article>
+<article class="card" data-search="sachi — サチ sachi aincrad membre d’une petite guilde de joueurs debutants, discrete et inquiete." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/sachi.webp" alt="Sachi" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Sachi</h3>
+        <div class="jp">サチ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Sachi</div>
+        <p>Membre d’une petite guilde de joueurs débutants, discrète et inquiète.</p>
+      </div>
+    </article>
+<article class="card" data-search="argo — アルコ argo / argo la rat / argo the rat aincrad courtiere en information : elle vend ce qu’elle sait, et elle sait beaucoup." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/argo.webp" alt="Argo" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aincrad</span></div>
+        <h3>Argo</h3>
+        <div class="jp">アルゴ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Argo / Argo la Rat / Argo the Rat</div>
+        <p>Courtière en information : elle vend ce qu’elle sait, et elle sait beaucoup.</p>
+      </div>
+    </article></div>
+  </section>
+  <details class="locked" data-section="alo" id="alo">
+    <summary><div><div class="title">🔒 Volumes 3 et 4 — le monde des fées <span class="count">5</span></div><div class="desc">Un second monde, d’autres avatars : les noms de joueur changent tous.</div></div></summary>
+    <div class="grid"><article class="card" data-search="leafa kirigaya suguha リーファ（桐ヶ谷 直葉） leafa / riifa / kirigaya suguha / suguha kirigaya monde des fees fee sylphe a l’epee, pratiquante de kendo dans la vie reelle." data-tag="alo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/leafa.webp" alt="Leafa" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des fées</span></div>
+        <h3>Leafa</h3>
+        <div class="jp">リーファ（桐ヶ谷 直葉）</div>
+        <div class="alias"><strong>Nom réel :</strong> Kirigaya Suguha</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Leafa / Riifa / Kirigaya Suguha / Suguha Kirigaya</div>
+        <p>Fée sylphe à l’épée, pratiquante de kendo dans la vie réelle.</p>
+      </div>
+    </article>
+<article class="card" data-search="oberon sugou nobuyuki オヘイロン（須郷 伸之） oberon / obeiron / sugou nobuyuki / nobuyuki sugou monde des fees homme en costume, d’une courtoisie appuyee." data-tag="alo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/oberon.webp" alt="Oberon" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des fées</span></div>
+        <h3>Oberon</h3>
+        <div class="jp">オベイロン（須郷 伸之）</div>
+        <div class="alias"><strong>Nom réel :</strong> Sugou Nobuyuki</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Oberon / Obeiron / Sugou Nobuyuki / Nobuyuki Sugou</div>
+        <p>Homme en costume, d’une courtoisie appuyée.</p>
+      </div>
+    </article>
+<article class="card" data-search="recon nagata shinichi レコン（長田 信一） recon / rekon / nagata shinichi / shinichi nagata monde des fees camarade de classe de suguha, maladroit et fidele." data-tag="alo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/recon.webp" alt="Recon" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des fées</span></div>
+        <h3>Recon</h3>
+        <div class="jp">レコン（長田 信一）</div>
+        <div class="alias"><strong>Nom réel :</strong> Nagata Shinichi</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Recon / Rekon / Nagata Shinichi / Shinichi Nagata</div>
+        <p>Camarade de classe de Suguha, maladroit et fidèle.</p>
+      </div>
+    </article>
+<article class="card" data-search="sakuya — サクヤ sakuya monde des fees cheffe du peuple sylphe, longue chevelure noire et katana." data-tag="alo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/sakuya.webp" alt="Sakuya" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des fées</span></div>
+        <h3>Sakuya</h3>
+        <div class="jp">サクヤ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Sakuya</div>
+        <p>Cheffe du peuple sylphe, longue chevelure noire et katana.</p>
+      </div>
+    </article>
+<article class="card" data-search="alicia rue — アリシャ・ルー alicia rue / alicia monde des fees cheffe du peuple chat, blonde, oreilles et queue felines." data-tag="alo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/alicia-rue.webp" alt="Alicia Rue" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des fées</span></div>
+        <h3>Alicia Rue</h3>
+        <div class="jp">アリシャ・ルー</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Alicia Rue / Alicia</div>
+        <p>Cheffe du peuple chat, blonde, oreilles et queue félines.</p>
+      </div>
+    </article></div>
+  </details>
+  <details class="locked" data-section="ggo" id="ggo">
+    <summary><div><div class="title">🔒 Volumes 5 et 6 — le monde des armes à feu <span class="count">3</span></div><div class="desc">Un troisième monde, plus sombre, où l’on ne se bat plus à l’épée.</div></div></summary>
+    <div class="grid"><article class="card" data-search="sinon asada shino シノン（朝田 詩乃） sinon / shinon / asada shino / shino asada monde des armes tireuse d’elite aux cheveux bleu pale, la meilleure au fusil du serveur." data-tag="ggo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/sinon.webp" alt="Sinon" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des armes</span></div>
+        <h3>Sinon</h3>
+        <div class="jp">シノン（朝田 詩乃）</div>
+        <div class="alias"><strong>Nom réel :</strong> Asada Shino</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Sinon / Shinon / Asada Shino / Shino Asada</div>
+        <p>Tireuse d’élite aux cheveux bleu pâle, la meilleure au fusil du serveur.</p>
+      </div>
+    </article>
+<article class="card" data-search="spiegel shinkawa kyouji シュヒーケル（新川 恭二） spiegel / supiigeru / shinkawa kyouji / kyouji shinkawa monde des armes camarade de classe de shino, qui joue sous cet avatar." data-tag="ggo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/spiegel.webp" alt="Spiegel" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des armes</span></div>
+        <h3>Spiegel</h3>
+        <div class="jp">シュピーゲル（新川 恭二）</div>
+        <div class="alias"><strong>Nom réel :</strong> Shinkawa Kyouji</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Spiegel / Supiigeru / Shinkawa Kyouji / Kyouji Shinkawa</div>
+        <p>Camarade de classe de Shino, qui joue sous cet avatar.</p>
+      </div>
+    </article>
+<article class="card" data-search="kikuoka seijirou — 菊岡 誠二郎 kikuoka seijirou / seijirou kikuoka / kikuoka / chrysheight monde reel fonctionnaire en costume, toujours a demi souriant." data-tag="ggo">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/kikuoka-seijirou.webp" alt="Kikuoka Seijirou" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde réel</span></div>
+        <h3>Kikuoka Seijirou</h3>
+        <div class="jp">菊岡 誠二郎</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kikuoka Seijirou / Seijirou Kikuoka / Kikuoka / Chrysheight</div>
+        <p>Fonctionnaire en costume, toujours à demi souriant.</p>
+      </div>
+    </article></div>
+  </details>
+  <details class="locked" data-section="rosario" id="rosario">
+    <summary><div><div class="title">🔒 Volume 7 <span class="count">1</span></div><div class="desc">Un volume à part, centré sur une rencontre.</div></div></summary>
+    <div class="grid"><article class="card" data-search="yuuki konno yuuki ユウキ（紺野 木綿季） yuuki / yuki / konno yuuki / yuuki konno monde des fees bretteuse au style fulgurant, cheveux violets et sourire constant." data-tag="rosario">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/yuuki.webp" alt="Yuuki" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Monde des fées</span></div>
+        <h3>Yuuki</h3>
+        <div class="jp">ユウキ（紺野 木綿季）</div>
+        <div class="alias"><strong>Nom réel :</strong> Konno Yuuki</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Yuuki / Yuki / Konno Yuuki / Yuuki Konno</div>
+        <p>Bretteuse au style fulgurant, cheveux violets et sourire constant.</p>
+      </div>
+    </article></div>
+  </details>
+  <details class="locked" data-section="alicization" id="alicization">
+    <summary><div><div class="title">🔒 Volumes 9 et suivants — l’autre monde <span class="count">6</span></div><div class="desc">Un monde entier où l’on n’arrive plus avec un avatar choisi.</div></div></summary>
+    <div class="grid"><article class="card" data-search="eugeo — ユーシオ eugeo / yuujio l’autre monde jeune homme blond, bucheron de son village, d’un calme patient." data-tag="alicization">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/eugeo.webp" alt="Eugeo" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">L’autre monde</span></div>
+        <h3>Eugeo</h3>
+        <div class="jp">ユージオ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Eugeo / Yuujio</div>
+        <p>Jeune homme blond, bûcheron de son village, d’un calme patient.</p>
+      </div>
+    </article>
+<article class="card" data-search="alice zuberg — アリス・ツーヘルク alice zuberg / alice / arisu l’autre monde fillette du meme village, vive et sure d’elle." data-tag="alicization">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/alice-zuberg.webp" alt="Alice Zuberg" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">L’autre monde</span></div>
+        <h3>Alice Zuberg</h3>
+        <div class="jp">アリス・ツーベルク</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Alice Zuberg / Alice / Arisu</div>
+        <p>Fillette du même village, vive et sûre d’elle.</p>
+      </div>
+    </article>
+<article class="card" data-search="selka zuberg — セルカ・ツーヘルク selka zuberg / selka / seruka l’autre monde sa sœur cadette, apprentie aupres de la sœur du village." data-tag="alicization">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/selka-zuberg.webp" alt="Selka Zuberg" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">L’autre monde</span></div>
+        <h3>Selka Zuberg</h3>
+        <div class="jp">セルカ・ツーベルク</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Selka Zuberg / Selka / Seruka</div>
+        <p>Sa sœur cadette, apprentie auprès de la sœur du village.</p>
+      </div>
+    </article>
+<article class="card" data-search="cardinal — カーティナル cardinal / kaadinaru l’autre monde petite silhouette en chapeau et cape, trouvee dans une bibliotheque." data-tag="alicization">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/cardinal.webp" alt="Cardinal" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">L’autre monde</span></div>
+        <h3>Cardinal</h3>
+        <div class="jp">カーディナル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Cardinal / Kaadinaru</div>
+        <p>Petite silhouette en chapeau et cape, trouvée dans une bibliothèque.</p>
+      </div>
+    </article>
+<article class="card" data-search="tiese schtrinen — ティーセ・シュトリーネン tiese schtrinen / tiese shtolienen / tiese l’autre monde eleve aux cheveux roux, appliquee et facilement rougissante." data-tag="alicization">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/tiese-schtrinen.webp" alt="Tiese Schtrinen" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">L’autre monde</span></div>
+        <h3>Tiese Schtrinen</h3>
+        <div class="jp">ティーゼ・シュトリーネン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Tiese Schtrinen / Tiese Shtolienen / Tiese</div>
+        <p>Élève aux cheveux roux, appliquée et facilement rougissante.</p>
+      </div>
+    </article>
+<article class="card" data-search="ronye arabel — ロニエ・アラヘル ronye arabel / ronie arabel / ronye l’autre monde eleve aux cheveux bruns, reservee et observatrice." data-tag="alicization">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/sword-art-online/ronye-arabel.webp" alt="Ronye Arabel" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">L’autre monde</span></div>
+        <h3>Ronye Arabel</h3>
+        <div class="jp">ロニエ・アラベル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ronye Arabel / Ronie Arabel / Ronye</div>
+        <p>Élève aux cheveux bruns, réservée et observatrice.</p>
+      </div>
+    </article></div>
+  </details>
+  <p id="empty" class="empty" style="display:none">Aucun personnage ne correspond à cette recherche.</p>
+</main>
+
+<script>
+const search=document.getElementById('search');
+const chips=[...document.querySelectorAll('.chip')];
+const cards=[...document.querySelectorAll('.card')];
+const empty=document.getElementById('empty');
+let activeFilter='all';
+function normalize(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function applyFilters(){
+  const q=normalize(search.value.trim()); let shown=0;
+  cards.forEach(card=>{
+    const text=normalize(card.dataset.search); const tag=card.dataset.tag;
+    const okFilter=activeFilter==='all'||tag===activeFilter;
+    const okSearch=!q||text.includes(q); const show=okFilter&&okSearch;
+    card.classList.toggle('hidden',!show); if(show) shown++;
+  });
+  document.querySelectorAll('.section,.locked').forEach(section=>{
+    const visible=section.querySelectorAll('.card:not(.hidden)').length>0;
+    section.classList.toggle('hidden',!visible);
+  });
+  // On ne force jamais l'ouverture d'une section repliée : la recherche ne doit pas provoquer un spoiler.
+  empty.style.display=shown?'none':'block';
+}
+search.addEventListener('input',applyFilters);
+chips.forEach(chip=>chip.addEventListener('click',()=>{chips.forEach(c=>c.classList.remove('active'));chip.classList.add('active');activeFilter=chip.dataset.filter;applyFilters();}));
+</script>
+</body></html>

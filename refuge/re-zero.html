@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Re:Zero — Guide visuel sans spoilers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"/>
+<link rel="stylesheet" href="../assets/css/guide.css"/>
+<style>
+/* La seule chose qui distingue cette page d'une autre : sa teinte.
+   Vert forêt — choisi pour sa distance aux six guides existants
+   (ΔE 38 de la plus proche, le sarcelle de Tensura), pas pour un
+   rappel de la série : Re:Zero n'a pas de couleur d'identité. */
+:root {
+  --accent:      #1E5F16;   /* 6,54:1 sur le papier */
+  --accent-fill: #1E5F16;   /* blanc dessus : 7,77:1 */
+  --accent-soft: #C8D9D2;
+  --accent-line: #85A988;
+  --grid: rgba(30, 95, 22, 0.08);
+}
+</style>
+</head>
+<body>
+<header><div class="hero">
+  <nav class="crumbs" aria-label="Fil d’Ariane"><ol>
+    <li><a href="../index.html#refuge">Sarindra’s Refuge</a></li>
+    <li><span aria-current="page">Re:Zero</span></li>
+  </ol></nav>
+  <div class="eyebrow">Guide de lecture • light novel • anti-spoil</div>
+  <h1>Re:Zero<em>Qui est qui ?</em></h1>
+  <p><strong>30 personnages</strong>, avec portrait, écriture japonaise et un repère court. Les sections suivantes restent repliées tant qu’on n’y est pas.</p>
+</div></header>
+
+<div class="controls"><div class="controls-inner">
+  <input id="search" class="search" type="search" placeholder="Chercher : Subaru, Emilia, Rem, ベアトリス, Roswaal…" autocomplete="off">
+  <div class="chips" aria-label="Filtres">
+    <button class="chip active" data-filter="all">Tous</button>
+      <button class="chip" data-filter="core">Essentiels</button>
+      <button class="chip" data-filter="cap">Volume 1</button>
+      <button class="chip" data-filter="manoir">Volumes 2-3</button>
+      <button class="chip" data-filter="royale">Sélection royale</button>
+      <button class="chip" data-filter="suite">Volumes suivants</button>
+  </div>
+</div></div>
+
+<main>
+  <div class="tip"><b>Astuce pour le novel :</b> les traductions transcrivent les noms différemment — <strong>Julius Juukulius / Euclius</strong>, <strong>Petelgeuse / Betelgeuse</strong>, <strong>Roswaal L. Mathers / Mellers</strong>, <strong>Garfiel / Garfield</strong>. Plusieurs personnages sont presque toujours appelés par leur surnom : <strong>Ferris</strong> pour Félix Argyle, <strong>Al</strong> pour Aldebaran, <strong>Betty</strong> pour Beatrice. La recherche accepte toutes les variantes affichées sur les fiches.</div>
+  <div class="no-spoil">🛡️ <strong>Protection anti-spoil :</strong> chaque personnage n’est décrit que tel qu’il apparaît la première fois. Ni les liens entre eux, ni les rôles qu’ils prennent ensuite, ni la moindre issue ne sont indiqués. Les sections sont rangées par volume de première apparition.</div>
+  <section class="section" data-section="core">
+    <h2>Les personnages essentiels <span>7</span></h2>
+    <div class="grid"><article class="card" data-search="natsuki subaru subaru ナツキ・スハル（菜月 昴） natsuki subaru / subaru natsuki / subaru / barusu le heros lyceen japonais transporte dans un autre monde en sortant d’une superette. tout le recit est raconte depuis son point de vue." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/natsuki-subaru.webp" alt="Natsuki Subaru" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Le héros</span></div>
+        <h3>Natsuki Subaru</h3>
+        <div class="short">Subaru</div>
+        <div class="jp">ナツキ・スバル（菜月 昴）</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Natsuki Subaru / Subaru Natsuki / Subaru / Barusu</div>
+        <p>Lycéen japonais transporté dans un autre monde en sortant d’une supérette. Tout le récit est raconté depuis son point de vue.</p>
+      </div>
+    </article>
+<article class="card" data-search="emilia emilia エミリア emilia / satella (nom d’emprunt donne au premier soir) rencontree au volume 1 demi-elfe aux cheveux argentes que subaru croise le premier jour. elle cherche un insigne qu’on lui a vole." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/emilia.webp" alt="Emilia" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Rencontrée au volume 1</span></div>
+        <h3>Emilia</h3>
+        <div class="jp">エミリア</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Emilia / Satella (nom d’emprunt donné au premier soir)</div>
+        <p>Demi-elfe aux cheveux argentés que Subaru croise le premier jour. Elle cherche un insigne qu’on lui a volé.</p>
+      </div>
+    </article>
+<article class="card" data-search="puck puck ハック puck / pack / grand esprit du feu esprit esprit felin lie a emilia. petit, gris, et volontiers moqueur." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/puck.webp" alt="Puck" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Esprit</span></div>
+        <h3>Puck</h3>
+        <div class="jp">パック</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Puck / Pack / Grand Esprit du Feu</div>
+        <p>Esprit félin lié à Emilia. Petit, gris, et volontiers moqueur.</p>
+      </div>
+    </article>
+<article class="card" data-search="rem rem レム rem / rem la servante manoir roswaal servante du manoir, cheveux bleus. sœur cadette de ram, et la plus reservee des deux." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/rem.webp" alt="Rem" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Manoir Roswaal</span></div>
+        <h3>Rem</h3>
+        <div class="jp">レム</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Rem / Rem la servante</div>
+        <p>Servante du manoir, cheveux bleus. Sœur cadette de Ram, et la plus réservée des deux.</p>
+      </div>
+    </article>
+<article class="card" data-search="ram ram ラム ram / ram la servante manoir roswaal servante du manoir, cheveux roses. sœur ainee de rem, et la plus directe des deux." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/ram.webp" alt="Ram" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Manoir Roswaal</span></div>
+        <h3>Ram</h3>
+        <div class="jp">ラム</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ram / Ram la servante</div>
+        <p>Servante du manoir, cheveux roses. Sœur aînée de Rem, et la plus directe des deux.</p>
+      </div>
+    </article>
+<article class="card" data-search="beatrice betty ヘアトリス beatrice / betty / beatrice manoir roswaal gardienne de la bibliotheque interdite du manoir. ton tranchant, et une maniere bien a elle de finir ses phrases." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/beatrice.webp" alt="Beatrice" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Manoir Roswaal</span></div>
+        <h3>Beatrice</h3>
+        <div class="short">Betty</div>
+        <div class="jp">ベアトリス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Beatrice / Betty / Béatrice</div>
+        <p>Gardienne de la bibliothèque interdite du manoir. Ton tranchant, et une manière bien à elle de finir ses phrases.</p>
+      </div>
+    </article>
+<article class="card" data-search="roswaal l. mathers roswaal ロスワール・l・メイサース roswaal l. mathers / roswaal l. mellers / roswaal / rozwaal manoir roswaal maitre du manoir et margrave du royaume. maquillage de clown et diction etiree." data-tag="core">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/roswaal-l-mathers.webp" alt="Roswaal L. Mathers" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Manoir Roswaal</span></div>
+        <h3>Roswaal L. Mathers</h3>
+        <div class="short">Roswaal</div>
+        <div class="jp">ロズワール・L・メイザース</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Roswaal L. Mathers / Roswaal L. Mellers / Roswaal / Rozwaal</div>
+        <p>Maître du manoir et margrave du royaume. Maquillage de clown et diction étirée.</p>
+      </div>
+    </article></div>
+  </section>
+  <details class="locked" data-section="cap" id="cap">
+    <summary><div><div class="title">🔒 Volume 1 — la capitale de Lugunica <span class="count">5</span></div><div class="desc">Les visages du premier volume, dans les rues de la capitale.</div></div></summary>
+    <div class="grid"><article class="card" data-search="felt felt フェルト felt / feruto bas-quartiers jeune voleuse des bas-quartiers, rapide et sans manieres." data-tag="cap">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/felt.webp" alt="Felt" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Bas-quartiers</span></div>
+        <h3>Felt</h3>
+        <div class="jp">フェルト</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Felt / Feruto</div>
+        <p>Jeune voleuse des bas-quartiers, rapide et sans manières.</p>
+      </div>
+    </article>
+<article class="card" data-search="reinhard van astrea reinhard ラインハルト・ウァン・アストレア reinhard van astrea / reinhard / rainhart chevalerie chevalier de la garde royale, cheveux roux, d’une courtoisie constante." data-tag="cap">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/reinhard-van-astrea.webp" alt="Reinhard van Astrea" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Chevalerie</span></div>
+        <h3>Reinhard van Astrea</h3>
+        <div class="short">Reinhard</div>
+        <div class="jp">ラインハルト・ヴァン・アストレア</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Reinhard van Astrea / Reinhard / Rainhart</div>
+        <p>Chevalier de la garde royale, cheveux roux, d’une courtoisie constante.</p>
+      </div>
+    </article>
+<article class="card" data-search="rom rom le vieux ハルカ・クロムウェル rom / rom-jii / old man rom / balga cromwell bas-quartiers geant qui tient une boutique de bric-a-brac dans les bas-quartiers." data-tag="cap">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/rom.webp" alt="Rom" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Bas-quartiers</span></div>
+        <h3>Rom</h3>
+        <div class="short">Rom le vieux</div>
+        <div class="jp">バルガ・クロムウェル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Rom / Rom-jii / Old Man Rom / Balga Cromwell</div>
+        <p>Géant qui tient une boutique de bric-à-brac dans les bas-quartiers.</p>
+      </div>
+    </article>
+<article class="card" data-search="elsa granhiert elsa エルサ・クランヒルテ elsa granhiert / elsa granhirte / elsa capitale femme en robe noire, tres calme, croisee des le premier soir." data-tag="cap">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/elsa-granhiert.webp" alt="Elsa Granhiert" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Capitale</span></div>
+        <h3>Elsa Granhiert</h3>
+        <div class="short">Elsa</div>
+        <div class="jp">エルザ・グランヒルテ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Elsa Granhiert / Elsa Granhirte / Elsa</div>
+        <p>Femme en robe noire, très calme, croisée dès le premier soir.</p>
+      </div>
+    </article>
+<article class="card" data-search="kadomon risch kadomon カトモン・リッシュ kadomon risch / kadomon capitale marchand de fruits : le premier habitant a qui subaru adresse la parole." data-tag="cap">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/kadomon-risch.webp" alt="Kadomon Risch" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Capitale</span></div>
+        <h3>Kadomon Risch</h3>
+        <div class="short">Kadomon</div>
+        <div class="jp">カドモン・リッシュ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Kadomon Risch / Kadomon</div>
+        <p>Marchand de fruits : le premier habitant à qui Subaru adresse la parole.</p>
+      </div>
+    </article></div>
+  </details>
+  <details class="locked" data-section="manoir" id="manoir">
+    <summary><div><div class="title">🔒 Volumes 2 et 3 — le manoir et le village <span class="count">3</span></div><div class="desc">On quitte la capitale pour le domaine Mathers et le village voisin.</div></div></summary>
+    <div class="grid"><article class="card" data-search="frederica baumann frederica フレテリカ・ハウマン frederica baumann / frederica / fredrica manoir roswaal servante de grande taille, blonde, aux canines marquees." data-tag="manoir">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/frederica-baumann.webp" alt="Frederica Baumann" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Manoir Roswaal</span></div>
+        <h3>Frederica Baumann</h3>
+        <div class="short">Frederica</div>
+        <div class="jp">フレデリカ・バウマン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Frederica Baumann / Frederica / Fredrica</div>
+        <p>Servante de grande taille, blonde, aux canines marquées.</p>
+      </div>
+    </article>
+<article class="card" data-search="petra leyte petra ヘトラ・レイテ petra leyte / petra village d’earlham petite fille du village voisin du manoir, vive et curieuse." data-tag="manoir">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/petra-leyte.webp" alt="Petra Leyte" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Village d’Earlham</span></div>
+        <h3>Petra Leyte</h3>
+        <div class="short">Petra</div>
+        <div class="jp">ペトラ・レイテ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Petra Leyte / Petra</div>
+        <p>Petite fille du village voisin du manoir, vive et curieuse.</p>
+      </div>
+    </article>
+<article class="card" data-search="meili portroute meili メィリィ・ホートルート meili portroute / meili / mei aux abords du manoir fillette aux cheveux bleus tresses, croisee pres du domaine." data-tag="manoir">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/meili-portroute.webp" alt="Meili Portroute" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Aux abords du manoir</span></div>
+        <h3>Meili Portroute</h3>
+        <div class="short">Meili</div>
+        <div class="jp">メィリィ・ポートルート</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Meili Portroute / Meili / Mei</div>
+        <p>Fillette aux cheveux bleus tressés, croisée près du domaine.</p>
+      </div>
+    </article></div>
+  </details>
+  <details class="locked" data-section="royale" id="royale">
+    <summary><div><div class="title">🔒 Volumes 4 à 6 — la sélection royale <span class="count">12</span></div><div class="desc">Le royaume doit se choisir une souveraine : candidates, chevaliers et marchands entrent en scène.</div></div></summary>
+    <div class="grid"><article class="card" data-search="crusch karsten crusch クルシュ・カルステン crusch karsten / crusch / kurushu selection royale duchesse aux cheveux verts, candidate a la selection. droite et sans detour." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/crusch-karsten.webp" alt="Crusch Karsten" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Sélection royale</span></div>
+        <h3>Crusch Karsten</h3>
+        <div class="short">Crusch</div>
+        <div class="jp">クルシュ・カルステン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Crusch Karsten / Crusch / Kurushu</div>
+        <p>Duchesse aux cheveux verts, candidate à la sélection. Droite et sans détour.</p>
+      </div>
+    </article>
+<article class="card" data-search="ferris ferris フェリックス・アーカイル ferris / felix argyle / felix argyle / feri camp crusch chevalier au service de crusch, oreilles de chat, parle de lui a la troisieme personne." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/ferris.webp" alt="Ferris" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Camp Crusch</span></div>
+        <h3>Ferris</h3>
+        <div class="jp">フェリックス・アーガイル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ferris / Felix Argyle / Félix Argyle / Feri</div>
+        <p>Chevalier au service de Crusch, oreilles de chat, parle de lui à la troisième personne.</p>
+      </div>
+    </article>
+<article class="card" data-search="wilhelm van astrea wilhelm ウィルヘルム・ウァン・アストレア wilhelm van astrea / wilhelm / vilhelm camp crusch majordome age de la maison karsten, au maintien d’ancien militaire." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/wilhelm-van-astrea.webp" alt="Wilhelm van Astrea" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Camp Crusch</span></div>
+        <h3>Wilhelm van Astrea</h3>
+        <div class="short">Wilhelm</div>
+        <div class="jp">ヴィルヘルム・ヴァン・アストレア</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Wilhelm van Astrea / Wilhelm / Vilhelm</div>
+        <p>Majordome âgé de la maison Karsten, au maintien d’ancien militaire.</p>
+      </div>
+    </article>
+<article class="card" data-search="priscilla barielle priscilla フリシラ・ハーリエル priscilla barielle / priscilla / purishira selection royale noble a l’eventail, candidate a la selection, d’un aplomb total." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/priscilla-barielle.webp" alt="Priscilla Barielle" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Sélection royale</span></div>
+        <h3>Priscilla Barielle</h3>
+        <div class="short">Priscilla</div>
+        <div class="jp">プリシラ・バーリエル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Priscilla Barielle / Priscilla / Purishira</div>
+        <p>Noble à l’éventail, candidate à la sélection, d’un aplomb total.</p>
+      </div>
+    </article>
+<article class="card" data-search="al al アルテハラン al / aldebaran / aru camp priscilla compagnon casque de priscilla, un seul bras, ton tres familier." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/al.webp" alt="Al" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Camp Priscilla</span></div>
+        <h3>Al</h3>
+        <div class="jp">アルデバラン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Al / Aldebaran / Aru</div>
+        <p>Compagnon casqué de Priscilla, un seul bras, ton très familier.</p>
+      </div>
+    </article>
+<article class="card" data-search="anastasia hoshin anastasia アナスタシア・ホーシン anastasia hoshin / anastasia / anastacia selection royale marchande venue de kararagi, candidate a la selection. douce de ton, ferme en affaires." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/anastasia-hoshin.webp" alt="Anastasia Hoshin" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Sélection royale</span></div>
+        <h3>Anastasia Hoshin</h3>
+        <div class="short">Anastasia</div>
+        <div class="jp">アナスタシア・ホーシン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Anastasia Hoshin / Anastasia / Anastacia</div>
+        <p>Marchande venue de Kararagi, candidate à la sélection. Douce de ton, ferme en affaires.</p>
+      </div>
+    </article>
+<article class="card" data-search="julius juukulius julius ユリウス・ユークリウス julius juukulius / julius euclius / julius jukulius / julius camp anastasia chevalier au service d’anastasia, escrimeur meticuleux et tres protocolaire." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/julius-juukulius.webp" alt="Julius Juukulius" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Camp Anastasia</span></div>
+        <h3>Julius Juukulius</h3>
+        <div class="short">Julius</div>
+        <div class="jp">ユリウス・ユークリウス</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Julius Juukulius / Julius Euclius / Julius Jukulius / Julius</div>
+        <p>Chevalier au service d’Anastasia, escrimeur méticuleux et très protocolaire.</p>
+      </div>
+    </article>
+<article class="card" data-search="ricardo welkin ricardo リカート・ウェルキン ricardo welkin / ricardo / rikado camp anastasia mercenaire de grande taille a l’apparence de bete, rire tonitruant." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/ricardo-welkin.webp" alt="Ricardo Welkin" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Camp Anastasia</span></div>
+        <h3>Ricardo Welkin</h3>
+        <div class="short">Ricardo</div>
+        <div class="jp">リカード・ウェルキン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ricardo Welkin / Ricardo / Rikado</div>
+        <p>Mercenaire de grande taille à l’apparence de bête, rire tonitruant.</p>
+      </div>
+    </article>
+<article class="card" data-search="mimi pearlbaton mimi ミミ・ハールハトン mimi pearlbaton / mimi camp anastasia petite mercenaire aux oreilles de chat, exuberante et bruyante." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/mimi-pearlbaton.webp" alt="Mimi Pearlbaton" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Camp Anastasia</span></div>
+        <h3>Mimi Pearlbaton</h3>
+        <div class="short">Mimi</div>
+        <div class="jp">ミミ・パールバトン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Mimi Pearlbaton / Mimi</div>
+        <p>Petite mercenaire aux oreilles de chat, exubérante et bruyante.</p>
+      </div>
+    </article>
+<article class="card" data-search="otto suwen otto オットー・スーウェン otto suwen / otto / oto marchand ambulant marchand sur les routes, bavard et d’une malchance remarquable." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/otto-suwen.webp" alt="Otto Suwen" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Marchand ambulant</span></div>
+        <h3>Otto Suwen</h3>
+        <div class="short">Otto</div>
+        <div class="jp">オットー・スーウェン</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Otto Suwen / Otto / Oto</div>
+        <p>Marchand sur les routes, bavard et d’une malchance remarquable.</p>
+      </div>
+    </article>
+<article class="card" data-search="russell fellow russell ラッセル・フェロー russell fellow / russel fellow / russell marchand marchand influent de la capitale, courtois et difficile a lire." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/russell-fellow.webp" alt="Russell Fellow" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Marchand</span></div>
+        <h3>Russell Fellow</h3>
+        <div class="short">Russell</div>
+        <div class="jp">ラッセル・フェロー</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Russell Fellow / Russel Fellow / Russell</div>
+        <p>Marchand influent de la capitale, courtois et difficile à lire.</p>
+      </div>
+    </article>
+<article class="card" data-search="petelgeuse romanee-conti petelgeuse ヘテルキウス・ロマネコンティ petelgeuse romanee-conti / betelgeuse romanee-conti / petelgeuse / geuse rencontre en chemin homme decharne aux gestes desarticules et au debit heurte." data-tag="royale">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/petelgeuse-romanee-conti.webp" alt="Petelgeuse Romanée-Conti" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Rencontré en chemin</span></div>
+        <h3>Petelgeuse Romanée-Conti</h3>
+        <div class="short">Petelgeuse</div>
+        <div class="jp">ペテルギウス・ロマネコンティ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Petelgeuse Romanée-Conti / Betelgeuse Romanée-Conti / Petelgeuse / Geuse</div>
+        <p>Homme décharné aux gestes désarticulés et au débit heurté.</p>
+      </div>
+    </article></div>
+  </details>
+  <details class="locked" data-section="suite" id="suite">
+    <summary><div><div class="title">🔒 Volumes suivants <span class="count">3</span></div><div class="desc">Personnages rencontrés plus loin dans la série. Aucun rôle futur n’est indiqué.</div></div></summary>
+    <div class="grid"><article class="card" data-search="echidna echidna エキトナ echidna / ekidona nom ancien silhouette aux cheveux blancs, dont le nom traverse les recits anciens." data-tag="suite">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/echidna.webp" alt="Echidna" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Nom ancien</span></div>
+        <h3>Echidna</h3>
+        <div class="jp">エキドナ</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Echidna / Ekidona</div>
+        <p>Silhouette aux cheveux blancs, dont le nom traverse les récits anciens.</p>
+      </div>
+    </article>
+<article class="card" data-search="garfiel tinzel garfiel カーフィール・ティンセル garfiel tinzel / garfield tinsel / garfiel rencontre plus loin jeune homme blond au caractere explosif, canines apparentes." data-tag="suite">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/garfiel-tinzel.webp" alt="Garfiel Tinzel" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Rencontré plus loin</span></div>
+        <h3>Garfiel Tinzel</h3>
+        <div class="short">Garfiel</div>
+        <div class="jp">ガーフィール・ティンゼル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Garfiel Tinzel / Garfield Tinsel / Garfiel</div>
+        <p>Jeune homme blond au caractère explosif, canines apparentes.</p>
+      </div>
+    </article>
+<article class="card" data-search="ryuzu meyer ryuzu リュース・メイエル ryuzu meyer / ryuzu bilma / ryuzu rencontree plus loin petite silhouette aux longs cheveux roses, d’un calme inalterable." data-tag="suite">
+      <div class="portrait-wrap">
+        <img class="portrait" src="../assets/img/guides/re-zero/ryuzu-meyer.webp" alt="Ryuzu Meyer" loading="lazy" onerror="this.closest('.portrait-wrap').classList.add('img-error');this.style.display='none';">
+        <div class="img-fallback">Image indisponible<br><small>Le reste de la fiche reste utilisable.</small></div>
+      </div>
+      <div class="card-body">
+        <div class="topline"><span class="badge">Rencontrée plus loin</span></div>
+        <h3>Ryuzu Meyer</h3>
+        <div class="short">Ryuzu</div>
+        <div class="jp">リューズ・メイエル</div>
+        <div class="alias"><strong>Novel / recherche :</strong> Ryuzu Meyer / Ryuzu Bilma / Ryuzu</div>
+        <p>Petite silhouette aux longs cheveux roses, d’un calme inaltérable.</p>
+      </div>
+    </article></div>
+  </details>
+  <p id="empty" class="empty" style="display:none">Aucun personnage ne correspond à cette recherche.</p>
+</main>
+
+<script>
+const search=document.getElementById('search');
+const chips=[...document.querySelectorAll('.chip')];
+const cards=[...document.querySelectorAll('.card')];
+const empty=document.getElementById('empty');
+let activeFilter='all';
+function normalize(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function applyFilters(){
+  const q=normalize(search.value.trim()); let shown=0;
+  cards.forEach(card=>{
+    const text=normalize(card.dataset.search); const tag=card.dataset.tag;
+    const okFilter=activeFilter==='all'||tag===activeFilter;
+    const okSearch=!q||text.includes(q); const show=okFilter&&okSearch;
+    card.classList.toggle('hidden',!show); if(show) shown++;
+  });
+  document.querySelectorAll('.section,.locked').forEach(section=>{
+    const visible=section.querySelectorAll('.card:not(.hidden)').length>0;
+    section.classList.toggle('hidden',!visible);
+  });
+  // On ne force jamais l'ouverture d'une section repliée : la recherche ne doit pas provoquer un spoiler.
+  empty.style.display=shown?'none':'block';
+}
+search.addEventListener('input',applyFilters);
+chips.forEach(chip=>chip.addEventListener('click',()=>{chips.forEach(c=>c.classList.remove('active'));chip.classList.add('active');activeFilter=chip.dataset.filter;applyFilters();}));
+</script>
+</body></html>
