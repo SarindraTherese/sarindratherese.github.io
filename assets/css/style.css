@@ -308,7 +308,7 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
 
 .hero-btns { display: flex; gap: var(--s2) 12px; flex-wrap: wrap; margin-bottom: var(--s7); }
 
-.btn-primary, .btn-ghost {
+.btn-primary, .btn-ghost, .btn-sand {
   display: inline-flex;
   align-items: center;
   gap: var(--s2);
@@ -327,6 +327,20 @@ a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3
   border: 1px solid var(--ink);
 }
 .btn-primary:hover { background: var(--slate); border-color: var(--slate); }
+
+/* Le sable est l'accent d'annotation du plan : ce qu'on ajoute en marge
+   et qui repartira. D'où cette troisième variante, réservée à ce qui est
+   daté — ici le giveaway. Le foncé du survol n'est pas un token : il ne
+   sert qu'ici, et l'ajouter à la palette laisserait croire le contraire. */
+.btn-sand {
+  background: var(--sand-text);   /* papier dessus : 5,00:1 */
+  color: var(--paper);
+  border: 1px solid var(--sand-text);
+}
+.btn-sand:hover { background: #7E4114; border-color: #7E4114; }
+/* Le bouton se range au bout de la ligne de la phrase, et se cale sur
+   son milieu — pas sur celui du bloc titre + phrase. */
+.gw-btn { justify-self: end; align-self: center; }
 
 .btn-ghost {
   background: var(--surface);
@@ -1942,6 +1956,23 @@ a.read-item:hover .read-title { color: var(--cyan); }
 #page-favoris .refuge-open {
   padding-bottom: var(--s4);
   margin-bottom: var(--s5);
+  /* Deux colonnes : le titre court sur les deux, puis la phrase et le
+     bouton se font face. Le 60ch de l'en-tête saute, sinon le bouton
+     n'a pas de quoi aller à l'opposé et le filet resterait plus court
+     que la sélection qu'il annonce. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  max-width: none;
+}
+#page-favoris .refuge-open .sec-title { grid-column: 1 / -1; }
+
+@media (max-width: 760px) {
+  /* Plus de place pour deux colonnes : le bouton repasse sous la
+     phrase, aligné à gauche comme le reste de l'en-tête. */
+  #page-favoris .refuge-open { grid-template-columns: minmax(0, 1fr); }
+  #page-favoris .refuge-open .sec-title { grid-column: auto; }
+  .gw-btn { justify-self: start; margin-top: var(--s2); }
 }
 
 /* ── Mes favoris & recommandations ───────────────────────────────
@@ -2212,7 +2243,7 @@ a.read-item:hover .read-title { color: var(--cyan); }
    ══════════════════════════════════════════════════════════════ */
 :root { --snap: 120ms cubic-bezier(0.2, 0.8, 0.3, 1); }
 
-.btn-primary, .btn-ghost, .send-btn, .collab-btn,
+.btn-primary, .btn-ghost, .btn-sand, .send-btn, .collab-btn,
 .year-pill, .rfg-item, .rfg-cta, .rfg-link, .reco-folder, .chip,
 .book.is-linked, .find.is-linked, .guide,
 .nav-toggle, .crumbs a {
@@ -2221,16 +2252,26 @@ a.read-item:hover .read-title { color: var(--cyan); }
 }
 
 /* L'enfoncement : un pixel, pas plus — c'est un appui, pas un rebond. */
-.btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
+.btn-primary:active, .btn-ghost:active, .btn-sand:active,
+.send-btn:active, .collab-btn:active,
 .year-pill:active, .rfg-cta:active, .rfg-link:active, .reco-folder:active, .chip:active,
-/* Les cartes se soulèvent au survol, comme les couvertures de l'étagère. */
+.book.is-linked:active, .find.is-linked:active, .rfg-item:active {
+  transform: translateY(1px);
+}
+
+/* La fiche d'un objet se soulève au survol, comme les couvertures de
+   l'étagère ; à l'appui, elle redescend à plat plutôt que de s'enfoncer. */
+.find.is-linked:hover { transform: translateY(-2px); }
+.find.is-linked:active { transform: translateY(0); }
+
 /* La pastille d'année s'affirme au survol au lieu de changer de filet. */
 .year-pill:hover { border-color: var(--cyan-fill); }
 .year-pill.is-current:active { background: var(--cyan); border-color: var(--cyan); }
 
 /* Bague de focus : aucun élément n'en avait, la navigation au clavier
    se faisait à l'aveugle. */
-.btn-primary:focus-visible, .btn-ghost:focus-visible, .send-btn:focus-visible,
+.btn-primary:focus-visible, .btn-ghost:focus-visible, .btn-sand:focus-visible,
+.send-btn:focus-visible,
 .collab-btn:focus-visible, .year-pill:focus-visible, .rfg-item:focus-visible,
 .book.is-linked:focus-visible, .find.is-linked:focus-visible, .ln-item:focus-visible,
 .rfg-cta:focus-visible,
@@ -2241,8 +2282,13 @@ a.read-item:hover .read-title { color: var(--cyan); }
 
 @media (prefers-reduced-motion: reduce) {
   .find.is-linked:hover,
-  .btn-primary:active, .btn-ghost:active, .send-btn:active, .collab-btn:active,
-  .year-pill:active, .rfg-cta:active, .chip:active,
+  .btn-primary:active, .btn-ghost:active, .btn-sand:active,
+  .send-btn:active, .collab-btn:active,
+  .year-pill:active, .rfg-cta:active, .rfg-link:active,
+  .reco-folder:active, .chip:active,
+  .book.is-linked:active, .find.is-linked:active, .rfg-item:active {
+    transform: none;
+  }
 }
 
 /* Aucun mot seul en bout de paragraphe : `pretty` recule la coupure

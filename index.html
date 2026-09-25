@@ -78,6 +78,7 @@
     <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M11 3.5 12.8 8.2 17.5 10l-4.7 1.8L11 16.5 9.2 11.8 4.5 10l4.7-1.8Z"/><path d="M18 14.5 18.9 17l2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9Z"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><path d="M2 7h20v5H2z"/><path d="M4 12v10h16V12"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
   </defs>
 </svg>
 
@@ -798,6 +799,14 @@
     <header class="refuge-open">
       <h3 class="sec-title">Mes <em>favoris &amp; recommandations</em></h3>
       <p class="refuge-lead" id="favoris-lead"></p>
+
+      <!-- Bouton temporaire : il s'efface de lui-même passé data-jusquau.
+           Pour le retirer plus tôt, supprimer ce lien. -->
+      <a class="btn-sand gw-btn" id="giveaway" data-jusquau="2026-10-31"
+         href="https://forms.gle/fCSAszL3nUZoKsao8" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-gift"/></svg>
+        Giveaway Sarindra&rsquo;s Refuge
+      </a>
     </header>
     <section class="reco" aria-label="Mes favoris et recommandations, par dossier">
       <nav class="reco-tree" id="reco-tree" aria-label="Choisir un dossier"></nav>
