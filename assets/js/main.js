@@ -385,6 +385,10 @@ const CONSEILS = [
   { id: 'anime',   nom: 'Anime & manga', icone: 'i-spark',
     lead: 'Les anime et les mangas qui m\'ont marquée.',
     items: [
+      { titre: 'Vinland Saga',
+        image: 'anime/vinland-saga.webp' },
+      { titre: 'Black Clover',
+        image: 'anime/black-clover.webp', large: true },
       { titre: 'Hunter \u00D7 Hunter',
         image: 'anime/hunter-x-hunter.webp' },
       { titre: 'Les Carnets de l\'Apothicaire',
@@ -1998,24 +2002,9 @@ function animateCounters() {
 /* ════════════════════════════════════════════════════════════
    11. INIT
    ════════════════════════════════════════════════════════════ */
-/* ── GIVEAWAY ──
-   Le bouton est écrit en dur dans le HTML : il doit rester cliquable
-   même sans script. Ici on ne fait que le retirer une fois le tirage
-   passé, pour qu'il ne traîne pas sur le site après coup. */
-function rangerGiveaway() {
-  const bouton = document.getElementById('giveaway');
-  if (!bouton) return;
-  const fin = bouton.getAttribute('data-jusquau');
-  if (!fin) return;
-  /* Fin de la journée indiquée, à l'heure de celui qui lit. */
-  const limite = new Date(fin + 'T23:59:59');
-  if (!isNaN(limite.getTime()) && Date.now() > limite.getTime()) bouton.remove();
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   applyAvailability();
   renderRefuge();
-  rangerGiveaway();
   renderLightNovels();
   renderFinds();
   renderConseils();
